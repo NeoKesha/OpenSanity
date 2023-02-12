@@ -1,0 +1,20 @@
+#pragma once
+
+#include "headers/OpenSanityGlobal.h"
+#include "headers/Known/TwinString.h"
+#include "headers/Known/Math/Vector4.h"
+
+class AutoClass52 {
+	public:
+		Vector4 vec1;
+		Vector4 vec2;
+		TwinString chunkName;
+
+		void Construct(ChunkData* param_1);
+		AutoClass52* Cosntruct(AutoClass52* other);
+		AutoClass52* Copy(AutoClass52* other);
+		virtual void FUN_000f6ab0(InstanceContext* ctx, byte param_2);
+		void FUN_000f6b70(InstanceContext* ctx, ChunkData* chunkData, byte param_3);
+		virtual void FUN_000fb0b0(InstanceContext* ctx);
+
+};

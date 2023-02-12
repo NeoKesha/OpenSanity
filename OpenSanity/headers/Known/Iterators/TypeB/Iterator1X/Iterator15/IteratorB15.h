@@ -1,0 +1,20 @@
+#pragma once
+
+#include "headers/OpenSanityGlobal.h"
+#include "headers/Known/Iterators/TypeB/Iterator1X/Iterator15/IteratorB15Abstract.h"
+
+class IteratorB15 : public IteratorB15Abstract {
+	public:
+
+		virtual Path** Get();
+		virtual uint End();
+		virtual void Rewind();
+		void Dispose(byte param_1);
+		virtual void Iterate();
+		void Construct(uint param_1);
+		virtual void SeekEnd();
+		virtual int Get2();
+		virtual void Previous();
+		virtual void Set(int param_1);
+
+};

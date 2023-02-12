@@ -1,0 +1,13 @@
+#pragma once
+
+#include "headers/OpenSanityGlobal.h"
+#include "headers/Known/Builders/BaseBuilder/BaseBuilder.h"
+
+class CameraFactory : public BaseBuilder {
+	public:
+
+		void Dispose(byte flag);
+		static GameCameraAbstract* BUILD(uint id);
+		static void Construct(uint* param_1);
+
+};
