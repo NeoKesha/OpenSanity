@@ -5,6 +5,7 @@
 class BaseBuilder {
 	public:
 
+		virtual void* BUILD(uint id);
 		void Dispose(byte param_1);
 		static void Unroll(uint* param_1);
 		static void Unroll_2(uint* param_1);

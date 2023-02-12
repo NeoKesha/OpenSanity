@@ -16,7 +16,7 @@ void PerceptFactory::Dispose(byte flag) {
 	return;
 }
 
-PerceptAbstract* PerceptFactory::BUILD(int id, int arg) {
+void* PerceptFactory::BUILD(uint id) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	PerceptAbstract * PerceptFactory::BUILD(int id,int arg){

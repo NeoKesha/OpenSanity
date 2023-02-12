@@ -16,7 +16,7 @@ void CameraFactory::Dispose(byte flag) {
 	return;
 }
 
-GameCameraAbstract* CameraFactory::BUILD(uint id) {
+void* CameraFactory::BUILD(uint id) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	GameCameraAbstract * CameraFactory::BUILD(uint id){

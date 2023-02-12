@@ -1,5 +1,10 @@
 #include "headers/Known/Builders/BaseBuilder/BaseBuilder.h"
 
+void* BaseBuilder::BUILD(uint id)
+{
+	return null;
+}
+
 void BaseBuilder::Dispose(byte param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*

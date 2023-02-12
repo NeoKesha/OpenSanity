@@ -4,9 +4,7 @@
 
 class ObjectBuilder {
 	public:
-		ObjectBuilder * prevBuilder;
-		ObjectBuilder * nextBuilder;
-		ObjectBuilder * builder;
-
-
+		ObjectBuilder* prevBuilder;
+		ObjectBuilder* nextBuilder;
+		BaseBuilder* builder;
 };

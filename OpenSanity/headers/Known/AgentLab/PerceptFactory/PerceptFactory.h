@@ -7,7 +7,7 @@ class PerceptFactory : public BaseBuilder {
 	public:
 
 		void Dispose(byte flag);
-		static PerceptAbstract* BUILD(int id, int arg);
+		virtual void* BUILD(uint id); //arg unused
 		void Construct();
 
 };

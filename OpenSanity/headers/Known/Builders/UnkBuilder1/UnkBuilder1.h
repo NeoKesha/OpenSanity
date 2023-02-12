@@ -7,7 +7,7 @@ class UnkBuilder1 : public BaseBuilder {
 	public:
 
 		void Dispose(byte flag);
-		static void* BUILD(uint id);
+		virtual void* BUILD(uint id);
 		static void Construct(uint* param_1);
 
 };

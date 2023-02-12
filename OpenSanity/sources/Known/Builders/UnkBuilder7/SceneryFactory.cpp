@@ -15,7 +15,7 @@ void SceneryFactory::Dispose(byte flag) {
 	return;
 }
 
-int* SceneryFactory::BUILD(int id) {
+void* SceneryFactory::BUILD(uint id) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	int * SceneryFactory::BUILD(int id){

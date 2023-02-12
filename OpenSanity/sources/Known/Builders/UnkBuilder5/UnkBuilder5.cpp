@@ -15,7 +15,7 @@ void UnkBuilder5::Dispose(byte flag) {
 	return;
 }
 
-float* UnkBuilder5::BUILD(int id) {
+void* UnkBuilder5::BUILD(uint id) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	float * UnkBuilder5::BUILD(int id){

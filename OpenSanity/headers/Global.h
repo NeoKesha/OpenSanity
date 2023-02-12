@@ -95,6 +95,12 @@ public:
 	int INT_003a3368;
 	int DAT_004a7a7c;
 	ScreenInfoExt* DAT_003ec544;
+	int DAT_004937b4;
+	int SOME_VECTOR_INDEX;
+	int INT_004937b0;
+	int DAT_004937a4;
+	int INT_004937a8;
+	int INT_004937ac;
 
 	//GLOBAL VALUES
 	float SinTable[32768];

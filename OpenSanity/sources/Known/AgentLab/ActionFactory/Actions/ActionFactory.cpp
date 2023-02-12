@@ -16,7 +16,7 @@ void ActionFactory::Dispose(byte flag) {
 	return;
 }
 
-ActionAbstract* ActionFactory::BUILD(int id, int arg) {
+void* ActionFactory::BUILD(uint id) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	ActionAbstract * ActionFactory::BUILD(int id,int arg){

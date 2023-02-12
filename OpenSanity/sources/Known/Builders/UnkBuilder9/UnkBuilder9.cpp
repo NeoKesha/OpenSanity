@@ -15,7 +15,7 @@ void UnkBuilder9::Dispose(byte flag) {
 	return;
 }
 
-uint* UnkBuilder9::BUILD(int id) {
+void* UnkBuilder9::BUILD(uint id) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	uint * UnkBuilder9::BUILD(int id){

@@ -7,7 +7,7 @@ class SceneryFactory : public BaseBuilder {
 	public:
 
 		void Dispose(byte flag);
-		static int* BUILD(int id);
+		virtual void* BUILD(uint id);
 		static void Construct(SceneryFactory* param_1);
 
 };

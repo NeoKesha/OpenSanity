@@ -7,7 +7,7 @@ class ActionFactory : public BaseBuilder {
 	public:
 
 		void Dispose(byte flag);
-		static ActionAbstract* BUILD(int id, int arg);
+		virtual void* BUILD(uint id); //arg unused
 		void Construct();
 
 };

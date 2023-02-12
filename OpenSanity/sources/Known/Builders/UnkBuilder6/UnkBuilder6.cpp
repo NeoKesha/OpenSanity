@@ -16,7 +16,7 @@ void UnkBuilder6::Dispose(byte flag) {
 	return;
 }
 
-InstanceNodeAbstract* UnkBuilder6::BUILD(int id) {
+void* UnkBuilder6::BUILD(uint id) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	InstanceNodeAbstract * UnkBuilder6::BUILD(int id){
