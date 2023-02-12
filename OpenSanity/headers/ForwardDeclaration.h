@@ -1,25 +1,25 @@
 #pragma once
 
-class Renderer; //DONE
-class FileStream; //DONE
-class TwinString; //WIP
-class GameContext; //WIP
-class ScreenInfo; //WIP
-class FontRenderer; //WIP
-class IteratorC4; //WIP
-class FontCollection; //WIP
-class RendererSubStruct; //WIP
-class IteratorB1; //WIP
-class SaveSystem; //WIP
-class SaveSystemAbstract; //WIP
-class SaveSystemA; //WIP
-class GameResources; //WIP
-class GameResourcesBase; //WIP
-class StringCollection; //WIP
-class GameResourceManager; //WIP
-class Matrix4; //WIP
-class Clock; //WIP
-class InputController; //WIP
+class Renderer; 
+class FileStream; 
+class TwinString; 
+class GameContext; 
+class ScreenInfo; 
+class FontRenderer; 
+class IteratorC4; 
+class FontCollection; 
+class RendererSubStruct; 
+class IteratorB1; 
+class SaveSystem; 
+class SaveSystemAbstract; 
+class SaveSystemA; 
+class GameResources; 
+class GameResourcesBase; 
+class StringCollection; 
+class GameResourceManager; 
+class Matrix4; 
+class Clock; 
+class InputController; 
 class PhysicalPool;
 class ObjectBuilderStorage;
 class VirtualPool;

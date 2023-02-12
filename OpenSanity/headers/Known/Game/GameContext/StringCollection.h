@@ -4,7 +4,7 @@
 
 class StringCollection {
 	public:
-		TwinString * array;
+		TwinString** array;
 		int strCnt;
 		uint capacity;
 		uint cnt2;
