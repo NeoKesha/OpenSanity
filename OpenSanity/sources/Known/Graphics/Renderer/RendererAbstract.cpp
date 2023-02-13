@@ -3,6 +3,8 @@
 #include "headers/Known/Math/Vector2.h"
 #include "headers/Known/Graphics/FontRenderer/FontRenderer.h"
 #include "headers/Known/Iterators/TypeC/Iterator4/IteratorC4.h"
+#include "headers/Unknown/AutoClasses/AutoClass25/AutoClass25.h"
+#include "headers/Known/Game/InstanceSystem/InstanceContextRefCounter.h"
 #include "headers/Global.h"
 
 RendererAbstract::RendererAbstract() {
@@ -46,7 +48,6 @@ void RendererAbstract::CleanUp() {
 
 
 void RendererAbstract::UnkMethod1() {
-	uint uVar1;
 	IteratorC4 iterator(&substruct);
 	//Stub2();
 	iterator.Reset();
@@ -61,92 +62,58 @@ void RendererAbstract::UnkMethod1() {
 }
 
 void RendererAbstract::UnkMethod2() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	 WARNING: Globals starting with '_' overlap smaller symbols at the same address void __fastcall RendererAbstract::UnkMethod2(Renderer *this){
-		AutoClass25 *pAVar1;
-		InstanceContextRefCounter *pIVar2;
-		FontRenderer **result;
-		IteratorC4 local_c;
-		local_c.collection = &(this->parent).substruct;
-		local_c.parent = (IteratorCBase_VTable *)&IteratorC_VT_4;
-		local_c.i = 0;
-		local_c.index = 0;
-		IteratorC4::Reset(&local_c);
-		if (local_c.index != (local_c.collection)->cnt2) {
-		do {
-		result = (FontRenderer **)(*(local_c.parent)->Get)((IteratorCAbstract *)&local_c);
-		if (((((*(byte *)&(*result)->flags & 1) != 0) &&(pAVar1 = (*result)->field1_0x4, pAVar1 != (AutoClass25 *)0x0)) &&(pIVar2 = pAVar1->ctxPtr, pIVar2 != (InstanceContextRefCounter *)0x0)) &&(pIVar2->ctx != (InstanceContext *)0x0)) {
-		_DAT_003ead18 = _DAT_003ead18 + 1;
+	Global* GLOBAL = Global::Get();
+
+	IteratorC4 iterator(&substruct);
+	iterator.Reset();
+	while (iterator.index != (iterator.collection)->count) {
+		FontRenderer* result = *iterator.Get();
+		if ((result->flags & 1) == 0) {
+			iterator.Iterate();
+			continue;
 		}
-		IteratorC4::Iterate(&local_c);
+		AutoClass25* ac25 = result->field1_0x4;
+		if (ac25 == null) {
+			iterator.Iterate();
+			continue;
 		}
-		 while (local_c.index != (local_c.collection)->cnt2);
+		InstanceContextRefCounter* refCounter = ac25->ctxPtr;
+		if (refCounter == null) {
+			iterator.Iterate();
+			continue;
 		}
-		return;
+		InstanceContext* ctx = refCounter->ctx;
+		if (ctx == null) {
+			iterator.Iterate();
+			continue;
 		}
-		
-	*/
-	return;
+		GLOBAL->DAT_003ead18 = GLOBAL->DAT_003ead18 + 1;
+		iterator.Iterate();
+	}
 }
 
 void RendererAbstract::Render() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall RendererAbstract::Render(Renderer *this){
-		FontRenderer **result;
-		IteratorC4 local_c;
-		local_c.collection = &(this->parent).substruct;
-		local_c.parent = (IteratorCBase_VTable *)&IteratorC_VT_4;
-		local_c.i = 0;
-		local_c.index = 0;
-		IteratorC4::Reset(&local_c);
-		if (local_c.index != (local_c.collection)->cnt2) {
-		do {
-		result = (FontRenderer **)(*(local_c.parent)->Get)((IteratorCAbstract *)&local_c);
-		FontRenderer::Render(*result);
-		IteratorC4::Iterate(&local_c);
-		}
-		 while (local_c.index != (local_c.collection)->cnt2);
-		}
-		return;
-		}
-		
-	*/
-	return;
+	IteratorC4 iterator(&substruct);
+	iterator.Reset();
+	while (iterator.index != (iterator.collection)->count) {
+		FontRenderer* result = *iterator.Get();
+		result->Render();
+		iterator.Iterate();
+	}
 }
 
 void RendererAbstract::UnkMethod5() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall RendererAbstract::UnkMethod5(Renderer *this){
-		int cnt;
-		int i;
-		short *index;
-		FontRenderer **value;
-		(*((this->parent).vtable)->Stub2)();
-		value = (FontRenderer **)0x0;
-		i = 0;
-		cnt = (this->parent).substruct.cnt1 + -1;
-		if (0 < cnt) {
-		index = (this->parent).substruct.indexArray;
-		do {
-		if (*index == -1) {
-		value = (this->parent).substruct.pointerArray + i;
-		break;
+	FontRenderer* value = null;
+	//Stub2();
+	for (int i = 0; i < this->substruct.capacity; ++i) {
+		if (this->substruct.indexArray[i] == -1) {
+			value = this->substruct.pointerArray[i];
+			break;
 		}
-		i = i + 1;
-		index = index + 1;
-		}
-		 while (i < cnt);
-		}
-		FontRenderer::DrawAll(*value);
-		(*((this->parent).vtable)->SwapBuffer)();
-		(*((this->parent).vtable)->Stub3)();
-		return;
-		}
-		
-	*/
+	}
+	value->DrawAll();
+	SwapBuffer();
+	//Stub3();
 	return;
 }
 
@@ -175,31 +142,21 @@ void RendererAbstract::SetXY(Vector2* val) {
 }
 
 void RendererAbstract::FUN_00114940() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall RendererAbstract::FUN_00114940(RendererAbstract *this){
-		FontRenderer **result;
-		IteratorC4 local_c;
-		local_c.collection = &this->substruct;
-		local_c.parent = (IteratorCBase_VTable *)&IteratorC_VT_4;
-		local_c.i = 0;
-		local_c.index = 0;
-		IteratorC4::Reset(&local_c);
-		if (local_c.index != (local_c.collection)->cnt2) {
-		do {
-		result = (FontRenderer **)(*(local_c.parent)->Get)((IteratorCAbstract *)&local_c);
-		if ((*(byte *)&(*result)->flags & 1) != 0) {
-		FontRenderer::DrawAll(*result);
+
+	IteratorC4 iterator(&substruct);
+	iterator.Reset();
+	while (iterator.index != (iterator.collection)->count) {
+		FontRenderer* result = *iterator.Get();
+		if ((result->flags & 1) != 0) {
+			result->DrawAll();
 		}
-		IteratorC4::Iterate(&local_c);
-		}
-		 while (local_c.index != (local_c.collection)->cnt2);
-		}
-		return;
-		}
-		
-	*/
-	return;
+		iterator.Iterate();
+	}
+}
+
+void RendererAbstract::SwapBuffer()
+{
+	//Abstract method
 }
 
 

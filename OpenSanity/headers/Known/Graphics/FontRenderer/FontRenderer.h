@@ -31,7 +31,7 @@ class FontRenderer {
 		int field25_0x64;
 
 		virtual void DrawAll();
-		static void Render(FontRenderer* renderer);
+		void Render();
 		virtual void DrawText(float x, float y, char* str);
 		FontRenderer();
 		FontRenderer(Renderer* renderer, ScreenInfo* screen);

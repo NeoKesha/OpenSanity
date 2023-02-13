@@ -19,5 +19,6 @@ class RendererAbstract {
 		virtual void UnkMethod5();
 		virtual void SetXY(Vector2* vec);
 		virtual void FUN_00114940();
+		virtual void SwapBuffer();
 
 };

@@ -73,7 +73,7 @@ void FontRenderer::DrawAll() {
 	return;
 }
 
-void FontRenderer::Render(FontRenderer* renderer) {
+void FontRenderer::Render() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall FontRenderer::Render(FontRenderer *renderer){

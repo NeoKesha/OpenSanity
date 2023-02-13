@@ -101,6 +101,7 @@ public:
 	int DAT_004937a4;
 	int INT_004937a8;
 	int INT_004937ac;
+	int DAT_003ead18;
 
 	//GLOBAL VALUES
 	float SinTable[32768];
