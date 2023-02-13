@@ -24,10 +24,7 @@ RendererAbstract::~RendererAbstract() {
 
 
 void RendererAbstract::CleanUp() {
-	IteratorC4 iterator;
-	iterator.i = 0;
-	iterator.index = 0;
-	iterator.collection = &this->substruct;
+	IteratorC4 iterator(&substruct);
 	iterator.Reset();
 	if (iterator.index != (iterator.collection)->count) {
 		do {
@@ -49,35 +46,18 @@ void RendererAbstract::CleanUp() {
 
 
 void RendererAbstract::UnkMethod1() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall RendererAbstract::UnkMethod1(Renderer *this){
-		uint uVar1;
-		FontRenderer **result;
-		IteratorC4 iterator;
-		iterator.i = 0;
-		iterator.index = 0;
-		iterator.collection = &(this->parent).substruct;
-		iterator.parent = (IteratorCBase_VTable *)&IteratorC_VT_4;
-		(*((this->parent).vtable)->Stub2)();
-		IteratorC4::Reset(&iterator);
-		if (iterator.index != (iterator.collection)->cnt2) {
-		do {
-		result = (FontRenderer **)(*(iterator.parent)->Get)((IteratorCAbstract *)&iterator);
-		uVar1 = (*result)->flags;
-		if ((uVar1 & 1) != 0) {
-		(*result)->flags = uVar1 | 0x30;
+	uint uVar1;
+	IteratorC4 iterator(&substruct);
+	//Stub2();
+	iterator.Reset();
+	while (iterator.index != (iterator.collection)->count) {
+		FontRenderer*  result = *iterator.Get();
+		if ((result->flags & 1) != 0) {
+			result->flags = result->flags | 0x30;
 		}
-		IteratorC4::Iterate(&iterator);
-		}
-		 while (iterator.index != (iterator.collection)->cnt2);
-		}
-		(*((this->parent).vtable)->Stub3)();
-		return;
-		}
-		
-	*/
-	return;
+		iterator.Iterate();
+	}
+	//Stub3();
 }
 
 void RendererAbstract::UnkMethod2() {

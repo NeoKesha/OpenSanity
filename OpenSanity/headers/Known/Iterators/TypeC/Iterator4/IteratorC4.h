@@ -8,15 +8,15 @@ class IteratorC4 : public IteratorC4Abstract {
 		short i;
 		short index;
 		RendererSubStruct * collection;
+		
+		IteratorC4(RendererSubStruct* _collection);
 
 		virtual void Reset();
 		virtual void Iterate();
 		virtual FontRenderer** Get();
-		void Dispose(byte param_1);
 		virtual bool IsEnd();
 		virtual void Set(IteratorC4* param_1);
 		virtual int GetIndex();
 		virtual int GetCollectionCnt();
-		void Construct(uint param_1);
 
 };
