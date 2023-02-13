@@ -3,9 +3,9 @@
 #include "headers/Known/Graphics/FontRenderer/FontRenderer.h"
 
 RendererSubStruct::RendererSubStruct() {
-	cnt1 = 0;
-	field2_0x6 = 10;
-	cnt2 = 0;
+	capacity = 0;
+	expansion = 10;
+	count = 0;
 	lastIndex = -1;
 	indexArray = null;
 	pointerArray = null;
@@ -17,117 +17,81 @@ RendererSubStruct::~RendererSubStruct() {
 }
 
 void RendererSubStruct::RelocateArrays() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall RendererSubStruct::RelocateArrays(RendererSubStruct *this){
-		FontRenderer **ptr;
-		FontRenderer **ppFVar1;
-		undefined4 *puVar2;
-		int iVar3;
-		uint uVar4;
-		uint uVar5;
-		undefined4 *puVar6;
-		bool bVar7;
-		uVar4 = (int)this->cnt1 & 0x80000001;
-		bVar7 = uVar4 == 0;
-		if ((int)uVar4 < 0) {
+	FontRenderer** oldPointerArray;
+	FontRenderer** newPointerArray;
+	short* newIndexArray;
+	int iVar3;
+	uint uVar4;
+	uint uVar5;
+	bool bVar7;
+	uVar4 = (int)this->capacity & 0x80000001;
+	bVar7 = uVar4 == 0;
+	if ((int)uVar4 < 0) {
 		bVar7 = (uVar4 - 1 | 0xfffffffe) == 0xffffffff;
-		}
-		if (!bVar7) {
-		this->cnt1 = this->cnt1 + 1;
-		}
-		uVar4 = (int)this->field2_0x6 & 0x80000001;
-		bVar7 = uVar4 == 0;
-		if ((int)uVar4 < 0) {
+	}
+	if (!bVar7) {
+		this->capacity = this->capacity + 1;
+	}
+	uVar4 = (int)this->expansion & 0x80000001;
+	bVar7 = uVar4 == 0;
+	if ((int)uVar4 < 0) {
 		bVar7 = (uVar4 - 1 | 0xfffffffe) == 0xffffffff;
+	}
+	if (!bVar7) {
+		this->expansion = this->expansion + 1;
+	}
+	newPointerArray = new FontRenderer * [this->expansion + this->capacity];
+	newIndexArray = new short[this->expansion + this->capacity];
+	if (this->capacity != 0) {
+		oldPointerArray = this->pointerArray;
+		this->pointerArray = newPointerArray;
+		Populate(oldPointerArray);
+		uVar5 = this->capacity * 2;
+		short* indexPtr = newIndexArray;
+		for (int i = uVar5 / 4; i != 0; --i) {
+			*indexPtr = -1;
+			++indexPtr;
 		}
-		if (!bVar7) {
-		this->field2_0x6 = this->field2_0x6 + 1;
+		for (int i = uVar5 & 3; i != 0; --i) {
+			*indexPtr = 255;
+			++indexPtr;
 		}
-		ppFVar1 = (FontRenderer **)VirtualPool::AllocateMemory(((int)this->field2_0x6 + (int)this->cnt1) * 4);
-		puVar2 = (undefined4 *)VirtualPool::AllocateMemory(((int)this->field2_0x6 + (int)this->cnt1) * 2);
-		if (this->cnt1 != 0) {
-		ptr = this->pointerArray;
-		this->pointerArray = ppFVar1;
-		FUN_00119ef0((int)this,(int)ptr);
-		uVar5 = (int)this->cnt1 << 1;
-		puVar6 = puVar2;
-		for (uVar4 = uVar5 >> 2;
-		 uVar4 != 0;
-		 uVar4 = uVar4 - 1) {
-		*puVar6 = 0xffffffff;
-		puVar6 = puVar6 + 1;
-		}
-		for (uVar5 = uVar5 & 3;
-		 uVar5 != 0;
-		 uVar5 = uVar5 - 1) {
-		*(undefined *)puVar6 = 0xff;
-		puVar6 = (undefined4 *)((int)puVar6 + 1);
-		}
-		VirtualPool::FreeMemory(ptr);
-		VirtualPool::FreeMemory(this->indexArray);
-		}
-		iVar3 = (int)this->cnt1;
-		if (iVar3 < this->field2_0x6 + iVar3) {
-		do {
-		*(short *)((int)puVar2 + iVar3 * 2) = (short)iVar3 + 1;
-		iVar3 = iVar3 + 1;
-		}
-		 while (iVar3 < (int)this->field2_0x6 + (int)this->cnt1);
-		}
-		*(undefined2 *)((int)puVar2 + iVar3 * 2 + -2) = 0xfffe;
-		this->pointerArray = ppFVar1;
-		this->indexArray = (short *)puVar2;
-		this->lastIndex = this->cnt1;
-		this->cnt1 = this->field2_0x6 + this->cnt1;
-		return;
-		}
-		
-	*/
-	return;
+		delete oldPointerArray;
+		delete this->indexArray;
+	}
+	for (int i = this->capacity; i < this->capacity + this->expansion; ++i) {
+		newIndexArray[i] = i + 1;
+	}
+	newIndexArray[this->capacity + this->expansion - 1] = 0xFFFE;
+	this->pointerArray = newPointerArray;
+	this->indexArray = newIndexArray;
+	this->lastIndex = this->capacity;
+	this->capacity = this->expansion + this->capacity;
 }
 
-void RendererSubStruct::Expand() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall RendererSubStruct::Expand(RendererSubStruct *this){
-		short i;
-		if (this->cnt2 < this->cnt1) {
-		i = this->lastIndex;
-		this->lastIndex = this->indexArray[i];
-		this->indexArray[i] = -1;
-		this->cnt2 = this->cnt2 + 1;
-		return;
+void RendererSubStruct::Populate(FontRenderer** arr)
+{
+	for (int i = 0; i < this->count; ++i) {
+		if (this->indexArray[i] == -1) {
+			this->pointerArray[i] = arr[i];
 		}
-		RelocateArrays(this);
-		Expand(this);
-		return;
-		}
-		
-	*/
-	return;
+	}
 }
 
 void RendererSubStruct::Add(FontRenderer** fontRenderer) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall RendererSubStruct::Add(RendererSubStruct *this,FontRenderer **fontRenderer){
-		int iVar1;
-		short i;
-		if (this->cnt2 < this->cnt1) {
-		i = this->lastIndex;
-		this->lastIndex = this->indexArray[i];
-		this->indexArray[i] = -1;
-		this->cnt2 = this->cnt2 + 1;
-		this->pointerArray[i] = *fontRenderer;
-		return;
-		}
-		RelocateArrays(this);
-		iVar1 = Expand(this);
-		this->pointerArray[iVar1] = *fontRenderer;
-		return;
-		}
-		
-	*/
-	return;
+	if (this->count < this->capacity) {
+		int prevIndex = this->lastIndex;
+		this->lastIndex = this->indexArray[this->lastIndex];
+		this->indexArray[prevIndex] = -1;
+		this->count = this->count + 1;
+		this->pointerArray[prevIndex] = *fontRenderer;
+	}
+	else {
+		RelocateArrays();
+		int prevIndex = this->lastIndex;
+		this->lastIndex = this->indexArray[this->lastIndex];
+		this->indexArray[prevIndex] = -1;
+		this->count = this->count + 1;
+		this->pointerArray[prevIndex] = *fontRenderer;
+	}
 }

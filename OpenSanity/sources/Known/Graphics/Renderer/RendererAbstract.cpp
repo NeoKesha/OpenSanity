@@ -6,9 +6,9 @@
 #include "headers/Global.h"
 
 RendererAbstract::RendererAbstract() {
-	substruct.cnt1 = 0;
-	substruct.field2_0x6 = 10;
-	substruct.cnt2 = 0;
+	substruct.capacity = 0;
+	substruct.expansion = 10;
+	substruct.count = 0;
 	substruct.lastIndex = -1;
 	substruct.indexArray = (short*)0x0;
 	substruct.pointerArray = (FontRenderer**)0x0;
@@ -29,7 +29,7 @@ void RendererAbstract::CleanUp() {
 	iterator.index = 0;
 	iterator.collection = &this->substruct;
 	iterator.Reset();
-	if (iterator.index != (iterator.collection)->cnt2) {
+	if (iterator.index != (iterator.collection)->count) {
 		do {
 			FontRenderer* fontRenderer = *iterator.Get();
 			if (fontRenderer != null) {
@@ -40,7 +40,7 @@ void RendererAbstract::CleanUp() {
 				delete fontRenderer;
 			}
 			iterator.Iterate();
-		} while (iterator.index != (iterator.collection)->cnt2);
+		} while (iterator.index != (iterator.collection)->count);
 	}
 	delete substruct.indexArray;
 	delete substruct.pointerArray;

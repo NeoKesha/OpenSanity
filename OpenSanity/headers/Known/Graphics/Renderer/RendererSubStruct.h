@@ -4,18 +4,18 @@
 
 class RendererSubStruct {
 	public:
-		short cnt1;
-		short cnt2;
+		short capacity;
+		short count;
 		short lastIndex;
 		short * indexArray;
-		int field2_0x6;
+		int expansion;
 		FontRenderer * * pointerArray;
 
 		RendererSubStruct();
 		~RendererSubStruct();
 
 		void RelocateArrays();
-		void Expand();
+		void Populate(FontRenderer** pointerArray);
 		virtual void Add(FontRenderer** fontRenderer);
 
 };
