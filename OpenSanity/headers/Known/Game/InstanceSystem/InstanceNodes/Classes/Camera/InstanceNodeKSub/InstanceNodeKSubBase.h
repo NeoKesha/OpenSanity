@@ -8,8 +8,10 @@ class InstanceNodeKSubBase : public InstanceNodeKSubAbstract {
 	public:
 		InputWrapper inputWrapper;
 
-		void Construct(int param_1, int param_2);
-		void Dispose(byte param_1);
+		InstanceNodeKSubBase();
+		InstanceNodeKSubBase(uint cnt1, uint cnt2);
+		~InstanceNodeKSubBase();
+		virtual void CleanUp();
 		static void FUN_000a5110(uint* param_1, uint* param_2);
 
 };

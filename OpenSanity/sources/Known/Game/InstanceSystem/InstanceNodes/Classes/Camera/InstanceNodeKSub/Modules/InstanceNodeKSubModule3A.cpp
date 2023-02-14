@@ -1,49 +1,34 @@
 #include "headers/Known/Game/InstanceSystem/InstanceNodes/Classes/Camera/InstanceNodeKSub/Modules/InstanceNodeKSubModule3A.h"
 
 #include "headers/Known/Math/Matrix4.h"
+#include "headers/Global.h"
+
+InstanceNodeKSubModule3A::InstanceNodeKSubModule3A() : InstanceNodeKSubModule3Abstract()
+{
+	Init();
+}
+
+InstanceNodeKSubModule3A::~InstanceNodeKSubModule3A()
+{
+
+}
+
 void InstanceNodeKSubModule3A::Init() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubModule3A::Init(InstanceNodeKSubModule3A *this){
-		uint uVar1;
-		float fVar2;
-		fVar2 = FLOAT_0038639c;
-		this->field13_0x50 = this->field13_0x50 & 0xffffffe0;
-		(this->parent).vec1.z = 0.0;
-		(this->parent).vec1.y = 0.0;
-		(this->parent).vec1.x = 0.0;
-		(this->parent).vec1.w = fVar2;
-		(this->parent).vec2.x = Vector4_0039ef70.x;
-		(this->parent).vec2.y = Vector4_0039ef70.y;
-		(this->parent).vec2.z = Vector4_0039ef70.z;
-		(this->parent).vec2.w = fVar2;
-		(this->parent).vec1.w = 0.0;
-		(this->parent).vec1.z = 0.0;
-		(this->parent).vec1.y = 0.0;
-		(this->parent).vec1.x = 0.0;
-		(this->field23_0x60).x = Vector4_0039ef70.x;
-		(this->field23_0x60).y = Vector4_0039ef70.y;
-		(this->field23_0x60).z = Vector4_0039ef70.z;
-		(this->field23_0x60).w = fVar2;
-		(this->field24_0x70).x = Vector4_0039ef70.x;
-		(this->field24_0x70).y = Vector4_0039ef70.y;
-		(this->field24_0x70).z = Vector4_0039ef70.z;
-		(this->field24_0x70).w = fVar2;
-		uVar1 = this->field13_0x50;
-		*(undefined4 *)&this->field_0x80 = 0;
-		*(undefined4 *)&this->field_0x84 = 0;
-		*(undefined4 *)&this->field_0x90 = 0;
-		*(undefined4 *)&this->field_0x88 = 0;
-		(this->parent).field13_0x10 = 0;
-		this->field13_0x50 = uVar1 & 0xffffffdf;
-		this->field14_0x54 = 0;
-		(this->parent).fov = ENV_FLOAT_113_SCREEN_FOV;
-		this->field49_0x98 = 0;
-		return;
-		}
-		
-	*/
-	return;
+	this->field13_0x50 = 0; //this->field13_0x50 = this->field13_0x50 & 0xffffffe0;
+	(this->field23_0x60).x = 0.0f;
+	(this->field23_0x60).y = 0.0f;
+	(this->field23_0x60).z = 0.0f;
+	(this->field23_0x60).w = 1.0f;
+	(this->field24_0x70).x = 0.0f;
+	(this->field24_0x70).y = 0.0f;
+	(this->field24_0x70).z = 0.0f;
+	(this->field24_0x70).w = 1.0f;
+	(this->field_0x80).x = 0.0f;
+	(this->field_0x80).y = 0.0f;
+	(this->field_0x80).z = 0.0f;
+	(this->field_0x80).w = 0.0f;
+	this->field14_0x54 = 0;
+	this->field49_0x98 = 0;
 }
 
 void InstanceNodeKSubModule3A::UnkMethod3(int param_1, Matrix4* mat) {
@@ -145,33 +130,6 @@ void InstanceNodeKSubModule3A::UnkMethod3(int param_1, Matrix4* mat) {
 		Matrix4::FUN_000d9f80(&local_50,vec);
 		FUN_000e8310(&local_50,&pVVar1->x,&local_80,&local_70.x);
 		Vector4::FUN_000db0d0(vec,&local_50);
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubModule3A::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubModule3A * __thiscall InstanceNodeKSubModule3A::Dispose(InstanceNodeKSubModule3A *this,byte param_1){
-		(this->parent).vtable = &InstanceNodeKSubModule3_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubModule3A::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubModule3A::Construct(InstanceNodeKSubModule3Abstract *this){
-		Init((InstanceNodeKSubModule3A *)this);
 		return;
 		}
 		

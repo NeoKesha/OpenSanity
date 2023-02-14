@@ -2,25 +2,21 @@
 
 #include "headers/Known/Math/Vector4.h"
 #include "headers/Known/Game/InstanceSystem/InstanceNodes/Classes/Camera/InstanceNodeKSub/InstanceNodeKSubA.h"
-void InstanceNodeKSubModuleA::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubModuleA * __fastcall InstanceNodeKSubModuleA::Construct(InstanceNodeKSubModuleA *this){
-		float fVar1;
-		fVar1 = FLOAT_0038807c;
-		this->field11_0x20 = FLOAT_0038807c;
-		this->field12_0x24 = fVar1;
-		(this->parent).vtable = &InstanceNodeKSubModule_VT_A;
-		this->functionType = 0x11;
-		(this->field10_0x10).x = Vector4_0039ef70.x;
-		(this->field10_0x10).y = Vector4_0039ef70.y;
-		(this->field10_0x10).z = Vector4_0039ef70.z;
-		(this->field10_0x10).w = FLOAT_0038639c;
-		return this;
-		}
-		
-	*/
-	return;
+
+InstanceNodeKSubModuleA::InstanceNodeKSubModuleA() : InstanceNodeKSubModuleAbstract()
+{
+	this->field11_0x20 = 5.0f;
+	this->field12_0x24 = 5.0f;
+	this->functionType = 0x11;
+	(this->field10_0x10).x = 0.0f;
+	(this->field10_0x10).y = 0.0f;
+	(this->field10_0x10).z = 0.0f;
+	(this->field10_0x10).w = 1.0f;
+}
+
+InstanceNodeKSubModuleA::~InstanceNodeKSubModuleA()
+{
+
 }
 
 float InstanceNodeKSubModuleA::F(float x) {
@@ -38,21 +34,6 @@ float InstanceNodeKSubModuleA::F(float x) {
 		
 	*/
 	return 0.0f;
-}
-
-void InstanceNodeKSubModuleA::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubModuleA * __thiscall InstanceNodeKSubModuleA::Dispose(InstanceNodeKSubModuleA *this,byte param_1){
-		(this->parent).vtable = &InstanceNodeKSubModule_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
 }
 
 void InstanceNodeKSubModuleA::SetVec1(uint param_1, Vector4* vec) {

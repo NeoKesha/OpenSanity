@@ -1,5 +1,24 @@
 #include "headers/Known/Game/InstanceSystem/InstanceNodes/Classes/Camera/InstanceNodeKSub/Modules/InstanceNodeKSubModule2A.h"
 
+InstanceNodeKSubModule2A::InstanceNodeKSubModule2A() : InstanceNodeKSubModule2Abstract()
+{
+	this->field15_0x80 = 0;//this->field15_0x80 = this->field15_0x80 & 0xfffffff0;
+	(this->field28_0x90).x = 0.0f;
+	(this->field28_0x90).y = 0.0f;
+	(this->field28_0x90).z = 0.0f;
+	(this->field28_0x90).w = 1.0f;
+	(this->field29_0xa0).x = 0.0f;
+	(this->field29_0xa0).y = 0.0f;
+	(this->field29_0xa0).z = 0.0f;
+	(this->field29_0xa0).w = 1.0f;
+	this->field38_0xb8 = 0;
+}
+
+InstanceNodeKSubModule2A::~InstanceNodeKSubModule2A()
+{
+
+}
+
 float InstanceNodeKSubModule2A::FUN_001c92e0(int param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -37,40 +56,6 @@ float InstanceNodeKSubModule2A::FUN_001c92e0(int param_1) {
 		
 	*/
 	return 0.0f;
-}
-
-void InstanceNodeKSubModule2A::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubModule2A * __fastcall InstanceNodeKSubModule2A::Construct(InstanceNodeKSubModule2A *this){
-		float fVar1;
-		InstanceNodeKSubModule2A *pIVar2;
-		fVar1 = FLOAT_0038639c;
-		pIVar2 = (InstanceNodeKSubModule2A *)(this->field15_0x80 & 0xfffffff0);
-		this->field15_0x80 = (uint)pIVar2;
-		(this->parent).field26_0x20.z = 0.0;
-		(this->parent).field26_0x20.y = 0.0;
-		(this->parent).field26_0x20.x = 0.0;
-		(this->parent).field26_0x20.w = fVar1;
-		(this->parent).field27_0x30.x = Vector4_0039ef70.x;
-		(this->parent).field27_0x30.y = Vector4_0039ef70.y;
-		(this->parent).field27_0x30.z = Vector4_0039ef70.z;
-		(this->parent).field27_0x30.w = fVar1;
-		(this->field28_0x90).x = Vector4_0039ef70.x;
-		(this->field28_0x90).y = Vector4_0039ef70.y;
-		(this->field28_0x90).z = Vector4_0039ef70.z;
-		(this->field28_0x90).w = fVar1;
-		(this->field29_0xa0).x = Vector4_0039ef70.x;
-		(this->field29_0xa0).y = Vector4_0039ef70.y;
-		(this->field29_0xa0).z = Vector4_0039ef70.z;
-		(this->field29_0xa0).w = fVar1;
-		(this->parent).field13_0x10 = 0;
-		this->field38_0xb8 = 0;
-		return pIVar2;
-		}
-		
-	*/
-	return;
 }
 
 void InstanceNodeKSubModule2A::UnkMethod3(int param_1) {
@@ -134,21 +119,6 @@ void InstanceNodeKSubModule2A::UnkMethod3(int param_1) {
 	return;
 }
 
-void InstanceNodeKSubModule2A::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubModule2A * __thiscall InstanceNodeKSubModule2A::Dispose(InstanceNodeKSubModule2A *this,byte param_1){
-		(this->parent).vtable = &InstanceNodeKSubModule2_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
 float InstanceNodeKSubModule2A::UnkMethod4() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -159,32 +129,3 @@ float InstanceNodeKSubModule2A::UnkMethod4() {
 	*/
 	return 0.0f;
 }
-
-InstanceNodeKSubModule2A* InstanceNodeKSubModule2A::ConstructEx() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubModule2A * __fastcall InstanceNodeKSubModule2A::ConstructEx(InstanceNodeKSubModule2A *this){
-		float fVar1;
-		InstanceNodeKSubModule2A *extraout_ECX;
-		(this->parent).vtable = &InstanceNodeKSubModule2_VT_Abstract;
-		(this->parent).field13_0x10 = 0;
-		(this->parent).field31_0x70 = 0;
-		(this->parent).field32_0x71 = 1;
-		(this->parent).field26_0x20.z = 0.0;
-		(this->parent).field26_0x20.y = 0.0;
-		(this->parent).field26_0x20.x = 0.0;
-		fVar1 = FLOAT_0038639c;
-		(this->parent).field26_0x20.w = FLOAT_0038639c;
-		(this->parent).field27_0x30.x = Vector4_0039ef70.x;
-		(this->parent).field27_0x30.y = Vector4_0039ef70.y;
-		(this->parent).field27_0x30.z = Vector4_0039ef70.z;
-		(this->parent).field27_0x30.w = fVar1;
-		(this->parent).vtable = &InstanceNodeKSubModule2_VT_A;
-		Construct(this);
-		return extraout_ECX;
-		}
-		
-	*/
-	return null;
-}
-

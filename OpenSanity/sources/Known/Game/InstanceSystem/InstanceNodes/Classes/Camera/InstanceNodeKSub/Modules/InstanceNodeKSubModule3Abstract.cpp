@@ -1,6 +1,30 @@
 #include "headers/Known/Game/InstanceSystem/InstanceNodes/Classes/Camera/InstanceNodeKSub/Modules/InstanceNodeKSubModule3Abstract.h"
 
 #include "headers/Known/Game/InstanceSystem/InstanceNodes/Classes/Camera/InstanceNodeKSub/InstanceNodeKSubA.h"
+#include "headers/Global.h"
+
+InstanceNodeKSubModule3Abstract::InstanceNodeKSubModule3Abstract()
+{
+	Global* GLOBAL = Global::Get();
+
+	this->field13_0x10 = 0;
+	this->field25_0x40 = 1;
+	this->fov = GLOBAL->ENV_FLOAT_113_SCREEN_FOV;
+	(this->vec1).z = 0.0f;
+	(this->vec1).y = 0.0f;
+	(this->vec1).x = 0.0f;
+	(this->vec1).w = 1.0f;
+	(this->vec2).z = 0.0f;
+	(this->vec2).y = 0.0f;
+	(this->vec2).x = 0.0f;
+	(this->vec2).w = 1.0f;
+}
+
+InstanceNodeKSubModule3Abstract::~InstanceNodeKSubModule3Abstract()
+{
+
+}
+
 float InstanceNodeKSubModule3Abstract::FUN_001d0470(float param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -119,117 +143,5 @@ bool InstanceNodeKSubModule3Abstract::UnkMethod5(uint param_1, InstanceNodeKSubA
 }
 
 bool InstanceNodeKSubModule3Abstract::ReturnFalse() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	bool InstanceNodeKSubModule3Abstract::ReturnFalse(void){
-		return false;
-		}
-		
-	*/
 	return false;
 }
-
-void InstanceNodeKSubModule3Abstract::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubModule3Abstract * __thiscall InstanceNodeKSubModule3Abstract::Dispose(InstanceNodeKSubModule3Abstract *this,byte param_1){
-		this->vtable = &InstanceNodeKSubModule3_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubModule3Abstract::Unroll() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubModule3Abstract::Unroll(InstanceNodeKSubModule3Abstract *this){
-		this->vtable = &InstanceNodeKSubModule3_VT_Abstract;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubModule3Abstract::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubModule3Abstract::Construct(InstanceNodeKSubModule3Abstract *this){
-		float fVar1;
-		this->field13_0x10 = 0;
-		this->vtable = &InstanceNodeKSubModule3_VT_Abstract;
-		this->field25_0x40 = 1;
-		this->fov = ENV_FLOAT_113_SCREEN_FOV;
-		(this->vec1).z = 0.0;
-		(this->vec1).y = 0.0;
-		(this->vec1).x = 0.0;
-		fVar1 = FLOAT_0038639c;
-		(this->vec1).w = FLOAT_0038639c;
-		(this->vec2).x = Vector4_0039ef70.x;
-		(this->vec2).y = Vector4_0039ef70.y;
-		(this->vec2).z = Vector4_0039ef70.z;
-		(this->vec2).w = fVar1;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubModule3Abstract::Construct_8() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	undefined4 __fastcall InstanceNodeKSubModule3Abstract::Construct(InstanceNodeKSubModule3Abstract *this){
-		float fVar1;
-		undefined4 extraout_ECX;
-		this->vtable = &InstanceNodeKSubModule3_VT_Abstract;
-		this->field13_0x10 = 0;
-		this->field25_0x40 = 1;
-		this->fov = ENV_FLOAT_113_SCREEN_FOV;
-		(this->vec1).z = 0.0;
-		(this->vec1).y = 0.0;
-		(this->vec1).x = 0.0;
-		fVar1 = FLOAT_0038639c;
-		(this->vec1).w = FLOAT_0038639c;
-		(this->vec2).x = Vector4_0039ef70.x;
-		(this->vec2).y = Vector4_0039ef70.y;
-		(this->vec2).z = Vector4_0039ef70.z;
-		(this->vec2).w = fVar1;
-		this->vtable = &InstanceNodeKSubModule3_VT_A;
-		InstanceNodeKSubModule3A::Init((InstanceNodeKSubModule3A *)this);
-		return extraout_ECX;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubModule3Abstract::Unroll_9(uint* param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubModule3Abstract::Unroll(undefined4 *param_1){
-		*param_1 = &InstanceNodeKSubModule3_VT_Abstract;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubModule3Abstract::Unroll_10(uint* param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubModule3Abstract::Unroll(undefined4 *param_1){
-		*param_1 = &InstanceNodeKSubModule3_VT_Abstract;
-		return;
-		}
-		
-	*/
-	return;
-}
-

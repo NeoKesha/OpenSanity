@@ -10,7 +10,8 @@
 #include "headers/Known/Credits.h"
 #include "headers/Global.h"
 
-GameController::GameController(InputStruct* inputHandle, InputStruct* inputHandle2, FontRenderer* fontRenderer, UnkFamily16A* defaultRm, GameResourceManager* resourceManager, GameResources* gameResources)
+GameController::GameController(InputStruct* inputHandle, InputStruct* inputHandle2, FontRenderer* fontRenderer, UnkFamily16A* defaultRm, GameResourceManager* resourceManager, GameResources* gameResources) :
+	sfxData(3), galleryName(), font(), field32_0xb0(), unkStruct3(), field42_0x4a0(), chunkDescriptor(),  oleg(&font, chunkDesc)
 {
 	Global* GLOBAL = Global::Get();
 
@@ -21,15 +22,6 @@ GameController::GameController(InputStruct* inputHandle, InputStruct* inputHandl
 	this->inputHandle1 = inputHandle;
 	this->gameResources = gameResources;
 	this->inputHandle2 = inputHandle2;
-	this->sfxData = SectionDataSfx(3);
-	(this->galleryName).value = (char*)0x0;
-	(this->galleryName).strLength = 0;
-	(this->galleryName).strSize = 0;
-	this->font = Font();
-	this->field32_0xb0 = AutoClass25();
-	this->unkStruct3 = InstanceNodeKSubA();
-	this->field42_0x4a0 = InstanceNodeKSubC();
-	this->chunkDescriptor = ChunkDesc();
 	(this->unkStruct).chunkName.value = (char*)0x0;
 	(this->unkStruct).chunkName.strLength = 0;
 	(this->unkStruct).chunkName.strSize = 0;
@@ -39,7 +31,6 @@ GameController::GameController(InputStruct* inputHandle, InputStruct* inputHandl
 	(this->unkStruct).someTicks = 0;
 	(this->unkStruct).rmDataPool = new byte[0xf000];
 	this->chunkDesc = &this->chunkDescriptor;
-	this->oleg = Oleg(&this->font, this->chunkDesc);
 	statePtr = &this->state;
 	this->credits = (Credits*)0x0;
 	*statePtr = 0;

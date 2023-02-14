@@ -3,50 +3,56 @@
 #include "headers/Known/Game/InstanceSystem/InstanceNodes/Classes/Camera/InstanceNodeKSub/Modules/InstanceNodeKSubModuleAbstract.h"
 #include "headers/Known/Game/InstanceSystem/InstanceNodes/Classes/Camera/InstanceNodeKSub/Modules/InstanceNodeKSubModule3Abstract.h"
 #include "headers/Known/Game/InstanceSystem/InstanceNodes/Classes/Camera/InstanceNodeKSub/Modules/InstanceNodeKSubModule2Abstract.h"
-void InstanceNodeKSubAbstract::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubAbstract::Construct(InstanceNodeKSubAbstract *this){
-		this->vtable = (InstanceNodeKSubAbstract_VTable *)&InstanceNodeKSub_VT_Abstract;
-		this->field14_0x14 = (undefined **)0x0;
-		this->struct1ptr = (InstanceNodeKSubModuleAbstract *)0x0;
-		this->struct2ptr = (InstanceNodeKSubModuleAbstract *)0x0;
-		this->struct3ptr = (InstanceNodeKSubModule2Abstract *)0x0;
-		this->struct4ptr = (InstanceNodeKSubModule3Abstract *)0x0;
-		this->field13_0x10 = (undefined **)0x0;
-		return;
-		}
-		
-	*/
+
+InstanceNodeKSubAbstract::InstanceNodeKSubAbstract()
+{
+	this->field14_0x14 = null;
+	this->struct1ptr = null;
+	this->struct2ptr = null;
+	this->struct3ptr = null;
+	this->struct4ptr = null;
+	this->field13_0x10 = null;
 	return;
+}
+
+InstanceNodeKSubAbstract::InstanceNodeKSubAbstract(InstanceNodeKSubModule2Abstract* ptr1, InstanceNodeKSubModule3Abstract* ptr2)
+{
+	this->struct3ptr = ptr1;
+	this->field14_0x14 = null;
+	this->struct1ptr = null;
+	this->struct2ptr = null;
+	this->struct4ptr = ptr2;
+	this->field13_0x10 = null;
+	return;
+}
+
+InstanceNodeKSubAbstract::~InstanceNodeKSubAbstract()
+{
+	CleanUp();
 }
 
 void InstanceNodeKSubAbstract::CleanUp() {
 	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubAbstract::CleanUp(InstanceNodeKSubAbstract *this){
-		this->vtable = (InstanceNodeKSubAbstract_VTable *)&InstanceNodeKSub_VT_Abstract;
-		if (((*(byte *)&this->field13_0x10 & 4) != 0) &&(this->struct1ptr != (InstanceNodeKSubModuleAbstract *)0x0)) {
-		(*(code *)*this->struct1ptr->vtable)(1);
-		}
-		this->struct1ptr = (InstanceNodeKSubModuleAbstract *)0x0;
-		if (((*(byte *)&this->field13_0x10 & 8) != 0) &&(this->struct2ptr != (InstanceNodeKSubModuleAbstract *)0x0)) {
-		(*(code *)*this->struct2ptr->vtable)(1);
-		}
-		this->struct2ptr = (InstanceNodeKSubModuleAbstract *)0x0;
-		if (((*(byte *)&this->field13_0x10 & 0x10) != 0) &&(this->struct3ptr != (InstanceNodeKSubModule2Abstract *)0x0)) {
-		(*(code *)*this->struct3ptr->vtable)(1);
-		}
-		this->struct3ptr = (InstanceNodeKSubModule2Abstract *)0x0;
-		if (((*(byte *)&this->field13_0x10 & 0x20) != 0) &&(this->struct4ptr != (InstanceNodeKSubModule3Abstract *)0x0)) {
-		(*(code *)*this->struct4ptr->vtable)(1);
-		}
-		this->struct4ptr = (InstanceNodeKSubModule3Abstract *)0x0;
-		return;
-		}
-		
-	*/
-	return;
+
+	if (((*(byte*)&this->field13_0x10 & 4) != 0) && (this->struct1ptr != null)) {
+		//(*(code*)*this->struct1ptr->vtable)(1);
+	}
+	this->struct1ptr = null;
+
+	if (((*(byte*)&this->field13_0x10 & 8) != 0) && (this->struct2ptr != null)) {
+		//(*(code*)*this->struct2ptr->vtable)(1);
+	}
+	this->struct2ptr = null;
+
+	if (((*(byte*)&this->field13_0x10 & 0x10) != 0) && (this->struct3ptr != null)) {
+		//(*(code*)*this->struct3ptr->vtable)(1);
+	}
+	this->struct3ptr = null;
+
+	if (((*(byte*)&this->field13_0x10 & 0x20) != 0) && (this->struct4ptr != null)) {
+		//(*(code*)*this->struct4ptr->vtable)(1);
+	}
+	this->struct4ptr = null;
 }
 
 void InstanceNodeKSubAbstract::FUN_001c6fd0(uint param_1) {
@@ -66,21 +72,6 @@ void InstanceNodeKSubAbstract::FUN_001c6fd0(uint param_1) {
 		}
 		}
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubAbstract::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubAbstract * __thiscall InstanceNodeKSubAbstract::Dispose(InstanceNodeKSubAbstract *this,byte param_1){
-		CleanUp(this);
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
 		}
 		
 	*/
@@ -230,22 +221,3 @@ uint InstanceNodeKSubAbstract::FUN_001c7220(uint param_1, uint* param_2) {
 	*/
 	return 0;
 }
-
-void InstanceNodeKSubAbstract::Construct_6(uint param_1, uint param_2) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall InstanceNodeKSubAbstract::Construct(InstanceNodeKSubAbstract *this,InstanceNodeKSubModule2Abstract *param_1,InstanceNodeKSubModule3Abstract *param_2){
-		this->struct3ptr = param_1;
-		this->vtable = (InstanceNodeKSubAbstract_VTable *)&InstanceNodeKSub_VT_Abstract;
-		this->field14_0x14 = (undefined **)0x0;
-		this->struct1ptr = (InstanceNodeKSubModuleAbstract *)0x0;
-		this->struct2ptr = (InstanceNodeKSubModuleAbstract *)0x0;
-		this->struct4ptr = param_2;
-		this->field13_0x10 = (undefined **)0x0;
-		return;
-		}
-		
-	*/
-	return;
-}
-

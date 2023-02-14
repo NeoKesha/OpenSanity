@@ -30,7 +30,9 @@
 #include "headers/Unknown/Families/Families1X/Family10/UnkFamily10R.h"
 Oleg::Oleg() : OlegBase()
 {
+
 }
+
 Oleg::Oleg(Font* font, ChunkDesc* chunkDesc) : OlegBase()
 {
 	Logging::LogUnimplemented(__FUNCSIG__);

@@ -2,6 +2,30 @@
 
 #include "headers/Known/Math/Matrix4.h"
 #include "headers/Known/Math/Vector4.h"
+InstanceNodeKSubA::InstanceNodeKSubA() : InstanceNodeKSubBase(), struct1(), struct2(), struct3(), struct4()
+{
+	//*(uint*)&(this->parent).inputWrapper = this->inputWrapper & 0xffffff34 | 0x134; //TODO: resolve?
+
+	(this->vec1).x = 0.0f;
+	(this->vec1).y = 0.0f;
+	(this->vec1).z = 0.0f;
+	(this->vec2).x = 0.0f;
+	(this->vec2).y = 0.0f;
+	(this->vec2).z = 0.0f;
+	
+	this->field75_0xb4 = 0;
+	this->field76_0xb8 = 0;
+	this->struct1ptr = &struct1;
+	this->struct2ptr = &struct2;
+	this->struct3ptr = &struct3;
+	this->struct4ptr = &struct4;
+}
+
+InstanceNodeKSubA::~InstanceNodeKSubA()
+{
+	CleanUp();
+}
+
 void InstanceNodeKSubA::FUN_00139480(float* param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -109,100 +133,8 @@ void InstanceNodeKSubA::FUN_00139650(Vector4* param_1, bool param_2) {
 	return;
 }
 
-void InstanceNodeKSubA::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubA * __fastcall InstanceNodeKSubA::Construct(InstanceNodeKSubA *this){
-		InstanceNodeKSubModule2A *this_00;
-		InstanceNodeKSubModule3A *this_01;
-		uint uVar1;
-		float fVar2;
-		InstanceNodeKSubModule3Abstract *extraout_ECX;
-		byte extraout_DL;
-		float uVar3;
-		float uVar4;
-		float fVar3;
-		InstanceNodeKSubModule2A *pppuVar1;
-		fVar2 = FLOAT_0038807c;
-		fVar3 = FLOAT_0038639c;
-		uVar3 = 0.0;
-		(this->parent).parent.field14_0x14 = (undefined **)0x0;
-		(this->parent).parent.struct1ptr = (InstanceNodeKSubModuleAbstract *)0x0;
-		(this->parent).parent.struct2ptr = (InstanceNodeKSubModuleAbstract *)0x0;
-		(this->parent).parent.struct3ptr = (InstanceNodeKSubModule2Abstract *)0x0;
-		(this->parent).parent.struct4ptr = (InstanceNodeKSubModule3Abstract *)0x0;
-		(this->parent).parent.field13_0x10 = (undefined **)0x0;
-		(this->parent).parent.vtable = (InstanceNodeKSubAbstract_VTable *)&InstanceNodeKSub_VT_A;
-		(this->struct1).parent.vtable = &InstanceNodeKSubModule_VT_A;
-		(this->struct1).field11_0x20 = fVar2;
-		(this->struct1).field12_0x24 = fVar2;
-		(this->struct1).functionType = 0x11;
-		(this->struct1).field10_0x10.x = Vector4_0039ef70.x;
-		(this->struct1).field10_0x10.y = Vector4_0039ef70.y;
-		(this->struct1).field10_0x10.z = Vector4_0039ef70.z;
-		(this->struct1).field10_0x10.w = fVar3;
-		(this->struct2).parent.vtable = &InstanceNodeKSubModule_VT_A;
-		(this->struct2).field11_0x20 = fVar2;
-		(this->struct2).field12_0x24 = fVar2;
-		(this->struct2).functionType = 0x11;
-		(this->struct2).field10_0x10.x = Vector4_0039ef70.x;
-		(this->struct2).field10_0x10.y = Vector4_0039ef70.y;
-		(this->struct2).field10_0x10.z = Vector4_0039ef70.z;
-		(this->struct2).field10_0x10.w = fVar3;
-		(this->struct3).parent.vtable = &InstanceNodeKSubModule2_VT_Abstract;
-		(this->struct3).parent.field13_0x10 = 0;
-		(this->struct3).parent.field31_0x70 = 0;
-		this_00 = &this->struct3;
-		(this->struct3).parent.field32_0x71 = 1;
-		(this->struct3).parent.field26_0x20.z = 0.0;
-		(this->struct3).parent.field26_0x20.y = 0.0;
-		(this->struct3).parent.field26_0x20.x = 0.0;
-		(this->struct3).parent.field26_0x20.w = fVar3;
-		(this->struct3).parent.field27_0x30.x = Vector4_0039ef70.x;
-		(this->struct3).parent.field27_0x30.y = Vector4_0039ef70.y;
-		(this->struct3).parent.field27_0x30.z = Vector4_0039ef70.z;
-		(this->struct3).parent.field27_0x30.w = fVar3;
-		(this_00->parent).vtable = &InstanceNodeKSubModule2_VT_A;
-		InstanceNodeKSubModule2A::Construct(this_00);
-		this_01 = &this->struct4;
-		(this_01->parent).vtable = &InstanceNodeKSubModule3_VT_Abstract;
-		(this->struct4).parent.field13_0x10 = uVar3;
-		(this->struct4).parent.field25_0x40 = extraout_DL;
-		(this->struct4).parent.fov = ENV_FLOAT_113_SCREEN_FOV;
-		(this->struct4).parent.vec1.z = uVar3;
-		(this->struct4).parent.vec1.y = uVar3;
-		(this->struct4).parent.vec1.x = uVar3;
-		(this->struct4).parent.vec1.w = fVar3;
-		(this->struct4).parent.vec2.x = Vector4_0039ef70.x;
-		(this->struct4).parent.vec2.y = Vector4_0039ef70.y;
-		(this->struct4).parent.vec2.z = Vector4_0039ef70.z;
-		(this->struct4).parent.vec2.w = fVar3;
-		(this_01->parent).vtable = &InstanceNodeKSubModule3_VT_A;
-		InstanceNodeKSubModule3A::Init(this_01);
-		uVar1 = *(uint *)&(this->parent).inputWrapper;
-		(this->parent).inputWrapper.array2 = (InputBinding2 *)0x0;
-		(this->parent).inputWrapper.array1 = (InputBinding1 *)0x0;
-		*(uint *)&(this->parent).inputWrapper = uVar1 & 0xffffff34 | 0x134;
-		(this->vec1).x = Vector4_0039ef70.x;
-		(this->vec1).y = Vector4_0039ef70.y;
-		(this->vec1).z = Vector4_0039ef70.z;
-		(this->vec2).x = Vector4_0039ef70.x;
-		(this->vec2).y = Vector4_0039ef70.y;
-		(this->vec2).z = Vector4_0039ef70.z;
-		(this->parent).parent.struct3ptr = &this_00->parent;
-		this->field75_0xb4 = 0;
-		this->field76_0xb8 = 0;
-		(this->parent).parent.struct2ptr = &(this->struct2).parent;
-		(this->parent).parent.struct1ptr = &(this->struct1).parent;
-		(this->parent).parent.struct4ptr = extraout_ECX;
-		return this;
-		}
-		
-	*/
-	return;
-}
-
 void InstanceNodeKSubA::CleanUp() {
+	InstanceNodeKSubBase::CleanUp();
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall InstanceNodeKSubA::CleanUp(InstanceNodeKSubA *this){
@@ -215,40 +147,6 @@ void InstanceNodeKSubA::CleanUp() {
 		InputWrapper::Dispose(&(this->parent).inputWrapper);
 		InstanceNodeKSubAbstract::CleanUp((InstanceNodeKSubAbstract *)this);
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubA::Dispose() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubA::Dispose(InstanceNodeKSubA *this){
-		(this->parent).parent.vtable = (InstanceNodeKSubAbstract_VTable *)&InstanceNodeKSub_VT_Base;
-		InputWrapper::Dispose(&(this->parent).inputWrapper);
-		InstanceNodeKSubAbstract::CleanUp((InstanceNodeKSubAbstract *)this);
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubA::Dispose_6(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InstanceNodeKSubA * __thiscall InstanceNodeKSubA::Dispose(InstanceNodeKSubA *this,byte param_1){
-		(this->parent).parent.vtable = (InstanceNodeKSubAbstract_VTable *)&InstanceNodeKSub_VT_A;
-		(this->struct4).parent.vtable = &InstanceNodeKSubModule3_VT_Abstract;
-		(this->struct3).parent.vtable = &InstanceNodeKSubModule2_VT_Abstract;
-		(this->struct2).parent.vtable = &InstanceNodeKSubModule_VT_Abstract;
-		(this->struct1).parent.vtable = &InstanceNodeKSubModule_VT_Abstract;
-		InstanceNodeKSubAbstract::CleanUp((InstanceNodeKSubAbstract *)this);
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
 		}
 		
 	*/
@@ -291,23 +189,6 @@ void InstanceNodeKSubA::FUN_001cb030() {
 		(this->parent).parent.struct4ptr = &(this->struct4).parent;
 		(this->parent).parent.struct1ptr = &(this->struct1).parent;
 		(this->parent).parent.struct3ptr = &(this->struct3).parent;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void InstanceNodeKSubA::Dispose_10() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InstanceNodeKSubA::Dispose(InstanceNodeKSubA *this){
-		(this->parent).parent.vtable = (InstanceNodeKSubAbstract_VTable *)&InstanceNodeKSub_VT_A;
-		(this->struct4).parent.vtable = &InstanceNodeKSubModule3_VT_Abstract;
-		(this->struct3).parent.vtable = &InstanceNodeKSubModule2_VT_Abstract;
-		(this->struct2).parent.vtable = &InstanceNodeKSubModule_VT_Abstract;
-		(this->struct1).parent.vtable = &InstanceNodeKSubModule_VT_Abstract;
-		InstanceNodeKSubAbstract::CleanUp((InstanceNodeKSubAbstract *)this);
 		return;
 		}
 		

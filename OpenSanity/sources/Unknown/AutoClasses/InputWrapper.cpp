@@ -3,17 +3,43 @@
 #include "headers/Unknown/AutoClasses/InputBinding1.h"
 #include "headers/Known/Input/InputController/InputStruct.h"
 #include "headers/Unknown/AutoClasses/InputBinding2.h"
-void InputWrapper::Dispose() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall InputWrapper::Dispose(InputWrapper *this){
-		VirtualPool::FreeMemory(this->array2);
-		VirtualPool::FreeMemory(this->array1);
-		return;
+
+InputWrapper::InputWrapper()
+{
+	this->array1 = null;
+	this->array2 = null;
+	this->arrayLength2 = 0;
+	this->arrayLength1 = 0;
+	FUN_0020a4b0();
+}
+
+InputWrapper::InputWrapper(uint cnt1, uint cnt2)
+{
+	this->array1 = null;
+	this->array2 = null;
+	if (cnt2 != 0) {
+		this->array2 = new InputBinding2[cnt2];
+		for (int i = 0; i < cnt2; ++i) {
+			this->array2[i] = InputBinding2();
 		}
-		
-	*/
-	return;
+	}
+
+	if (cnt1 != 0) {
+		this->array1 = new InputBinding1[cnt1];
+		for (int i = 0; i < cnt1; ++i) {
+			this->array1[i] = InputBinding1();
+		}
+	}
+
+	this->arrayLength2 = cnt2;
+	this->arrayLength1 = cnt1;
+	FUN_0020a4b0();
+}
+
+InputWrapper::~InputWrapper()
+{
+	delete this->array1;
+	delete this->array2;
 }
 
 void InputWrapper::FUN_0020a4b0() {
@@ -256,38 +282,3 @@ float InputWrapper::FUN_0020a8c0(InputStruct* param_1, int param_2) {
 	*/
 	return 0.0f;
 }
-
-void InputWrapper::Construct(int cnt1, int cnt2) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InputWrapper * __thiscall InputWrapper::Construct(InputWrapper *this,int cnt1,int cnt2){
-		InputBinding2 *startPtr;
-		InputBinding1 *startPtr_00;
-		if (cnt2 == 0) {
-		LAB_0020ad13:startPtr = (InputBinding2 *)0x0;
-		}
-		else {
-		startPtr = (InputBinding2 *)VirtualPool::AllocateMemory(cnt2 * 8);
-		if (startPtr == (InputBinding2 *)0x0) goto LAB_0020ad13;
-		ForEach(startPtr,8,cnt2,InputBinding2::Construct);
-		}
-		this->array2 = startPtr;
-		if (cnt1 != 0) {
-		startPtr_00 = (InputBinding1 *)VirtualPool::AllocateMemory(cnt1 << 4);
-		if (startPtr_00 != (InputBinding1 *)0x0) {
-		ForEach(startPtr_00,0x10,cnt1,InputBinding1::Construct);
-		goto LAB_0020ad46;
-		}
-		}
-		startPtr_00 = (InputBinding1 *)0x0;
-		LAB_0020ad46:this->arrayLength2 = (byte)cnt2;
-		this->array1 = startPtr_00;
-		this->arrayLength1 = (byte)cnt1;
-		FUN_0020a4b0(this);
-		return this;
-		}
-		
-	*/
-	return;
-}
-
