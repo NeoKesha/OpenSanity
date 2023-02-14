@@ -85,7 +85,7 @@ void OlegModuleMenuBubble::Construct(float k, uint arrayLength, byte param_3, by
 	return;
 }
 
-void OlegModuleMenuBubble::Render(int param_1) {
+void OlegModuleMenuBubble::Render(FontRenderer* renderer) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleMenuBubble::Render(OlegModuleMenuBubble *this,int param_1){

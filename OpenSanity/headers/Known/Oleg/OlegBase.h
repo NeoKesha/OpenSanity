@@ -7,6 +7,8 @@ class OlegBase {
 	public:
 		OlegMask uiPresetMask[64];
 		OlegModuleAbstract * modules[64];
+		int field2_0x8;
+		int field3_0xc;
 
 		OlegBase();
 		~OlegBase();

@@ -8,7 +8,7 @@ class OlegModuleIcon : public OlegModuleB {
 
 		void Construct(UIElementImage* param_1);
 		void Construct_1(float param_1, UIElementImage* icons);
-		virtual void Render(int param_1);
+		virtual void Render(FontRenderer* renderer);
 		virtual void FUN_001a3ad0(Vector2* param_1);
 		void Dispose(byte param_1);
 

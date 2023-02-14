@@ -1,7 +1,7 @@
 #include "headers/Known/Oleg/Modules/OlegModuleAB.h"
 
 #include "headers/Known/Oleg/UIElement/UIElementImage.h"
-void OlegModuleAB::Render(int param_1) {
+void OlegModuleAB::Render(FontRenderer* renderer) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleAB::Render(OlegModuleAB *this,int param_1){

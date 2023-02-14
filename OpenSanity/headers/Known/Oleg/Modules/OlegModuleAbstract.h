@@ -15,7 +15,7 @@ class OlegModuleAbstract {
 		void SetSplineToAll(uint spline);
 		static void Unroll(OlegModuleAbstract* param_1);
 		virtual void CallOther1();
-		virtual void Render();
+		virtual void Render(FontRenderer* renderer);
 		virtual void Process(SomeState* timeState);
 		virtual void Reset();
 		virtual void CallOther2();

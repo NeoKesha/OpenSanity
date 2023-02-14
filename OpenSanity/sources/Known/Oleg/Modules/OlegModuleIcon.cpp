@@ -57,7 +57,7 @@ void OlegModuleIcon::Construct_1(float param_1, UIElementImage* icons) {
 	return;
 }
 
-void OlegModuleIcon::Render(int param_1) {
+void OlegModuleIcon::Render(FontRenderer* renderer) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleIcon::Render(OlegModuleIcon *this,int param_1){

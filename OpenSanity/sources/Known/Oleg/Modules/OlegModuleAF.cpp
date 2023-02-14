@@ -38,7 +38,7 @@ void OlegModuleAF::FUN_001a0e60(bool param_1, Vector2* param_2) {
 	return;
 }
 
-void OlegModuleAF::Render(int param_1) {
+void OlegModuleAF::Render(FontRenderer* renderer) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleAF::Render(OlegModuleAF *this,int param_1){

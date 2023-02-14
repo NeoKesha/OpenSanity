@@ -15,7 +15,7 @@ void OlegModuleAC::Construct(float param_1, UIElementImage* param_2) {
 	return;
 }
 
-void OlegModuleAC::Render(int param_1) {
+void OlegModuleAC::Render(FontRenderer* renderer) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleAC::Render(OlegModuleAC *this,int param_1){

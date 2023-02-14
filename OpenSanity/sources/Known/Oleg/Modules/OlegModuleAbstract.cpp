@@ -53,7 +53,7 @@ void OlegModuleAbstract::CallOther1() {
 	return;
 }
 
-void OlegModuleAbstract::Render() {
+void OlegModuleAbstract::Render(FontRenderer* renderer) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall OlegModuleAbstract::Render(OlegModuleAbstract *this){
