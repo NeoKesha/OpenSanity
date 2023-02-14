@@ -2,50 +2,24 @@
 
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
 void UnkFamily16Sub::InitSubStructArray() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall UnkFamily16Sub::InitSubStructArray(UnkFamily16Sub *this){
-		uint i;
-		this->cnt = 0;
-		i = 0;
-		do {
-		this->array[i * 2] = 0;
-		this->array[i * 2 + 1] = 0;
-		i = i + 1;
-		}
-		 while (i < 0x100);
-		return;
-		}
-		
-	*/
-	return;
+	for (int i = 0; i < 256; ++i) {
+		this->ctxArray[i * 2] = null; //yeah
+		this->ctxArray[i * 2 + 1] = null;
+	}
 }
 
 void UnkFamily16Sub::FUN_000f79a0(InstanceContext* ctx) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall UnkFamily16Sub::FUN_000f79a0(UnkFamily16Sub *this,InstanceContext *ctx){
-		int iVar1;
-		ushort uVar2;
-		uint cnt;
-		uint index;
-		if (this->cnt != 0) {
-		index = ctx->field36_0x164;
-		uVar2 = this->cnt - 1;
-		this->cnt = uVar2;
-		cnt = (uint)uVar2;
-		if (index < cnt) {
-		iVar1 = this->array[cnt * 2];
-		this->array[index * 2] = iVar1;
-		this->array[index * 2 + 1] = this->array[cnt * 2 + 1];
-		*(uint *)(iVar1 + 0x164) = index;
-		}
-		ctx->field36_0x164 = -1;
-		}
-		return;
-		}
-		
-	*/
-	return;
+    if (this->cnt != 0) {
+        uint index = ctx->someIndex;
+        --this->cnt;
+        if (index < this->cnt) {
+            InstanceContext* ptr = this->ctxArray[cnt * 2];
+            this->ctxArray[index * 2] = ptr;
+            this->ctxArray[index * 2 + 1] = this->ctxArray[cnt * 2 + 1];
+            ptr->someIndex = index;
+        }
+        ctx->someIndex = -1;
+    }
+    return;
 }
 

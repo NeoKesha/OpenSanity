@@ -4,7 +4,7 @@
 
 class UnkFamily16Sub {
 	public:
-		int array[512];
+		InstanceContext* ctxArray[512];
 		short cnt;
 
 		void InitSubStructArray();

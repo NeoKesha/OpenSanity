@@ -15,6 +15,7 @@ class InstanceContext : public InstanceContextBase {
 		InstanceContextSub * subPtr;
 		InstanceContext * prev;
 		InstanceContext * next;
+		int someIndex;
 
 		void FUN_000a81e0(float* param_2, uint param_3);
 		void FUN_00026f70(Vector4* vec);
