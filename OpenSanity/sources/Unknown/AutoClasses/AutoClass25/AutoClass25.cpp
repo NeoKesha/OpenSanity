@@ -3,6 +3,17 @@
 #include "headers/Known/Graphics/Renderer/ScreenInfoExt.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContextRefCounter.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
+
+AutoClass25::AutoClass25() : matrix1(), matrix3() //this calls what is called Construct1
+{
+	this->ctxPtr = (InstanceContextRefCounter*)0x0;
+	this->unkFloat = 1.0;
+	(this->vec1).x = 1.0f / 5.0f;
+	(this->vec1).y = 1.0f / 5.0f;
+	(this->vec1).z = 1.0;
+	(this->vec1).w = 1.0;
+}
+
 void AutoClass25::FUN_000c5310(InstanceContext* ctx) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -39,30 +50,6 @@ void AutoClass25::FUN_001c6d10(ScreenInfoExt* info) {
 		Matrix4::Multiply4443(&this->matrix1,&info->matrix2,&this->matrix5);
 		Matrix4::Multiply4443(&this->matrix3,&info->matrix2,&this->matrix4);
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void AutoClass25::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	AutoClass25 * __fastcall AutoClass25::Construct(AutoClass25 *this){
-		float fVar1;
-		float k;
-		fVar1 = FLOAT_0038639c;
-		this->ctxPtr = (InstanceContextRefCounter *)0x0;
-		this->unkFloat = fVar1;
-		Matrix4::Construct1(&this->matrix1);
-		fVar1 = FLOAT_0038639c;
-		k = FLOAT_0038639c / FLOAT_003a3c34;
-		(this->vec1).x = FLOAT_0038639c / FLOAT_003a3c30;
-		(this->vec1).y = k;
-		(this->vec1).z = fVar1;
-		(this->vec1).w = fVar1;
-		Matrix4::Construct1(&this->matrix3);
-		return this;
 		}
 		
 	*/

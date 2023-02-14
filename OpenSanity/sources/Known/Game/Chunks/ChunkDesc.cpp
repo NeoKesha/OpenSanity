@@ -4,6 +4,15 @@
 #include "headers/Known/TwinString.h"
 #include "headers/Unknown/Families/Families1X/Family16/UnkFamily16A.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
+
+ChunkDesc::ChunkDesc()
+{
+	Logging::LogUnimplemented(__FUNCSIG__);
+}
+ChunkDesc::~ChunkDesc()
+{
+	Logging::LogUnimplemented(__FUNCSIG__);
+}
 void ChunkDesc::ResetStrings() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*

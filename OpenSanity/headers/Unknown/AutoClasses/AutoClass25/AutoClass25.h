@@ -16,9 +16,10 @@ class AutoClass25 {
 		InstanceContextRefCounter * ctxPtr;
 		float unkFloat;
 
+		AutoClass25();
+
 		void FUN_000c5310(InstanceContext* ctx);
 		void FUN_001c6d10(ScreenInfoExt* info);
-		void Construct();
 		void FUN_001cb0b0(float aspectRatio);
 
 };

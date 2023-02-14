@@ -21,6 +21,9 @@ class ChunkDesc {
 		AutoClass53 * slot2;
 		AutoClass53 * slot3;
 
+		ChunkDesc();
+		~ChunkDesc();
+
 		void ResetStrings();
 		bool ReloadLevel(UnkFamily16A* _default);
 		void Construct();

@@ -2,6 +2,134 @@
 
 #include "headers/Known/Math/Vector4.h"
 #include "headers/Unknown/Families/Families1X/Family14/UnkFamily14Base.h"
+
+Matrix4::Matrix4()
+{
+	this->m44 = 1.0;
+	this->m33 = 1.0;
+	this->m22 = 1.0;
+	this->m11 = 1.0;
+	this->m21 = 0.0;
+	this->m14 = 0.0;
+	this->m13 = 0.0;
+	this->m12 = 0.0;
+	this->m32 = 0.0;
+	this->m31 = 0.0;
+	this->m24 = 0.0;
+	this->m23 = 0.0;
+	this->m43 = 0.0;
+	this->m42 = 0.0;
+	this->m41 = 0.0;
+	this->m34 = 0.0;
+}
+
+Matrix4::Matrix4(float k)
+{
+	float fVar1;
+	float fVar2;
+	float local_8 = 0.0f;
+	float local_4 = 0.0f;
+
+	if (k == 0.0) {
+		this->m44 = 1.0;
+		this->m33 = 1.0;
+		this->m22 = 1.0;
+		this->m11 = 1.0;
+		this->m21 = 0.0;
+		this->m14 = 0.0;
+		this->m13 = 0.0;
+		this->m12 = 0.0;
+		this->m32 = 0.0;
+		this->m24 = 0.0;
+		this->m23 = 0.0;
+		this->m43 = 0.0;
+		this->m42 = 0.0;
+		this->m41 = 0.0;
+		this->m34 = 0.0;
+		this->m31 = 0.0;
+		return;
+	}
+	fVar1 = 0.0;
+	fVar2 = 1.0;
+	this->m14 = 0.0;
+	this->m13 = 0.0;
+	this->m12 = 0.0;
+	this->m11 = 0.0;
+	this->m24 = 0.0;
+	this->m23 = 0.0;
+	this->m22 = 0.0;
+	this->m21 = 0.0;
+	this->m34 = 0.0;
+	this->m33 = 0.0;
+	this->m32 = 0.0;
+	this->m31 = 0.0;
+	this->m43 = 0.0;
+	this->m42 = 0.0;
+	this->m41 = 0.0;
+	this->m44 = 1.0;
+	FUN_000d2a10(&k, &local_8, &local_4);
+	this->m33 = local_8;
+	this->m11 = local_8;
+	this->m22 = fVar2;
+	this->m13 = fVar1 - local_4;
+	this->m31 = local_4;
+	return;
+}
+
+void Matrix4::FUN_000d2a10(float* k, float* x, float* y) {
+	Logging::LogUnimplemented(__FUNCSIG__);
+	/*
+	uint uVar1;
+	uint uVar2;
+	uint uVar3;
+	float fVar4;
+	float fVar5;
+	float fVar6;
+	uVar1 = (int)(*this + 8U) >> 4;
+	uVar2 = uVar1 & 0xc00;
+	uVar3 = *this + 8U & 0xf;
+	uVar1 = uVar1 & 0x3ff;
+	if (uVar2 < 0x801) {
+		if ((uVar2 == 0x800) || (uVar2 == 0)) {
+			uVar3 = uVar3 - 8;
+			goto LAB_000d2a5f;
+		}
+		if (uVar2 != 0x400) goto LAB_000d2a5f;
+	}
+	else if (uVar2 != 0xc00) goto LAB_000d2a5f;
+	uVar1 = 0x400 - uVar1;
+	uVar3 = 7 - uVar3;
+LAB_000d2a5f:
+	fVar5 = (float)(int)TRIGONOMETRY_INDEXES[uVar1 * 2] * 0.0002441406;
+	fVar6 = (float)(int)TRIGONOMETRY_INDEXES[uVar1 * 2 + 1] * 0.0002441406;
+	if (uVar3 == 0) {
+		*x = fVar5;
+		*y = fVar6;
+	}
+	else {
+		fVar4 = FLOAT_0039eec0 * 0.0002441406 * 0.0625 * (float)uVar3;
+		*x = fVar5 - fVar4 * fVar6;
+		*y = fVar4 * fVar5 + fVar6;
+	}
+	if (uVar2 == 0x400) {
+		*x = 0.0 - *x;
+	}
+	else {
+		if (uVar2 == 0x800) {
+			*x = 0.0 - *x;
+			*y = 0.0 - *y;
+			return;
+		}
+		if (uVar2 == 0xc00) {
+			*y = 0.0 - *y;
+			return;
+		}
+	}
+	return;
+	*/
+}
+
+
 void Matrix4::Multiply4443(Matrix4* mat1, Matrix4* out) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -136,35 +264,6 @@ void Matrix4::FUN_000d4000(Vector4* param_1, Vector4* param_2) {
 	return;
 }
 
-void Matrix4::Construct1() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Matrix4::Construct1(Matrix4 *this){
-		float fVar1;
-		fVar1 = FLOAT_0038639c;
-		this->m44 = FLOAT_0038639c;
-		this->m33 = fVar1;
-		this->m22 = fVar1;
-		this->m11 = fVar1;
-		this->m21 = 0.0;
-		this->m14 = 0.0;
-		this->m13 = 0.0;
-		this->m12 = 0.0;
-		this->m32 = 0.0;
-		this->m31 = 0.0;
-		this->m24 = 0.0;
-		this->m23 = 0.0;
-		this->m43 = 0.0;
-		this->m42 = 0.0;
-		this->m41 = 0.0;
-		this->m34 = 0.0;
-		return;
-		}
-		
-	*/
-	return;
-}
-
 void Matrix4::FUN_000d4180() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -282,64 +381,6 @@ void Matrix4::FUN_000d9f80(Vector4* vec) {
 		this->m32 = fVar6 * fVar2 - fVar9;
 		this->m33 = fVar5 - (fVar2 * fVar8 + fVar7);
 		this->m34 = 0.0;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void Matrix4::Construct(float param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall Matrix4::Construct(Matrix4 *this,float param_1){
-		float fVar1;
-		float fVar2;
-		float local_8;
-		float local_4;
-		fVar2 = FLOAT_0038639c;
-		if (param_1 == 0.0) {
-		this->m44 = FLOAT_0038639c;
-		this->m33 = fVar2;
-		this->m22 = fVar2;
-		this->m11 = fVar2;
-		this->m21 = 0.0;
-		this->m14 = 0.0;
-		this->m13 = 0.0;
-		this->m12 = 0.0;
-		this->m32 = 0.0;
-		this->m24 = 0.0;
-		this->m23 = 0.0;
-		this->m43 = 0.0;
-		this->m42 = 0.0;
-		this->m41 = 0.0;
-		this->m34 = 0.0;
-		this->m31 = 0.0;
-		return;
-		}
-		fVar1 = 0.0;
-		this->m14 = 0.0;
-		this->m13 = 0.0;
-		this->m12 = 0.0;
-		this->m11 = 0.0;
-		this->m24 = 0.0;
-		this->m23 = 0.0;
-		this->m22 = 0.0;
-		this->m21 = 0.0;
-		this->m34 = 0.0;
-		this->m33 = 0.0;
-		this->m32 = 0.0;
-		this->m31 = 0.0;
-		this->m43 = 0.0;
-		this->m42 = 0.0;
-		this->m41 = 0.0;
-		this->m44 = fVar2;
-		FUN_000d2a10(&param_1,&local_8,&local_4);
-		this->m33 = local_8;
-		this->m11 = local_8;
-		this->m22 = fVar2;
-		this->m13 = fVar1 - local_4;
-		this->m31 = local_4;
 		return;
 		}
 		
