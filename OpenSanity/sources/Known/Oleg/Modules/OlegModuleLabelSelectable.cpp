@@ -7,32 +7,81 @@
 #include "headers/SortLater/InputObserver.h"
 #include "headers/Known/Input/InputController/InputStruct.h"
 #include "headers/Unknown/UnkSfxCollection.h"
-void OlegModuleLabelSelectable::Construct(float k, InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelSelectable * __thiscall OlegModuleLabelSelectable::Construct(OlegModuleLabelSelectable *this,float k,InputObserver *inputObserver,ColorMatrix *colorMatrix,UnkSfxCollection *sfxCollection){
-		uint uVar1;
-		OlegModuleA::Construct(&this->parent,k);
-		this->inputObserver = inputObserver;
-		this->colorMatrix = colorMatrix;
-		this->page1 = (UnkFamily10Base *)0x0;
-		this->page2 = (UnkFamily10Base *)0x0;
-		this->field11_0xa4 = 0;
-		this->field12_0xa8 = 0;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_LabelSelectable;
-		this->sfxCollection = sfxCollection;
-		*(undefined4 *)&this->field_0x88 = 0;
-		uVar1 = (this->parent).parent.flags;
-		(this->parent).parent.fadeInLength = 0;
-		(this->parent).parent.startTime = 0;
-		(this->parent).parent.fadeOutLength = 0;
-		(this->parent).parent.value = 0.0;
-		(this->parent).parent.flags = uVar1 & 0xffffff1f | 0x110;
-		return this;
-		}
-		
-	*/
-	return;
+
+OlegModuleLabelSelectable::OlegModuleLabelSelectable(InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection) : OlegModuleA()
+{
+	this->page1 = null;
+	this->page2 = null;
+	this->inputObserver = inputObserver;
+	this->colorMatrix = colorMatrix;
+	this->inputHandle = null;
+	this->field11_0xa4 = 0;
+	this->field12_0xa8 = 0;
+	this->sfxCollection = sfxCollection;
+
+	this->field_0x88 = 0;
+	this->fadeInLength = 0;
+	this->startTime = 0;
+	this->fadeOutLength = 0;
+	this->value = 0.0;
+	this->flags = this->flags & 0xffffff1f | 0x110;
+}
+
+OlegModuleLabelSelectable::OlegModuleLabelSelectable(UnkFamily10Base* page, InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection) : OlegModuleA()
+{
+	this->page1 = page;
+	this->page2 = page;
+	this->inputObserver = inputObserver;
+	this->colorMatrix = colorMatrix;
+	this->inputHandle = null;
+	this->field11_0xa4 = 0;
+	this->field12_0xa8 = 0;
+	this->sfxCollection = sfxCollection;
+
+	this->field_0x88 = 0;
+	this->fadeInLength = 0;
+	this->startTime = 0;
+	this->fadeOutLength = 0;
+	this->value = 0.0;
+	this->flags = this->flags & 0xffffff1f | 0x110;
+}
+
+OlegModuleLabelSelectable::OlegModuleLabelSelectable(float x, InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection) : OlegModuleA(x)
+{
+	this->page1 = null;
+	this->page2 = null;
+	this->inputObserver = inputObserver;
+	this->colorMatrix = colorMatrix;
+	this->inputHandle = null;
+	this->field11_0xa4 = 0;
+	this->field12_0xa8 = 0;
+	this->sfxCollection = sfxCollection;
+
+	this->field_0x88 = 0;
+	this->fadeInLength = 0;
+	this->startTime = 0;
+	this->fadeOutLength = 0;
+	this->value = 0.0;
+	this->flags = this->flags & 0xffffff1f | 0x110;
+}
+
+OlegModuleLabelSelectable::OlegModuleLabelSelectable(float x, UnkFamily10Base* page, InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection) : OlegModuleA(x)
+{
+	this->page1 = page;
+	this->page2 = page;
+	this->inputObserver = inputObserver;
+	this->colorMatrix = colorMatrix;
+	this->inputHandle = null;
+	this->field11_0xa4 = 0;
+	this->field12_0xa8 = 0;
+	this->sfxCollection = sfxCollection;
+
+	this->field_0x88 = 0;
+	this->fadeInLength = 0;
+	this->startTime = 0;
+	this->fadeOutLength = 0;
+	this->value = 0.0;
+	this->flags = this->flags & 0xffffff1f | 0x110;
 }
 
 void OlegModuleLabelSelectable::FUN_001a0f70() {
@@ -68,60 +117,6 @@ void OlegModuleLabelSelectable::FUN_001a0fa0() {
 		(*this_00->vtable->CallOther2)(this_00);
 		}
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleLabelSelectable::Construct_3(uint param_1, uint param_2, uint param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelSelectable * __thiscall OlegModuleLabelSelectable::Construct(OlegModuleLabelSelectable *this,InputObserver *param_1,ColorMatrix *param_2,UnkSfxCollection *param_3){
-		uint uVar1;
-		OlegModuleA::Construct(&this->parent);
-		this->inputObserver = param_1;
-		this->colorMatrix = param_2;
-		this->page1 = (UnkFamily10Base *)0x0;
-		this->page2 = (UnkFamily10Base *)0x0;
-		this->field11_0xa4 = 0;
-		this->field12_0xa8 = 0;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_LabelSelectable;
-		this->sfxCollection = param_3;
-		*(undefined4 *)&this->field_0x88 = 0;
-		uVar1 = (this->parent).parent.flags;
-		(this->parent).parent.fadeInLength = 0;
-		(this->parent).parent.startTime = 0;
-		(this->parent).parent.fadeOutLength = 0;
-		(this->parent).parent.value = 0.0;
-		(this->parent).parent.flags = uVar1 & 0xffffff1f | 0x110;
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleLabelSelectable::Construct_4(uint param_1, uint param_2, uint param_3, uint param_4) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelSelectable * __thiscall OlegModuleLabelSelectable::Construct(OlegModuleLabelSelectable *this,UnkFamily10Base *param_1,InputObserver *param_2,ColorMatrix *param_3,UnkSfxCollection *param_4){
-		OlegModuleA::Construct(&this->parent);
-		this->page1 = param_1;
-		this->page2 = param_1;
-		this->inputObserver = param_2;
-		this->field11_0xa4 = 0;
-		this->field12_0xa8 = 0;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_LabelSelectable;
-		this->colorMatrix = param_3;
-		this->sfxCollection = param_4;
-		*(undefined4 *)&this->field_0x88 = 0;
-		(this->parent).parent.fadeInLength = 0;
-		(this->parent).parent.startTime = 0;
-		(this->parent).parent.fadeOutLength = 0;
-		(this->parent).parent.flags = (this->parent).parent.flags & 0xffffff1f | 0x110;
-		(this->parent).parent.value = 0.0;
-		return this;
 		}
 		
 	*/
@@ -228,49 +223,3 @@ void OlegModuleLabelSelectable::FUN_001a6990(Vector2* param_1) {
 	*/
 	return;
 }
-
-void OlegModuleLabelSelectable::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelSelectable * __thiscall OlegModuleLabelSelectable::Dispose(OlegModuleLabelSelectable *this,byte param_1){
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleLabelSelectable::Construct_8(float param_1, byte param_2, InputObserver* param_3, ColorMatrix* param_4, UnkSfxCollection* param_5) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelSelectable * __thiscall OlegModuleLabelSelectable::Construct(OlegModuleLabelSelectable *this,float param_1,undefined param_2,InputObserver *param_3,ColorMatrix *param_4,UnkSfxCollection *param_5){
-		uint uVar1;
-		undefined3 in_stack_00000009;
-		OlegModuleA::Construct(&this->parent,param_1);
-		this->page1 = _param_2;
-		this->page2 = _param_2;
-		this->inputObserver = param_3;
-		this->colorMatrix = param_4;
-		this->inputHandle = (InputStruct *)0x0;
-		this->field11_0xa4 = 0;
-		this->field12_0xa8 = 0;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_LabelSelectable;
-		this->sfxCollection = param_5;
-		*(undefined4 *)&this->field_0x88 = 0;
-		uVar1 = (this->parent).parent.flags;
-		(this->parent).parent.fadeInLength = 0;
-		(this->parent).parent.startTime = 0;
-		(this->parent).parent.fadeOutLength = 0;
-		(this->parent).parent.value = 0.0;
-		(this->parent).parent.flags = uVar1 & 0xffffff1f | 0x110;
-		return this;
-		}
-		
-	*/
-	return;
-}
-

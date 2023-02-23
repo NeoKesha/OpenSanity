@@ -9,10 +9,12 @@ class OlegModuleMenuBubble : public OlegModuleA {
 		byte index1;
 		int index2;
 		UIElementSimpleShapeA * * imageArray;
+		byte field_0x89;
+
+		OlegModuleMenuBubble(float x, uint arrayLength, byte param_3, byte index1, int index2);
+		~OlegModuleMenuBubble();
 
 		UIElementSimpleShapeA* FUN_001a0fd0(int i, TwinsanityMaterialShader* param_2);
-		static void Dispose(OlegModuleMenuBubble* param_1);
-		void Construct(float k, uint arrayLength, byte param_3, byte index1, int index2);
 		virtual void Render(FontRenderer* renderer);
 
 };

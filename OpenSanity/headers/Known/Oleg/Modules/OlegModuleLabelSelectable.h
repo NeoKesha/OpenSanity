@@ -11,15 +11,19 @@ class OlegModuleLabelSelectable : public OlegModuleA {
 		InputObserver * inputObserver;
 		ColorMatrix * colorMatrix;
 		UnkSfxCollection * sfxCollection;
+		int field_0x88;
+		int field11_0xa4;
+		int field12_0xa8;
 
-		void Construct(float k, InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection);
+		
+		OlegModuleLabelSelectable(InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection);
+		OlegModuleLabelSelectable(UnkFamily10Base* page, InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection);
+		OlegModuleLabelSelectable(float x, InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection);
+		OlegModuleLabelSelectable(float x, UnkFamily10Base* page, InputObserver* inputObserver, ColorMatrix* colorMatrix, UnkSfxCollection* sfxCollection);
 		virtual void FUN_001a0f70();
 		virtual void FUN_001a0fa0();
-		void Construct_3(uint param_1, uint param_2, uint param_3);
-		void Construct_4(uint param_1, uint param_2, uint param_3, uint param_4);
 		virtual void Render(FontRenderer* renderer);
 		virtual void FUN_001a6990(Vector2* param_1);
-		void Dispose(byte param_1);
-		void Construct_8(float param_1, byte param_2, InputObserver* param_3, ColorMatrix* param_4, UnkSfxCollection* param_5);
+		
 
 };

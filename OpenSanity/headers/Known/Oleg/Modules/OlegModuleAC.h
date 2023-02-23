@@ -5,9 +5,10 @@
 
 class OlegModuleAC : public OlegModuleA {
 	public:
+		UIElementImage* field1_0x88;
 
-		void Construct(float param_1, UIElementImage* param_2);
+		OlegModuleAC(UIElementImage* param_1);
+		OlegModuleAC(float x, UIElementImage* param_2);
+
 		virtual void Render(FontRenderer* renderer);
-		void Construct_2(uint param_1);
-
 };

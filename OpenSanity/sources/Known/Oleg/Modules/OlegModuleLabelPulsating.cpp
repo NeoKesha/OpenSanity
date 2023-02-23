@@ -2,20 +2,19 @@
 
 #include "headers/Known/Graphics/FontRenderer/FontRenderer.h"
 #include "headers/Known/Graphics/Font/Font.h"
-void OlegModuleLabelPulsating::Construct(float param_1, Font* font, int index1, int index2) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelPulsating * __thiscall OlegModuleLabelPulsating::Construct(OlegModuleLabelPulsating *this,float param_1,Font *font,int index1,int index2){
-		OlegModuleA::Construct(&this->parent,param_1);
-		this->index1 = index1;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_LabelPulsating;
-		this->font = font;
-		this->index2 = index2;
-		return this;
-		}
-		
-	*/
-	return;
+
+OlegModuleLabelPulsating::OlegModuleLabelPulsating(Font* font, int index1, int index2) : OlegModuleA()
+{
+	this->font = font;
+	this->index1 = index1;
+	this->index2 = index2;
+}
+
+OlegModuleLabelPulsating::OlegModuleLabelPulsating(float x, Font* font, int index1, int index2) : OlegModuleA(x)
+{
+	this->font = font;
+	this->index1 = index1;
+	this->index2 = index2;
 }
 
 void OlegModuleLabelPulsating::Render(FontRenderer* fontRenderer) {
@@ -67,35 +66,3 @@ void OlegModuleLabelPulsating::Render(FontRenderer* fontRenderer) {
 	*/
 	return;
 }
-
-void OlegModuleLabelPulsating::Construct_2(uint param_1, uint param_2, uint param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelPulsating * __thiscall OlegModuleLabelPulsating::Construct(OlegModuleLabelPulsating *this,Font *param_1,int param_2,int param_3){
-		OlegModuleA::Construct(&this->parent);
-		this->font = param_1;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_LabelPulsating;
-		this->index2 = param_3;
-		this->index1 = param_2;
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleLabelPulsating::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelPulsating * __thiscall OlegModuleLabelPulsating::Dispose(OlegModuleLabelPulsating *this,byte param_1){
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-

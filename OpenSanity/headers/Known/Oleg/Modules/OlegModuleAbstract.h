@@ -1,6 +1,8 @@
 #pragma once
 
 #include "headers/OpenSanityGlobal.h"
+#include "headers/Known/Math/Vector2.h"
+
 
 class OlegModuleAbstract {
 	public:
@@ -11,17 +13,22 @@ class OlegModuleAbstract {
 		float value;
 		OlegModuleAbstract * next;
 		SplineA * spline;
+		Vector2 field2_0x8;
+		int field_0x28;
+		int field13_0x2c;
+		float field14_0x30;
+		float field15_0x34;
+
+		OlegModuleAbstract();
+		OlegModuleAbstract(float x);
+		~OlegModuleAbstract();
 
 		void SetSplineToAll(uint spline);
-		static void Unroll(OlegModuleAbstract* param_1);
 		virtual void CallOther1();
 		virtual void Render(FontRenderer* renderer);
 		virtual void Process(SomeState* timeState);
 		virtual void Reset();
 		virtual void CallOther2();
-		void Dispose(byte param_1);
-		void Dispose_8(byte param_1);
-		void Construct();
-		void Construct_10(uint param_1);
+
 
 };

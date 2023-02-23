@@ -2,6 +2,34 @@
 
 #include "headers/Known/Math/Spline/SplineA.h"
 #include "headers/Unknown/SomeState.h"
+
+OlegModuleAbstract::OlegModuleAbstract()
+{
+	(this->field2_0x8).x = 0.5;
+	(this->field2_0x8).y = 0.5;
+	this->value = 0.0;
+	this->next = (OlegModuleAbstract*)0x0;
+	this->spline = (SplineA*)0x0;
+	this->field_0x28 = 0;
+	this->field13_0x2c = 127;
+	this->field14_0x30 = 0.0;
+	this->field15_0x34 = 0.0;
+	this->flags = 0;
+	this->flags = 0x1800;
+	this->startTime = 0;
+	this->fadeInLength = 0;
+	this->fadeOutLength = 0;
+}
+
+OlegModuleAbstract::OlegModuleAbstract(float x) : OlegModuleAbstract()
+{
+	(this->field2_0x8).x = x;
+}
+
+OlegModuleAbstract::~OlegModuleAbstract()
+{
+
+}
 void OlegModuleAbstract::SetSplineToAll(uint spline) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -17,18 +45,6 @@ void OlegModuleAbstract::SetSplineToAll(uint spline) {
 		module->spline = spline;
 		moduleList = &module->next;
 		}
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleAbstract::Unroll(OlegModuleAbstract* param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleAbstract::Unroll(OlegModuleAbstract *param_1){
-		param_1->vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
 		return;
 		}
 		
@@ -170,96 +186,6 @@ void OlegModuleAbstract::CallOther2() {
 		(*this_00->vtable->CallOther2)(this_00);
 		return;
 		}
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleAbstract::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleAbstract * __thiscall OlegModuleAbstract::Dispose(OlegModuleAbstract *this,byte param_1){
-		this->vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleAbstract::Dispose_8(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	undefined4 * __thiscall OlegModuleAbstract::Dispose(OlegModuleAbstract *this,byte param_1){
-		this->vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return &this->vtable;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleAbstract::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleAbstract::Construct(OlegModuleAbstract *this){
-		float fVar1;
-		fVar1 = FLOAT_00386ab4;
-		this->vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		(this->field2_0x8).x = fVar1;
-		(this->field2_0x8).y = fVar1;
-		this->value = 0.0;
-		this->next = (OlegModuleAbstract *)0x0;
-		this->spline = (SplineA *)0x0;
-		*(undefined4 *)&this->field_0x28 = 0;
-		*(undefined *)&this->field13_0x2c = 0;
-		*(undefined *)((int)&this->field13_0x2c + 1) = 0;
-		*(undefined *)((int)&this->field13_0x2c + 2) = 0;
-		*(undefined *)((int)&this->field13_0x2c + 3) = 0x7f;
-		this->field14_0x30 = 0.0;
-		this->field15_0x34 = 0.0;
-		this->flags = 0;
-		this->flags = 0x1800;
-		this->startTime = 0;
-		this->fadeInLength = 0;
-		this->fadeOutLength = 0;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleAbstract::Construct_10(uint param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall OlegModuleAbstract::Construct(OlegModuleAbstract *this,float param_1){
-		this->vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		(this->field2_0x8).x = param_1;
-		(this->field2_0x8).y = FLOAT_00386ab4;
-		this->value = 0.0;
-		this->next = (OlegModuleAbstract *)0x0;
-		this->spline = (SplineA *)0x0;
-		*(undefined4 *)&this->field_0x28 = 0;
-		*(undefined *)&this->field13_0x2c = 0;
-		*(undefined *)((int)&this->field13_0x2c + 1) = 0;
-		*(undefined *)((int)&this->field13_0x2c + 2) = 0;
-		*(undefined *)((int)&this->field13_0x2c + 3) = 0x7f;
-		this->field14_0x30 = 0.0;
-		this->field15_0x34 = 0.0;
-		this->flags = 0;
-		this->flags = 0x1c00;
-		this->startTime = 0;
-		this->fadeInLength = 0;
-		this->fadeOutLength = 0;
 		return;
 		}
 		

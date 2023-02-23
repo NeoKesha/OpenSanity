@@ -2,6 +2,15 @@
 
 #include "headers/Known/Math/Vector2.h"
 #include "headers/Known/Oleg/UIElement/UIElementImage.h"
+OlegModuleAF::OlegModuleAF(float x, UIElementImage* param_2, UIElementImage* param_3) : OlegModuleA(x)
+{
+	this->image1 = null;
+	this->image2 = null;
+	this->field1_0x88 = 0.5f;
+	this->field2_0x8c = param_2;
+	this->field3_0x90 = param_3;
+}
+
 void OlegModuleAF::FUN_001a0e30(bool param_1, Vector2* param_2) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -83,39 +92,3 @@ void OlegModuleAF::Render(FontRenderer* renderer) {
 	*/
 	return;
 }
-
-void OlegModuleAF::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleAF * __thiscall OlegModuleAF::Dispose(OlegModuleAF *this,byte param_1){
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)this);
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleAF::Construct(float param_1, uint param_2, uint param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleAF * __thiscall OlegModuleAF::Construct(OlegModuleAF *this,float param_1,UIElementImage *param_2,uint param_3){
-		float fVar1;
-		OlegModuleA::Construct(&this->parent,param_1);
-		fVar1 = FLOAT_00386ab4;
-		this->image1 = (UIElementImage *)0x0;
-		this->image2 = (UIElementImage *)0x0;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_AF;
-		this->field1_0x88 = fVar1;
-		this->field2_0x8c = param_2;
-		this->field3_0x90 = (UIElementImage *)param_3;
-		return this;
-		}
-		
-	*/
-	return;
-}
-

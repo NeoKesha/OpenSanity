@@ -18,6 +18,7 @@ class ColorMatrix {
 		int unkFiled5;
 		uint * unkFiled6;
 
-		void Construct(float scale);
+		ColorMatrix();
+		ColorMatrix(float scale);
 
 };

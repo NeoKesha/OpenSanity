@@ -170,6 +170,13 @@ class Oleg : public OlegBase {
 		OlegModuleAC module86;
 		OlegModuleIcon uiIcon23;
 		OlegModuleLabelPulsating caption21;
+		int field5_0x320;
+		int field1_0x310;
+		int field3_0x318;
+		int field4_0x31c;
+		int field66_0xb00;
+		int field67_0xb04;
+		int field68_0xb08;
 
 		Oleg();
 		Oleg(Font* font, ChunkDesc* chunkDesc);
@@ -185,6 +192,7 @@ class Oleg : public OlegBase {
 		void CalculateStatsHUD(NodeRelated2C* data);
 		void FUN_000b7db0();
 		void FUN_000b79f0();
+		void FUN_000b33f0();
 		
 		void FUN_000b22a0();
 		void FUN_000b4f10(int i, char param_2);
@@ -201,7 +209,7 @@ class Oleg : public OlegBase {
 		void FUN_000b5270(int param_1, InstanceContext* param_2);
 		void ReadUI(int index, MemoryStream* stream);
 		void GrandALife(int param_1, char param_2);
-		void AssignModuleToSlot(int index, uint module);
+		void AssignModuleToSlot(int index, OlegModuleAbstract* module);
 		static void FUN_001a1be0(UnkSfxCollection* _struct);
 		void FUN_001a2670(uint param_1, uint param_2, SplineA* spline);
 		virtual void ShowUI_30(uint flags1, uint flags2, int appearTime, int disappearTime);

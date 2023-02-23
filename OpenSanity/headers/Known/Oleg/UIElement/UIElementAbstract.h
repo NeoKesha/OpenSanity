@@ -6,6 +6,7 @@ class UIElementAbstract {
 	public:
 		TwinsanityMaterialShader * shader;
 		TwinsanityMaterial * material;
+		int field3_0xc;
 
 		virtual void FUN_00102210(int cnt);
 		virtual void ReplaceMaterial(uint id);

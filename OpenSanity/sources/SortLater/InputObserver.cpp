@@ -2,19 +2,16 @@
 
 #include "headers/Unknown/AutoClasses/InputWrapper.h"
 #include "headers/Known/Input/InputController/InputStruct.h"
-void InputObserver::Construct(InputWrapper* other) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall InputObserver::Construct(InputObserver *this,InputWrapper *other){
-		this->collection = other;
-		this->vtable = &InputObserver_VT;
-		this->inputMask1 = 0;
-		this->inputMask0 = 0;
-		return;
-		}
-		
-	*/
-	return;
+
+InputObserver::InputObserver(InputWrapper* other)
+{
+	this->collection = other;
+	this->inputMask1 = 0;
+	this->inputMask0 = 0;
+}
+
+InputObserver::~InputObserver()
+{
 }
 
 void InputObserver::UpdateInputMask(InputStruct* inputHandle, char param_2) {
@@ -129,21 +126,6 @@ void InputObserver::UpdateInputMask(InputStruct* inputHandle, char param_2) {
 		}
 		 while (local_4 != 0);
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void InputObserver::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	InputObserver * __thiscall InputObserver::Dispose(InputObserver *this,byte param_1){
-		this->vtable = &InputObserver_VT;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
 		}
 		
 	*/

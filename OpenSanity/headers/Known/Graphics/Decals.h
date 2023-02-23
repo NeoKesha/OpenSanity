@@ -6,6 +6,8 @@ class Decals {
 	public:
 		byte header[64];
 		int unkStruct;
+		TwinsanityMaterialShader* shader;
+		int field90752_0x16318;
 
 		void FUN_000fe0e0();
 		void FUN_000fe1c0();

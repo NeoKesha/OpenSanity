@@ -5,9 +5,11 @@
 
 class OlegModuleAH : public OlegModuleA {
 	public:
+		UIElementImage* field1_0x88;
+		ChunkDesc* field_0x8c;
+
+		OlegModuleAH(float x);
+		OlegModuleAH(float x, UIElementImage* param_2, ChunkDesc* param_3);
 
 		virtual void Render(FontRenderer* renderer);
-		void Dispose(byte param_1);
-		void Construct(float param_1, UIElementImage* param_2, uint param_3);
-
 };

@@ -32,7 +32,7 @@ class FontRenderer {
 
 		virtual void DrawAll();
 		void Render();
-		virtual void DrawText(float x, float y, char* str);
+		virtual void DrawText_Twins(float x, float y, char* str);
 		FontRenderer();
 		FontRenderer(Renderer* renderer, ScreenInfo* screen);
 

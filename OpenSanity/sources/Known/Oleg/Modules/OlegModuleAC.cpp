@@ -1,18 +1,15 @@
 #include "headers/Known/Oleg/Modules/OlegModuleAC.h"
 
 #include "headers/Known/Oleg/UIElement/UIElementImage.h"
-void OlegModuleAC::Construct(float param_1, UIElementImage* param_2) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleAC * __thiscall OlegModuleAC::Construct(OlegModuleAC *this,float param_1,UIElementImage *param_2){
-		OlegModuleA::Construct(&this->parent,param_1);
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_AC;
-		this->field1_0x88 = param_2;
-		return this;
-		}
-		
-	*/
-	return;
+
+OlegModuleAC::OlegModuleAC(UIElementImage* param_1) : OlegModuleA()
+{
+	this->field1_0x88 = param_1;
+}
+
+OlegModuleAC::OlegModuleAC(float x, UIElementImage* param_2) : OlegModuleA(x)
+{
+	this->field1_0x88 = param_2;
 }
 
 void OlegModuleAC::Render(FontRenderer* renderer) {
@@ -90,18 +87,3 @@ void OlegModuleAC::Render(FontRenderer* renderer) {
 	*/
 	return;
 }
-
-void OlegModuleAC::Construct_2(uint param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleAC * __thiscall OlegModuleAC::Construct(OlegModuleAC *this,UIElementImage *param_1){
-		OlegModuleA::Construct(&this->parent);
-		this->field1_0x88 = param_1;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_AC;
-		return this;
-		}
-		
-	*/
-	return;
-}
-

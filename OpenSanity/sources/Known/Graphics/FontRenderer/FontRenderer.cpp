@@ -183,7 +183,7 @@ void FontRenderer::Render() {
 	return;
 }
 
-void FontRenderer::DrawText(float x, float y, char* str) {
+void FontRenderer::DrawText_Twins(float x, float y, char* str) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall FontRenderer::DrawText(FontRenderer *this,float x,float y,char *str){

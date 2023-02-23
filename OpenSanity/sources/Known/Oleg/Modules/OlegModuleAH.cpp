@@ -1,6 +1,19 @@
 #include "headers/Known/Oleg/Modules/OlegModuleAH.h"
 
 #include "headers/Known/Oleg/UIElement/UIElementImage.h"
+
+OlegModuleAH::OlegModuleAH(float x) : OlegModuleA(x)
+{
+	this->field1_0x88 = null;
+	this->field_0x8c = null;
+}
+
+OlegModuleAH::OlegModuleAH(float x, UIElementImage* param_2, ChunkDesc* param_3) : OlegModuleA(x)
+{
+	this->field1_0x88 = param_2;
+	this->field_0x8c = param_3;
+}
+
 void OlegModuleAH::Render(FontRenderer* renderer) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -71,34 +84,3 @@ void OlegModuleAH::Render(FontRenderer* renderer) {
 	*/
 	return;
 }
-
-void OlegModuleAH::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleAH * __thiscall OlegModuleAH::Dispose(OlegModuleAH *this,byte param_1){
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)this);
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleAH::Construct(float param_1, UIElementImage* param_2, uint param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleAH * __thiscall OlegModuleAH::Construct(OlegModuleAH *this,float param_1,UIElementImage *param_2,undefined4 param_3){
-		OlegModuleA::Construct(&this->parent,param_1);
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_AH;
-		this->field1_0x88 = param_2;
-		*(undefined4 *)&this->field_0x8c = param_3;
-		return this;
-		}
-		
-	*/
-	return;
-}
-

@@ -29,6 +29,7 @@ public:
 	float ENV_FLOAT_113_SCREEN_FOV = 8191; //45 degree
 	float ENV_FLOAT_116_DT3 = 0.0f;
 	Decals ENV_CLASS_175_DECAL;
+	float ENV_FLOAT_92_0_15 = 0.0f;
 
 	//UNK ADDRESSES
 	int			DAT_003ead50;
@@ -102,6 +103,7 @@ public:
 	int INT_004937a8;
 	int INT_004937ac;
 	int DAT_003ead18;
+	int DAT_00402a08;
 
 	//GLOBAL VALUES
 	float SinTable[32768];

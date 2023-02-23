@@ -2,6 +2,11 @@
 
 #include "headers/Known/Memory/Streams/FileStream/FileStream.h"
 #include "headers/Known/Memory/Streams/MemoryStream/MemoryStream.h"
+#include "headers/Global.h"
+#include "headers/Known/Math/Matrix4.h"
+#include "headers/Known/Graphics/Shader/TwinsanityMaterialShader.h"
+#include "headers/Known/Math/Vector4.h"
+
 void Decals::FUN_000fe0e0() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -342,113 +347,93 @@ void Decals::FUN_0010a5d0(float time) {
 
 void Decals::DrawPlane() {
 	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Decals::DrawPlane(Decals *this){
-		int iVar1;
-		Vector4 *pVVar2;
-		uint uVar3;
-		int iVar4;
-		short *psVar5;
-		short sVar6;
-		int local_d8;
-		int *streamData;
-		float local_cc;
-		float local_c8;
-		undefined4 local_c4;
-		float local_c0;
-		float local_bc;
-		float local_b8;
-		float local_b4;
-		float local_b0;
-		undefined4 local_ac;
-		float local_a8;
-		undefined4 local_a4;
-		float local_a0;
-		float local_9c;
-		float local_98;
-		undefined4 local_94;
-		float local_90;
-		float local_8c;
-		float local_88;
-		float local_84;
-		float local_80;
-		undefined4 local_7c;
-		float local_78;
-		float local_74;
-		Matrix4 local_70;
-		float local_2c;
-		float local_28;
-		int local_14;
-		local_14 = SECURITY_COOKIE;
-		if (this->field90752_0x16318 != 0) {
-		pVVar2 = &this->field90750_0x16304;
-		local_d8 = 4;
-		do {
-		psVar5 = (short *)pVVar2->x;
-		pVVar2->x = 0.0;
-		if (psVar5 != (short *)0x0) {
-		TwinsanityMaterialShader::FUN_00105840(*(TwinsanityMaterialShader **)((int)(pVVar2 + -0x50) + 8));
+	Global* GLOBAL = Global::Get();
+
+/*
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  float fVar6;
+  float *floatValue;
+  int iVar7;
+  uint i;
+  int iVar8;
+  float psVar6;
+  short sVar9;
+  int cnt;
+  int *streamData;
+  Matrix4 local_cc;
+  float local_7c;
+  Matrix4 local_70;
+  float local_2c;
+  float local_28;
+  int local_14;
+
+  local_14 = SECURITY_COOKIE;
+  if (*(int *)&this->field_0x16318 != 0) {
+	floatValue = this->floatArray;
+	cnt = 4;
+	do {
+	  psVar6 = *floatValue;
+	  *floatValue = 0.0;
+	  if (psVar6 != 0.0) {
+		TwinsanityMaterialShader::FUN_00105840((TwinsanityMaterialShader *)floatValue[-0x13e]);
 		Matrix4::Construct1(&local_70);
 		_D3DDevice_SetTransform@8(6,&local_70);
 		do {
-		uVar3 = *(uint *)(psVar5 + 0x226) & 0x3f;
-		local_a8 = (&this->field89606_0x15e30)[uVar3 * 8];
-		local_a4 = *(undefined4 *)(SaveFileC::UpdateBankData + (int)(&this->field0_0x0 + uVar3 * 0x10));
-		local_c0 = (&this->field89608_0x15e38)[uVar3 * 8];
-		local_bc = (&this->field89609_0x15e3c)[uVar3 * 8];
-		local_78 = (&this->field89610_0x15e40)[uVar3 * 8];
-		local_74 = (&this->field89611_0x15e44)[uVar3 * 8];
-		local_90 = (&this->field89612_0x15e48)[uVar3 * 8];
-		local_8c = (&this->field89613_0x15e4c)[uVar3 * 8];
-		DAT_00402a08 = 1;
-		_D3DDevice_SetVertexShaderInput@12((int *)0x0,(int *)0x0,(int **)0x0);
-		_D3DDevice_SetVertexShader@4(0x142);
-		sVar6 = 0;
-		if (0 < *psVar5) {
+		  i = *(uint *)((int)psVar6 + 0x44c) & 0x3f;
+		  local_cc.m32 = (&this->field89606_0x15e30)[i * 8];
+					 00015e2f 
+	local_cc.m33 = *(float*)(SaveFileC::UpdateBankData + (int)(&this->field0_0x0 + i * 0x10))
+		;
+	local_cc.m14 = (&this->field89608_0x15e38)[i * 8];
+	local_cc.m21 = (&this->field89609_0x15e3c)[i * 8];
+	local_cc.m44 = (&this->field89612_0x15e48)[i * 8];
+	DAT_00402a08 = 1;
+	_D3DDevice_SetVertexShaderInput@12((int*)0x0, (int*)0x0, (int**)0x0);
+	_D3DDevice_SetVertexShader@4(0x142);
+	sVar9 = 0;
+	if (0 < *(short*)psVar6) {
 		do {
-		iVar4 = (int)sVar6;
-		iVar1 = iVar4 + 0x44;
-		local_88 = *(float *)(psVar5 + iVar1 * 8);
-		local_9c = *(float *)(psVar5 + iVar1 * 8 + 2);
-		local_98 = *(float *)(psVar5 + iVar1 * 8 + 4);
-		local_2c = *(float *)(psVar5 + iVar4 * 8 + 0x42a);
-		local_28 = *(float *)(psVar5 + iVar4 * 8 + 0x42c);
-		local_c4 = *(undefined4 *)(psVar5 + iVar4 * 2 + 0x530);
-		streamData = (int *)(*(float *)(psVar5 + (iVar4 + 0x85) * 8) + local_88);
-		local_cc = local_2c + local_9c;
-		local_c8 = local_28 + local_98;
-		local_b8 = *(float *)(psVar5 + (iVar4 + 0x65) * 8) + local_88;
-		local_b4 = *(float *)(psVar5 + iVar4 * 8 + 0x32a) + local_9c;
-		local_b0 = *(float *)(psVar5 + iVar4 * 8 + 0x32c) + local_98;
-		local_a0 = local_88 - *(float *)(psVar5 + (iVar4 + 0x65) * 8);
-		local_84 = local_9c - local_2c;
-		local_9c = local_9c - *(float *)(psVar5 + iVar4 * 8 + 0x32a);
-		local_80 = local_98 - local_28;
-		local_98 = local_98 - *(float *)(psVar5 + iVar4 * 8 + 0x32c);
-		local_88 = local_88 - *(float *)(psVar5 + (iVar4 + 0x85) * 8);
-		local_ac = local_c4;
-		local_94 = local_c4;
-		local_7c = local_c4;
-		_D3DDevice_DrawVerticesUP@16(D3DPT_LINESTRIP,4,&streamData,0x18);
-		sVar6 = sVar6 + 1;
-		}
-		 while (sVar6 < *psVar5);
-		}
-		psVar5 = *(short **)(psVar5 + 6);
-		}
-		 while (psVar5 != (short *)0x0);
-		}
-		pVVar2 = (Vector4 *)&pVVar2->y;
-		local_d8 = local_d8 + -1;
-		}
-		 while (local_d8 != 0);
-		}
-		@__security_check_cookie@4(local_14);
-		return;
-		}
-		
-	*/
-	return;
+			iVar8 = (int)sVar9;
+			iVar7 = (iVar8 + 0x44) * 0x10;
+			fVar1 = *(float*)(iVar7 + (int)psVar6);
+			fVar2 = *(float*)(iVar7 + 4 + (int)psVar6);
+			fVar3 = *(float*)(iVar7 + 8 + (int)psVar6);
+			fVar4 = *(float*)((iVar8 + 0x65) * 0x10 + (int)psVar6);
+			iVar7 = iVar8 * 0x10;
+			local_2c = *(float*)(iVar7 + 0x854 + (int)psVar6);
+			fVar5 = *(float*)(iVar7 + 0x654 + (int)psVar6);
+			fVar6 = *(float*)(iVar7 + 0x658 + (int)psVar6);
+			local_28 = *(float*)(iVar7 + 0x858 + (int)psVar6);
+			local_cc.m13 = *(float*)((int)psVar6 + 0xa60 + iVar8 * 4);
+			streamData = (int*)(*(float*)((iVar8 + 0x85) * 0x10 + (int)psVar6) + fVar1);
+			local_cc.m11 = local_2c + fVar2;
+			local_cc.m12 = local_28 + fVar3;
+			local_cc.m22 = fVar4 + fVar1;
+			local_cc.m23 = fVar5 + fVar2;
+			local_cc.m24 = fVar6 + fVar3;
+			local_cc.m34 = fVar1 - fVar4;
+			local_cc.m41 = fVar2 - fVar5;
+			local_cc.m42 = fVar3 - fVar6;
+			local_cc.m31 = local_cc.m13;
+			local_cc.m43 = local_cc.m13;
+			_D3DDevice_DrawVerticesUP@16(D3DPT_LINESTRIP, 4, &streamData, 0x18);
+			sVar9 = sVar9 + 1;
+		} while (sVar9 < *(short*)psVar6);
+	}
+	psVar6 = *(float*)((int)psVar6 + 0xc);
+} while (psVar6 != 0.0);
+	  }
+	  floatValue = floatValue + 1;
+	  cnt = cnt + -1;
+	} while (cnt != 0);
+  }
+  @__security_check_cookie@4(local_14);
+  return;
+*/
 }
 
 void Decals::Construct() {

@@ -1,4 +1,5 @@
 #include "headers/Known/Oleg/Oleg.h"
+#include "headers/Global.h"
 
 #include "headers/Unknown/Families/Families1X/Family10/UnkFamily10S.h"
 #include "headers/Unknown/Families/Families1X/Family10/V/UnkFamily10VA.h"
@@ -28,459 +29,339 @@
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
 #include "headers/Unknown/Families/Families1X/Family10/UnkFamily10Q.h"
 #include "headers/Unknown/Families/Families1X/Family10/UnkFamily10R.h"
-Oleg::Oleg() : OlegBase()
+#include "headers/Known/ColorTransparent.h"
+
+
+//TODO: Remove all default constructions from constructor and initialized to avoid double work
+Oleg::Oleg(Font* font, ChunkDesc* chunkDesc) : OlegBase(),
+spline0(), spline1(), spline2(), spline3(),
+inputWrapper(0, 7), inputObserver(&inputWrapper),
+material(), materialRelated(), spline4(), screenMessage(font),
+uiIcon01(&someIcon1), uiIcon02(&someIcon1), uiIcon03(&someIcon1), uiIcon04(0.75f, &crashTwinsanityLogo), uiIcon05(&someIcon1),
+label01(0.5f, font, 0x22), uiIcon06(&someIcon1), uiIcon07(0.5f, &crashTwinsanityLogo), uiIcon08(0.5f, &iconsPsm2[17]), bubble01(0.5f, 8, 1, 0x40, 0), bubble02(0.5f, 4, 1, 0x20, 0),
+caption01(0.9f, font, 0x1d, 0x44), caption02(0.9f, font, 0xc0, 0x44), caption03(0.075f, font, 0x1c, 0x14), caption04(0.075f, font, 0x1e, 0x14), caption05(0.9f, font, 0x1f, 0x44),
+option01(0.5f, &inputObserver, &colorMatrix[6], &sfxRelated),
+bubble03(0.5f, 4, 1, 0x20, 0),
+option02(0.5f, &inputObserver, &colorMatrix[0], &sfxRelated),
+caption06(0.5f, font, 0x29, 0x22),
+option03(0.5f, &inputObserver, &colorMatrix[2], &sfxRelated),
+option04(0.5f, &inputObserver, &colorMatrix[4], &sfxRelated),
+option05(0.5f, &inputObserver, &colorMatrix[2], &sfxRelated),
+caption07(0.5f, font, 0x65, 0x22),
+option06(0.5f, &inputObserver, &colorMatrix[2], &sfxRelated),
+caption08(0.5f, font, 0x49, 0x22),
+option07(0.5f, &inputObserver, &colorMatrix[2], &sfxRelated),
+caption09(0.5f, font, 0x4a, 0x22),
+caption10(0.5f, font, 0x20, 0x22),
+caption11(0.5f, font, 0x24, 0x22),
+caption12(0.5f, font, 0x25, 0x22),
+caption13(0.5f, font, 0x27, 0x22),
+caption14(0.5f, font, 0x28, 0x22),
+option08(0.5f, &inputObserver, &colorMatrix[2], &sfxRelated),
+caption15(0.5f, font, 0x26, 0x22),
+caption16(0.5f, font, 0x46, 0x22),
+option09(0.5f, &inputObserver, &colorMatrix[2], &sfxRelated),
+caption17(0.5f, font, 0xb8, 0x22),
+option10(0.5f, &inputObserver, &colorMatrix[2], &sfxRelated),
+bubble04(0.5f, 4, 1, 0x20, 0),
+bubble05(0.5f, 4, 1, 0x20, 0),
+bubble06(0.5f, 4, 1, 0x20, 0),
+bubble07(0.5f, 2, 1, 0x20, 0),
+bubble08(0.5f, 4, 1, 0x18, 0),
+uiIcon09(0.5f, &someIcon2),
+progressPercent(0.5f, font, 0x22),
+label03(0.5f, font, 0x60),
+uiIcon10(0.5f, &iconsPsm2[0xd]),
+label04(0.5f, font, 0x60),
+uiIcon11(0.5f, &iconsPsm2[0]),
+label05(0.5f, font, 0x60),
+uiIcon12(0.5f, &iconsPsm2[0xf]),
+option11(0.5f, &inputObserver, &colorMatrix[5], &sfxRelated),
+option12(0.5f, &inputObserver, &colorMatrix[5], &sfxRelated),
+option13(0.5f, &inputObserver, &colorMatrix[5], &sfxRelated),
+option14(0.5f, &inputObserver, &colorMatrix[5], &sfxRelated),
+caption18(0.5f, font, 0x4c, 0x22),
+bubble09(0.5f, 4, 1, 0x20, 0),
+option15(0.5f, &inputObserver, &colorMatrix[1], &sfxRelated),
+bubble10(0.5f, 4, 1, 0x20, 0),
+uiIcon13(0.5f, &crashTwinsanityLogo),
+caption19(0.5f, font, 0xb7, 0x14),
+option16(0.5f, &inputObserver, &colorMatrix[3], &sfxRelated),
+label07(0.5f, font, 0x22),
+label08(0.5f, font, 0x22),
+option17(0.5f, &inputObserver, &colorMatrix[7], &sfxRelated),
+label09(0.5f, font, 0x22),
+bubble11(0.5f, 4, 1, 0x20, 0),
+option18(0.5f, &inputObserver, &colorMatrix[8], &sfxRelated),
+caption20(0.5f, font, 0x47, 0x22),
+uiIcon14(0.5f, &iconsPsm2[0x11]),
+label10(0.9, font, 0x30),
+uiIcon15(0.5f, &someIcon4),
+label11(0.9f, font, 0x30),
+uiIcon16(0.5f, &iconsPsm2[0x12]),
+module75(0.075f, &someIcon1, chunkDesc),
+module76(0.5f, &iconsPsm2[6], &iconsPsm2[0xd]),
+wumpaCount(0.075f, font, 0x14),
+uiIcon17(0.075f, &iconsPsm2[0xd]),
+label13(0.9f, font, 0x44),
+uiIcon18(0.9f, &iconsPsm2[0]),
+lifeIcon(0.2f, &iconsPsm2[0]),
+uiIcon20(0.5f, &iconsPsm2[0xe]),
+label14(0.9f, font, 0x44),
+uiIcon21(0.9f, &iconsPsm2[0x10]),
+uiIcon22(&someIcon1),
+module86(0.5f, &iconsPsm3[0]),
+uiIcon23(0.075f, &crashTwinsanityLogo),
+caption21(0.5f, font, 0x5c, 0x22)
 {
+	Global* GLOBAL = Global::Get();
 
-}
+	uint* puVar2;
+	float fVar3;
+	Vector4* pVVar4;
+	Vector2* pVVar5;
+	float* pfVar6;
+	byte* pbVar7;
+	OlegModuleIcon* moduleElement;
+	int i;
+	int extraout_ECX;
+	OlegModuleIcon** moduleArray;
+	float fStack24;
+	float local_14;
+	float fStack16;
+	float local_c;
+	float fStack8;
+	float local_4;
+	ChunkDesc* puVar4;
+	InputObserver* inputObserver;
+	OlegModuleLabelPulsating* puVar1;
+	Font* _font;
+	OlegModuleAH* member38;
+	UnkSfxCollection* sfxArr;
+	_font = font;
+	this->field5_0x320 = 0;
+	this->chunkDesc = chunkDesc;
+	this->font = font;
+	sfxArr = &this->sfxRelated;
+	FUN_001a1be0(sfxArr);
+	this->page1 = null;
+	this->page2 = null;
+	this->page3 = null;
+	this->page4 = null;
+	this->page5 = null;
+	this->page6 = null;
+	this->page7 = null;
+	this->page8 = null;
+	this->page9 = null;
+	this->page10 = null;
+	this->page11 = null;
+	this->page12 = null;
+	this->page13 = null;
+	this->page14 = null;
+	this->page15 = null;
+	this->page16 = null;
+	this->page17 = null;
+	this->page18 = null;
+	this->unkClass = null;
+	this->arr1length = 8;
+	this->arr1 = new Vector4[this->arr1length];
+	this->arr2length = 8;
+	this->arr2 = new Vector2[this->arr2length];
+	this->arr3length = 2;
+	this->arr3 = new float[this->arr3length];
+	this->arr4length = 2;
+	this->arr4 = new float[this->arr4length];
 
-Oleg::Oleg(Font* font, ChunkDesc* chunkDesc) : OlegBase()
-{
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	Oleg * __thiscall Oleg::Construct(Oleg *this,Font *font,ChunkDesc *chunkDesc){
-		OlegModuleAF *this_00;
-		uint *puVar2;
-		float fVar3;
-		Vector4 *pVVar4;
-		Vector2 *pVVar5;
-		float *pfVar6;
-		byte *pbVar7;
-		OlegModuleIcon *moduleElement;
-		int i;
-		int extraout_ECX;
-		OlegModuleIcon **moduleArray;
-		float fStack24;
-		float local_14;
-		float fStack16;
-		float local_c;
-		float fStack8;
-		float local_4;
-		ChunkDesc *puVar4;
-		InputObserver *inputObserver;
-		OlegModuleLabelPulsating *puVar1;
-		Font *_font;
-		OlegModuleAH *member38;
-		UnkSfxCollection *sfxArr;
-		_font = font;
-		OlegBase::Construct(&this->parent);
-		(this->parent).vtable = (OlegBase_VTable *)&Oleg_VT;
-		this->field5_0x320 = 0;
-		SplineA::Construct(&this->spline0);
-		(this->spline1).parent.next = (SplineAbstract *)0x0;
-		(this->spline1).parent.position = 0.0;
-		(this->spline1).parent.startupLevel = 0.0;
-		(this->spline1).parent.repeats = 0;
-		(this->spline1).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_D;
-		(this->spline2).parent.next = (SplineAbstract *)0x0;
-		(this->spline2).parent.position = 0.0;
-		(this->spline2).parent.startupLevel = 0.0;
-		(this->spline2).parent.repeats = 0;
-		(this->spline2).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_E;
-		(this->spline3).parent.next = (SplineAbstract *)0x0;
-		(this->spline3).parent.position = 0.0;
-		(this->spline3).parent.startupLevel = 0.0;
-		(this->spline3).parent.repeats = 0;
-		(this->spline3).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_C;
-		this->chunkDesc = chunkDesc;
-		this->font = font;
-		(this->psmPath).value = (char *)0x0;
-		(this->psmPath).strLength = 0;
-		(this->psmPath).strSize = 0;
-		InputWrapper::Construct(&this->inputWrapper,0,7);
-		inputObserver = &this->inputObserver;
-		InputObserver::Construct(inputObserver,&this->inputWrapper);
-		ColorMatrix::Construct(this->colorMatrix,(float)font);
-		ColorMatrix::Construct(this->colorMatrix + 1,(float)font);
-		ColorMatrix::Construct(this->colorMatrix + 2,(float)font);
-		ColorMatrix::Construct(this->colorMatrix + 3,(float)font);
-		ColorMatrix::Construct(this->colorMatrix + 4,(float)font);
-		ColorMatrix::Construct(this->colorMatrix + 5,(float)font);
-		ColorMatrix::Construct(this->colorMatrix + 6,(float)font);
-		ColorMatrix::Construct(this->colorMatrix + 7,(float)font);
-		ColorMatrix::Construct(this->colorMatrix + 8,(float)font);
-		sfxArr = &this->sfxRelated;
-		FUN_001a1be0(sfxArr);
-		this->page1 = (UnkFamily10VM *)0x0;
-		this->page2 = (UnkFamily10B *)0x0;
-		this->page3 = (UnkFamily10I *)0x0;
-		this->page4 = (UnkFamily10L *)0x0;
-		this->page5 = (UnkFamily10M *)0x0;
-		this->page6 = (UnkFamily10N *)0x0;
-		this->page7 = (UnkFamily10VA *)0x0;
-		this->page8 = (UnkFamily10P *)0x0;
-		this->page9 = (UnkFamily10P *)0x0;
-		this->page10 = (UnkFamily10P *)0x0;
-		this->page11 = (UnkFamily10Q *)0x0;
-		this->page12 = (UnkFamily10Q *)0x0;
-		this->page13 = (UnkFamily10Q *)0x0;
-		this->page14 = (UnkFamily10Q *)0x0;
-		this->page15 = (UnkFamily10R *)0x0;
-		this->page16 = (UnkFamily10S *)0x0;
-		this->page17 = (UnkFamily10ZA *)0x0;
-		this->page18 = (UnkFamily10VL *)0x0;
-		TwinsanityMaterialShader::Construct(&this->material);
-		this->unkClass = (ShaderProgramAbstract *)0x0;
-		UIElementImage::Construct(&this->materialRelated);
-		this->arr1length = 8;
-		pVVar4 = (Vector4 *)VirtualPool::AllocateMemory(0x80);
-		this->arr1 = pVVar4;
-		this->arr2length = 8;
-		pVVar5 = (Vector2 *)VirtualPool::AllocateMemory(0x40);
-		this->arr2 = pVVar5;
-		this->arr3length = 2;
-		pfVar6 = (float *)VirtualPool::AllocateMemory(8);
-		this->arr3 = pfVar6;
-		this->arr4length = 2;
-		pfVar6 = (float *)VirtualPool::AllocateMemory(8);
-		this->arr4 = pfVar6;
-		 param_2 is reused as AutoClass51 ptr chunkDesc = (ChunkDesc *)this->unkStruct12array;
-		font = (Font *)&Eight;
-		do {
-		UnkFamily20Base::Construct((UnkFamily20Base *)chunkDesc);
-		 Iterate array of AutoClass51 chunkDesc = (ChunkDesc *)(chunkDesc->uintArray + 6);
-		font = (Font *)((int)&font[-1].field7_0x30 + 3);
-		 Font reused as INT counter from 8 to 0 }
-		 while (font != (Font *)0x0);
-		(this->spline4).parent.next = (SplineAbstract *)0x0;
-		(this->spline4).parent.position = 0.0;
-		(this->spline4).parent.startupLevel = 0.0;
-		(this->spline4).parent.repeats = 0;
-		(this->spline4).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_B;
-		UnkFamily20Base::Construct(&(this->spline4).unkStruct);
-		chunkDesc = (ChunkDesc *)&this->someIcon1;
-		(this->spline4).unkStruct.vtable = (UnkFamily20Base_VTable *)&UnkFamily20_VT_A;
-		font = (Font *)0x2e;
-		do {
-		UIElementImage::Construct((UIElementImage *)chunkDesc);
-		 next chunkDesc = (ChunkDesc *)&(chunkDesc->unkString1).strLength;
-		font = (Font *)((int)&font[-1].field7_0x30 + 3);
-		}
-		 while (font != (Font *)0x0);
-		chunkDesc = (ChunkDesc *)this->iconsPsm3;
-		font = (Font *)&Eight;
-		do {
-		UIElementImage::Construct((UIElementImage *)chunkDesc);
-		 next chunkDesc = (ChunkDesc *)&(chunkDesc->unkString1).strLength;
-		font = (Font *)((int)&font[-1].field7_0x30 + 3);
-		}
-		 while (font != (Font *)0x0);
-		AutoClass11::Construct(&this->screenMessage,_font);
-		OlegModuleIcon::Construct(&this->uiIcon01,&this->someIcon1);
-		OlegModuleIcon::Construct(&this->uiIcon02,&this->someIcon1);
-		OlegModuleIcon::Construct(&this->uiIcon03,&this->someIcon1);
-		OlegModuleIcon::Construct(&this->uiIcon04,0.075,&this->crashTwinsanityLogo);
-		OlegModuleIcon::Construct(&this->uiIcon05,&this->someIcon1);
-		OlegModuleLabelGeneric::Construct(&this->label01,0.5,_font,0x22);
-		OlegModuleIcon::Construct(&this->uiIcon06,&this->someIcon1);
-		OlegModuleMenuBubble::Construct(&this->bubble01,0.5,8,1,0x40,0);
-		OlegModuleMenuBubble::Construct(&this->bubble02,0.5,4,1,0x20,0);
-		OlegModuleLabelPulsating::Construct(&this->caption01,0.9,_font,0x1d,0x44);
-		OlegModuleLabelPulsating::Construct(&this->caption02,0.9,_font,0xc0,0x44);
-		OlegModuleLabelPulsating::Construct(&this->caption03,0.075,_font,0x1c,0x14);
-		OlegModuleLabelPulsating::Construct(&this->caption04,0.075,_font,0x1e,0x14);
-		OlegModuleLabelPulsating::Construct(&this->caption05,0.9,_font,0x1f,0x44);
-		OlegModuleLabelSelectable::Construct(&this->option01,0.5,inputObserver,this->colorMatrix + 6,sfxArr);
-		OlegModuleMenuBubble::Construct(&this->bubble03,0.5,4,1,0x20,0);
-		OlegModuleLabelSelectable::Construct(&this->option02,0.5,inputObserver,this->colorMatrix,sfxArr);
-		OlegModuleLabelPulsating::Construct(&this->caption06,0.5,_font,0x29,0x22);
-		OlegModuleLabelSelectable::Construct(&this->option03,0.5,inputObserver,this->colorMatrix + 2,sfxArr);
-		OlegModuleIcon::Construct(&this->uiIcon07,0.5,&this->crashTwinsanityLogo);
-		OlegModuleLabelSelectable::Construct(&this->option04,0.5,inputObserver,this->colorMatrix + 4,sfxArr);
-		OlegModuleLabelSelectable::Construct(&this->option05,0.5,inputObserver,this->colorMatrix + 2,sfxArr);
-		OlegModuleLabelPulsating::Construct(&this->caption07,0.5,_font,0x65,0x22);
-		OlegModuleLabelSelectable::Construct(&this->option06,0.5,inputObserver,this->colorMatrix + 2,sfxArr);
-		OlegModuleLabelPulsating::Construct(&this->caption08,0.5,_font,0x49,0x22);
-		OlegModuleLabelSelectable::Construct(&this->option07,0.5,inputObserver,this->colorMatrix + 2,sfxArr);
-		OlegModuleLabelPulsating::Construct(&this->caption09,0.5,_font,0x4a,0x22);
-		OlegModuleLabelPulsating::Construct(&this->caption10,0.5,_font,0x20,0x22);
-		OlegModuleLabelPulsating::Construct(&this->caption11,0.5,_font,0x24,0x22);
-		OlegModuleLabelPulsating::Construct(&this->caption12,0.5,_font,0x25,0x22);
-		OlegModuleLabelPulsating::Construct(&this->caption13,0.5,_font,0x27,0x22);
-		OlegModuleLabelPulsating::Construct(&this->caption14,0.5,_font,0x28,0x22);
-		OlegModuleLabelSelectable::Construct(&this->option08,0.5,inputObserver,this->colorMatrix + 2,sfxArr);
-		OlegModuleLabelPulsating::Construct(&this->caption15,0.5,_font,0x26,0x22);
-		OlegModuleLabelPulsating::Construct(&this->caption16,0.5,_font,0x46,0x22);
-		OlegModuleIcon::Construct(&this->uiIcon08,0.5,this->iconsPsm2 + 0x11);
-		OlegModuleLabelSelectable::Construct(&this->option09,0.5,inputObserver,this->colorMatrix + 2,sfxArr);
-		OlegModuleLabelPulsating::Construct(&this->caption17,0.5,_font,0xb8,0x22);
-		OlegModuleLabelSelectable::Construct(&this->option10,0.5,inputObserver,this->colorMatrix + 2,sfxArr);
-		OlegModuleMenuBubble::Construct(&this->bubble04,0.5,4,1,0x20,0);
-		OlegModuleMenuBubble::Construct(&this->bubble05,0.5,4,1,0x20,0);
-		OlegModuleMenuBubble::Construct(&this->bubble06,0.5,4,1,0x20,0);
-		OlegModuleMenuBubble::Construct(&this->bubble07,0.5,2,1,0x20,0);
-		OlegModuleMenuBubble::Construct(&this->bubble08,0.5,4,1,0x18,0);
-		OlegModuleIcon::Construct(&this->uiIcon09,0.5,&this->someIcon2);
-		OlegModuleLabelGeneric::Construct(&this->progressPercent,0.5,_font,0x22);
-		OlegModuleLabelGeneric::Construct(&this->label03,0.5,_font,0x60);
-		OlegModuleIcon::Construct(&this->uiIcon10,0.5,this->iconsPsm2 + 0xd);
-		OlegModuleLabelGeneric::Construct(&this->label04,0.5,_font,0x60);
-		OlegModuleIcon::Construct(&this->uiIcon11,0.5,this->iconsPsm2);
-		OlegModuleLabelGeneric::Construct(&this->label05,0.5,_font,0x60);
-		OlegModuleIcon::Construct(&this->uiIcon12,0.5,this->iconsPsm2 + 0xf);
-		OlegModuleLabelSelectable::Construct(&this->option11,0.5,inputObserver,this->colorMatrix + 5,sfxArr);
-		OlegModuleLabelSelectable::Construct(&this->option12,0.5,inputObserver,this->colorMatrix + 5,sfxArr);
-		OlegModuleLabelSelectable::Construct(&this->option13,0.5,inputObserver,this->colorMatrix + 5,sfxArr);
-		OlegModuleLabelSelectable::Construct(&this->option14,0.5,inputObserver,this->colorMatrix + 5,sfxArr);
-		OlegModuleLabelPulsating::Construct(&this->caption18,0.5,_font,0x4c,0x22);
-		OlegModuleMenuBubble::Construct(&this->bubble09,0.5,4,1,0x20,0);
-		OlegModuleLabelSelectable::Construct(&this->option15,0.5,inputObserver,this->colorMatrix + 1,sfxArr);
-		OlegModuleMenuBubble::Construct(&this->bubble10,0.5,4,1,0x20,0);
-		OlegModuleIcon::Construct(&this->uiIcon13,0.075,&this->crashTwinsanityLogo);
-		OlegModuleLabelPulsating::Construct(&this->caption19,0.075,_font,0xb7,0x14);
-		OlegModuleLabelSelectable::Construct(&this->option16,0.5,inputObserver,this->colorMatrix + 3,sfxArr);
-		OlegModuleLabelGeneric::Construct(&this->label07,0.5,_font,0x22);
-		OlegModuleLabelGeneric::Construct(&this->label08,0.5,_font,0x22);
-		OlegModuleLabelSelectable::Construct(&this->option17,0.5,inputObserver,this->colorMatrix + 7,sfxArr);
-		OlegModuleLabelGeneric::Construct(&this->label09,0.5,_font,0x22);
-		OlegModuleMenuBubble::Construct(&this->bubble11,0.5,4,1,0x20,0);
-		OlegModuleLabelSelectable::Construct(&this->option18,0.5,inputObserver,this->colorMatrix + 8,sfxArr);
-		OlegModuleLabelPulsating::Construct(&this->caption20,0.5,_font,0x47,0x22);
-		OlegModuleIcon::Construct(&this->uiIcon14,0.5,this->iconsPsm2 + 0x11);
-		OlegModuleLabelGeneric::Construct(&this->label10,0.9,_font,0x30);
-		OlegModuleIcon::Construct(&this->uiIcon15,0.075,&this->someIcon4);
-		OlegModuleLabelGeneric::Construct(&this->label11,0.9,_font,0x30);
-		OlegModuleIcon::Construct(&this->uiIcon16,0.075,this->iconsPsm2 + 0x12);
-		puVar4 = this->chunkDesc;
-		member38 = &this->module75;
-		OlegModuleA::Construct(&member38->parent,0.075);
-		*(ChunkDesc **)&(this->module75).field_0x8c = puVar4;
-		this_00 = &this->module76;
-		(member38->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_AH;
-		(this->module75).field1_0x88 = &this->someIcon1;
-		OlegModuleA::Construct(&this_00->parent,0.5);
-		fVar3 = FLOAT_00386ab4;
-		(this->module76).field3_0x90 = this->iconsPsm2 + 0xd;
-		(this_00->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_AF;
-		(this->module76).field1_0x88 = fVar3;
-		(this->module76).field2_0x8c = this->iconsPsm2 + 6;
-		(this->module76).image1 = (UIElementImage *)0x0;
-		(this->module76).image2 = (UIElementImage *)0x0;
-		OlegModuleLabelGeneric::Construct(&this->wumpaCount,0.075,_font,0x14);
-		OlegModuleIcon::Construct(&this->uiIcon17,0.075,this->iconsPsm2 + 0xd);
-		OlegModuleLabelGeneric::Construct(&this->label13,0.9,_font,0x44);
-		OlegModuleIcon::Construct(&this->uiIcon18,0.9,this->iconsPsm2);
-		OlegModuleIcon::Construct(&this->lifeIcon,0.2,this->iconsPsm2);
-		OlegModuleIcon::Construct(&this->uiIcon20,0.5,this->iconsPsm2 + 0xe);
-		OlegModuleLabelGeneric::Construct(&this->label14,0.9,_font,0x44);
-		OlegModuleIcon::Construct(&this->uiIcon21,0.9,this->iconsPsm2 + 0x10);
-		OlegModuleIcon::Construct(&this->uiIcon22,&this->someIcon1);
-		OlegModuleAC::Construct(&this->module86,0.5,this->iconsPsm3);
-		OlegModuleIcon::Construct(&this->uiIcon23,0.075,&this->crashTwinsanityLogo);
-		OlegModuleLabelPulsating::Construct(&this->caption21,0.5,_font,0x5c,0x22);
-		pbVar7 = &this->iconsPsm2[0].parent.field3_0xc;
-		i = 6;
-		do {
-		*pbVar7 = 1;
-		pbVar7 = pbVar7 + 0x20;
-		i = i + -1;
-		}
-		 while (i != 0);
-		pbVar7 = &this->iconsPsm2[0x18].parent.field3_0xc;
-		i = 0x10;
-		do {
-		*pbVar7 = 1;
-		fVar3 = ENV_FLOAT_92_0_15;
-		pbVar7 = pbVar7 + 0x20;
-		i = i + -1;
-		}
-		 while (i != 0);
-		(this->crashTwinsanityLogo).parent.field3_0xc = 1;
-		(this->someIcon2).parent.field3_0xc = 1;
-		this->iconsPsm2[0xd].parent.field3_0xc = 1;
-		this->iconsPsm2[0xe].parent.field3_0xc = 1;
-		this->iconsPsm2[0xf].parent.field3_0xc = 1;
-		this->iconsPsm2[0x11].parent.field3_0xc = 1;
-		this->iconsPsm2[0x17].parent.field3_0xc = 1;
-		(this->materialRelated).parent.field3_0xc = 1;
-		(this->uiIcon12).field2_0x8c = this->unkStruct12array;
-		this->field1_0x310 = 0;
-		puVar2 = &this->screenFlags;
-		*puVar2 = 0;
-		this->field3_0x318 = 0;
-		this->field4_0x31c = 0;
-		*puVar2 = *puVar2 & 0xfffe0203 | 0x202;
-		this->field3_0x318 = this->field3_0x318 & 0xfffe3233 | 0x3232;
-		this->field4_0x31c = this->field4_0x31c & 0xfffe1819 | 0x1818;
-		this->deltaTime = (int)(TicksPerTime * fVar3);
-		(this->spline0).parent.length = fVar3;
-		chunkDesc = (ChunkDesc *)(this->iconsPsm2 + 7);
-		this->field66_0xb00 = 0;
-		this->field67_0xb04 = 0;
-		this->field68_0xb08 = 0;
-		moduleArray = this->iconArray;
-		font = (Font *)&PRIMITIVE_TYPE;
-		do {
-		moduleElement = (OlegModuleIcon *)VirtualPool::AllocateMemory(0xbc);
-		if (moduleElement == (OlegModuleIcon *)0x0) {
-		moduleElement = (OlegModuleIcon *)0x0;
-		}
-		else {
-		moduleElement = OlegModuleIcon::Construct(moduleElement,0.5,(UIElementImage *)chunkDesc);
-		}
-		*moduleArray = moduleElement;
-		chunkDesc = (ChunkDesc *)&(chunkDesc->unkString1).strLength;
-		moduleArray = moduleArray + 1;
-		font = (Font *)((int)&font[-1].field7_0x30 + 3);
-		 font reused as counter from 6 to 0 }
-		 while (font != (Font *)0x0);
-		InitModuleMask(this);
-		thunk_FUN_000b33f0(extraout_ECX);
-		fStack24 = FLOAT_0038bc0c;
-		local_14 = 0.0;
-		fStack16 = FLOAT_0038639c;
-		local_c = FLOAT_0038639c;
-		fStack8 = FLOAT_0038c9bc;
-		local_4 = FLOAT_0038cae0;
-		OlegModuleA::FUN_001a2e90(&member38->parent,COLOR_WHITE,(ColorTransparent *)&stack0xfffffff8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xffffffe8);
-		fStack8 = FLOAT_0038639c;
-		local_4 = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option02).parent,COLOR_WHITE,&ColorTransparent_0039e304,(ColorTransparent *)&stack0xfffffff8,&ColorTransparent_0039e304);
-		fStack8 = FLOAT_0038d548;
-		local_4 = FLOAT_0038d548;
-		OlegModuleA::UnkFun(&(this->caption06).parent,COLOR_WHITE,&ColorTransparent_0039e2fc,(ColorTransparent *)&stack0xfffffff8,&ColorTransparent_0039e2fc);
-		(this->option02).parent.parent.next = (OlegModuleAbstract *)&this->caption06;
-		thunk_FUN_000b18e0(this);
-		thunk_FUN_000b79f0(this);
-		thunk_FUN_000b1a40(this);
-		thunk_FUN_000b1c50(this);
-		thunk_FUN_000b1d80(this);
-		fStack8 = FLOAT_0038639c;
-		local_4 = FLOAT_0038639c;
-		fStack16 = FLOAT_00386ab4;
-		local_c = FLOAT_00386608;
-		OlegModuleA::FUN_001a2e30(&(this->option16).parent,(uint)COLOR_WHITE,(Vector2 *)&stack0xfffffff0,(Vector2 *)&stack0xfffffff8);
-		thunk_FUN_000b7db0(this);
-		thunk_FUN_000b1f60(this);
-		thunk_FUN_000b21c0(this);
-		thunk_FUN_000b22a0(this);
-		thunk_FUN_000b3210(this);
-		fStack8 = 0.0;
-		local_4 = FLOAT_0038bc0c;
-		fStack16 = FLOAT_00386ab4;
-		fStack24 = FLOAT_00386ab4;
-		local_c = FLOAT_00386608;
-		local_14 = FLOAT_0038bf5c;
-		OlegModuleA::FUN_001a2e90(&this_00->parent,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xfffffff8);
-		fStack8 = FLOAT_0038a838;
-		local_4 = FLOAT_0038a838;
-		fStack16 = FLOAT_00386ab4;
-		local_c = FLOAT_0038a82c;
-		OlegModuleA::FUN_001a2e30(&(this->caption20).parent,(uint)COLOR_WHITE,(Vector2 *)&stack0xfffffff0,(Vector2 *)&stack0xfffffff8);
-		fStack8 = 0.0;
-		fStack16 = FLOAT_00386608;
-		local_c = FLOAT_00386608;
-		local_4 = FLOAT_00386ab4;
-		fStack24 = FLOAT_00386ab4;
-		local_14 = FLOAT_0038ab4c;
-		OlegModuleA::FUN_001a40a0((OlegModuleA *)&this->uiIcon14,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xfffffff8);
-		fStack16 = FLOAT_0038cac0;
-		fStack8 = FLOAT_0038bc0c;
-		local_4 = 0.0;
-		(this->uiIcon14).parent.parent.next = (OlegModuleAbstract *)&this->caption20;
-		local_c = fStack16;
-		fStack24 = FLOAT_0038d77c;
-		local_14 = FLOAT_0038a828;
-		OlegModuleA::FUN_001a2e90(&(this->wumpaCount).parent,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xfffffff8);
-		fStack8 = FLOAT_0038bc0c;
-		local_4 = 0.0;
-		fStack16 = FLOAT_0038d778;
-		local_c = FLOAT_0038ab54;
-		fStack24 = FLOAT_0038c850;
-		local_14 = FLOAT_0038b3c8;
-		OlegModuleA::FUN_001a40a0((OlegModuleA *)&this->uiIcon17,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xfffffff8);
-		fStack8 = FLOAT_00386ab4;
-		local_4 = 0.0;
-		fStack16 = FLOAT_0038cac0;
-		local_c = FLOAT_0038cac0;
-		fStack24 = FLOAT_0038d774;
-		local_14 = FLOAT_0038a828;
-		OlegModuleA::FUN_001a2e90(&(this->label13).parent,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xfffffff8);
-		fStack8 = FLOAT_00386ab4;
-		local_4 = 0.0;
-		fStack16 = FLOAT_0038bf5c;
-		local_c = FLOAT_0038ab54;
-		fStack24 = FLOAT_0038d770;
-		local_14 = FLOAT_0038b3c8;
-		OlegModuleA::FUN_001a40a0((OlegModuleA *)&this->uiIcon18,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xfffffff8);
-		fStack8 = FLOAT_0038639c;
-		local_4 = FLOAT_0038639c;
-		fStack16 = FLOAT_0038a838;
-		local_c = FLOAT_0038cae4;
-		OlegModuleA::FUN_001a2e30(&(this->label14).parent,(uint)COLOR_WHITE,(Vector2 *)&stack0xfffffff0,(Vector2 *)&stack0xfffffff8);
-		fStack8 = FLOAT_0038ab54;
-		local_4 = FLOAT_0038ab54;
-		fStack16 = FLOAT_0038d76c;
-		local_c = FLOAT_0038d768;
-		OlegModuleLabelGeneric::FUN_001a4010((OlegModuleLabelGeneric *)&this->uiIcon21,(uint)COLOR_WHITE,(Vector2 *)&stack0xfffffff0,(Vector2 *)&stack0xfffffff8);
-		fStack8 = FLOAT_00386ab4;
-		local_4 = FLOAT_0038a828;
-		fStack16 = FLOAT_0038a828;
-		local_c = FLOAT_0038a828;
-		fStack24 = FLOAT_00386ab4;
-		local_14 = FLOAT_0038a828;
-		OlegModuleA::FUN_001a41b0((OlegModuleA *)&this->uiIcon20,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xfffffff8);
-		fStack16 = FLOAT_0038bf5c;
-		fStack8 = FLOAT_0038d764;
-		local_4 = FLOAT_0038b3bc;
-		local_c = FLOAT_0038ab54;
-		fStack24 = FLOAT_0038d764;
-		local_14 = FLOAT_0038b3bc;
-		OlegModuleA::FUN_001a41b0((OlegModuleA *)&this->lifeIcon,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xfffffff8);
-		(this->wumpaCount).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon17;
-		(this->label13).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon18;
-		(this->label14).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon21;
-		AssignModuleToSlot(this,4,&this->uiIcon06);
-		AssignModuleToSlot(this,5,&this->bubble01);
-		AssignModuleToSlot(this,6,&this->bubble02);
-		AssignModuleToSlot(this,7,&this->caption01);
-		AssignModuleToSlot(this,8,&this->caption02);
-		AssignModuleToSlot(this,9,&this->caption03);
-		AssignModuleToSlot(this,10,&this->caption04);
-		AssignModuleToSlot(this,0xb,&this->caption05);
-		AssignModuleToSlot(this,0xc,&this->option01);
-		AssignModuleToSlot(this,0xe,&this->option03);
-		AssignModuleToSlot(this,0xf,&this->uiIcon07);
-		AssignModuleToSlot(this,0,&this->uiIcon01);
-		AssignModuleToSlot(this,1,&this->uiIcon03);
-		AssignModuleToSlot(this,2,&this->uiIcon05);
-		AssignModuleToSlot(this,3,&this->label01);
-		AssignModuleToSlot(this,0x10,&this->option04);
-		AssignModuleToSlot(this,0x11,&this->option05);
-		AssignModuleToSlot(this,0x12,&this->option06);
-		AssignModuleToSlot(this,0x13,&this->bubble07);
-		AssignModuleToSlot(this,0x14,&this->caption10);
-		AssignModuleToSlot(this,0x15,&this->caption12);
-		AssignModuleToSlot(this,0x2f,&this->option07);
-		AssignModuleToSlot(this,0x16,&this->caption13);
-		AssignModuleToSlot(this,0x17,&this->caption15);
-		AssignModuleToSlot(this,0x18,&this->caption17);
-		AssignModuleToSlot(this,0xd,&this->option02);
-		AssignModuleToSlot(this,0x19,&this->option11);
-		AssignModuleToSlot(this,0x1a,&this->option12);
-		AssignModuleToSlot(this,0x1b,&this->option13);
-		AssignModuleToSlot(this,0x1c,&this->option14);
-		AssignModuleToSlot(this,0x1d,&this->caption18);
-		AssignModuleToSlot(this,0x1e,&this->option15);
-		AssignModuleToSlot(this,0x1f,&this->uiIcon13);
-		AssignModuleToSlot(this,0x20,&this->option16);
-		AssignModuleToSlot(this,0x21,&this->label07);
-		AssignModuleToSlot(this,0x22,&this->label08);
-		AssignModuleToSlot(this,0x23,&this->label09);
-		AssignModuleToSlot(this,0x24,&this->uiIcon14);
-		AssignModuleToSlot(this,0x25,&this->label10);
-		AssignModuleToSlot(this,0x26,member38);
-		AssignModuleToSlot(this,0x27,this_00);
-		AssignModuleToSlot(this,0x28,&this->wumpaCount);
-		AssignModuleToSlot(this,0x29,&this->label13);
-		AssignModuleToSlot(this,0x2a,&this->uiIcon20);
-		AssignModuleToSlot(this,0x2b,&this->label14);
-		AssignModuleToSlot(this,0x2c,&this->uiIcon22);
-		AssignModuleToSlot(this,0x2d,&this->module86);
-		AssignModuleToSlot(this,0x2e,&this->uiIcon23);
-		return this;
-		}
+	//TODO: Stress test initialization and make sure everything is right and no reference is lost
+	//Should be initialized by default
+	//for (int i = 0; i < 8; ++i) {
+	//	this->unkStruct12array[8] = UnkFamily20Base();
+	//}
+	//this->someIcon1 = UIElementImage();
+	//this->crashTwinsanityLogo = UIElementImage();
+	//this->someIcon2 = UIElementImage();
+	//this->someIcon3 = UIElementImage();
+	//this->someIcon4 = UIElementImage();
+	//this->someIcon5 = UIElementImage();
+	//for (int i = 0; i < 40; ++i) {
+	//	this->iconsPsm2[i] = UIElementImage();
+	//}
+	//for (int i = 0; i < 8; ++i) {
+	//	this->iconsPsm3[i] = UIElementImage();
+	//}
+	for (int i = 0; i < 6; ++i) {
+		this->iconsPsm2[i].field3_0xc = 1;
+	}
+	for (int i = 0x18; i < 0x28; ++i) {
+		this->iconsPsm2[i].field3_0xc = 1;
+	}
+	fVar3 = GLOBAL->ENV_FLOAT_92_0_15;
+	(this->crashTwinsanityLogo).field3_0xc = 1;
+	(this->someIcon2).field3_0xc = 1;
+	this->iconsPsm2[0xd].field3_0xc = 1;
+	this->iconsPsm2[0xe].field3_0xc = 1;
+	this->iconsPsm2[0xf].field3_0xc = 1;
+	this->iconsPsm2[0x11].field3_0xc = 1;
+	this->iconsPsm2[0x17].field3_0xc = 1;
+	(this->materialRelated).field3_0xc = 1;
+	(this->uiIcon12).field2_0x8c = this->unkStruct12array;
+	this->field1_0x310 = 0;
+	this->screenFlags = 0;
+	this->field3_0x318 = 0;
+	this->field4_0x31c = 0;
+	this->screenFlags = this->screenFlags & 0xfffe0203 | 0x202;
+	this->field3_0x318 = this->field3_0x318 & 0xfffe3233 | 0x3232;
+	this->field4_0x31c = this->field4_0x31c & 0xfffe1819 | 0x1818;
+	this->deltaTime = (int)(GLOBAL->TICKS_PER_TIME * fVar3);
+	(this->spline0).length = fVar3;
+	
+	this->field66_0xb00 = 0;
+	this->field67_0xb04 = 0;
+	this->field68_0xb08 = 0;
+	chunkDesc = (ChunkDesc*)(this->iconsPsm2 + 7);
 
-	*/
+	for (int i = 0; i < 6; ++i) {
+		this->iconArray[i] = new OlegModuleIcon(0.5f, &this->iconsPsm2[7 + i]);
+	}
+	InitModuleMask();
+	FUN_000b33f0();
+
+	Vector2 v1(-0.5f, 0.0f);
+	Vector2 v2(1.0f, 1.0f); 
+	Vector2 v3(0.075f, 0.06f); 
+	module75.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v1, &v2, &v3); //TODO: in case of bug reverse order?
+
+	Vector2 v4(0.5f, 0.764f);
+	Vector2 v5(1.0f, 1.0f);
+	Vector2 v6(0.5f, 0.764f);
+	option02.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v4, &v5, &v6);
+
+	Vector2 v7(0.5f, 0.414);
+	Vector2 v8(0.625f, 0.625f);
+	Vector2 v9(0.5f, 0.414);
+	caption06.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v7, &v8, &v9);
+	option02.next = &caption06;
+
+	FUN_000b18e0();
+	FUN_000b79f0();
+	FUN_000b1a40();
+	FUN_000b1c50();
+	FUN_000b1d80();
+
+	Vector2 v10(1.0f, 1.0f);
+	Vector2 v11(0.5f, 0.1f);
+	option16.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v10, &v11);
+
+	FUN_000b7db0();
+	FUN_000b1f60();
+	FUN_000b21c0();
+	FUN_000b22a0();
+	FUN_000b3210();
+
+	Vector2 v12(0.0f, -0.5f);
+	Vector2 v13(0.5f, 0.5f);
+	Vector2 v14(0.1f, 0.16f);
+	module76.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v12, &v13, &v14);
+
+	Vector2 v15(0.75f, 0.75f);
+	Vector2 v16(0.5f, 0.4f);
+	caption20.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v15, &v16);
+
+	Vector2 v17(0.0f, 0.1f);
+	Vector2 v18(0.1f, 0.5f);
+	Vector2 v19(0.5f, 0.85f);
+	uiIcon14.FUN_001a40a0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v17, &v18, &v19);
+	uiIcon14.next = &caption20;
+
+	Vector2 v20(-0.5f, 0.0f);
+	Vector2 v21(1.5f, 1.5f);
+	Vector2 v22(0.185f, 0.2f);
+	wumpaCount.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v20, &v21, &v22);
+
+	Vector2 v23(-0.5f, 0.0f);
+	Vector2 v24(0.11f, 0.15f);
+	Vector2 v25(0.125f, 0.13f);
+	uiIcon17.FUN_001a40a0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v23, &v24, &v25);
+
+	Vector2 v26(0.5f, 0.0f);
+	Vector2 v27(1.5f, 1.5f);
+	Vector2 v28(0.76f, 0.2f);
+	label13.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v26, &v27, &v28);
+
+	Vector2 v29(0.5f, 0.0f);
+	Vector2 v30(0.16f, 0.15f);
+	Vector2 v31(0.83f, 0.13f);
+	uiIcon18.FUN_001a40a0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v29, &v30, &v31);
+
+	Vector2 v32(1.0f, 1.0f);
+	Vector2 v33(0.75f, 0.92f);
+	label14.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v32, &v33);
+
+	Vector2 v34(0.15f, 0.15f);
+	Vector2 v35(0.825f, 0.845f);
+	uiIcon21.FUN_001a4010(Color(1.0f, 1.0f, 1.0f, 1.0f), &v34, &v35);
+
+	Vector2 v36(0.5f, 0.2f);
+	Vector2 v37(0.2f, 0.12f);
+	Vector2 v38(0.5f, 0.2f);
+	uiIcon20.FUN_001a41b0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v36, &v37, &v38);
+
+	Vector2 v39(0.16f, 0.34f);
+	Vector2 v40(0.12f, 0.15f);
+	Vector2 v41(0.34f, 0.12f);
+	lifeIcon.FUN_001a41b0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v39, &v40, &v41);
+
+	wumpaCount.next = &uiIcon17;
+	label13.next = &uiIcon18;
+	label14.next = &uiIcon21;
+	AssignModuleToSlot(4, &this->uiIcon06);
+	AssignModuleToSlot(5, &this->bubble01);
+	AssignModuleToSlot(6, &this->bubble02);
+	AssignModuleToSlot(7, &this->caption01);
+	AssignModuleToSlot(8, &this->caption02);
+	AssignModuleToSlot(9, &this->caption03);
+	AssignModuleToSlot(0, &this->caption04);
+	AssignModuleToSlot(0xb, &this->caption05);
+	AssignModuleToSlot(0xc, &this->option01);
+	AssignModuleToSlot(0xe, &this->option03);
+	AssignModuleToSlot(0xf, &this->uiIcon07);
+	AssignModuleToSlot(0, &this->uiIcon01);
+	AssignModuleToSlot(1, &this->uiIcon03);
+	AssignModuleToSlot(2, &this->uiIcon05);
+	AssignModuleToSlot(3, &this->label01);
+	AssignModuleToSlot(0x10, &this->option04);
+	AssignModuleToSlot(0x11, &this->option05);
+	AssignModuleToSlot(0x12, &this->option06);
+	AssignModuleToSlot(0x13, &this->bubble07);
+	AssignModuleToSlot(0x14, &this->caption10);
+	AssignModuleToSlot(0x15, &this->caption12);
+	AssignModuleToSlot(0x2f, &this->option07);
+	AssignModuleToSlot(0x16, &this->caption13);
+	AssignModuleToSlot(0x17, &this->caption15);
+	AssignModuleToSlot(0x18, &this->caption17);
+	AssignModuleToSlot(0xd, &this->option02);
+	AssignModuleToSlot(0x19, &this->option11);
+	AssignModuleToSlot(0x1a, &this->option12);
+	AssignModuleToSlot(0x1b, &this->option13);
+	AssignModuleToSlot(0x1c, &this->option14);
+	AssignModuleToSlot(0x1d, &this->caption18);
+	AssignModuleToSlot(0x1e, &this->option15);
+	AssignModuleToSlot(0x1f, &this->uiIcon13);
+	AssignModuleToSlot(0x20, &this->option16);
+	AssignModuleToSlot(0x21, &this->label07);
+	AssignModuleToSlot(0x22, &this->label08);
+	AssignModuleToSlot(0x23, &this->label09);
+	AssignModuleToSlot(0x24, &this->uiIcon14);
+	AssignModuleToSlot(0x25, &this->label10);
+	AssignModuleToSlot(0x26, &this->module75);
+	AssignModuleToSlot(0x27, &this->module76);
+	AssignModuleToSlot(0x28, &this->wumpaCount);
+	AssignModuleToSlot(0x29, &this->label13);
+	AssignModuleToSlot(0x2a, &this->uiIcon20);
+	AssignModuleToSlot(0x2b, &this->label14);
+	AssignModuleToSlot(0x2c, &this->uiIcon22);
+	AssignModuleToSlot(0x2d, &this->module86);
+	AssignModuleToSlot(0x2e, &this->uiIcon23);
 }
 Oleg::~Oleg()
 {
@@ -2193,6 +2074,59 @@ void Oleg::FUN_000b79f0() {
 	return;
 }
 
+void Oleg::FUN_000b33f0()
+{
+	Logging::LogUnimplemented(__FUNCSIG__);
+	/*
+	  ShaderProgramAbstract *shader;
+  UIElementAbstract *uielement;
+  int iVar1;
+  
+  shader = (ShaderProgramAbstract *)VirtualPool::AllocateMemory(0x80);
+  if (shader == (ShaderProgramAbstract *)0x0) {
+    shader = (ShaderProgramAbstract *)0x0;
+  }
+  else {
+    ShaderProgramAbstract::Construct(shader);
+    shader->vtable = (ShaderProgramAbstract_VTable *)&PTR_Dispose_0038d440;
+    shader->id = 0xe;
+  }
+  ENV_CLASS_94.shaderType = 0x18;
+  ENV_CLASS_94.field6_0x18 = 2;
+  ENV_CLASS_94.field7_0x1c = 0;
+  ENV_CLASS_94.shaderProgramCnt = 1;
+  PTR_003e2d28 = shader;
+  ENV_CLASS_94.shaderPrograms[0] = shader;
+  (shader->vec0).x = 1.0;
+  (shader->vec0).y = 1.0;
+  (shader->vec0).z = 1.0;
+  (shader->vec0).w = 1.0;
+  PTR_003e2d28->flags = PTR_003e2d28->flags | 1;
+  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xffffffe1;
+  PTR_003e2d28->states = PTR_003e2d28->states | 0x8000000;
+  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xffffffdf;
+  PTR_003e2d28->states = PTR_003e2d28->states & 0xfeffffff;
+  PTR_003e2d28->states = PTR_003e2d28->states & 0xfdffffff;
+  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xfff7ffff;
+  PTR_003e2d28->states = PTR_003e2d28->states & 0xfffffff8;
+  PTR_003e2d28->states = PTR_003e2d28->states & 0xffffffc7;
+  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xfc7fffff;
+  PTR_003e2d28->flags = PTR_003e2d28->flags | 0x4000000;
+  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xdfffffff;
+  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xbfffffff;
+  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xf7ffffff;
+  (*PTR_003e2d28->vtable->Method4)();
+  uielement = (UIElementAbstract *)&this->someIcon1;
+  iVar1 = 6;
+  do {
+    (*uielement->vtable->ReplaceShader)(uielement,&ENV_CLASS_94);
+    uielement = uielement + 2;
+    iVar1 = iVar1 + -1;
+  } while (iVar1 != 0);
+  return;
+	*/
+}
+
 void Oleg::FUN_000b22a0() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -3188,7 +3122,7 @@ void Oleg::GrandALife(int param_1, char param_2) {
 	return;
 }
 
-void Oleg::AssignModuleToSlot(int index, uint module) {
+void Oleg::AssignModuleToSlot(int index, OlegModuleAbstract* module) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall Oleg::AssignModuleToSlot(Oleg *this,int index,OlegModuleAbstract *module){

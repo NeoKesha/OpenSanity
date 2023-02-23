@@ -2,6 +2,74 @@
 
 #include "headers/Known/Math/Vector2.h"
 #include "headers/Known/ColorTransparent.h"
+
+OlegModuleA::OlegModuleA() : OlegModuleAbstract()
+{
+	this->color1 = Color();
+	this->color2 = Color();
+	this->array[2].x = 0.5f;
+	this->array[2].y = 0.5f;
+	this->array[3].x = 0.5f;
+	this->array[3].y = 0.5f;
+	this->array[6].x = 1.0f;
+	this->array[6].y = 1.0f;
+	this->array[7].x = 1.0f;
+	this->array[7].y = 1.0f;
+}
+
+OlegModuleA::OlegModuleA(float x) : OlegModuleAbstract(x)
+{
+	this->color1 = Color();
+	this->color2 = Color();
+	this->array[2].x = 0.5f;
+	this->array[2].y = 0.5f;
+	this->array[3].x = 0.5f;
+	this->array[3].y = 0.5f;
+	this->array[6].x = 1.0f;
+	this->array[6].y = 1.0f;
+	this->array[7].x = 1.0f;
+	this->array[7].y = 1.0f;
+}
+
+void OlegModuleA::FUN_001a4010(Color param_1, Vector2* param_2, Vector2* param_3) {
+	Logging::LogUnimplemented(__FUNCSIG__);
+	/*
+	void __thiscall OlegModuleLabelGeneric::FUN_001a4010(OlegModuleLabelGeneric *this,uint param_1,Vector2 *param_2,Vector2 *param_3){
+		float fVar1;
+		float fVar2;
+		float fVar3;
+		float fVar4;
+		float fVar5;
+		float fVar6;
+		fVar3 = FLOAT_00386ab4;
+		fVar1 = param_3->x;
+		fVar2 = param_3->y;
+		fVar5 = param_2->x;
+		fVar6 = param_2->y;
+		(this->parent).array[1].y = (float)param_1;
+		param_3 = (Vector2 *)(param_1 & 0xffffff);
+		(this->parent).array[1].x = (float)param_3;
+		fVar1 = fVar1 * fVar3 * FLOAT_0039456c;
+		fVar2 = fVar2 * fVar3;
+		fVar3 = fVar5 - fVar1;
+		(this->parent).array[5].x = fVar3;
+		fVar4 = fVar6 - fVar2;
+		(this->parent).array[5].y = fVar4;
+		(this->parent).array[4].x = fVar3;
+		(this->parent).array[4].y = fVar4;
+		fVar5 = fVar5 + fVar1;
+		fVar6 = fVar6 + fVar2;
+		(this->parent).array[9].x = fVar5;
+		(this->parent).array[9].y = fVar6;
+		(this->parent).array[8].x = fVar5;
+		(this->parent).array[8].y = fVar6;
+		return;
+		}
+
+	*/
+	return;
+}
+
 void OlegModuleA::FUN_00108ea0(Vector2* vector, uint time, uint val1, uint val2) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -120,21 +188,21 @@ void OlegModuleA::Hide(int appearTime, int disappearTime) {
 	return;
 }
 
-void OlegModuleA::FUN_001a2e30(uint param_1, Vector2* vec1, Vector2* vec2) {
+void OlegModuleA::FUN_001a2e30(Color color, Vector2* vec1, Vector2* vec2) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleA::FUN_001a2e30(OlegModuleA *this,uint param_1,Vector2 *vec1,Vector2 *vec2){
 		this->array[1].y = (float)param_1;
 		param_1 = param_1 & 0xffffff;
 		this->array[1].x = (float)param_1;
-		this->array[5].x = vec1->x;
-		this->array[5].y = vec1->y;
-		this->array[4].x = vec1->x;
-		this->array[4].y = vec1->y;
-		this->array[9].x = vec2->x;
-		this->array[9].y = vec2->y;
-		this->array[8].x = vec2->x;
-		this->array[8].y = vec2->y;
+		this->array[3].x = vec1->x;
+		this->array[3].y = vec1->y;
+		this->array[2].x = vec1->x;
+		this->array[2].y = vec1->y;
+		this->array[7].x = vec2->x;
+		this->array[7].y = vec2->y;
+		this->array[6].x = vec2->x;
+		this->array[6].y = vec2->y;
 		return;
 		}
 		
@@ -142,7 +210,7 @@ void OlegModuleA::FUN_001a2e30(uint param_1, Vector2* vec1, Vector2* vec2) {
 	return;
 }
 
-void OlegModuleA::FUN_001a2e90(Color color, ColorTransparent* color2, ColorTransparent* color3, ColorTransparent* color4) {
+void OlegModuleA::FUN_001a2e90(Color color, Vector2* v1, Vector2* v2, Vector2* v3) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleA::FUN_001a2e90(OlegModuleA *this,Color color,ColorTransparent *color2,ColorTransparent *color3,ColorTransparent *color4){
@@ -156,14 +224,14 @@ void OlegModuleA::FUN_001a2e90(Color color, ColorTransparent* color2, ColorTrans
 		c2 = color4->color;
 		this->array[1].y = color;
 		this->array[1].x = color;
-		this->array[5].x = color2->alpha;
-		this->array[5].y = (float)color2->color;
-		this->array[4].x = a2 + a1;
-		this->array[4].y = (float)c2 + (float)c1;
-		this->array[9].x = color3->alpha;
-		this->array[9].y = (float)color3->color;
-		this->array[8].x = color3->alpha;
-		this->array[8].y = (float)color3->color;
+		this->array[3].x = color2->alpha;
+		this->array[3].y = (float)color2->color;
+		this->array[2].x = a2 + a1;
+		this->array[2].y = (float)c2 + (float)c1;
+		this->array[7].x = color3->alpha;
+		this->array[7].y = (float)color3->color;
+		this->array[6].x = color3->alpha;
+		this->array[6].y = (float)color3->color;
 		return;
 		}
 		
@@ -171,21 +239,21 @@ void OlegModuleA::FUN_001a2e90(Color color, ColorTransparent* color2, ColorTrans
 	return;
 }
 
-void OlegModuleA::UnkFun(Color color1, ColorTransparent* color2, ColorTransparent* color3, ColorTransparent* color4) {
+void OlegModuleA::UnkFun(Color color, Vector2* v1, Vector2* v2, Vector2* v3) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleA::UnkFun(OlegModuleA *this,Color color1,ColorTransparent *color2,ColorTransparent *color3,ColorTransparent *color4){
 		this->array[1].y = color1;
 		color1 = (float)((uint)color1 & 0xffffff);
 		this->array[1].x = color1;
-		this->array[5].x = color2->alpha;
-		this->array[5].y = (float)color2->color;
-		this->array[4].x = color4->alpha;
-		this->array[4].y = (float)color4->color;
-		this->array[9].x = color3->alpha;
-		this->array[9].y = (float)color3->color;
-		this->array[8].x = 0.0;
-		this->array[8].y = 0.0;
+		this->array[3].x = color2->alpha;
+		this->array[3].y = (float)color2->color;
+		this->array[2].x = color4->alpha;
+		this->array[2].y = (float)color4->color;
+		this->array[7].x = color3->alpha;
+		this->array[7].y = (float)color3->color;
+		this->array[6].x = 0.0;
+		this->array[6].y = 0.0;
 		return;
 		}
 		
@@ -193,7 +261,7 @@ void OlegModuleA::UnkFun(Color color1, ColorTransparent* color2, ColorTransparen
 	return;
 }
 
-void OlegModuleA::FUN_001a40a0(uint color1, ColorTransparent* param_2, ColorTransparent* param_3, ColorTransparent* param_4) {
+void OlegModuleA::FUN_001a40a0(Color color, Vector2* v1, Vector2* v2, Vector2* v3) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleA::FUN_001a40a0(OlegModuleA *this,float color1,ColorTransparent *param_2,ColorTransparent *param_3,ColorTransparent *param_4){
@@ -215,14 +283,14 @@ void OlegModuleA::FUN_001a40a0(uint color1, ColorTransparent* param_2, ColorTran
 		CVar6 = param_4->color;
 		this->array[1].y = color1;
 		this->array[1].x = color1;
-		this->array[5].x = fVar2 - fVar8;
-		this->array[5].y = (float)CVar1 - fVar7;
-		this->array[4].x = fVar3 + (fVar2 - fVar8);
-		this->array[4].y = (float)CVar4 + ((float)CVar1 - fVar7);
-		this->array[9].x = fVar2 + fVar8;
-		this->array[9].y = (float)CVar1 + fVar7;
-		this->array[8].x = fVar5 + fVar2 + fVar8;
-		this->array[8].y = (float)CVar6 + (float)CVar1 + fVar7;
+		this->array[3].x = fVar2 - fVar8;
+		this->array[3].y = (float)CVar1 - fVar7;
+		this->array[2].x = fVar3 + (fVar2 - fVar8);
+		this->array[2].y = (float)CVar4 + ((float)CVar1 - fVar7);
+		this->array[7].x = fVar2 + fVar8;
+		this->array[7].y = (float)CVar1 + fVar7;
+		this->array[6].x = fVar5 + fVar2 + fVar8;
+		this->array[6].y = (float)CVar6 + (float)CVar1 + fVar7;
 		return;
 		}
 		
@@ -230,7 +298,7 @@ void OlegModuleA::FUN_001a40a0(uint color1, ColorTransparent* param_2, ColorTran
 	return;
 }
 
-void OlegModuleA::FUN_001a41b0(Color param_1, ColorTransparent* param_2, ColorTransparent* param_3, ColorTransparent* param_4) {
+void OlegModuleA::FUN_001a41b0(Color color, Vector2* v1, Vector2* v2, Vector2* v3) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall OlegModuleA::FUN_001a41b0(OlegModuleA *this,Color param_1,ColorTransparent *param_2,ColorTransparent *param_3,ColorTransparent *param_4){
@@ -249,95 +317,15 @@ void OlegModuleA::FUN_001a41b0(Color param_1, ColorTransparent* param_2, ColorTr
 		this->array[1].x = (float)param_3;
 		fVar4 = fVar4 * fVar5 * FLOAT_0039456c;
 		fVar5 = (float)CVar1 * fVar5;
-		this->array[5].x = fVar2 - fVar4;
-		this->array[5].y = (float)CVar3 - fVar5;
-		this->array[4].x = param_4->alpha;
-		this->array[4].y = (float)param_4->color;
-		this->array[9].x = fVar2 + fVar4;
-		this->array[9].y = (float)CVar3 + fVar5;
-		this->array[8].x = param_4->alpha;
-		this->array[8].y = (float)param_4->color;
+		this->array[3].x = fVar2 - fVar4;
+		this->array[3].y = (float)CVar3 - fVar5;
+		this->array[2].x = param_4->alpha;
+		this->array[2].y = (float)param_4->color;
+		this->array[7].x = fVar2 + fVar4;
+		this->array[7].y = (float)CVar3 + fVar5;
+		this->array[6].x = param_4->alpha;
+		this->array[6].y = (float)param_4->color;
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleA::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleA * __fastcall OlegModuleA::Construct(OlegModuleA *this){
-		float fVar1;
-		fVar1 = FLOAT_00386ab4;
-		(this->parent).field2_0x8.x = FLOAT_00386ab4;
-		(this->parent).field2_0x8.y = fVar1;
-		(this->parent).value = 0.0;
-		(this->parent).next = (OlegModuleAbstract *)0x0;
-		(this->parent).spline = (SplineA *)0x0;
-		*(undefined4 *)&(this->parent).field_0x28 = 0;
-		*(undefined *)&(this->parent).field13_0x2c = 0;
-		*(undefined *)((int)&(this->parent).field13_0x2c + 1) = 0;
-		*(undefined *)((int)&(this->parent).field13_0x2c + 2) = 0;
-		*(undefined *)((int)&(this->parent).field13_0x2c + 3) = 0x7f;
-		(this->parent).field14_0x30 = 0.0;
-		(this->parent).field15_0x34 = 0.0;
-		(this->parent).flags = 0;
-		(this->parent).startTime = 0;
-		(this->parent).fadeInLength = 0;
-		(this->parent).fadeOutLength = 0;
-		(this->parent).vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_A;
-		(this->parent).flags = 0x1800;
-		this->array[1].x = FLOAT_0049648c;
-		this->array[1].y = FLOAT_0049648c;
-		this->array[4].x = FLOAT_003a3934;
-		this->array[4].y = FLOAT_003a3938;
-		this->array[5].x = FLOAT_003a3934;
-		this->array[5].y = FLOAT_003a3938;
-		this->array[8].x = FLOAT_003a393c;
-		this->array[8].y = FLOAT_003a3940;
-		this->array[9].x = FLOAT_003a393c;
-		this->array[9].y = FLOAT_003a3940;
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleA::Construct_9(float k) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleA * __thiscall OlegModuleA::Construct(OlegModuleA *this,float k){
-		(this->parent).field2_0x8.x = k;
-		(this->parent).field2_0x8.y = FLOAT_00386ab4;
-		(this->parent).value = 0.0;
-		(this->parent).next = (OlegModuleAbstract *)0x0;
-		(this->parent).spline = (SplineA *)0x0;
-		*(undefined4 *)&(this->parent).field_0x28 = 0;
-		*(undefined *)&(this->parent).field13_0x2c = 0;
-		*(undefined *)((int)&(this->parent).field13_0x2c + 1) = 0;
-		*(undefined *)((int)&(this->parent).field13_0x2c + 2) = 0;
-		*(undefined *)((int)&(this->parent).field13_0x2c + 3) = 0x7f;
-		(this->parent).field14_0x30 = 0.0;
-		(this->parent).field15_0x34 = 0.0;
-		(this->parent).flags = 0;
-		(this->parent).startTime = 0;
-		(this->parent).fadeInLength = 0;
-		(this->parent).fadeOutLength = 0;
-		(this->parent).vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_A;
-		(this->parent).flags = 0x1c00;
-		this->array[1].x = FLOAT_0049648c;
-		this->array[1].y = FLOAT_0049648c;
-		this->array[4].x = FLOAT_003a3934;
-		this->array[4].y = FLOAT_003a3938;
-		this->array[5].x = FLOAT_003a3934;
-		this->array[5].y = FLOAT_003a3938;
-		this->array[8].x = FLOAT_003a393c;
-		this->array[8].y = FLOAT_003a3940;
-		this->array[9].x = FLOAT_003a393c;
-		this->array[9].y = FLOAT_003a3940;
-		return this;
 		}
 		
 	*/
@@ -355,11 +343,11 @@ void OlegModuleA::Interpolate1() {
 		fVar1 = FLOAT_0038639c;
 		T = (this->parent).value;
 		fVar2 = FLOAT_0038639c - T;
-		this->array[2].x = fVar2 * this->array[3].x + T * this->array[5].x;
-		this->array[2].y = this->array[3].y * fVar2 + this->array[5].y * T;
+		this->array[0].x = fVar2 * this->array[1].x + T * this->array[3].x;
+		this->array[0].y = this->array[1].y * fVar2 + this->array[3].y * T;
 		T = (this->parent).value;
-		this->array[6].x = this->array[9].x * T + this->array[7].x * (fVar1 - T);
-		this->array[6].y = this->array[7].y * (fVar1 - T) + this->array[9].y * T;
+		this->array[4].x = this->array[7].x * T + this->array[5].x * (fVar1 - T);
+		this->array[4].y = this->array[5].y * (fVar1 - T) + this->array[7].y * T;
 		return;
 		}
 		
@@ -378,11 +366,11 @@ void OlegModuleA::Interpolate2() {
 		fVar1 = FLOAT_0038639c;
 		T = (this->parent).value;
 		fVar2 = FLOAT_0038639c - T;
-		this->array[2].x = fVar2 * this->array[3].x + T * this->array[4].x;
-		this->array[2].y = this->array[3].y * fVar2 + this->array[4].y * T;
+		this->array[0].x = fVar2 * this->array[1].x + T * this->array[2].x;
+		this->array[0].y = this->array[1].y * fVar2 + this->array[2].y * T;
 		T = (this->parent).value;
-		this->array[6].x = this->array[8].x * T + this->array[7].x * (fVar1 - T);
-		this->array[6].y = this->array[7].y * (fVar1 - T) + this->array[8].y * T;
+		this->array[4].x = this->array[6].x * T + this->array[5].x * (fVar1 - T);
+		this->array[4].y = this->array[5].y * (fVar1 - T) + this->array[6].y * T;
 		return;
 		}
 		
@@ -391,128 +379,49 @@ void OlegModuleA::Interpolate2() {
 }
 
 void OlegModuleA::Shift1() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleA::Shift1(OlegModuleA *this){
-		this->array[0].x = this->array[1].x;
-		this->array[2].x = this->array[4].x;
-		this->array[2].y = this->array[4].y;
-		this->array[6].x = this->array[8].x;
-		this->array[6].y = this->array[8].y;
-		return;
-		}
-		
-	*/
-	return;
+	this->color0 = this->color1;
+	this->array[0].x = this->array[2].x;
+	this->array[0].y = this->array[2].y;
+	this->array[4].x = this->array[6].x;
+	this->array[4].y = this->array[6].y;
 }
 
 void OlegModuleA::Shift2() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleA::Shift2(OlegModuleA *this){
-		this->array[0].y = this->array[0].x;
-		this->array[3].x = this->array[2].x;
-		this->array[3].y = this->array[2].y;
-		this->array[7].x = this->array[6].x;
-		this->array[7].y = this->array[6].y;
-		return;
-		}
-		
-	*/
-	return;
+	this->color4 = this->color0;
+	this->array[1].x = this->array[0].x;
+	this->array[1].y = this->array[0].y;
+	this->array[5].x = this->array[4].x;
+	this->array[5].y = this->array[4].y;
 }
 
 void OlegModuleA::Shift3() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleA::Shift3(OlegModuleA *this){
-		this->array[0].x = this->array[1].y;
-		this->array[2].x = this->array[5].x;
-		this->array[2].y = this->array[5].y;
-		this->array[6].x = this->array[9].x;
-		this->array[6].y = this->array[9].y;
-		return;
-		}
-		
-	*/
-	return;
+	this->color0 = this->color2;
+	this->array[0].x = this->array[3].x;
+	this->array[0].y = this->array[3].y;
+	this->array[4].x = this->array[7].x;
+	this->array[4].y = this->array[7].y;
 }
 
 void OlegModuleA::Shift4() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleA::Shift4(OlegModuleA *this){
-		this->array[0].y = this->array[0].x;
-		this->array[3].x = this->array[2].x;
-		this->array[3].y = this->array[2].y;
-		this->array[7].x = this->array[6].x;
-		this->array[7].y = this->array[6].y;
-		return;
-		}
-		
-	*/
-	return;
+	this->color4 = this->color0;
+	this->array[1].x = this->array[0].x;
+	this->array[1].y = this->array[0].y;
+	this->array[5].x = this->array[4].x;
+	this->array[5].y = this->array[4].y;
 }
 
 void OlegModuleA::Shift5() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleA::Shift5(OlegModuleA *this){
-		this->array[0].x = this->array[1].x;
-		this->array[2].x = this->array[4].x;
-		this->array[2].y = this->array[4].y;
-		this->array[6].x = this->array[8].x;
-		this->array[6].y = this->array[8].y;
-		return;
-		}
-		
-	*/
-	return;
+	this->color0 = this->color1;
+	this->array[0].x = this->array[2].x;
+	this->array[0].y = this->array[2].y;
+	this->array[4].x = this->array[6].x;
+	this->array[4].y = this->array[6].y;
 }
 
 void OlegModuleA::Shift6() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleA::Shift6(OlegModuleA *this){
-		this->array[0].x = this->array[1].y;
-		this->array[2].x = this->array[5].x;
-		this->array[2].y = this->array[5].y;
-		this->array[6].x = this->array[9].x;
-		this->array[6].y = this->array[9].y;
-		return;
-		}
-		
-	*/
-	return;
+	this->color0 = this->color2;
+	this->array[0].x = this->array[3].x;
+	this->array[0].y = this->array[3].y;
+	this->array[4].x = this->array[7].x;
+	this->array[4].y = this->array[7].y;
 }
-
-void OlegModuleA::Dispose(byte flag) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleA * __thiscall OlegModuleA::Dispose(OlegModuleA *this,byte flag){
-		(this->parent).vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		if ((flag & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleA::Dispose_19(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleA * __thiscall OlegModuleA::Dispose(OlegModuleA *this,byte param_1){
-		(this->parent).vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-

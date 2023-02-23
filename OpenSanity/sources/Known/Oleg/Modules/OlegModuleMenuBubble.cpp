@@ -2,6 +2,28 @@
 
 #include "headers/Known/Oleg/UIElement/UIElementSimpleShapeA.h"
 #include "headers/Known/Graphics/Shader/TwinsanityMaterialShader.h"
+
+OlegModuleMenuBubble::OlegModuleMenuBubble(float x, uint arrayLength, byte param_3, byte index1, int index2) : OlegModuleA(x)
+{
+	this->index2 = index2;
+	this->cnt = arrayLength;
+	this->field_0x89 = param_3;
+	this->index1 = index1;
+	this->imageArray = new UIElementSimpleShapeA*[arrayLength];
+	for (int i = 0; i < arrayLength; ++i) {
+		this->imageArray[i] = null;
+	}
+}
+
+OlegModuleMenuBubble::~OlegModuleMenuBubble()
+{
+	for (int i = 0; i < this->cnt; ++i) {
+		delete imageArray[i];
+	}
+
+	delete imageArray;
+}
+
 UIElementSimpleShapeA* OlegModuleMenuBubble::FUN_001a0fd0(int i, TwinsanityMaterialShader* param_2) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -24,65 +46,6 @@ UIElementSimpleShapeA* OlegModuleMenuBubble::FUN_001a0fd0(int i, TwinsanityMater
 		
 	*/
 	return null;
-}
-
-void OlegModuleMenuBubble::Dispose(OlegModuleMenuBubble* param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall OlegModuleMenuBubble::Dispose(OlegModuleMenuBubble *param_1){
-		uint uVar1;
-		UIElementSimpleShapeA *this;
-		uint uVar2;
-		uVar1 = *(uint *)&param_1->cnt;
-		uVar2 = 0;
-		(param_1->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_MenuBubble;
-		if ((uVar1 & 0xff) != 0) {
-		do {
-		this = param_1->imageArray[uVar2];
-		if (this != (UIElementSimpleShapeA *)0x0) {
-		(*((this->parent).parent.vtable)->Dispose)((UIElementAbstract *)this,1);
-		}
-		uVar2 = uVar2 + 1;
-		}
-		 while (uVar2 < (*(uint *)&param_1->cnt & 0xff));
-		}
-		VirtualPool::FreeMemory(param_1->imageArray);
-		(param_1->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void OlegModuleMenuBubble::Construct(float k, uint arrayLength, byte param_3, byte index1, int index2) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleMenuBubble * __thiscall OlegModuleMenuBubble::Construct(OlegModuleMenuBubble *this,float k,uint arrayLength,undefined param_3,byte index1,int index2){
-		UIElementSimpleShapeA **ppUVar1;
-		uint i;
-		OlegModuleA::Construct(&this->parent,k);
-		this->index2 = index2;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_MenuBubble;
-		*(undefined4 *)&this->cnt = 0;
-		this->cnt = (char)arrayLength;
-		this->field_0x89 = param_3;
-		this->index1 = index1;
-		ppUVar1 = (UIElementSimpleShapeA **)VirtualPool::AllocateMemory(arrayLength * 4);
-		this->imageArray = ppUVar1;
-		i = 0;
-		if (arrayLength != 0) {
-		do {
-		this->imageArray[i] = (UIElementSimpleShapeA *)0x0;
-		i = i + 1;
-		}
-		 while (i < arrayLength);
-		}
-		return this;
-		}
-		
-	*/
-	return;
 }
 
 void OlegModuleMenuBubble::Render(FontRenderer* renderer) {

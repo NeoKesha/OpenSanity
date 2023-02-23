@@ -12,9 +12,14 @@ class AutoClass11 {
 		Color color;
 		Vector4 vec;
 		OlegModuleLabelGeneric * module;
+		int field1_0x4;
+		int field6_0x2c;
+		int field5_0x28;
+
+		AutoClass11();
+		AutoClass11(Font* font);
 
 		void DrawOnScreenText(SomeState* param_1);
-		void Construct(Font* font);
 		void DrawMessage(FontRenderer* fontRenderer);
 
 };

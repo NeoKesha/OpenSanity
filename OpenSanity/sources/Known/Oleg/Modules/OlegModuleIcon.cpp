@@ -2,59 +2,39 @@
 
 #include "headers/Known/Math/Vector2.h"
 #include "headers/Known/Oleg/UIElement/UIElementImage.h"
-void OlegModuleIcon::Construct(UIElementImage* param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleIcon * __thiscall OlegModuleIcon::Construct(OlegModuleIcon *this,UIElementImage *param_1){
-		float fVar1;
-		OlegModuleB::Construct(&this->parent);
-		fVar1 = FLOAT_003869d8;
-		this->field1_0x88 = param_1;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Icon;
-		this->field2_0x8c = (UnkFamily20Base *)0x0;
-		*(undefined4 *)&this->field_0x90 = 0;
-		this->field7_0x94 = fVar1;
-		this->field8_0x98 = 0;
-		this->field9_0x9c = 0;
-		this->field10_0xa0 = fVar1;
-		this->field11_0xa4 = 0;
-		this->field12_0xa8 = 0;
-		this->field13_0xac = 0;
-		this->field14_0xb0 = fVar1;
-		this->field15_0xb4 = 0;
-		this->field16_0xb8 = 0;
-		return this;
-		}
-		
-	*/
-	return;
+
+OlegModuleIcon::OlegModuleIcon(UIElementImage* icons) : OlegModuleA()
+{
+	this->icons = icons;
+	this->field2_0x8c = null;
+	this->field3_0x90 = 0.0;
+	this->field4_0x94 = -1.0;
+	this->field5_0x98 = 0.0;
+	this->field6_0x9c = 0.0;
+	this->field7_0xa0 = -1.0;
+	this->field8_0xa4 = 0.0;
+	this->field9_0xa8 = 0.0;
+	this->field10_0xac = 0.0;
+	this->field11_0xb0 = -1.0;
+	this->field12_0xb4 = 0.0;
+	this->field13_0xb8 = 0.0;
 }
 
-void OlegModuleIcon::Construct_1(float param_1, UIElementImage* icons) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleIcon * __thiscall OlegModuleIcon::Construct(OlegModuleIcon *this,float param_1,UIElementImage *icons){
-		float fVar1;
-		OlegModuleB::Construct(&this->parent,param_1);
-		fVar1 = FLOAT_003869d8;
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Icon;
-		this->field1_0x88 = icons;
-		this->field2_0x8c = (UnkFamily20Base *)0x0;
-		*(undefined4 *)&this->field_0x90 = 0;
-		this->field7_0x94 = fVar1;
-		this->field8_0x98 = 0;
-		this->field9_0x9c = 0;
-		this->field10_0xa0 = fVar1;
-		this->field11_0xa4 = 0;
-		this->field12_0xa8 = 0;
-		this->field13_0xac = 0;
-		this->field14_0xb0 = fVar1;
-		this->field16_0xb8 = 0;
-		return this;
-		}
-		
-	*/
-	return;
+OlegModuleIcon::OlegModuleIcon(float x, UIElementImage* icons) : OlegModuleA(x)
+{
+	this->icons = icons;
+	this->field2_0x8c = null;
+	this->field3_0x90 = 0.0;
+	this->field4_0x94 = -1.0;
+	this->field5_0x98 = 0.0;
+	this->field6_0x9c = 0.0;
+	this->field7_0xa0 = -1.0;
+	this->field8_0xa4 = 0.0;
+	this->field9_0xa8 = 0.0;
+	this->field10_0xac = 0.0;
+	this->field11_0xb0 = -1.0;
+	this->field12_0xb4 = 0.0;
+	this->field13_0xb8 = 0.0;
 }
 
 void OlegModuleIcon::Render(FontRenderer* renderer) {
@@ -243,19 +223,3 @@ void OlegModuleIcon::FUN_001a3ad0(Vector2* param_1) {
 	*/
 	return;
 }
-
-void OlegModuleIcon::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleIcon * __thiscall OlegModuleIcon::Dispose(OlegModuleIcon *this,byte param_1){
-		(this->parent).parent.vtable = (OlegModuleAbstract_VTable *)&OlegModule_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
