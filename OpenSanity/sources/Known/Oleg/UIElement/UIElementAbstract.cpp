@@ -1,8 +1,50 @@
 #include "headers/Known/Oleg/UIElement/UIElementAbstract.h"
 
+#include "headers/Global.h"
 #include "headers/Known/Memory/Streams/MemoryStream/MemoryStream.h"
 #include "headers/Known/LevelStructure/Data/GraphicsSectionData/Material/TwinsanityMaterial.h"
 #include "headers/Known/Graphics/Shader/TwinsanityMaterialShader.h"
+
+UIElementAbstract::UIElementAbstract()
+{
+	this->shader = null;
+	this->material = null;
+	this->field3_0xc = 0;
+}
+
+UIElementAbstract::UIElementAbstract(TwinsanityMaterialShader* shader)
+{
+	this->material = null;
+	this->field3_0xc = 0;
+	FreeMaterial();
+	this->shader = shader;
+}
+
+UIElementAbstract::UIElementAbstract(uint param_2, uint param_3)
+{
+	Logging::LogUnimplemented(__FUNCSIG__);
+
+	this->material = (TwinsanityMaterial*)0x0;
+	this->field3_0xc = 0;
+	//ReplaceMaterial(param_2, param_3);
+}
+
+UIElementAbstract::~UIElementAbstract()
+{
+	Global* GLOBAL = Global::Get();
+	if (this->material != null) {
+		if (this->material->id == 0xffffffff) {
+			this->material->FreeMaterial();
+			delete this->material;
+		}
+		else {
+			//TODO: Resolve conflict - this->material is not TwinsanityMaterial but SectionMaterial?
+			//GLOBAL->ENV_CLASS_187_SECTION_MATERIALS.Method4(this->material);
+		}
+		this->material = (TwinsanityMaterial*)0x0;
+	}
+}
+
 void UIElementAbstract::FUN_00102210(int cnt) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -65,22 +107,6 @@ void UIElementAbstract::CleanUp() {
 	return;
 }
 
-void UIElementAbstract::Construct(int cnt) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementAbstract * __thiscall UIElementAbstract::Construct(UIElementAbstract *this,int cnt){
-		this->vtable = (UIElementAbstract_VTable *)&UIElement_VT_Abstract;
-		this->material = (TwinsanityMaterial *)0x0;
-		this->field3_0xc = 0;
-		(*(code *)PTR_FreeMaterial_00390624)();
-		this->shader = (TwinsanityMaterialShader *)cnt;
-		return this;
-		}
-		
-	*/
-	return;
-}
-
 void UIElementAbstract::FreeMaterial() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -98,22 +124,6 @@ void UIElementAbstract::FreeMaterial() {
 		this->material = (TwinsanityMaterial *)0x0;
 		}
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void UIElementAbstract::Construct_5(byte param_2, byte param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementAbstract * __fastcall UIElementAbstract::Construct(UIElementAbstract *this,undefined param_2,undefined1 param_3){
-		undefined3 in_register_00000009;
-		this->material = (TwinsanityMaterial *)0x0;
-		this->field3_0xc = 0;
-		this->vtable = (UIElementAbstract_VTable *)&UIElement_VT_Abstract;
-		ReplaceMaterial(this,CONCAT31(in_register_00000009,param_2));
-		return this;
 		}
 		
 	*/
@@ -153,33 +163,6 @@ void UIElementAbstract::Read(MemoryStream* stream) {
 	return;
 }
 
-void UIElementAbstract::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementAbstract * __thiscall UIElementAbstract::Dispose(UIElementAbstract *this,byte param_1){
-		TwinsanityMaterial *this_00;
-		this_00 = this->material;
-		this->vtable = (UIElementAbstract_VTable *)&UIElement_VT_Abstract;
-		if (this_00 != (TwinsanityMaterial *)0x0) {
-		if (this_00->id == 0xffffffff) {
-		TwinsanityMaterial::FreeMaterial(this_00);
-		VirtualPool::FreeMemory(this_00);
-		}
-		else {
-		(*(ENV_CLASS_187_SECTION_MATERIALS.parent)->Method4)(&ENV_CLASS_187_SECTION_MATERIALS.parent,(undefined *)this_00);
-		}
-		this->material = (TwinsanityMaterial *)0x0;
-		}
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
 void UIElementAbstract::EmptyFunction() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -190,19 +173,3 @@ void UIElementAbstract::EmptyFunction() {
 	*/
 	return;
 }
-
-void UIElementAbstract::Construct_9() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall UIElementAbstract::Construct(UIElementAbstract *this){
-		this->vtable = (UIElementAbstract_VTable *)&UIElement_VT_Abstract;
-		this->shader = (TwinsanityMaterialShader *)0x0;
-		this->material = (TwinsanityMaterial *)0x0;
-		this->field3_0xc = 0;
-		return;
-		}
-		
-	*/
-	return;
-}
-

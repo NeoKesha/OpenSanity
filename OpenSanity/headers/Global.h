@@ -203,7 +203,7 @@ public:
 	GameResourceManager* RESOURCE_MANAGER;
 
 	//RESOURCES
-	SectionDataMaterialXbox ENV_CLASS_187_SECTION_MATERIALS;
+	SectionDataMaterialXbox ENV_CLASS_187_SECTION_MATERIALS; //TODO: Init materials
 	
 private:
 	Global();

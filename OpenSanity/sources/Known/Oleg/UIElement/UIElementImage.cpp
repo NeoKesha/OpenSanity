@@ -2,19 +2,48 @@
 
 #include "headers/Known/Math/Matrix4.h"
 #include "headers/Known/Graphics/Shader/TwinsanityMaterialShader.h"
-void UIElementImage::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementImage * __fastcall UIElementImage::Construct(UIElementImage *this){
-		(this->parent).shader = (TwinsanityMaterialShader *)0x0;
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		(this->parent).field3_0xc = 0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_Image;
-		return this;
-		}
-		
-	*/
-	return;
+
+
+UIElementImage::UIElementImage() : UIElementAbstract()
+{
+
+}
+
+UIElementImage::UIElementImage(TwinsanityMaterialShader* shader) : UIElementAbstract(shader)
+{
+	this->pos.x = 0.0f;
+	this->pos.y = 0.0f;
+	this->size.x = 1.0f;
+	this->size.y = 1.0f;
+}
+
+UIElementImage::UIElementImage(TwinsanityMaterialShader* shader, Vector2* pos, Vector2* size) : UIElementAbstract(shader)
+{
+	this->pos.x = pos->x;
+	this->pos.y = pos->y;
+	this->size.x = size->x - pos->x;
+	this->size.y = size->y - pos->y;
+}
+
+UIElementImage::UIElementImage(uint param_2, uint param_3) : UIElementAbstract(param_2, param_3)
+{
+	this->pos.x = 0.0f;
+	this->pos.y = 0.0f;
+	this->size.x = 1.0f;
+	this->size.y = 1.0f;
+}
+
+UIElementImage::UIElementImage(uint param_2, uint param_3, Vector2* pos, Vector2* size) : UIElementAbstract(param_2, param_3)
+{
+	this->pos.x = pos->x;
+	this->pos.y = pos->y;
+	this->size.x = size->x - pos->x;
+	this->size.y = size->y - pos->y;
+}
+
+UIElementImage::~UIElementImage()
+{
+	CleanUp();
 }
 
 void UIElementImage::RenderColorTransfomed(Matrix4* transform, Color color) {
@@ -84,21 +113,6 @@ void UIElementImage::RenderColorTransfomed(Matrix4* transform, Color color) {
 		local_14 = local_40.y;
 		FUN_0010c810((int)&local_30,(int)&local_90,(undefined *)&local_a0,4,(int *)(this->parent).shader);
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void UIElementImage::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementImage * __thiscall UIElementImage::Dispose(UIElementImage *this,byte param_1){
-		UIElementAbstract::CleanUp(&this->parent);
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
 		}
 		
 	*/
@@ -177,108 +191,3 @@ void UIElementImage::Render() {
 	*/
 	return;
 }
-
-void UIElementImage::Construct_8(TwinsanityMaterialShader* param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementImage * __thiscall UIElementImage::Construct(UIElementImage *this,TwinsanityMaterialShader *param_1){
-		float fVar1;
-		(this->parent).shader = (TwinsanityMaterialShader *)0x0;
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		(this->parent).field3_0xc = 0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_Image;
-		(this->pos).x = 0.0;
-		(this->pos).y = 0.0;
-		fVar1 = FLOAT_0038639c;
-		(this->size).x = FLOAT_0038639c;
-		(this->size).y = fVar1;
-		(*((this->parent).vtable)->FreeMaterial)(&this->parent);
-		(this->parent).shader = param_1;
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void UIElementImage::Construct_9(int param_1, float* param_2, float* param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementImage * __thiscall UIElementImage::Construct(UIElementImage *this,int param_1,float *param_2,float *param_3){
-		float fVar1;
-		float fVar2;
-		float fVar3;
-		float fVar4;
-		(this->parent).shader = (TwinsanityMaterialShader *)0x0;
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		(this->parent).field3_0xc = 0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_Image;
-		fVar1 = *param_2;
-		fVar2 = param_2[1];
-		fVar3 = *param_3;
-		fVar4 = param_3[1];
-		(this->pos).x = fVar1;
-		(this->pos).y = fVar2;
-		(this->size).x = fVar3 - fVar1;
-		(this->size).y = fVar4 - fVar2;
-		(*((this->parent).vtable)->FreeMaterial)(&this->parent);
-		(this->parent).shader = (TwinsanityMaterialShader *)param_1;
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void UIElementImage::Construct_10(byte param_2, uint param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementImage * __fastcall UIElementImage::Construct(UIElementImage *this,undefined param_2,undefined4 param_3){
-		float fVar1;
-		undefined3 in_register_00000009;
-		(this->parent).shader = (TwinsanityMaterialShader *)0x0;
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		(this->parent).field3_0xc = 0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_Image;
-		(this->pos).x = 0.0;
-		(this->pos).y = 0.0;
-		fVar1 = FLOAT_0038639c;
-		(this->size).x = FLOAT_0038639c;
-		(this->size).y = fVar1;
-		UIElementAbstract::ReplaceMaterial(&this->parent,CONCAT31(in_register_00000009,param_2));
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void UIElementImage::Construct_11(byte param_2, byte param_3, float* param_4, float* param_5) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementImage * __fastcall UIElementImage::Construct(UIElementImage *this,undefined param_2,undefined1 param_3,float *param_4,float *param_5){
-		float fVar1;
-		float fVar2;
-		float fVar3;
-		float fVar4;
-		undefined3 in_register_00000009;
-		(this->parent).shader = (TwinsanityMaterialShader *)0x0;
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		(this->parent).field3_0xc = 0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_Image;
-		fVar1 = *param_4;
-		fVar2 = param_4[1];
-		fVar3 = *param_5;
-		fVar4 = param_5[1];
-		(this->pos).x = fVar1;
-		(this->pos).y = fVar2;
-		(this->size).x = fVar3 - fVar1;
-		(this->size).y = fVar4 - fVar2;
-		UIElementAbstract::ReplaceMaterial(&this->parent,CONCAT31(in_register_00000009,param_2));
-		return this;
-		}
-		
-	*/
-	return;
-}
-
