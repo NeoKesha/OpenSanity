@@ -9,6 +9,10 @@ class UnkFamily20BaseSub {
 		short lastIndex;
 		short * indexes;
 		struct1 * unkArray;
+		int field2_0x6;
+
+		UnkFamily20BaseSub();
+		~UnkFamily20BaseSub();
 
 		void FUN_000c3ac0();
 

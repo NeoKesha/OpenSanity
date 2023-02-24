@@ -6,7 +6,10 @@
 
 UIElementImage::UIElementImage() : UIElementAbstract()
 {
-
+	this->pos.x = 0.0f;
+	this->pos.y = 0.0f;
+	this->size.x = 1.0f;
+	this->size.y = 1.0f;
 }
 
 UIElementImage::UIElementImage(TwinsanityMaterialShader* shader) : UIElementAbstract(shader)

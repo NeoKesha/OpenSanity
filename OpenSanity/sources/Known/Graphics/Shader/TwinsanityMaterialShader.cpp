@@ -1,17 +1,11 @@
 #include "headers/Known/Graphics/Shader/TwinsanityMaterialShader.h"
 
 #include "headers/Known/Memory/Streams/MemoryStream/MemoryStream.h"
-void TwinsanityMaterialShader::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	TwinsanityMaterialShader * __fastcall TwinsanityMaterialShader::Construct(TwinsanityMaterialShader *this){
-		this->shaderProgramCnt = 0;
-		this->field9_0x24 = 0;
-		return this;
-		}
-		
-	*/
-	return;
+
+TwinsanityMaterialShader::TwinsanityMaterialShader()
+{
+	this->shaderProgramCnt = 0;
+	this->field9_0x24 = 0;
 }
 
 void TwinsanityMaterialShader::DisposeShaderPrograms() {

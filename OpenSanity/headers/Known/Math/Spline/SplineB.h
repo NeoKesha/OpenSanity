@@ -8,10 +8,10 @@ class SplineB : public SplineAbstract {
 	public:
 		UnkFamily20Base unkStruct;
 
+		SplineB();
+		~SplineB();
+
 		virtual SplineB* Step(float step, uint param_2);
 		virtual void Reset();
-		void Dispose(byte param_1);
 		virtual void Method3();
-		void Construct();
-
 };

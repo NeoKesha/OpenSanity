@@ -2,46 +2,22 @@
 
 #include "headers/Known/Math/Matrix4.h"
 #include "headers/Known/Math/Vector2.h"
-void UnkFamily20Base::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall UnkFamily20Base::Construct(UnkFamily20Base *this){
-		this->vtable = (UnkFamily20Base_VTable *)&UnkFamily20_VT_Base;
-		(this->subStruct).vtable = &AutoClass_VT_ID_51_Sub;
-		(this->subStruct).totalSpace = 0;
-		(this->subStruct).field2_0x6 = 10;
-		(this->subStruct).occupiedElements = 0;
-		(this->subStruct).lastIndex = -1;
-		(this->subStruct).indexes = (short *)0x0;
-		(this->subStruct).unkArray = (struct1 *)0x0;
-		this->field5_0x30 = 0;
-		this->field6_0x34 = 0.0;
-		this->field7_0x38 = 0.0;
-		this->field8_0x3c = 1;
-		this->field9_0x40 = 0;
-		this->field10_0x44 = 0;
-		this->field3_0x28 = 0.0;
-		this->field4_0x2c = 0.0;
-		return;
-		}
-		
-	*/
-	return;
+
+UnkFamily20Base::UnkFamily20Base()
+{
+	this->field5_0x30 = 0;
+	this->field6_0x34 = 0.0;
+	this->field7_0x38 = 0.0;
+	this->field8_0x3c = 1;
+	this->field9_0x40 = 0;
+	this->field10_0x44 = 0;
+	this->field3_0x28 = 0.0;
+	this->field4_0x2c = 0.0;
 }
 
-void UnkFamily20Base::Dispose() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall UnkFamily20Base::Dispose(UnkFamily20Base *this){
-		this->vtable = (UnkFamily20Base_VTable *)&UnkFamily20_VT_Base;
-		(this->subStruct).vtable = &AutoClass_VT_ID_51_Sub;
-		VirtualPool::FreeMemory((this->subStruct).indexes);
-		VirtualPool::FreeMemory((this->subStruct).unkArray);
-		return;
-		}
-		
-	*/
-	return;
+UnkFamily20Base::~UnkFamily20Base()
+{
+
 }
 
 int UnkFamily20Base::FUN_00109e40(float step, uint param_2) {
@@ -276,24 +252,6 @@ void UnkFamily20Base::FUN_00113c30(float* param_1, float* param_2) {
 		(this->subStruct).unkArray[index].b = (short)(int)local_4;
 		}
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void UnkFamily20Base::Dispose_7(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	undefined4 * __thiscall UnkFamily20Base::Dispose(UnkFamily20Base *this,byte param_1){
-		this->vtable = (UnkFamily20Base_VTable *)&UnkFamily20_VT_Base;
-		(this->subStruct).vtable = &AutoClass_VT_ID_51_Sub;
-		VirtualPool::FreeMemory((this->subStruct).indexes);
-		VirtualPool::FreeMemory((this->subStruct).unkArray);
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return &this->vtable;
 		}
 		
 	*/

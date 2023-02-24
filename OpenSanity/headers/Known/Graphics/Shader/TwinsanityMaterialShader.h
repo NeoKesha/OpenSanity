@@ -7,8 +7,10 @@ class TwinsanityMaterialShader {
 		ShaderProgramAbstract * shaderPrograms[4];
 		uint shaderProgramCnt;
 		uint shaderType;
+		int field9_0x24;
 
-		void Construct();
+		TwinsanityMaterialShader();
+
 		virtual void DisposeShaderPrograms();
 		virtual void Write(MemoryStream* stream);
 		virtual void FUN_00105840();

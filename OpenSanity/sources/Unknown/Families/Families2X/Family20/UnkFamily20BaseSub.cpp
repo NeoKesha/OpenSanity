@@ -1,6 +1,23 @@
 #include "headers/Unknown/Families/Families2X/Family20/UnkFamily20BaseSub.h"
 
 #include "headers/Unknown/struct1.h"
+
+UnkFamily20BaseSub::UnkFamily20BaseSub()
+{
+	this->totalSpace = 0;
+	this->field2_0x6 = 10;
+	this->occupiedElements = 0;
+	this->lastIndex = -1;
+	this->indexes = null;
+	this->unkArray = null;
+}
+
+UnkFamily20BaseSub::~UnkFamily20BaseSub()
+{
+	delete this->indexes;
+	delete this->unkArray;
+}
+
 void UnkFamily20BaseSub::FUN_000c3ac0() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*

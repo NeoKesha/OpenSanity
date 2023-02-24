@@ -178,7 +178,6 @@ class Oleg : public OlegBase {
 		int field67_0xb04;
 		int field68_0xb08;
 
-		Oleg();
 		Oleg(Font* font, ChunkDesc* chunkDesc);
 		~Oleg();
 

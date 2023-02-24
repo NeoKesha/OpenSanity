@@ -172,23 +172,6 @@ caption21(0.5f, font, 0x5c, 0x22)
 	this->arr4length = 2;
 	this->arr4 = new float[this->arr4length];
 
-	//TODO: Stress test initialization and make sure everything is right and no reference is lost
-	//Should be initialized by default
-	//for (int i = 0; i < 8; ++i) {
-	//	this->unkStruct12array[8] = UnkFamily20Base();
-	//}
-	//this->someIcon1 = UIElementImage();
-	//this->crashTwinsanityLogo = UIElementImage();
-	//this->someIcon2 = UIElementImage();
-	//this->someIcon3 = UIElementImage();
-	//this->someIcon4 = UIElementImage();
-	//this->someIcon5 = UIElementImage();
-	//for (int i = 0; i < 40; ++i) {
-	//	this->iconsPsm2[i] = UIElementImage();
-	//}
-	//for (int i = 0; i < 8; ++i) {
-	//	this->iconsPsm3[i] = UIElementImage();
-	//}
 	for (int i = 0; i < 6; ++i) {
 		this->iconsPsm2[i].field3_0xc = 1;
 	}

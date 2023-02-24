@@ -1,5 +1,15 @@
 #include "headers/Known/Math/Spline/SplineB.h"
 
+SplineB::SplineB() : SplineAbstract(), unkStruct()
+{
+
+}
+
+SplineB::~SplineB()
+{
+
+}
+
 SplineB* SplineB::Step(float step, uint param_2) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -46,21 +56,6 @@ void SplineB::Reset() {
 	return;
 }
 
-void SplineB::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	SplineB * __thiscall SplineB::Dispose(SplineB *this,byte param_1){
-		UnkFamily20Base::Dispose(&this->unkStruct);
-		(this->parent).vtable = (SplineAbstract_VTable *)&Spline_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
 
 void SplineB::Method3() {
 	Logging::LogUnimplemented(__FUNCSIG__);
@@ -73,22 +68,3 @@ void SplineB::Method3() {
 	*/
 	return;
 }
-
-void SplineB::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	SplineB * __fastcall SplineB::Construct(SplineB *this){
-		(this->parent).next = (SplineAbstract *)0x0;
-		(this->parent).position = 0.0;
-		(this->parent).startupLevel = 0.0;
-		(this->parent).repeats = 0;
-		(this->parent).vtable = (SplineAbstract_VTable *)&Spline_VT_B;
-		UnkFamily20Base::Construct(&this->unkStruct);
-		(this->unkStruct).vtable = (UnkFamily20Base_VTable *)&UnkFamily20_VT_A;
-		return this;
-		}
-		
-	*/
-	return;
-}
-
