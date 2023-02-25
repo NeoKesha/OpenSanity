@@ -32,7 +32,7 @@
 #include "headers/Known/ColorTransparent.h"
 
 
-//TODO: Remove all default constructions from constructor and initialized to avoid double work
+//TODO: Remove all default consfxRelatedions from consfxRelatedor and initialized to avoid double work
 Oleg::Oleg(Font* font, ChunkDesc* chunkDesc) : OlegBase(),
 spline0(), spline1(), spline2(), spline3(),
 inputWrapper(0, 7), inputObserver(&inputWrapper),
@@ -116,34 +116,10 @@ caption21(0.5f, font, 0x5c, 0x22)
 {
 	Global* GLOBAL = Global::Get();
 
-	uint* puVar2;
-	float fVar3;
-	Vector4* pVVar4;
-	Vector2* pVVar5;
-	float* pfVar6;
-	byte* pbVar7;
-	OlegModuleIcon* moduleElement;
-	int i;
-	int extraout_ECX;
-	OlegModuleIcon** moduleArray;
-	float fStack24;
-	float local_14;
-	float fStack16;
-	float local_c;
-	float fStack8;
-	float local_4;
-	ChunkDesc* puVar4;
-	InputObserver* inputObserver;
-	OlegModuleLabelPulsating* puVar1;
-	Font* _font;
-	OlegModuleAH* member38;
-	UnkSfxCollection* sfxArr;
-	_font = font;
 	this->field5_0x320 = 0;
 	this->chunkDesc = chunkDesc;
 	this->font = font;
-	sfxArr = &this->sfxRelated;
-	FUN_001a1be0(sfxArr);
+	FUN_001a1be0(&this->sfxRelated);
 	this->page1 = null;
 	this->page2 = null;
 	this->page3 = null;
@@ -178,7 +154,6 @@ caption21(0.5f, font, 0x5c, 0x22)
 	for (int i = 0x18; i < 0x28; ++i) {
 		this->iconsPsm2[i].field3_0xc = 1;
 	}
-	fVar3 = GLOBAL->ENV_FLOAT_92_0_15;
 	(this->crashTwinsanityLogo).field3_0xc = 1;
 	(this->someIcon2).field3_0xc = 1;
 	this->iconsPsm2[0xd].field3_0xc = 1;
@@ -195,8 +170,8 @@ caption21(0.5f, font, 0x5c, 0x22)
 	this->screenFlags = this->screenFlags & 0xfffe0203 | 0x202;
 	this->field3_0x318 = this->field3_0x318 & 0xfffe3233 | 0x3232;
 	this->field4_0x31c = this->field4_0x31c & 0xfffe1819 | 0x1818;
-	this->deltaTime = (int)(GLOBAL->TICKS_PER_TIME * fVar3);
-	(this->spline0).length = fVar3;
+	this->deltaTime = (int)(GLOBAL->TICKS_PER_TIME * GLOBAL->ENV_FLOAT_92_0_15);
+	(this->spline0).length = GLOBAL->ENV_FLOAT_92_0_15;
 	
 	this->field66_0xb00 = 0;
 	this->field67_0xb04 = 0;
@@ -348,222 +323,15 @@ caption21(0.5f, font, 0x5c, 0x22)
 }
 Oleg::~Oleg()
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::Dispose(Oleg *param_1){
-		UnkFamily10B *pUVar1;
-		OlegModuleIcon *this;
-		int iVar2;
-		uint uVar3;
-		OlegModuleIcon **ppOVar4;
-		UIElementAbstract *pUVar5;
-		UnkFamily20Base *this_00;
-		pUVar1 = param_1->page2;
-		(param_1->parent).vtable = (OlegBase_VTable *)&Oleg_VT;
-		if (pUVar1 != (UnkFamily10B *)0x0) {
-		(*(code *)((pUVar1->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page3 != (UnkFamily10I *)0x0) {
-		(*(code *)((param_1->page3->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page5 != (UnkFamily10M *)0x0) {
-		(*(code *)((param_1->page5->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page6 != (UnkFamily10N *)0x0) {
-		(*(code *)((param_1->page6->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page7 != (UnkFamily10VA *)0x0) {
-		(*(code *)((param_1->page7->parent).parent.vtable)->field3_0xc)(1);
-		}
-		if (param_1->page18 != (UnkFamily10VL *)0x0) {
-		(*(code *)((param_1->page18->parent).parent.vtable)->field3_0xc)(1);
-		}
-		if (param_1->page4 != (UnkFamily10L *)0x0) {
-		(*(code *)((param_1->page4->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page11 != (UnkFamily10Q *)0x0) {
-		(*(code *)((param_1->page11->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page12 != (UnkFamily10Q *)0x0) {
-		(*(code *)((param_1->page12->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page13 != (UnkFamily10Q *)0x0) {
-		(*(code *)((param_1->page13->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page14 != (UnkFamily10Q *)0x0) {
-		(*(code *)((param_1->page14->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page15 != (UnkFamily10R *)0x0) {
-		(*(code *)((param_1->page15->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page16 != (UnkFamily10S *)0x0) {
-		(*(code *)((param_1->page16->parent).vtable)->field3_0xc)(1);
-		}
-		if (param_1->page17 != (UnkFamily10ZA *)0x0) {
-		(*(code *)((param_1->page17->parent).parent.vtable)->field3_0xc)(1);
-		}
-		uVar3 = 0;
-		do {
-		thunk_FUN_000adb30((int)param_1,uVar3);
-		uVar3 = uVar3 + 1;
-		}
-		 while (uVar3 < 3);
-		ppOVar4 = param_1->iconArray;
-		iVar2 = 6;
-		do {
-		this = *ppOVar4;
-		if (this != (OlegModuleIcon *)0x0) {
-		(*((this->parent).parent.vtable)->Dispose)((OlegModuleAbstract *)this,1);
-		}
-		ppOVar4 = ppOVar4 + 1;
-		iVar2 = iVar2 + -1;
-		}
-		 while (iVar2 != 0);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption21);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon23);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->module86);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon22);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon21);
-		TwinString::Dispose(&(param_1->label14).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label14);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon20);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->lifeIcon);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon18);
-		TwinString::Dispose(&(param_1->label13).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label13);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon17);
-		TwinString::Dispose(&(param_1->wumpaCount).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->wumpaCount);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->module76);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->module75);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon16);
-		TwinString::Dispose(&(param_1->label11).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label11);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon15);
-		TwinString::Dispose(&(param_1->label10).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label10);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon14);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption20);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option18);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble11);
-		TwinString::Dispose(&(param_1->label09).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label09);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option17);
-		TwinString::Dispose(&(param_1->label08).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label08);
-		TwinString::Dispose(&(param_1->label07).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label07);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option16);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption19);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon13);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble10);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option15);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble09);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption18);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option14);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option13);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option12);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option11);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon12);
-		TwinString::Dispose(&(param_1->label05).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label05);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon11);
-		TwinString::Dispose(&(param_1->label04).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label04);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon10);
-		TwinString::Dispose(&(param_1->label03).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label03);
-		TwinString::Dispose(&(param_1->progressPercent).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->progressPercent);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon09);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble08);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble07);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble06);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble05);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble04);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option10);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption17);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option09);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon08);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption16);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption15);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option08);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption14);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption13);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption12);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption11);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption10);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption09);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option07);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption08);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option06);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption07);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option05);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option04);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon07);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option03);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption06);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option02);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble03);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->option01);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption05);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption04);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption03);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption02);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->caption01);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble02);
-		OlegModuleMenuBubble::Dispose(&param_1->bubble01);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon06);
-		TwinString::Dispose(&(param_1->label01).str);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->label01);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon05);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon04);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon03);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon02);
-		OlegModuleAbstract::Unroll((OlegModuleAbstract *)&param_1->uiIcon01);
-		TwinString::Dispose(&(param_1->screenMessage).message);
-		pUVar5 = (UIElementAbstract *)&param_1->screenMessage;
-		iVar2 = 8;
-		do {
-		pUVar5 = pUVar5 + -2;
-		UIElementAbstract::CleanUp(pUVar5);
-		iVar2 = iVar2 + -1;
-		}
-		 while (iVar2 != 0);
-		pUVar5 = (UIElementAbstract *)param_1->iconsPsm3;
-		iVar2 = 0x2e;
-		do {
-		pUVar5 = pUVar5 + -2;
-		UIElementAbstract::CleanUp(pUVar5);
-		iVar2 = iVar2 + -1;
-		}
-		 while (iVar2 != 0);
-		UnkFamily20Base::Dispose(&(param_1->spline4).unkStruct);
-		(param_1->spline4).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_Abstract;
-		this_00 = (UnkFamily20Base *)&param_1->field_0xa74;
-		iVar2 = 8;
-		do {
-		this_00 = this_00 + -1;
-		UnkFamily20Base::Dispose(this_00);
-		iVar2 = iVar2 + -1;
-		}
-		 while (iVar2 != 0);
-		UIElementAbstract::CleanUp(&(param_1->materialRelated).parent);
-		TwinsanityMaterialShader::DisposeShaderPrograms(&param_1->material);
-		FUN_001a18b0(&(param_1->inputObserver).vtable);
-		InputWrapper::Dispose(&param_1->inputWrapper);
-		TwinString::Dispose(&param_1->psmPath);
-		(param_1->spline3).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_Abstract;
-		(param_1->spline2).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_Abstract;
-		(param_1->spline1).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_Abstract;
-		(param_1->spline0).parent.vtable = (SplineAbstract_VTable *)&Spline_VT_Abstract;
-		(param_1->parent).vtable = (OlegBase_VTable *)&Oleg_VT_Base;
-		return;
-		}
-
-	*/
-	return;
+	delete this->arr1;
+	delete this->arr2;
+	delete this->arr3;
+	delete this->arr4;
+	for (int i = 0; i < 6; ++i) {
+		delete this->iconArray[i];
+	}
 }
+
 bool Oleg::FUN_000c2230(int index) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -757,7 +525,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page1 = (UnkFamily10VM *)0x0;
 		}
 		else {
-		page1 = UnkFamily10VM::Construct(page1,0);
+		page1 = UnkFamily10VM::ConsfxRelated(page1,0);
 		}
 		this->page1 = page1;
 		page2 = (UnkFamily10B *)VirtualPool::AllocateMemory(0x248);
@@ -765,7 +533,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page2 = (UnkFamily10B *)0x0;
 		}
 		else {
-		page2 = UnkFamily10B::Construct(page2);
+		page2 = UnkFamily10B::ConsfxRelated(page2);
 		}
 		this->page2 = page2;
 		page3 = (UnkFamily10I *)VirtualPool::AllocateMemory(0xf8);
@@ -773,7 +541,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page3 = (UnkFamily10I *)0x0;
 		}
 		else {
-		page3 = UnkFamily10I::Construct(page3);
+		page3 = UnkFamily10I::ConsfxRelated(page3);
 		}
 		this->page3 = page3;
 		page4 = (UnkFamily10L *)VirtualPool::AllocateMemory(0x50);
@@ -781,7 +549,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page4 = (UnkFamily10L *)0x0;
 		}
 		else {
-		page4 = UnkFamily10L::Construct(page4);
+		page4 = UnkFamily10L::ConsfxRelated(page4);
 		}
 		this->page4 = page4;
 		page5 = (UnkFamily10M *)VirtualPool::AllocateMemory(0x148);
@@ -789,7 +557,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page5 = (UnkFamily10M *)0x0;
 		}
 		else {
-		page5 = UnkFamily10M::Construct(page5);
+		page5 = UnkFamily10M::ConsfxRelated(page5);
 		}
 		this->page5 = page5;
 		page6 = (UnkFamily10N *)VirtualPool::AllocateMemory(0x50);
@@ -797,7 +565,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page6 = (UnkFamily10N *)0x0;
 		}
 		else {
-		page6 = UnkFamily10N::Construct(page6,0);
+		page6 = UnkFamily10N::ConsfxRelated(page6,0);
 		}
 		this->page6 = page6;
 		page7 = (UnkFamily10VA *)VirtualPool::AllocateMemory(0x50);
@@ -805,7 +573,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page7 = (UnkFamily10VA *)0x0;
 		}
 		else {
-		page7 = UnkFamily10VA::Construct(page7,0);
+		page7 = UnkFamily10VA::ConsfxRelated(page7,0);
 		}
 		this->page7 = page7;
 		page8 = (UnkFamily10P *)VirtualPool::AllocateMemory(0x50);
@@ -813,7 +581,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page8 = (UnkFamily10P *)0x0;
 		}
 		else {
-		page8 = UnkFamily10P::Construct(page8,0);
+		page8 = UnkFamily10P::ConsfxRelated(page8,0);
 		}
 		this->page8 = page8;
 		page8 = (UnkFamily10P *)VirtualPool::AllocateMemory(0x50);
@@ -821,7 +589,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page8 = (UnkFamily10P *)0x0;
 		}
 		else {
-		page8 = UnkFamily10P::Construct(page8,0);
+		page8 = UnkFamily10P::ConsfxRelated(page8,0);
 		}
 		this->page9 = page8;
 		page8 = (UnkFamily10P *)VirtualPool::AllocateMemory(0x50);
@@ -829,7 +597,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page8 = (UnkFamily10P *)0x0;
 		}
 		else {
-		page8 = UnkFamily10P::Construct(page8,0);
+		page8 = UnkFamily10P::ConsfxRelated(page8,0);
 		}
 		this->page10 = page8;
 		page14 = (UnkFamily10Q *)VirtualPool::AllocateMemory(0x78);
@@ -837,7 +605,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page14 = (UnkFamily10Q *)0x0;
 		}
 		else {
-		page14 = UnkFamily10Q::Construct(page14,0,&this->option11);
+		page14 = UnkFamily10Q::ConsfxRelated(page14,0,&this->option11);
 		}
 		this->page11 = page14;
 		page14 = (UnkFamily10Q *)VirtualPool::AllocateMemory(0x78);
@@ -845,7 +613,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page14 = (UnkFamily10Q *)0x0;
 		}
 		else {
-		page14 = UnkFamily10Q::Construct(page14,1,&this->option12);
+		page14 = UnkFamily10Q::ConsfxRelated(page14,1,&this->option12);
 		}
 		this->page12 = page14;
 		page14 = (UnkFamily10Q *)VirtualPool::AllocateMemory(0x78);
@@ -853,7 +621,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page14 = (UnkFamily10Q *)0x0;
 		}
 		else {
-		page14 = UnkFamily10Q::Construct(page14,2,&this->option13);
+		page14 = UnkFamily10Q::ConsfxRelated(page14,2,&this->option13);
 		}
 		this->page13 = page14;
 		page14 = (UnkFamily10Q *)VirtualPool::AllocateMemory(0x78);
@@ -861,7 +629,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page14 = (UnkFamily10Q *)0x0;
 		}
 		else {
-		page14 = UnkFamily10Q::Construct(page14,3,&this->option14);
+		page14 = UnkFamily10Q::ConsfxRelated(page14,3,&this->option14);
 		}
 		this->page14 = page14;
 		page15 = (UnkFamily10R *)VirtualPool::AllocateMemory(0x144);
@@ -869,7 +637,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page15 = (UnkFamily10R *)0x0;
 		}
 		else {
-		page15 = UnkFamily10R::Construct(page15,0);
+		page15 = UnkFamily10R::ConsfxRelated(page15,0);
 		}
 		this->page15 = page15;
 		page16 = (UnkFamily10S *)VirtualPool::AllocateMemory(0x54);
@@ -877,7 +645,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page16 = (UnkFamily10S *)0x0;
 		}
 		else {
-		page16 = UnkFamily10S::Construct(page16,mainMenu);
+		page16 = UnkFamily10S::ConsfxRelated(page16,mainMenu);
 		}
 		this->page16 = page16;
 		page17 = (UnkFamily10ZA *)VirtualPool::AllocateMemory(0x60);
@@ -885,7 +653,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page17 = (UnkFamily10ZA *)0x0;
 		}
 		else {
-		page17 = UnkFamily10ZA::Construct(page17,mainMenu,&this->option18);
+		page17 = UnkFamily10ZA::ConsfxRelated(page17,mainMenu,&this->option18);
 		}
 		this->page17 = page17;
 		page18 = (UnkFamily10VL *)VirtualPool::AllocateMemory(0x50);
@@ -893,7 +661,7 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 		page18 = (UnkFamily10VL *)0x0;
 		}
 		else {
-		page18 = UnkFamily10VL::Construct(page18,0);
+		page18 = UnkFamily10VL::ConsfxRelated(page18,0);
 		}
 		this->page18 = page18;
 		pUVar2 = (UnkFamily10Base *)this->page1;
@@ -2070,7 +1838,7 @@ void Oleg::FUN_000b33f0()
     shader = (ShaderProgramAbstract *)0x0;
   }
   else {
-    ShaderProgramAbstract::Construct(shader);
+    ShaderProgramAbstract::ConsfxRelated(shader);
     shader->vtable = (ShaderProgramAbstract_VTable *)&PTR_Dispose_0038d440;
     shader->id = 0xe;
   }
@@ -2512,7 +2280,7 @@ void Oleg::FUN_000b4f10(int i, char param_2) {
 		(&this->screenFlags)[index] = (uVar5 >> 8 ^ uVar5) & 0x1fe ^ uVar5 | 1;
 		length = XAPILIB::XGetSectionSize((int)pXVar2);
 		memptr = (void *)_XLoadSectionByHandle@4((int)pXVar2);
-		MemoryStream::Construct(&local_14,memptr,length,0,0x40);
+		MemoryStream::ConsfxRelated(&local_14,memptr,length,0,0x40);
 		ReadUI(this,index,&local_14);
 		_XFreeSectionByHandle@4(pXVar2);
 		MemoryStream::Dispose(&local_14);
@@ -2536,7 +2304,7 @@ void Oleg::FUN_000b4f10(int i, char param_2) {
 		pFVar3 = (FileResourceDescG *)0x0;
 		}
 		else {
-		pFVar3 = FileResourceDescG::Construct(pFVar3,local_20.value,&reader->parent,0xd);
+		pFVar3 = FileResourceDescG::ConsfxRelated(pFVar3,local_20.value,&reader->parent,0xd);
 		}
 		GameReaderStorage::AddFileDesc(this_00,&pFVar3->parent,0);
 		if (param_2 != '\0') {
@@ -2551,103 +2319,136 @@ void Oleg::FUN_000b4f10(int i, char param_2) {
 }
 
 void Oleg::InitModuleMask() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::InitModuleMask(Oleg *this){
-		 Letterboxes (this->parent).uiPresetMask[0].high = 9;
-		(this->parent).uiPresetMask[0].low = 0;
-		 Logo at bottom left (this->parent).uiPresetMask[1].high = 2;
-		(this->parent).uiPresetMask[1].low = 0;
-		 Dimmed stripe for text (this->parent).uiPresetMask[2].high = 0xc;
-		(this->parent).uiPresetMask[2].low = 0;
-		 Dimmed screen (this->parent).uiPresetMask[3].high = 0x10;
-		(this->parent).uiPresetMask[3].low = 0;
-		 B (this->parent).uiPresetMask[4].high = 0x80;
-		(this->parent).uiPresetMask[4].low = 0;
-		 Y (this->parent).uiPresetMask[5].high = 0x100;
-		(this->parent).uiPresetMask[5].low = 0;
-		 A (this->parent).uiPresetMask[6].high = 0x200;
-		(this->parent).uiPresetMask[6].low = 0;
-		 L (this->parent).uiPresetMask[7].high = 0x400;
-		(this->parent).uiPresetMask[7].low = 0;
-		 R (this->parent).uiPresetMask[8].high = 0x800;
-		(this->parent).uiPresetMask[8].low = 0;
-		 Options (this->parent).uiPresetMask[9].high = 0x12b0;
-		(this->parent).uiPresetMask[9].low = 0;
-		 Placeholder message (this->parent).uiPresetMask[10].high = 0x22f0;
-		(this->parent).uiPresetMask[10].low = 0;
-		 Tile screen menu (this->parent).uiPresetMask[0xb].high = 0xc2f0;
-		(this->parent).uiPresetMask[0xb].low = 0;
-		 In-game Main Menu (this->parent).uiPresetMask[0xc].high = 0x90ef0;
-		(this->parent).uiPresetMask[0xc].low = 0;
-		 Disable autosave? (this->parent).uiPresetMask[0xd].high = 0x20ef0;
-		(this->parent).uiPresetMask[0xd].low = 0;
-		 Are you sure you want to quit (this->parent).uiPresetMask[0xe].high = (uint)&UINT_00040ef0;
-		(this->parent).uiPresetMask[0xe].low = 0;
-		 Reconnect controller (this->parent).uiPresetMask[0xf].high = (uint)FUN_00100030;
-		(this->parent).uiPresetMask[0xf].low = 0;
-		 Problem with the disk (this->parent).uiPresetMask[0x10].high = 0x200030;
-		(this->parent).uiPresetMask[0x10].low = 0;
-		 Autosave disabled (this->parent).uiPresetMask[0x11].high = 0x400270;
-		(this->parent).uiPresetMask[0x11].low = 0;
-		 Autosave enables (this->parent).uiPresetMask[0x12].high = 0x800270;
-		(this->parent).uiPresetMask[0x12].low = 0;
-		 Autosave failed (this->parent).uiPresetMask[0x13].high = 0x1000270;
-		(this->parent).uiPresetMask[0x13].low = 0;
-		 Earth hub gems (this->parent).uiPresetMask[0x14].high = 0x22000cb0;
-		(this->parent).uiPresetMask[0x14].low = 0;
-		 Hub gems (this->parent).uiPresetMask[0x15].high = 0x24000cb0;
-		(this->parent).uiPresetMask[0x15].low = 0;
-		 Hub gems (this->parent).uiPresetMask[0x16].high = 0x28000cb0;
-		(this->parent).uiPresetMask[0x16].low = 0;
-		 Hub gems (this->parent).uiPresetMask[0x17].high = 0x30000cb0;
-		(this->parent).uiPresetMask[0x17].low = 0;
-		 Extras screen (this->parent).uiPresetMask[0x18].high = 0x40000eb0;
-		(this->parent).uiPresetMask[0x18].low = 0;
-		 Gallery (this->parent).uiPresetMask[0x19].high = 0x80000080;
-		(this->parent).uiPresetMask[0x19].low = 0x2000;
-		 Game Over (this->parent).uiPresetMask[0x1a].high = 0x200;
-		(this->parent).uiPresetMask[0x1a].low = 0x3001;
-		 Loading game (this->parent).uiPresetMask[0x1b].high = 0x30;
-		(this->parent).uiPresetMask[0x1b].low = 2;
-		 Weird menu (this->parent).uiPresetMask[0x1c].high = 0x270;
-		(this->parent).uiPresetMask[0x1c].low = 4;
-		 Select slot to save (this->parent).uiPresetMask[0x1d].high = 0x270;
-		(this->parent).uiPresetMask[0x1d].low = 8;
-		 Autosave data (this->parent).uiPresetMask[0x1e].high = 0;
-		(this->parent).uiPresetMask[0x1e].low = 0x10;
-		(this->parent).uiPresetMask[0x1f].high = 0;
-		(this->parent).uiPresetMask[0x1f].low = 0x300;
-		(this->parent).uiPresetMask[0x20].high = 0;
-		(this->parent).uiPresetMask[0x20].low = 0x20;
-		 Life counter (this->parent).uiPresetMask[0x21].high = 0;
-		(this->parent).uiPresetMask[0x21].low = 0x240;
-		(this->parent).uiPresetMask[0x22].high = 0;
-		(this->parent).uiPresetMask[0x22].low = 0x80;
-		 Life counter (this->parent).uiPresetMask[0x23].high = 0;
-		(this->parent).uiPresetMask[0x23].low = 0x200;
-		(this->parent).uiPresetMask[0x24].high = 0;
-		(this->parent).uiPresetMask[0x24].low = 0x100;
-		 Centered icon (this->parent).uiPresetMask[0x25].high = 0;
-		(this->parent).uiPresetMask[0x25].low = 0x400;
-		(this->parent).uiPresetMask[0x26].high = 0;
-		(this->parent).uiPresetMask[0x26].low = 0x800;
-		(this->parent).uiPresetMask[0x27].high = 0;
-		(this->parent).uiPresetMask[0x28].high = 0;
-		(this->parent).uiPresetMask[0x29].high = 0;
-		 Black screen (this->parent).uiPresetMask[0x27].low = 0x1000;
-		 PSM Screen without UI (this->parent).uiPresetMask[0x28].low = 0x2000;
-		 Loading screen (this->parent).uiPresetMask[0x29].low = 0x6000;
-		 Clear UI mask (this->parent).uiPresetMask[0x2a].high = 0xfffffff8;
-		(this->parent).uiPresetMask[0x2a].low = 0xffffffff;
-		 Clear UI mask (this->parent).uiPresetMask[0x2b].high = 0xfffeffff;
-		(this->parent).uiPresetMask[0x2b].low = 0xffffffff;
-		 You will lose all unsaved progress message (this->parent).uiPresetMask[0x2c].high = 0x2f0;
-		(this->parent).uiPresetMask[0x2c].low = 0x8000;
-		return;
-		}
-		
-	*/
+	//Letterboxes 
+	this->uiPresetMask[0].high = 9;
+	this->uiPresetMask[0].low = 0;
+	//Logo at bottom left 
+	this->uiPresetMask[1].high = 2;
+	this->uiPresetMask[1].low = 0;
+	//Dimmed stripe for text 
+	this->uiPresetMask[2].high = 0xc;
+	this->uiPresetMask[2].low = 0;
+	//Dimmed screen 
+	this->uiPresetMask[3].high = 0x10;
+	this->uiPresetMask[3].low = 0;
+	//B 
+	this->uiPresetMask[4].high = 0x80;
+	this->uiPresetMask[4].low = 0;
+	//Y 
+	this->uiPresetMask[5].high = 0x100;
+	this->uiPresetMask[5].low = 0;
+	//A 
+	this->uiPresetMask[6].high = 0x200;
+	this->uiPresetMask[6].low = 0;
+	//L 
+	this->uiPresetMask[7].high = 0x400;
+	this->uiPresetMask[7].low = 0;
+	//R 
+	this->uiPresetMask[8].high = 0x800;
+	this->uiPresetMask[8].low = 0;
+	//Options 
+	this->uiPresetMask[9].high = 0x12b0;
+	this->uiPresetMask[9].low = 0;
+	//Placeholder message 
+	this->uiPresetMask[10].high = 0x22f0;
+	this->uiPresetMask[10].low = 0;
+	//Tile screen menu 
+	this->uiPresetMask[0xb].high = 0xc2f0;
+	this->uiPresetMask[0xb].low = 0;
+	//In-game Main Menu 
+	this->uiPresetMask[0xc].high = 0x90ef0;
+	this->uiPresetMask[0xc].low = 0;
+	//Disable autosave? 
+	this->uiPresetMask[0xd].high = 0x20ef0;
+	this->uiPresetMask[0xd].low = 0;
+	//Are you sure you want to quit 
+	this->uiPresetMask[0xe].high = 0x40ef0;
+	this->uiPresetMask[0xe].low = 0;
+	//Reconnect controller 
+	this->uiPresetMask[0xf].high = 0x100030;
+	this->uiPresetMask[0xf].low = 0;
+	//Problem with the disk 
+	this->uiPresetMask[0x10].high = 0x200030;
+	this->uiPresetMask[0x10].low = 0;
+	//Autosave disabled 
+	this->uiPresetMask[0x11].high = 0x400270;
+	this->uiPresetMask[0x11].low = 0;
+	//Autosave enables 
+	this->uiPresetMask[0x12].high = 0x800270;
+	this->uiPresetMask[0x12].low = 0;
+	//Autosave failed 
+	this->uiPresetMask[0x13].high = 0x1000270;
+	this->uiPresetMask[0x13].low = 0;
+	//Earth hub gems 
+	this->uiPresetMask[0x14].high = 0x22000cb0;
+	this->uiPresetMask[0x14].low = 0;
+	//Hub gems 
+	this->uiPresetMask[0x15].high = 0x24000cb0;
+	this->uiPresetMask[0x15].low = 0;
+	//Hub gems 
+	this->uiPresetMask[0x16].high = 0x28000cb0;
+	this->uiPresetMask[0x16].low = 0;
+	//Hub gems 
+	this->uiPresetMask[0x17].high = 0x30000cb0;
+	this->uiPresetMask[0x17].low = 0;
+	//Extras screen 
+	this->uiPresetMask[0x18].high = 0x40000eb0;
+	this->uiPresetMask[0x18].low = 0;
+	//Gallery 
+	this->uiPresetMask[0x19].high = 0x80000080;
+	this->uiPresetMask[0x19].low = 0x2000;
+	//Game Over 
+	this->uiPresetMask[0x1a].high = 0x200;
+	this->uiPresetMask[0x1a].low = 0x3001;
+	//Loading game 
+	this->uiPresetMask[0x1b].high = 0x30;
+	this->uiPresetMask[0x1b].low = 2;
+	//Weird menu 
+	this->uiPresetMask[0x1c].high = 0x270;
+	this->uiPresetMask[0x1c].low = 4;
+	//Select slot to save 
+	this->uiPresetMask[0x1d].high = 0x270;
+	this->uiPresetMask[0x1d].low = 8;
+	//Autosave data 
+	this->uiPresetMask[0x1e].high = 0;
+	this->uiPresetMask[0x1e].low = 0x10;
+	this->uiPresetMask[0x1f].high = 0;
+	this->uiPresetMask[0x1f].low = 0x300;
+	this->uiPresetMask[0x20].high = 0;
+	this->uiPresetMask[0x20].low = 0x20;
+	//Life counter 
+	this->uiPresetMask[0x21].high = 0;
+	this->uiPresetMask[0x21].low = 0x240;
+	this->uiPresetMask[0x22].high = 0;
+	this->uiPresetMask[0x22].low = 0x80;
+	//Life counter 
+	this->uiPresetMask[0x23].high = 0;
+	this->uiPresetMask[0x23].low = 0x200;
+	this->uiPresetMask[0x24].high = 0;
+	this->uiPresetMask[0x24].low = 0x100;
+	//Centered icon 
+	this->uiPresetMask[0x25].high = 0;
+	this->uiPresetMask[0x25].low = 0x400;
+	this->uiPresetMask[0x26].high = 0;
+	this->uiPresetMask[0x26].low = 0x800;
+	this->uiPresetMask[0x27].high = 0;
+	this->uiPresetMask[0x28].high = 0;
+	this->uiPresetMask[0x29].high = 0;
+	//Black screen 
+	this->uiPresetMask[0x27].low = 0x1000;
+	//PSM Screen without UI 
+	this->uiPresetMask[0x28].low = 0x2000;
+	//Loading screen 
+	this->uiPresetMask[0x29].low = 0x6000;
+	//Clear UI mask 
+	this->uiPresetMask[0x2a].high = 0xfffffff8;
+	this->uiPresetMask[0x2a].low = 0xffffffff;
+	//Clear UI mask 
+	this->uiPresetMask[0x2b].high = 0xfffeffff;
+	this->uiPresetMask[0x2b].low = 0xffffffff;
+	//You will lose all unsaved progress message 
+	this->uiPresetMask[0x2c].high = 0x2f0;
+	this->uiPresetMask[0x2c].low = 0x8000;
 	return;
 }
 
@@ -2699,32 +2500,24 @@ void Oleg::FUN_000b1d80() {
 }
 
 void Oleg::SetInputHandles(InputStruct* inputHandle) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall Oleg::SetInputHandles(Oleg *this,InputStruct *inputHandle){
-		(this->option02).inputHandle = inputHandle;
-		(this->option15).inputHandle = inputHandle;
-		(this->option03).inputHandle = inputHandle;
-		(this->option16).inputHandle = inputHandle;
-		(this->option04).inputHandle = inputHandle;
-		(this->option05).inputHandle = inputHandle;
-		(this->option06).inputHandle = inputHandle;
-		(this->option07).inputHandle = inputHandle;
-		(this->option08).inputHandle = inputHandle;
-		(this->option09).inputHandle = inputHandle;
-		(this->option10).inputHandle = inputHandle;
-		(this->option11).inputHandle = inputHandle;
-		(this->option12).inputHandle = inputHandle;
-		(this->option13).inputHandle = inputHandle;
-		(this->option14).inputHandle = inputHandle;
-		(this->option01).inputHandle = inputHandle;
-		(this->option17).inputHandle = inputHandle;
-		(this->option18).inputHandle = inputHandle;
-		return;
-		}
-		
-	*/
-	return;
+	(this->option02).inputHandle = inputHandle;
+	(this->option15).inputHandle = inputHandle;
+	(this->option03).inputHandle = inputHandle;
+	(this->option16).inputHandle = inputHandle;
+	(this->option04).inputHandle = inputHandle;
+	(this->option05).inputHandle = inputHandle;
+	(this->option06).inputHandle = inputHandle;
+	(this->option07).inputHandle = inputHandle;
+	(this->option08).inputHandle = inputHandle;
+	(this->option09).inputHandle = inputHandle;
+	(this->option10).inputHandle = inputHandle;
+	(this->option11).inputHandle = inputHandle;
+	(this->option12).inputHandle = inputHandle;
+	(this->option13).inputHandle = inputHandle;
+	(this->option14).inputHandle = inputHandle;
+	(this->option01).inputHandle = inputHandle;
+	(this->option17).inputHandle = inputHandle;
+	(this->option18).inputHandle = inputHandle;
 }
 
 void Oleg::FUN_000b1a40() {
@@ -2791,7 +2584,7 @@ void Oleg::LoadIconsPsm() {
 		TwinString fname;
 		MemoryStream stream;
 		TwinString::Set(&fname,PTR_s_StartUp\Icons.psm_0039e0a4);
-		MemoryStream::ConstructFile(&stream,fname.value,'\0');
+		MemoryStream::ConsfxRelatedFile(&stream,fname.value,'\0');
 		icon = (UIElementAbstract *)this->iconsPsm2;
 		i = 40;
 		do {
@@ -2826,58 +2619,51 @@ bool Oleg::FUN_000c2290(UIPresetIndex index) {
 }
 
 OlegModuleLabelSelectable* Oleg::GetSelectedLabel() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	OlegModuleLabelSelectable * __fastcall Oleg::GetSelectedLabel(Oleg *this){
-		if (((byte)(this->option02).parent.parent.flags & 0xf) == 3) {
+	if (((byte)(this->option02).flags & 0xf) == 3) {
 		return &this->option02;
-		}
-		if (((byte)(this->option15).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option15).flags & 0xf) == 3) {
 		return &this->option15;
-		}
-		if (((byte)(this->option03).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option03).flags & 0xf) == 3) {
 		return &this->option03;
-		}
-		if (((byte)(this->option11).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option11).flags & 0xf) == 3) {
 		return &this->option11;
-		}
-		if (((byte)(this->option12).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option12).flags & 0xf) == 3) {
 		return &this->option12;
-		}
-		if (((byte)(this->option13).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option13).flags & 0xf) == 3) {
 		return &this->option13;
-		}
-		if (((byte)(this->option14).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option14).flags & 0xf) == 3) {
 		return &this->option14;
-		}
-		if (((byte)(this->option01).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option01).flags & 0xf) == 3) {
 		return &this->option01;
-		}
-		if (((byte)(this->option04).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option04).flags & 0xf) == 3) {
 		return &this->option04;
-		}
-		if (((byte)(this->option05).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option05).flags & 0xf) == 3) {
 		return &this->option05;
-		}
-		if (((byte)(this->option06).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option06).flags & 0xf) == 3) {
 		return &this->option06;
-		}
-		if (((byte)(this->option07).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option07).flags & 0xf) == 3) {
 		return &this->option07;
-		}
-		if (((byte)(this->option09).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option09).flags & 0xf) == 3) {
 		return &this->option09;
-		}
-		if (((byte)(this->option08).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option08).flags & 0xf) == 3) {
 		return &this->option08;
-		}
-		if (((byte)(this->option10).parent.parent.flags & 0xf) == 3) {
+	}
+	if (((byte)(this->option10).flags & 0xf) == 3) {
 		return &this->option10;
-		}
-		return (OlegModuleLabelSelectable *)0x0;
-		}
-		
-	*/
+	}
 	return null;
 }
 
@@ -3106,34 +2892,15 @@ void Oleg::GrandALife(int param_1, char param_2) {
 }
 
 void Oleg::AssignModuleToSlot(int index, OlegModuleAbstract* module) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall Oleg::AssignModuleToSlot(Oleg *this,int index,OlegModuleAbstract *module){
-		(this->parent).modules[index] = module;
-		return;
-		}
-		
-	*/
-	return;
+	this->modules[index] = module;
 }
 
-void Oleg::FUN_001a1be0(UnkSfxCollection* _struct) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_001a1be0(UnkSfxCollection *struct){
-		uint i;
-		i = 0;
-		do {
-		struct->sfx[i] = (Sfx *)0x0;
-		struct->arr2[i] = 3;
+void Oleg::FUN_001a1be0(UnkSfxCollection* _sfxRelated) {
+	for (int i = 0; i < 13; ++i) {
+		sfxRelated.sfx[i] = null;
+		sfxRelated.arr2[i] = 3;
 		i = i + 1;
-		}
-		 while (i < 0xd);
-		return;
-		}
-		
-	*/
-	return;
+	} 
 }
 
 void Oleg::FUN_001a2670(uint param_1, uint param_2, SplineA* spline) {
@@ -3225,15 +2992,7 @@ void Oleg::ClearUI(uint maskLow, uint maskHigh, int appearTime, int disappearTim
 }
 
 void Oleg::SetScreenFlag(int index, int value) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall Oleg::SetScreenFlag(Oleg *this,int index,int value){
-		(&this->screenFlags)[index] =(&this->screenFlags)[index] ^ (value << 9 ^ (&this->screenFlags)[index]) & 0x1fe00;
-		return;
-		}
-		
-	*/
-	return;
+	(&this->screenFlags)[index] = (&this->screenFlags)[index] ^ (value << 9 ^ (&this->screenFlags)[index]) & 0x1fe00;
 }
 
 void Oleg::InitValues() {
@@ -3266,7 +3025,7 @@ void Oleg::InitValues() {
 		pSVar11 = (ShaderProgramAbstract *)0x0;
 		}
 		else {
-		ShaderProgramAbstract::Construct(pSVar11);
+		ShaderProgramAbstract::ConsfxRelated(pSVar11);
 		pSVar11->vtable = (ShaderProgramAbstract_VTable *)&PTR_Dispose_0038d440;
 		pSVar11->id = 0xe;
 		}
@@ -3449,17 +3208,17 @@ void Oleg::InitValues() {
 		this->unkStruct12array[7].field11_0x48 = (uint)&this->arr3length;
 		this->unkStruct12array[7].field3_0x28 = fVar5;
 		this->unkStruct12array[7].field4_0x2c = FLOAT_0038abc4;
-		UnkFamily20Base::FUN_00113af0(&(this->spline4).unkStruct,notThis,0x80);
+		UnkFamily20Base::FUN_00113af0(&(this->spline4).unksfxRelated,notThis,0x80);
 		fVar6 = FLOAT_0038cf68;
 		fVar5 = FLOAT_0038639c;
-		(this->spline4).unkStruct.vec.x = FLOAT_0038cf68;
-		(this->spline4).unkStruct.vec.y = fVar6;
+		(this->spline4).unksfxRelated.vec.x = FLOAT_0038cf68;
+		(this->spline4).unksfxRelated.vec.y = fVar6;
 		fVar6 = FLOAT_00386ab4;
-		(this->spline4).unkStruct.vec.z = FLOAT_00386ab4;
-		(this->spline4).unkStruct.vec.w = fVar6;
-		(this->spline4).unkStruct.field9_0x40 = &this->arr1length;
-		(this->spline4).unkStruct.field11_0x48 = (uint)&this->arr4length;
-		(this->spline4).unkStruct.field10_0x44 = &this->arr2length;
+		(this->spline4).unksfxRelated.vec.z = FLOAT_00386ab4;
+		(this->spline4).unksfxRelated.vec.w = fVar6;
+		(this->spline4).unksfxRelated.field9_0x40 = &this->arr1length;
+		(this->spline4).unksfxRelated.field11_0x48 = (uint)&this->arr4length;
+		(this->spline4).unksfxRelated.field10_0x44 = &this->arr2length;
 		(this->field65_0xaf0).x = 0.0;
 		(this->field65_0xaf0).z = 0.0;
 		fVar6 = FLOAT_0038b3cc;
@@ -3586,15 +3345,8 @@ void Oleg::ResetScreenMessage() {
 }
 
 void Oleg::RenderUI(FontRenderer* fontRenderer) {
+	OlegBase::Render(fontRenderer);
+	screenMessage.DrawMessage(fontRenderer);
 	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall Oleg::RenderUI(Oleg *this,FontRenderer *fontRenderer){
-		OlegBase::Render(&this->parent,fontRenderer);
-		AutoClass11::DrawMessage(&this->screenMessage,fontRenderer);
-		return;
-		}
-		
-	*/
-	return;
 }
 

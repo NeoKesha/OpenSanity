@@ -209,7 +209,7 @@ class Oleg : public OlegBase {
 		void ReadUI(int index, MemoryStream* stream);
 		void GrandALife(int param_1, char param_2);
 		void AssignModuleToSlot(int index, OlegModuleAbstract* module);
-		static void FUN_001a1be0(UnkSfxCollection* _struct);
+		void FUN_001a1be0(UnkSfxCollection* _struct);
 		void FUN_001a2670(uint param_1, uint param_2, SplineA* spline);
 		virtual void ShowUI_30(uint flags1, uint flags2, int appearTime, int disappearTime);
 		virtual void ClearUI(uint maskLow, uint maskHigh, int appearTime, int disappearTime);
