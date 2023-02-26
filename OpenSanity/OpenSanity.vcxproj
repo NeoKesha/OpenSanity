@@ -1258,6 +1258,7 @@
     <ClCompile Include="sources\Known\UnkSingletone\UnkSingletoneElement.cpp" />
     <ClCompile Include="sources\Logging.cpp" />
     <ClCompile Include="sources\Main.cpp" />
+    <ClCompile Include="sources\ShaderWrapper.cpp" />
     <ClCompile Include="sources\SortLater\AutoClass1.cpp" />
     <ClCompile Include="sources\SortLater\AutoClass14.cpp" />
     <ClCompile Include="sources\SortLater\AutoClass16.cpp" />
@@ -2730,6 +2731,7 @@
     <ClInclude Include="headers\Known\UnkSingletone\UnkSingletoneElement.h" />
     <ClInclude Include="headers\Logging.h" />
     <ClInclude Include="headers\OpenSanityGlobal.h" />
+    <ClInclude Include="headers\ShaderWrapper.h" />
     <ClInclude Include="headers\SortLater\AutoClass1.h" />
     <ClInclude Include="headers\SortLater\AutoClass14.h" />
     <ClInclude Include="headers\SortLater\AutoClass16.h" />
@@ -2954,6 +2956,7 @@
     <ClInclude Include="headers\Unknown\UnkSfxCollection.h" />
     <ClInclude Include="headers\Unknown\UnkStructures\US001.h" />
     <ClInclude Include="headers\Unknown\UnkStructures\US002.h" />
+    <ClInclude Include="headers\UnkShaderSetting.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

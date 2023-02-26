@@ -5,6 +5,8 @@
 #include "headers/Unknown/SomeState.h"
 #include "headers/Known/LevelStructure/Data/GraphicsSectionData/Material/SectionDataMaterialXbox.h"
 #include "headers/Unknown/AutoClasses/AutoClass40.h"
+#include "headers/Unknown/AutoClasses/AutoClass44.h"
+#include "headers/ShaderWrapper.h"
 #include "headers/Known/Graphics/Decals.h"
 
 class Global {
@@ -141,6 +143,10 @@ public:
 	float DELTA_TIME_SEC1;
 	float DELTA_TIME_SEC2;
 	InputStruct* INPUT_HANDLE;
+	AutoClass44 SOME_SHADER_SETTING;
+	ShaderWrapper SHADER_WATER;
+	ShaderWrapper SHADER_SKY;
+
 
 	//GLOBAL PARAMETERS
 	const char**	LANGUAGE_LIST;

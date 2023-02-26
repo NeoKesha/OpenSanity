@@ -1472,4 +1472,6 @@ class OGIType2;
 class InstanceNodeInstanceABody;
 class UIElementBTransform;
 class UIElementBColor;
+class UnkShaderSetting;
+class ShaderWrapper;
 class Global;

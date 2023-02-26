@@ -1,5 +1,16 @@
 #include "headers/Unknown/AutoClasses/AutoClass44.h"
 
+AutoClass44::AutoClass44()
+{
+	for (int i = 0; i < 16; ++i) {
+		this->elements[i].vertexAttributeFormat = 0;
+		this->elements[i].b = 0;
+		this->elements[i].c = 2;
+		this->elements[i].d = 0;
+		this->elements[i].e = 0;
+	}
+}
+
 char AutoClass44::FUN_001027a0(int param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -53,30 +64,3 @@ void AutoClass44::FUN_00102850(uint* param_1) {
 	*/
 	return;
 }
-
-void AutoClass44::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall AutoClass44::Construct(AutoClass44 *this){
-		undefined4 *puVar1;
-		int iVar2;
-		*(undefined *)&this[1].vertexAttributeFormat = 1;
-		puVar1 = &this->field1_0x4;
-		iVar2 = 0x10;
-		do {
-		puVar1[-1] = 0;
-		puVar1[1] = 2;
-		*puVar1 = 0;
-		*(undefined *)((int)puVar1 + 9) = 0;
-		*(undefined *)(puVar1 + 2) = 0;
-		puVar1 = puVar1 + 4;
-		iVar2 = iVar2 + -1;
-		}
-		 while (iVar2 != 0);
-		return;
-		}
-		
-	*/
-	return;
-}
-

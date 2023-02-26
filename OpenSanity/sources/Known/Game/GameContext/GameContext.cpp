@@ -164,8 +164,25 @@ void GameContext::FUN_00123250()
 
 void GameContext::CreateWaterAndSkyShaders()
 {
-	//TODO: XBOX xvs shader language magic here
 	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	//ORIGINAL: "xvs.1.1\n#pragma screenspace\nmul oPos, v0.x, c[0]\nmov oD0, v4\nmad oPos, v0.y, c[1], r12\nmad oPos, v0.z, c[2], r12\nmad oPos, v0.w, c[3], r12\nadd oT0, v5, c[4]\nmul oT1.x, r12.z, c[15].z\nmul oPos.xyz, r12.xyz, c-38.xyz\n + rcc r1.x, r12.w\nmad oPos.xyz, r12.xyz, r1.x, c-37.xyz\n"
+	static const char* shader1 = "vs.1.1\n"
+		"mul r2, v0.x, c[0]\n"
+		"mov oD0, v4\n"
+		"mad r2, v0.y, c[1], r2\n"
+		"mad r2, v0.z, c[2], r2\n"
+		"mad r2, v0.w, c[3], r2\n"
+		"add oT0, v5, c[4]\n"
+		"mul oT1.x, r2.z, c[15].z\n"
+		"mul r2.xyz, r2.xyz, c[0].xyz\n"
+		"mov r1, r2\n"
+		"mad r2.xyz, r2.xyz, r1.w, c[0].xyz\n"
+		"mov oPos, r2\n";
+	
+	GLOBAL->SHADER_WATER.CompileShader(shader1);
+	int a = 0;
 }
 
 void GameContext::CreateStaticGeometryShader()

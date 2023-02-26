@@ -4401,6 +4401,9 @@
     <ClCompile Include="sources\Unknown\struct1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\ShaderWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\DirectX\Resource\D3DBaseTexture.h">
@@ -8814,6 +8817,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\Logging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ShaderWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\UnkShaderSetting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
