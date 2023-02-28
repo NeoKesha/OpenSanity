@@ -27,6 +27,7 @@
 #include "headers/Known/Game/Chunks/ChunkList.h"
 #include "headers/Known/Game/Chunks/ChunkDataRefCounter.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
+#include "headers/Unknown/AutoClasses/AutoClass44.h"
 
 void GameContext::FUN_00021ce0() {
 	Logging::LogUnimplemented(__FUNCSIG__);
@@ -164,9 +165,22 @@ void GameContext::FUN_00123250()
 
 void GameContext::CreateWaterAndSkyShaders()
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
 	Global* GLOBAL = Global::Get();
 
+	for (int i = 0; i < 16; ++i) {
+		GLOBAL->SOME_SHADER_SETTING.elements[i].vertexAttributeFormat = 0;
+		GLOBAL->SOME_SHADER_SETTING.elements[i].b = 0;
+		GLOBAL->SOME_SHADER_SETTING.elements[i].c = 2;
+		GLOBAL->SOME_SHADER_SETTING.elements[i].e = 0;
+		GLOBAL->SOME_SHADER_SETTING.elements[i].d = 0;
+	}
+	
+	GLOBAL->SOME_SHADER_SETTING.elements[0].b = 0;
+	GLOBAL->SHADER_WATER.pDeclaration[1] = 0x40320000;
+	GLOBAL->SOME_SHADER_SETTING.elements[4].c = 0x44;
+
+	//Had to workaround r12 as read-oPos, because unsupported in this DX8 SDK version
+	//TODO: Beware of constants, especially c[0]
 	//ORIGINAL: "xvs.1.1\n#pragma screenspace\nmul oPos, v0.x, c[0]\nmov oD0, v4\nmad oPos, v0.y, c[1], r12\nmad oPos, v0.z, c[2], r12\nmad oPos, v0.w, c[3], r12\nadd oT0, v5, c[4]\nmul oT1.x, r12.z, c[15].z\nmul oPos.xyz, r12.xyz, c-38.xyz\n + rcc r1.x, r12.w\nmad oPos.xyz, r12.xyz, r1.x, c-37.xyz\n"
 	static const char* shader1 = "vs.1.1\n"
 		"mul r2, v0.x, c[0]\n"
@@ -181,8 +195,52 @@ void GameContext::CreateWaterAndSkyShaders()
 		"mad r2.xyz, r2.xyz, r1.w, c[0].xyz\n"
 		"mov oPos, r2\n";
 	
+	//TODO: BEWARE OF TYPE AND PACKING CHANGES
+	//see d3d8types.h of DX8 SDK and XBOX SDK
+	GLOBAL->SHADER_WATER.pDeclaration[0] = D3DVSD_STREAM(0);// 0x20000000;
+	//NORMPACKED3 - (x,y,z,1.0f) value packed into 32 bits with mask (11,10,10)
+	GLOBAL->SHADER_WATER.pDeclaration[2] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4);//0x40160003; D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_NORMPACKED3)
+	//PBYTE4 - 4 bytes from 0 to 255 mapped to [0;1]
+	GLOBAL->SHADER_WATER.pDeclaration[3] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4);//0x40440004; D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_PBYTE4)
+	GLOBAL->SHADER_WATER.pDeclaration[4] = D3DVSD_NOP(); //FOG UNSUPPORTED D3DVSD_REG(D3DVSDE_FOG, D3DVSDT_FLOAT2);//0x40220005; D3DVSD_REG(D3DVSDE_FOG , D3DVSDT_FLOAT2)
+	GLOBAL->SHADER_WATER.pDeclaration[5] = D3DVSD_END(); //end token
+	//Fuck
+	GLOBAL->SOME_SHADER_SETTING.elements[0].c = 0x32;
+	GLOBAL->SOME_SHADER_SETTING.elements[3].c = 0x16;
+	GLOBAL->SOME_SHADER_SETTING.elements[3].b = 0xc;
+	GLOBAL->SOME_SHADER_SETTING.elements[4].b = 0x10;
+	GLOBAL->SOME_SHADER_SETTING.elements[5].c = 0x22;
+	GLOBAL->SOME_SHADER_SETTING.elements[5].b = 0x14;
+	
+	GLOBAL->SHADER_WATER.unkInt3 = 0x18;
+
 	GLOBAL->SHADER_WATER.CompileShader(shader1);
-	int a = 0;
+	
+	//GLOBAL->SHADER_SKY.pDeclaration[1] = 0x40320000;
+	//GLOBAL->SHADER_SKY.pDeclaration[2] = 0x40160003;
+	//GLOBAL->SHADER_SKY.pDeclaration[3] = 0x40440004;
+
+	//ORIGINAL: "xvs.1.1\n#pragma screenspace\nmov oT1.x, c[5].z\nmul oPos, v0.x, c[0]\nmov oD0, v4\nmad oPos, v0.y, c[1], r12\nmad oPos, v0.z, c[2], r12\nmad oPos, v0.w, c[3], r12\nadd oT0, v5, c[4]\nmul oPos.xyz, r12.xyz, c-38.xyz\n + rcc r1.x, r12.w\nmad oPos.xyz, r12.xyz, r1.x, c-37.xyz\nmov oPos.z, c[5].z\n"
+	static const char* shader2 = "vs.1.1"
+		"mov oT1.x, c[5].z\n"
+		"mul r2, v0.x, c[0]\n"
+		"mov oD0, v4\n"
+		"mad r2, v0.y, c[1], r2\n"
+		"mad r2, v0.z, c[2], r2\n"
+		"mad r2, v0.w, c[3], r2\n"
+		"add oT0, v5, c[4]\n"
+		"mul r2.xyz, r2.xyz, c[0].xyz\n"
+		"mov r1, r2\n"
+		"mad r2.xyz, r2.xyz, r1.x, c[0].xyz\n"
+		"mov r2.z, c[5].z\n"
+		"mov oPos, r2\n";
+
+	GLOBAL->SHADER_SKY.pDeclaration[0] = D3DVSD_STREAM(0);
+	GLOBAL->SHADER_SKY.pDeclaration[4] = D3DVSD_NOP(); //FOG UNSUPPORTED D3DVSD_REG(D3DVSDE_FOG, D3DVSDT_FLOAT2);//0x40220005; D3DVSD_REG(D3DVSDE_FOG , D3DVSDT_FLOAT2)
+	GLOBAL->SHADER_SKY.pDeclaration[5] = D3DVSD_END();
+	GLOBAL->SHADER_SKY.unkInt3 = 0x18;
+
+	GLOBAL->SHADER_SKY.CompileShader(shader2);
 }
 
 void GameContext::CreateStaticGeometryShader()
