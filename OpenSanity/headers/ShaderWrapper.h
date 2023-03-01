@@ -3,10 +3,10 @@
 
 class ShaderWrapper {
 public:
-	HANDLE shaderHandle;
-	uint pDeclaration[64];
-	uint pFunction[256];
-	int unkInt3;
+	DWORD shaderHandle;
+	DWORD pDeclaration[64];
+	DWORD pFunction[256];
+	int declarationSize;
 	uint shaderSize;
 	uint unkField;
 

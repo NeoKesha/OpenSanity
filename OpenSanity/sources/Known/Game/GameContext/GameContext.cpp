@@ -167,86 +167,378 @@ void GameContext::CreateWaterAndSkyShaders()
 {
 	Global* GLOBAL = Global::Get();
 
-	GLOBAL->VERTEX_ATTRIBUTE_FORMAT.inputs[0].format = D3DVSDT_FLOAT3;
-	GLOBAL->VERTEX_ATTRIBUTE_FORMAT.inputs[0].offset = 0;
-	GLOBAL->VERTEX_ATTRIBUTE_FORMAT.inputs[3].format = D3DVSDT_FLOAT4; //D3DVSDT_NORMPACKED3
-	GLOBAL->VERTEX_ATTRIBUTE_FORMAT.inputs[3].offset = 0xc;
-	GLOBAL->VERTEX_ATTRIBUTE_FORMAT.inputs[4].format = D3DVSDT_FLOAT4; //D3DVSDT_PBYTE4
-	GLOBAL->VERTEX_ATTRIBUTE_FORMAT.inputs[4].offset = 0x10;
-	GLOBAL->VERTEX_ATTRIBUTE_FORMAT.inputs[5].format = D3DVSDT_FLOAT2;
-	GLOBAL->VERTEX_ATTRIBUTE_FORMAT.inputs[5].offset = 0x14;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_WATER.inputs[0].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_WATER.inputs[0].offset = 0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_WATER.inputs[3].format = D3DVSDT_FLOAT4; //D3DVSDT_NORMPACKED3
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_WATER.inputs[3].offset = 0xc;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_WATER.inputs[4].format = D3DVSDT_FLOAT4; //D3DVSDT_PBYTE4
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_WATER.inputs[4].offset = 0x10;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_WATER.inputs[5].format = D3DVSDT_FLOAT2;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_WATER.inputs[5].offset = 0x14;
 
 	//Had to workaround r12 as read-oPos, because unsupported in this DX8 SDK version
 	//TODO: Beware of constants, especially c[0]
+	// V5 is V7 (FOG -> TEXCOORD0) V3 -> V5 (DIFFUSE) V4 -> V6 (SPECULAR) //V2 -> V3 (NORMAL)
 	//ORIGINAL: "xvs.1.1\n#pragma screenspace\nmul oPos, v0.x, c[0]\nmov oD0, v4\nmad oPos, v0.y, c[1], r12\nmad oPos, v0.z, c[2], r12\nmad oPos, v0.w, c[3], r12\nadd oT0, v5, c[4]\nmul oT1.x, r12.z, c[15].z\nmul oPos.xyz, r12.xyz, c-38.xyz\n + rcc r1.x, r12.w\nmad oPos.xyz, r12.xyz, r1.x, c-37.xyz\n"
 	static const char* shader1 = "vs.1.1\n"
 		"mul r2, v0.x, c[0]\n"
-		"mov oD0, v4\n"
+		"mov oD0, v6\n"
 		"mad r2, v0.y, c[1], r2\n"
 		"mad r2, v0.z, c[2], r2\n"
 		"mad r2, v0.w, c[3], r2\n"
-		"add oT0, v5, c[4]\n"
+		"add oT2, v7, c[4]\n" //oT0 changed to oT2 because for some reason oT0 crashes on write
 		"mul oT1.x, r2.z, c[15].z\n"
-		"mul r2.xyz, r2.xyz, c[0].xyz\n"
-		"mov r1, r2\n"
-		"mad r2.xyz, r2.xyz, r1.w, c[0].xyz\n"
+		"mul r2.xyz, r2.xyz, c[38].xyz\n" //scale. wtf is register c[-38]?
+		"rcp r1.x, r2.w\n" //no rcc which is clamped
+		"mad r2.xyz, r2.xyz, r1.x, c[37].xyz\n" //offset
 		"mov oPos, r2\n";
-	
 	//TODO: BEWARE OF TYPE AND PACKING CHANGES
 	//see d3d8types.h of DX8 SDK and XBOX SDK
 	GLOBAL->SHADER_WATER.pDeclaration[0] = D3DVSD_STREAM(0);// 0x20000000;
 	GLOBAL->SHADER_WATER.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);//0x40320000; 
 	//NORMPACKED3 - (x,y,z,1.0f) value packed into 32 bits with mask (11,10,10)
-	GLOBAL->SHADER_WATER.pDeclaration[2] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4);//0x40160003; D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_NORMPACKED3)
+	GLOBAL->SHADER_WATER.pDeclaration[2] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4);//0x40160003; D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_NORMPACKED3) - NORMPACKED3 UNSUPPORTED
 	//PBYTE4 - 4 bytes from 0 to 255 mapped to [0;1]
-	GLOBAL->SHADER_WATER.pDeclaration[3] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4);//0x40440004; D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_PBYTE4)
-	GLOBAL->SHADER_WATER.pDeclaration[4] = D3DVSD_NOP(); //FOG UNSUPPORTED D3DVSD_REG(D3DVSDE_FOG, D3DVSDT_FLOAT2);//0x40220005; D3DVSD_REG(D3DVSDE_FOG , D3DVSDT_FLOAT2)
+	GLOBAL->SHADER_WATER.pDeclaration[3] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4);//0x40440004; D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_PBYTE4) - PBYTE4 UNSUPPORTED
+	//I place my bets it's not a FOG but a D3DVSDE_TEXCOORD0, despite SDK telling me that 0x5 reg is for FOG
+	GLOBAL->SHADER_WATER.pDeclaration[4] = D3DVSD_REG(D3DVSDE_TEXCOORD0, D3DVSDT_FLOAT2); //0x40220005; D3DVSD_REG(D3DVSDE_FOG , D3DVSDT_FLOAT2) - FOG UNSUPPORTED
 	GLOBAL->SHADER_WATER.pDeclaration[5] = D3DVSD_END();
-	GLOBAL->SHADER_WATER.unkInt3 = 0x18;
+	GLOBAL->SHADER_WATER.declarationSize = 0x18;
 	GLOBAL->SHADER_WATER.CompileShader(shader1);
 	
 	//ORIGINAL: "xvs.1.1\n#pragma screenspace\nmov oT1.x, c[5].z\nmul oPos, v0.x, c[0]\nmov oD0, v4\nmad oPos, v0.y, c[1], r12\nmad oPos, v0.z, c[2], r12\nmad oPos, v0.w, c[3], r12\nadd oT0, v5, c[4]\nmul oPos.xyz, r12.xyz, c-38.xyz\n + rcc r1.x, r12.w\nmad oPos.xyz, r12.xyz, r1.x, c-37.xyz\nmov oPos.z, c[5].z\n"
 	static const char* shader2 = "vs.1.1"
 		"mov oT1.x, c[5].z\n"
 		"mul r2, v0.x, c[0]\n"
-		"mov oD0, v4\n"
+		"mov oD0, v6\n"
 		"mad r2, v0.y, c[1], r2\n"
 		"mad r2, v0.z, c[2], r2\n"
 		"mad r2, v0.w, c[3], r2\n"
-		"add oT0, v5, c[4]\n"
-		"mul r2.xyz, r2.xyz, c[0].xyz\n"
-		"mov r1, r2\n"
-		"mad r2.xyz, r2.xyz, r1.x, c[0].xyz\n"
+		"add oT2, v7, c[4]\n"
+		"mul r2.xyz, r2.xyz, c[38].xyz\n"
+		"rcp r1.x, r2.w\n"
+		"mad r2.xyz, r2.xyz, r1.x, c[37].xyz\n"
 		"mov r2.z, c[5].z\n"
 		"mov oPos, r2\n";
-
 	GLOBAL->SHADER_SKY.pDeclaration[0] = D3DVSD_STREAM(0);
 	GLOBAL->SHADER_SKY.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);//0x40320000; 
-	GLOBAL->SHADER_SKY.pDeclaration[2] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4);//0x40160003; D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_NORMPACKED3)
-	GLOBAL->SHADER_SKY.pDeclaration[3] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4);//0x40440004; D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_PBYTE4)
-	GLOBAL->SHADER_SKY.pDeclaration[4] = D3DVSD_NOP(); //FOG UNSUPPORTED D3DVSD_REG(D3DVSDE_FOG, D3DVSDT_FLOAT2);//0x40220005; D3DVSD_REG(D3DVSDE_FOG , D3DVSDT_FLOAT2)
+	GLOBAL->SHADER_SKY.pDeclaration[2] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4);//0x40160003; D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_NORMPACKED3) - NORMPACKED3 UNSUPPORTED
+	GLOBAL->SHADER_SKY.pDeclaration[3] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4);//0x40440004; D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_PBYTE4) - PBYTE4 UNSUPPORTED
+	GLOBAL->SHADER_SKY.pDeclaration[4] = D3DVSD_REG(D3DVSDE_TEXCOORD0, D3DVSDT_FLOAT2); //0x40220005; D3DVSD_REG(D3DVSDE_FOG , D3DVSDT_FLOAT2) - FOG UNSUPPORTED
 	GLOBAL->SHADER_SKY.pDeclaration[5] = D3DVSD_END();
-	GLOBAL->SHADER_SKY.unkInt3 = 0x18;
-
+	GLOBAL->SHADER_SKY.declarationSize = 0x18;
 	GLOBAL->SHADER_SKY.CompileShader(shader2);
 }
 
 void GameContext::CreateStaticGeometryShader()
 {
-	//TODO: XBOX xvs shader language magic here
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_STATIC.inputs[0].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_STATIC.inputs[0].offset = 0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_STATIC.inputs[3].format = D3DVSDT_FLOAT4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_STATIC.inputs[3].offset = 0xc;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_STATIC.inputs[4].format = D3DVSDT_FLOAT4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_STATIC.inputs[4].offset = 0x10;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_STATIC.inputs[5].format = D3DVSDT_FLOAT2;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_STATIC.inputs[5].offset = 0x14;
+
+	//ORIGINAL "xvs.1.1\n#pragma screenspace\nmul oPos, c[0], v0.x\nmad oPos, c[1], v0.y, r12\nmad oPos, c[2], v0.z, r12\nmad oPos, c[3], v0.w, r12\ndp3 r6, v3, c[6]\nmul r6, r6, c[9]\ndp3 r7, v3, c[7]\nmad r7, r7, c[10], r6\ndp3 r8, v3, c[8]\nmad r8, r8, c[11], r7\nadd r9, r8, c[5]\nmov oD0.w, v4.w\nmul oD0.xyz, v4, r9\nmul oT1.x, r12.z, c[15].z\nadd oT0, v5, c[4]\nmul oPos.xyz, r12.xyz, c-38.xyz\n + rcc r1.x, r12.w\nmad oPos.xyz, r12.xyz, r1.x, c-37.xyz\n"
+	static const char* shader1 = "vs.1.1\n"
+		"mul r2, c[0], v0.x\n"
+		"mad r2, c[1], v0.y, r2\n"
+		"mad r2, c[2], v0.z, r2\n"
+		"mad r2, c[3], v0.w, r2\n"
+		"dp3 r6, v5, c[6]\n"
+		"mul r6, r6, c[9]\n"
+		"dp3 r7, v5, c[7]\n"
+		"mad r7, r7, c[10], r6\n"
+		"dp3 r8, v5, c[8]\n"
+		"mad r8, r8, c[11], r7\n"
+		"add r9, r8, c[5]\n"
+		"mov oD0.w, v6.w\n"
+		"mul oD0.xyz, v6, r9\n"
+		"mul oT1.x, r2.z, c[15].z\n"
+		"add oT2, v7, c[4]\n"
+		"mul r2.xyz, r2.xyz, c[38].xyz\n"
+		"rcp r1.x, r2.w\n"
+		"mad r2.xyz, r2.xyz, r1.x, c[37].xyz\n"
+		"mov oPos, r2";
+	GLOBAL->SHADER_STATIC_GEOMETRY_1.pDeclaration[0] = D3DVSD_STREAM(0);
+	GLOBAL->SHADER_STATIC_GEOMETRY_1.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);
+	GLOBAL->SHADER_STATIC_GEOMETRY_1.pDeclaration[2] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4);
+	GLOBAL->SHADER_STATIC_GEOMETRY_1.pDeclaration[3] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4);
+	GLOBAL->SHADER_STATIC_GEOMETRY_1.pDeclaration[4] = D3DVSD_REG(D3DVSDE_TEXCOORD0, D3DVSDT_FLOAT2);
+	GLOBAL->SHADER_STATIC_GEOMETRY_1.pDeclaration[5] = D3DVSD_END();
+	GLOBAL->SHADER_STATIC_GEOMETRY_1.declarationSize = 0x18;
+	GLOBAL->SHADER_STATIC_GEOMETRY_1.CompileShader(shader1);
+
+	//ORIGINAL "xvs.1.1\n#pragma screenspace\nmul oPos, c[0], v0.x\nmad oPos, c[1], v0.y, r12\nmad oPos, c[2], v0.z, r12\nmad oPos, c[3], v0.w, r12\nmov oD0, v4\nmul oT1.x, r12.z, c[15].z\nadd oT0, v5, c[4]\nmul oPos.xyz, r12.xyz, c-38.xyz\n + rcc r1.x, r12.w\nmad oPos.xyz, r12.xyz, r1.x, c-37.xyz\n"
+	static const char* shader2 = "vs.1.1\n"
+		"mul r2, c[0], v0.x\n"
+		"mad r2, c[1], v0.y, r2\n"
+		"mad r2, c[2], v0.z, r2\n"
+		"mad r2, c[3], v0.w, r2\n"
+		"mov oD0, v6\n"
+		"mul oT1.x, r2.z, c[15].z\n"
+		"add oT2, v7, c[4]\n"
+		"mul r2.xyz, r2.xyz, c[38].xyz\n"
+		"rcp r1.x, r2.w\n"
+		"mad r2.xyz, r2.xyz, r1.x, c[37].xyz\n"
+		"mov oPos, r2";
+	GLOBAL->SHADER_STATIC_GEOMETRY_2.pDeclaration[0] = D3DVSD_STREAM(0);
+	GLOBAL->SHADER_STATIC_GEOMETRY_2.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);
+	GLOBAL->SHADER_STATIC_GEOMETRY_2.pDeclaration[2] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4);
+	GLOBAL->SHADER_STATIC_GEOMETRY_2.pDeclaration[3] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4);
+	GLOBAL->SHADER_STATIC_GEOMETRY_2.pDeclaration[4] = D3DVSD_REG(D3DVSDE_TEXCOORD0, D3DVSDT_FLOAT2);
+	GLOBAL->SHADER_STATIC_GEOMETRY_2.pDeclaration[5] = D3DVSD_END();
+	GLOBAL->SHADER_STATIC_GEOMETRY_2.declarationSize = 0x18;
+	GLOBAL->SHADER_STATIC_GEOMETRY_2.CompileShader(shader2);
 }
 
 void GameContext::CreateSkinnedGeometryShader()
 {
-	//TODO: XBOX xvs shader language magic here
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[0].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[0].offset = 0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[1].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[1].offset = 0xc;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[2].format = D3DVSDT_SHORT4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[2].offset = 0x18;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[3].format = D3DVSDT_FLOAT4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[3].offset = 0x20;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[4].format = D3DVSDT_FLOAT4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[4].offset = 0x24;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[5].format = D3DVSDT_FLOAT2;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_SKINNED.inputs[5].offset = 0x28;
+
+	//ORIGINAL "xvs.1.1\nmov a0.x, v2.x\nmul r0, c[a0.x + 0], v0.x\nmad r0, c[a0.x + 1], v0.y, r0\nmad r0, c[a0.x + 2], v0.z, r0\nmad r0, c[a0.x + 3], v0.w, r0\nmul r0, r0, v1.x\nmul r3, c[a0.x + 0], v3.x\nmad r3, c[a0.x + 1], v3.y, r3\nmad r3, c[a0.x + 2], v3.z, r3\nmov a0.x, v2.y\nmul r1, c[a0.x + 0], v0.x\nmad r1, c[a0.x + 1], v0.y, r1\nmad r1, c[a0.x + 2], v0.z, r1\nmad r1, c[a0.x + 3], v0.w, r1\nmad r0, r1, v1.y, r0\nmov a0.x, v2.z\nmul r2, c[a0.x + 0], v0.x\nmad r2, c[a0.x + 1], v0.y, r2\nmad r2, c[a0.x + 2], v0.z, r2\nmad r2, c[a0.x + 3], v0.w, r2\nmad r0, r2, v1.z, r0\nmul oPos, c[0], r0.x\nmad oPos, c[1], r0.y, r12\nmad oPos, c[2], r0.z, r12\nmad oPos, c[3], r0.w, r12\ndp3 r6, r3, c6\nmul r6, r6, c[9]\ndp3 r7, r3, c7\nmad r7, r7, c[10], r6\ndp3 r8, r3, c8\nmad r8, r8, c[11], r7\nadd r9, r8, c[5]\nmov oD0.w, v4.w\nmul oD0.xyz, v4, r9\nmul oT1.x, r12.z, c[15].z\nadd oT0, v5, c[4]\n"
+	static const char* shader = "vs.1.1\n"
+		"mov a0.x, v3.x\n"
+		"mul r0, c[a0.x + 0], v0.x\n"
+		"mad r0, c[a0.x + 1], v0.y, r0\n"
+		"mad r0, c[a0.x + 2], v0.z, r0\n"
+		"mad r0, c[a0.x + 3], v0.w, r0\n"
+		"mul r0, r0, v1.x\n"
+		"mul r3, c[a0.x + 0], v5.x\n"
+		"mad r3, c[a0.x + 1], v5.y, r3\n"
+		"mad r3, c[a0.x + 2], v5.z, r3\n"
+		"mov a0.x, v3.y\n"
+		"mul r1, c[a0.x + 0], v0.x\n"
+		"mad r1, c[a0.x + 1], v0.y, r1\n"
+		"mad r1, c[a0.x + 2], v0.z, r1\n"
+		"mad r1, c[a0.x + 3], v0.w, r1\n"
+		"mad r0, r1, v1.y, r0\n"
+		"mov a0.x, v3.z\n"
+		"mul r2, c[a0.x + 0], v0.x\n"
+		"mad r2, c[a0.x + 1], v0.y, r2\n"
+		"mad r2, c[a0.x + 2], v0.z, r2\n"
+		"mad r2, c[a0.x + 3], v0.w, r2\n"
+		"mad r0, r2, v1.z, r0\n"
+		"mul r4, c[0], r0.x\n"
+		"mad r4, c[1], r0.y, r4\n"
+		"mad r4, c[2], r0.z, r4\n"
+		"mad r4, c[3], r0.w, r4\n"
+		"dp3 r6, r3, c6\n"
+		"mul r6, r6, c[9]\n"
+		"dp3 r7, r3, c7\n"
+		"mad r7, r7, c[10], r6\n"
+		"dp3 r8, r3, c8\n"
+		"mad r8, r8, c[11], r7\n"
+		"add r9, r8, c[5]\n"
+		"mov oD0.w, v6.w\n"
+		"mul oD0.xyz, v6, r9\n"
+		"mul oT1.x, r4.z, c[15].z\n"
+		"add oT2, v7, c[4]\n"
+		"mov oPos, r4"; 
+
+	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[0] = D3DVSD_STREAM(0);
+	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);
+	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[2] = D3DVSD_REG(D3DVSDE_BLENDWEIGHT, D3DVSDT_FLOAT3);
+	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[3] = D3DVSD_REG(D3DVSDE_NORMAL, D3DVSDT_SHORT4); //V2 -> V3
+	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[4] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4); //V3 -> V5
+	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[5] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4); //V4 -> V6
+	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[6] = D3DVSD_REG(D3DVSDE_TEXCOORD0, D3DVSDT_FLOAT2); //V5 -> V7
+	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[7] = D3DVSD_END();
+	GLOBAL->SHADER_SKINNED_GEOMETRY.declarationSize = 0x20;
+	GLOBAL->SHADER_SKINNED_GEOMETRY.CompileShader(shader);
 }
 
 void GameContext::CreateBlendSkinShader()
 {
-	//TODO: XBOX xvs shader language magic here
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[0].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[0].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[1].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[1].offset = 0xc;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[2].format = D3DVSDT_SHORT4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[2].offset = 0x18;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[3].format = D3DVSDT_FLOAT4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[3].offset = 0x20;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[4].format = D3DVSDT_FLOAT4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[4].offset = 0x24;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[5].format = D3DVSDT_FLOAT2;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[5].offset = 0x28;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[6].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[6].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[6].streamIndex = 1;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[7].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[7].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[7].streamIndex = 2;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[8].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[8].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[8].streamIndex = 3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[9].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[9].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[9].streamIndex = 4;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[10].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[10].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[10].streamIndex = 5;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[11].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[11].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[11].streamIndex = 6;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[12].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[12].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[12].streamIndex = 7;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[13].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[13].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[13].streamIndex = 8;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[14].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[14].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[14].streamIndex = 9;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[15].format = D3DVSDT_FLOAT3;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[15].offset = 0x0;
+	GLOBAL->VERTEX_ATTRIBUTE_FORMAT_BLEND.inputs[15].streamIndex = 10;
+
+	//ORIGINAL "xvs.1.1\nmov r4, v0\nmov r5, v0\nsub r8, v8, r5\nmad r4, c[12].z, r8, r4\nsub r7, v7, r5\nmad r4, c[12].y, r7, r4\nsub r6, v6, r5\nmad r4, c[12].x, r6, r4\nmov a0.x, v2.x\nmul r0, c[a0.x + 0], r4.x\nmad r0, c[a0.x + 1], r4.y, r0\nmad r0, c[a0.x + 2], r4.z, r0\nmad r0, c[a0.x + 3], r4.w, r0\nmul r0, r0, v1.x\nmul r3, c[a0.x + 0], v3.x\nmad r3, c[a0.x + 1], v3.y, r3\nmad r3, c[a0.x + 2], v3.z, r3\nmov a0.x, v2.y\nmul r1, c[a0.x + 0], r4.x\nmad r1, c[a0.x + 1], r4.y, r1\nmad r1, c[a0.x + 2], r4.z, r1\nmad r1, c[a0.x + 3], r4.w, r1\nmad r0, r1, v1.y, r0\nmov a0.x, v2.z\nmul r2, c[a0.x + 0], r4.x\nmad r2, c[a0.x + 1], r4.y, r2\nmad r2, c[a0.x + 2], r4.z, r2\nmad r2, c[a0.x + 3], r4.w, r2\nmad r0, r2, v1.z, r0\nmul oPos, c[0], r0.x\nmad oPos, c[1], r0.y, r12\nmad oPos, c[2], r0.z, r12\nmad oPos, c[3], r0.w, r12\ndp3 r6, r3, c6\nmul r6, r6.x, c[9]\ndp3 r7, r3, c7\nmad r7, r7.x, c[10], r6\ndp3 r8, r3, c8\nmad r8, r8.x, c[11], r7\nadd r9, r8, c[5]\nmov oD0.w, v4.w\nmul oD0.xyz, v4, r9\nmul oT1.x, r12.z, c[15].z\nadd oT0, v5, c[4]\n"
+	static const char* shader1 = "vs.1.1\n"
+		"mov r4, v0\n"
+		"mov r5, v0\n"
+		"sub r8, v10, r5\n"
+		"mad r4, c[12].z, r8, r4\n"
+		"sub r7, v9, r5\n"
+		"mad r4, c[12].y, r7, r4\n"
+		"sub r6, v8, r5\n"
+		"mad r4, c[12].x, r6, r4\n"
+		"mov a0.x, v3.x\n"
+		"mul r0, c[a0.x + 0], r4.x\n"
+		"mad r0, c[a0.x + 1], r4.y, r0\n"
+		"mad r0, c[a0.x + 2], r4.z, r0\n"
+		"mad r0, c[a0.x + 3], r4.w, r0\n"
+		"mul r0, r0, v1.x\n"
+		"mul r3, c[a0.x + 0], v5.x\n"
+		"mad r3, c[a0.x + 1], v5.y, r3\n"
+		"mad r3, c[a0.x + 2], v5.z, r3\n"
+		"mov a0.x, v3.y\n"
+		"mul r1, c[a0.x + 0], r4.x\n"
+		"mad r1, c[a0.x + 1], r4.y, r1\n"
+		"mad r1, c[a0.x + 2], r4.z, r1\n"
+		"mad r1, c[a0.x + 3], r4.w, r1\n"
+		"mad r0, r1, v1.y, r0\n"
+		"mov a0.x, v3.z\n"
+		"mul r2, c[a0.x + 0], r4.x\n"
+		"mad r2, c[a0.x + 1], r4.y, r2\n"
+		"mad r2, c[a0.x + 2], r4.z, r2\n"
+		"mad r2, c[a0.x + 3], r4.w, r2\n"
+		"mad r0, r2, v1.z, r0\n"
+		"mul r10, c[0], r0.x\n"
+		"mad r10, c[1], r0.y, r10\n"
+		"mad r10, c[2], r0.z, r10\n"
+		"mad r10, c[3], r0.w, r10\n"
+		"dp3 r6, r3, c6\n"
+		"mul r6, r6.x, c[9]\n"
+		"dp3 r7, r3, c7\n"
+		"mad r7, r7.x, c[10], r6\n"
+		"dp3 r8, r3, c8\n"
+		"mad r8, r8.x, c[11], r7\n"
+		"add r9, r8, c[5]\n"
+		"mov oD0.w, v6.w\n"
+		"mul oD0.xyz, v6, r9\n"
+		"mul oT1.x, r10.z, c[15].z\n"
+		"add oT0, v7, c[4]\n" //Does not crash for some reason
+		"mov oPos, r10";
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[0] = D3DVSD_STREAM(0);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[2] = D3DVSD_REG(D3DVSDE_BLENDWEIGHT, D3DVSDT_FLOAT3);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[3] = D3DVSD_REG(D3DVSDE_NORMAL, D3DVSDT_SHORT4);  //V2 -> V3
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[4] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4);  //V3 -> V5
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[5] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4); //V4 -> V6
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[6] = D3DVSD_REG(D3DVSDE_TEXCOORD0, D3DVSDT_FLOAT2); //V5 -> V7
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[7] = D3DVSD_STREAM(1);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[8] = D3DVSD_REG(D3DVSDE_TEXCOORD1, D3DVSDT_FLOAT3); //V6 -> V8 NOT A TEXTURE
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[9] = D3DVSD_STREAM(2);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[10] = D3DVSD_REG(D3DVSDE_TEXCOORD2, D3DVSDT_FLOAT3);//V7 -> V9 NOT A TEXTURE
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[11] = D3DVSD_STREAM(3);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[12] = D3DVSD_REG(D3DVSDE_TEXCOORD3, D3DVSDT_FLOAT3);//V8 -> V10 NOT A TEXTURE
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[13] = D3DVSD_STREAM(4);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[14] = D3DVSD_REG(D3DVSDE_TEXCOORD4, D3DVSDT_FLOAT3);//V9 -> V11 NOT A TEXTURE
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[15] = D3DVSD_STREAM(5);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[16] = D3DVSD_REG(D3DVSDE_TEXCOORD5, D3DVSDT_FLOAT3);//V10 -> V12 NOT A TEXTURE
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[17] = D3DVSD_STREAM(6);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[18] = D3DVSD_REG(D3DVSDE_TEXCOORD6, D3DVSDT_FLOAT3);//V11 -> V13 NOT A TEXTURE
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[19] = D3DVSD_STREAM(7);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[20] = D3DVSD_REG(D3DVSDE_TEXCOORD7, D3DVSDT_FLOAT3);//V12 -> V14 NOT A TEXTURE
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[21] = D3DVSD_STREAM(8);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[22] = D3DVSD_REG(D3DVSDE_POSITION2, D3DVSDT_FLOAT3);//V13 -> V15
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[23] = D3DVSD_STREAM(9);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[24] = D3DVSD_REG(D3DVSDE_NORMAL2, D3DVSDT_FLOAT3);//V14 -> V16 NOT A NORMAL
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[25] = D3DVSD_STREAM(10);
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[26] = D3DVSD_REG(D3DVSDE_BLENDINDICES, D3DVSDT_FLOAT3);//V15 -> V2 NOT A BLEND INDEX
+	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[27] = D3DVSD_END();
+	GLOBAL->SHADER_BLEND_SKIN_1.declarationSize = 0x70;
+	GLOBAL->SHADER_BLEND_SKIN_1.CompileShader(shader1);
+
+	//ORIGINAL "xvs.1.1\nmov a0.x, v2.x\nmul r0, c[a0.x + 0], v0.x\nmad r0, c[a0.x + 1], v0.y, r0\nmad r0, c[a0.x + 2], v0.z, r0\nmad r0, c[a0.x + 3], v0.w, r0\nmul r0, r0, v1.x\nmul r3, c[a0.x + 0], v3.x\nmad r3, c[a0.x + 1], v3.y, r3\nmad r3, c[a0.x + 2], v3.z, r3\nmov a0.x, v2.y\nmul r1, c[a0.x + 0], v0.x\nmad r1, c[a0.x + 1], v0.y, r1\nmad r1, c[a0.x + 2], v0.z, r1\nmad r1, c[a0.x + 3], v0.w, r1\nmad r0, r1, v1.y, r0\nmov a0.x, v2.z\nmul r2, c[a0.x + 0], v0.x\nmad r2, c[a0.x + 1], v0.y, r2\nmad r2, c[a0.x + 2], v0.z, r2\nmad r2, c[a0.x + 3], v0.w, r2\nmad r0, r2, v1.z, r0\nmul oPos, c[0], r0.x\nmad oPos, c[1], r0.y, r12\nmad oPos, c[2], r0.z, r12\nmad oPos, c[3], r0.w, r12\ndp3 r6, r3, c6\nmul r6, r6.x, c[9]\ndp3 r7, r3, c7\nmad r7, r7.x, c[10], r6\ndp3 r8, r3, c8\nmad r8, r8.x, c[11], r7\nadd r9, r8, c[5]\nmov oD0.w, v4.w\nmul oD0.xyz, v4, r9\nmul oT1.x, r12.z, c[15].z\nadd oT0, v5, c[4]\n"
+	static const char* shader2 = "vs.1.1\n"
+		"mov a0.x, v3.x\n"
+		"mul r0, c[a0.x + 0], v0.x\n"
+		"mad r0, c[a0.x + 1], v0.y, r0\n"
+		"mad r0, c[a0.x + 2], v0.z, r0\n"
+		"mad r0, c[a0.x + 3], v0.w, r0\n"
+		"mul r0, r0, v1.x\n"
+		"mul r3, c[a0.x + 0], v5.x\n"
+		"mad r3, c[a0.x + 1], v5.y, r3\n"
+		"mad r3, c[a0.x + 2], v5.z, r3\n"
+		"mov a0.x, v3.y\n"
+		"mul r1, c[a0.x + 0], v0.x\n"
+		"mad r1, c[a0.x + 1], v0.y, r1\n"
+		"mad r1, c[a0.x + 2], v0.z, r1\n"
+		"mad r1, c[a0.x + 3], v0.w, r1\n"
+		"mad r0, r1, v1.y, r0\n"
+		"mov a0.x, v3.z\n"
+		"mul r2, c[a0.x + 0], v0.x\n"
+		"mad r2, c[a0.x + 1], v0.y, r2\n"
+		"mad r2, c[a0.x + 2], v0.z, r2\n"
+		"mad r2, c[a0.x + 3], v0.w, r2\n"
+		"mad r0, r2, v1.z, r0\n"
+		"mul r10, c[0], r0.x\n"
+		"mad r10, c[1], r0.y, r10\n"
+		"mad r10, c[2], r0.z, r10\n"
+		"mad r10, c[3], r0.w, r10\n"
+		"dp3 r6, r3, c6\n"
+		"mul r6, r6.x, c[9]\n"
+		"dp3 r7, r3, c7\n"
+		"mad r7, r7.x, c[10], r6\n"
+		"dp3 r8, r3, c8\n"
+		"mad r8, r8.x, c[11], r7\n"
+		"add r9, r8, c[5]\n"
+		"mov oD0.w, v6.w\n"
+		"mul oD0.xyz, v6, r9\n"
+		"mul oT1.x, r10.z, c[15].z\n"
+		"add oT2, v7, c[4]\n"
+		"mov oPos, r10";
+	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[0] = D3DVSD_STREAM(0);
+	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);
+	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[2] = D3DVSD_REG(D3DVSDE_BLENDWEIGHT, D3DVSDT_FLOAT3);
+	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[3] = D3DVSD_REG(D3DVSDE_NORMAL, D3DVSDT_SHORT4); //V2 -> V3
+	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[4] = D3DVSD_REG(D3DVSDE_DIFFUSE, D3DVSDT_FLOAT4); //V3 -> V5
+	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[5] = D3DVSD_REG(D3DVSDE_SPECULAR, D3DVSDT_FLOAT4); //V4 -> V6
+	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[6] = D3DVSD_REG(D3DVSDE_TEXCOORD0, D3DVSDT_FLOAT2); //V5 -> V7
+	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[7] = D3DVSD_END();
+	GLOBAL->SHADER_BLEND_SKIN_2.declarationSize = 0x20;
+	GLOBAL->SHADER_BLEND_SKIN_2.CompileShader(shader2);
 }
 
 uint GameContext::ParseVideoParameters(TwinString* arg) {

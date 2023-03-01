@@ -14,7 +14,8 @@ void ShaderWrapper::CompileShader(const char* shaderCode)
         LPVOID pResolverUserData,
         LPDWORD pShaderType
     */
-    HRESULT result = D3DXAssembleShader(shaderCode,strlen(shaderCode), 0, null, &buffer, &errors);
+    HRESULT result;
+    result = D3DXAssembleShader(shaderCode, strlen(shaderCode), 0, null, &buffer, &errors);
     if (result != D3D_OK) {
         if (result == D3DERR_INVALIDCALL) {
             Logging::Log("CompileShader: INVALID CALL");
@@ -33,5 +34,14 @@ void ShaderWrapper::CompileShader(const char* shaderCode)
     memcpy_s(this->pFunction, 1024, bufferData, shaderSize);
     this->shaderSize = shaderSize;
 
-    GLOBAL->D3D_DEVICE->CreateVertexShader((DWORD*)this->pDeclaration, (DWORD*)this->pFunction, (DWORD*)this->shaderHandle, D3DUSAGE_SOFTWAREPROCESSING); //D3DUSAGE_PERSISTENTDIFFUSE - XBOX extension
+    result = GLOBAL->D3D_DEVICE->CreateVertexShader(this->pDeclaration, this->pFunction, &this->shaderHandle, 0); //D3DUSAGE_PERSISTENTDIFFUSE - XBOX extension
+    if (result != D3D_OK) {
+        if (result == D3DERR_INVALIDCALL) {
+            Logging::Log("CreateVertexShader: INVALID CALL");
+        }
+        else if (result == D3DERR_OUTOFVIDEOMEMORY) {
+            Logging::Log("CreateVertexShader: INVALID DATA");
+        }
+        return;
+    }
 }
