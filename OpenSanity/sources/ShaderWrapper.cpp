@@ -15,6 +15,7 @@ void ShaderWrapper::CompileShader(const char* shaderCode)
         LPDWORD pShaderType
     */
     HRESULT result;
+
     result = D3DXAssembleShader(shaderCode, strlen(shaderCode), 0, null, &buffer, &errors);
     if (result != D3D_OK) {
         if (result == D3DERR_INVALIDCALL) {
@@ -40,7 +41,7 @@ void ShaderWrapper::CompileShader(const char* shaderCode)
             Logging::Log("CreateVertexShader: INVALID CALL");
         }
         else if (result == D3DERR_OUTOFVIDEOMEMORY) {
-            Logging::Log("CreateVertexShader: INVALID DATA");
+            Logging::Log("CreateVertexShader: OUT OF VRAM");
         }
         return;
     }
