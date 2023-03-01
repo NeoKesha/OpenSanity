@@ -1279,7 +1279,7 @@
     <ClCompile Include="sources\Unknown\AutoClasses\AutoClass4.cpp" />
     <ClCompile Include="sources\Unknown\AutoClasses\AutoClass40.cpp" />
     <ClCompile Include="sources\Unknown\AutoClasses\AutoClass42.cpp" />
-    <ClCompile Include="sources\Unknown\AutoClasses\AutoClass44.cpp" />
+    <ClCompile Include="sources\Unknown\AutoClasses\D3DVERTEXATTRIBUTEFORMAT.cpp" />
     <ClCompile Include="sources\Unknown\AutoClasses\AutoClass46.cpp" />
     <ClCompile Include="sources\Unknown\AutoClasses\AutoClass52.cpp" />
     <ClCompile Include="sources\Unknown\AutoClasses\AutoClass53.cpp" />
@@ -2752,7 +2752,7 @@
     <ClInclude Include="headers\Unknown\AutoClasses\AutoClass4.h" />
     <ClInclude Include="headers\Unknown\AutoClasses\AutoClass40.h" />
     <ClInclude Include="headers\Unknown\AutoClasses\AutoClass42.h" />
-    <ClInclude Include="headers\Unknown\AutoClasses\AutoClass44.h" />
+    <ClInclude Include="headers\Unknown\AutoClasses\D3DVERTEXATTRIBUTEFORMAT.h" />
     <ClInclude Include="headers\Unknown\AutoClasses\AutoClass46.h" />
     <ClInclude Include="headers\Unknown\AutoClasses\AutoClass52.h" />
     <ClInclude Include="headers\Unknown\AutoClasses\AutoClass53.h" />
@@ -2956,7 +2956,7 @@
     <ClInclude Include="headers\Unknown\UnkSfxCollection.h" />
     <ClInclude Include="headers\Unknown\UnkStructures\US001.h" />
     <ClInclude Include="headers\Unknown\UnkStructures\US002.h" />
-    <ClInclude Include="headers\UnkShaderSetting.h" />
+    <ClInclude Include="headers\D3DVERTEXSHADERINPUT.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

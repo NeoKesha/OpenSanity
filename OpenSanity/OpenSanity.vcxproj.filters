@@ -3780,7 +3780,7 @@
     <ClCompile Include="sources\Unknown\AutoClasses\AutoClass42.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\Unknown\AutoClasses\AutoClass44.cpp">
+    <ClCompile Include="sources\Unknown\AutoClasses\D3DVERTEXATTRIBUTEFORMAT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\Unknown\AutoClasses\AutoClass46.cpp">
@@ -8171,7 +8171,7 @@
     <ClInclude Include="headers\Unknown\AutoClasses\AutoClass42.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\Unknown\AutoClasses\AutoClass44.h">
+    <ClInclude Include="headers\Unknown\AutoClasses\D3DVERTEXATTRIBUTEFORMAT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\Unknown\AutoClasses\AutoClass46.h">
@@ -8822,7 +8822,7 @@
     <ClInclude Include="headers\ShaderWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\UnkShaderSetting.h">
+    <ClInclude Include="headers\D3DVERTEXSHADERINPUT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

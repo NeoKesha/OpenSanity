@@ -75,7 +75,7 @@ class BankSub;
 class SectionAbstract;
 class AutoClass40;
 class Decals;
-class AutoClass44;
+class D3DVERTEXATTRIBUTEFORMAT;
 class AutoClass3;
 class AutoClass46;
 class UnkFamily28A;

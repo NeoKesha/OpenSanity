@@ -1,17 +1,17 @@
-#include "headers/Unknown/AutoClasses/AutoClass44.h"
+#include "headers/Unknown/AutoClasses/D3DVERTEXATTRIBUTEFORMAT.h"
 
-AutoClass44::AutoClass44()
+D3DVERTEXATTRIBUTEFORMAT::D3DVERTEXATTRIBUTEFORMAT()
 {
 	for (int i = 0; i < 16; ++i) {
-		this->elements[i].vertexAttributeFormat = 0;
-		this->elements[i].b = 0;
-		this->elements[i].c = 2;
-		this->elements[i].d = 0;
-		this->elements[i].e = 0;
+		this->inputs[i].streamIndex = 0;
+		this->inputs[i].offset = 0;
+		this->inputs[i].format = D3DVSDT_FLOAT3; //Actually D3DVSDT_NONE, but there is NONE of that in DX8 SDK for Windows
+		this->inputs[i].tessType = 0;
+		this->inputs[i].tessSource = 0;
 	}
 }
 
-char AutoClass44::FUN_001027a0(int param_1) {
+char D3DVERTEXATTRIBUTEFORMAT::FUN_001027a0(int param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	char __thiscall AutoClass44::FUN_001027a0(AutoClass44 *this,int param_1){
@@ -48,7 +48,7 @@ char AutoClass44::FUN_001027a0(int param_1) {
 	return 0;
 }
 
-void AutoClass44::FUN_00102850(uint* param_1) {
+void D3DVERTEXATTRIBUTEFORMAT::FUN_00102850(uint* param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall AutoClass44::FUN_00102850(AutoClass44 *this,uint *param_1){
