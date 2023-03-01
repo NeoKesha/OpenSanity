@@ -186,8 +186,8 @@ void GameContext::CreateWaterAndSkyShaders()
 		"mad r2, v0.y, c[1], r2\n"
 		"mad r2, v0.z, c[2], r2\n"
 		"mad r2, v0.w, c[3], r2\n"
-		//"add oT2, v7, c[4]\n" //oT0 changed to oT2 because for some reason oT0 crashes on write
-		//"mul oT1.x, r2.z, c[15].z\n" //TODO:: FSFR shaders do not create and give INVALID CALL error if i touch oT regs
+		"add oT0, v7, c[4]\n" 
+		"mul oT1.x, r2.z, c[15].z\n" 
 		"mul r2.xyz, r2.xyz, c[38].xyz\n" //scale. wtf is register c[-38]?
 		"rcp r1.x, r2.w\n" //no rcc which is clamped
 		"mad r2.xyz, r2.xyz, r1.x, c[37].xyz\n" //offset
@@ -208,13 +208,13 @@ void GameContext::CreateWaterAndSkyShaders()
 	
 	//ORIGINAL: "xvs.1.1\n#pragma screenspace\nmov oT1.x, c[5].z\nmul oPos, v0.x, c[0]\nmov oD0, v4\nmad oPos, v0.y, c[1], r12\nmad oPos, v0.z, c[2], r12\nmad oPos, v0.w, c[3], r12\nadd oT0, v5, c[4]\nmul oPos.xyz, r12.xyz, c-38.xyz\n + rcc r1.x, r12.w\nmad oPos.xyz, r12.xyz, r1.x, c-37.xyz\nmov oPos.z, c[5].z\n"
 	static const char* shader2 = "vs.1.1"
-		//"mov oT1.x, c[5].z\n"
+		"mov oT1.x, c[5].z\n"
 		"mul r2, v0.x, c[0]\n"
 		"mov oD0, v6\n"
 		"mad r2, v0.y, c[1], r2\n"
 		"mad r2, v0.z, c[2], r2\n"
 		"mad r2, v0.w, c[3], r2\n"
-		//"add oT2, v7, c[4]\n"
+		"add oT0, v7, c[4]\n"
 		"mul r2.xyz, r2.xyz, c[38].xyz\n"
 		"rcp r1.x, r2.w\n"
 		"mad r2.xyz, r2.xyz, r1.x, c[37].xyz\n"
@@ -258,8 +258,8 @@ void GameContext::CreateStaticGeometryShader()
 		"add r9, r8, c[5]\n"
 		"mov oD0.w, v6.w\n"
 		"mul oD0.xyz, v6, r9\n"
-		//"mul oT1.x, r2.z, c[15].z\n"
-		//"add oT2, v7, c[4]\n"
+		"mul oT1.x, r2.z, c[15].z\n"
+		"add oT0, v7, c[4]\n"
 		"mul r2.xyz, r2.xyz, c[38].xyz\n"
 		"rcp r1.x, r2.w\n"
 		"mad r2.xyz, r2.xyz, r1.x, c[37].xyz\n"
@@ -280,8 +280,8 @@ void GameContext::CreateStaticGeometryShader()
 		"mad r2, c[2], v0.z, r2\n"
 		"mad r2, c[3], v0.w, r2\n"
 		"mov oD0, v6\n"
-		//"mul oT1.x, r2.z, c[15].z\n"
-		//"add oT2, v7, c[4]\n"
+		"mul oT1.x, r2.z, c[15].z\n"
+		"add oT0, v7, c[4]\n"
 		"mul r2.xyz, r2.xyz, c[38].xyz\n"
 		"rcp r1.x, r2.w\n"
 		"mad r2.xyz, r2.xyz, r1.x, c[37].xyz\n"
@@ -349,8 +349,8 @@ void GameContext::CreateSkinnedGeometryShader()
 		"add r9, r8, c[5]\n"
 		"mov oD0.w, v6.w\n"
 		"mul oD0.xyz, v6, r9\n"
-		//"mul oT1.x, r4.z, c[15].z\n"
-		//"add oT2, v7, c[4]\n"
+		"mul oT1.x, r4.z, c[15].z\n"
+		"add oT0, v7, c[4]\n"
 		"mov oPos, r4"; 
 
 	GLOBAL->SHADER_SKINNED_GEOMETRY.pDeclaration[0] = D3DVSD_STREAM(0);
@@ -457,7 +457,7 @@ void GameContext::CreateBlendSkinShader()
 		"mov oD0.w, v6.w\n"
 		"mul oD0.xyz, v6, r9\n"
 		"mul oT1.x, r10.z, c[15].z\n"
-		"add oT0, v7, c[4]\n" //Does not crash for some reason
+		"add oT0, v7, c[4]\n"
 		"mov oPos, v0";
 	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[0] = D3DVSD_STREAM(0);
 	GLOBAL->SHADER_BLEND_SKIN_1.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);
@@ -527,8 +527,8 @@ void GameContext::CreateBlendSkinShader()
 		"add r9, r8, c[5]\n"
 		"mov oD0.w, v6.w\n"
 		"mul oD0.xyz, v6, r9\n"
-		//"mul oT1.x, r10.z, c[15].z\n"
-		//"add oT2, v7, c[4]\n"
+		"mul oT1.x, r10.z, c[15].z\n"
+		"add oT0, v7, c[4]\n"
 		"mov oPos, r10";
 	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[0] = D3DVSD_STREAM(0);
 	GLOBAL->SHADER_BLEND_SKIN_2.pDeclaration[1] = D3DVSD_REG(D3DVSDE_POSITION, D3DVSDT_FLOAT3);
