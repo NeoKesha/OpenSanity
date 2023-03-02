@@ -698,7 +698,19 @@ void GameContext::InitializeSystems() {
 
 void GameContext::InitMatrixes()
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	float val = 0.0f;
+	GLOBAL->DAT_003cff78 = 0;
+	GLOBAL->INT_003cff7c = 0;
+	GLOBAL->TICKS_COUNTER = 0.0f;
+
+	for (int i = 0; i < 48; ++i) {
+		GLOBAL->MATRIX_ARRAY_1[i] = Matrix4(val);
+		float k = Global::FUN_000e22f0(&val);
+		GLOBAL->MATRIX_ARRAY_1[i].m34 = k * 0.125;
+		val += (65536.0f / GLOBAL->PI_2) * GLOBAL->ENV_FLOAT_15;
+	}
 }
 
 GameContext::GameContext() : GameContextAbstract() {

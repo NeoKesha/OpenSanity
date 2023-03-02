@@ -1,4 +1,6 @@
 #include "headers/Known/Game/GameContext/GameContextAbstract.h"
+#include "headers/Global.h"
+#include <cmath>
 
 GameContextAbstract::GameContextAbstract() {
 	this->profile = 0;
@@ -50,24 +52,16 @@ void GameContextAbstract::DoStuff(int flags) {
 
 void GameContextAbstract::BuildCosTable()
 {
-	/*
-	  long cosIndex;
-  long sinIndex;
-  float10 cosValue;
-  unkbyte10 extraout_ST0;
-  float10 sinValue;
-  int i;
-  
-  i = 0;
-  do {
-    cosValue = (float10)fcos((float10)i * (float10)FLOAT_0039eeb0 * (float10)0.0009765625);
-    cosIndex = __ftol2((float)(cosValue * (float10)4096.0 + (float10)0.5));
-    sinValue = (float10)fsin(extraout_ST0);
-    TRIGONOMETRY_INDEXES[i * 2] = (short)cosIndex;
-    sinIndex = __ftol2((float)(sinValue * (float10)4096.0 + (float10)0.5));
-    TRIGONOMETRY_INDEXES[i * 2 + 1] = (short)sinIndex;
-    i = i + 1;
-  } while (i < 0x401);
-	*/
+	Global* GLOBAL = Global::Get();
+
+	for (int i = 0; i < 1024; ++i) {
+		float cosValue = cosf(((float)i * 1.5707964f * 0.0009765625f));
+		short cosIndex = (short)(cosValue * 4096.0f + 0.5f);
+		float sinValue = sinf(((float)i * 1.5707964f * 0.0009765625f));
+		short sinIndex = (short)(sinValue * 4096.0f + 0.5f);
+		GLOBAL->TRIGONOMETRY_INDEXES[i * 2] = cosIndex;
+		GLOBAL->TRIGONOMETRY_INDEXES[i * 2 + 1] = sinIndex;
+	}
+	return;
 }
 

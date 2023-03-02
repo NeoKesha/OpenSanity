@@ -8,6 +8,8 @@
 #include "headers/Unknown/AutoClasses/D3DVERTEXATTRIBUTEFORMAT.h"
 #include "headers/ShaderWrapper.h"
 #include "headers/Known/Graphics/Decals.h"
+#include "headers/Known/Math/Matrix4.h"
+
 
 class Global {
 public:
@@ -19,6 +21,9 @@ public:
 
 		return instance;
 	}
+	
+	static float FUN_000e22f0(float* num);
+	static void FUN_000d2a10(float* a, float* x, float* y);
 
 	//COPYRIGHT CHECK
 	//uint REFERENCE_CHECKSUM = 0xA24;
@@ -32,6 +37,8 @@ public:
 	float ENV_FLOAT_116_DT3 = 0.0f;
 	Decals ENV_CLASS_175_DECAL;
 	float ENV_FLOAT_92_0_15 = 0.0f;
+	float ENV_FLOAT_15 = 6.2831855f * 0.02083333f;
+	float PI_2 = 6.2831855f;
 
 	//UNK ADDRESSES
 	int			DAT_003ead50;
@@ -106,6 +113,8 @@ public:
 	int INT_004937ac;
 	int DAT_003ead18;
 	int DAT_00402a08;
+	int DAT_003cff78 = 0;
+	int INT_003cff7c = 0;
 
 	//GLOBAL VALUES
 	float SinTable[32768];
@@ -156,6 +165,9 @@ public:
 	ShaderWrapper SHADER_BLEND_SKIN_2;
 	int SOME_LIST1_LENGTH;
 	int SOME_LIST1[25];
+	float TICKS_COUNTER;
+	Matrix4 MATRIX_ARRAY_1[48];
+	short TRIGONOMETRY_INDEXES[2048];
 
 
 	//GLOBAL PARAMETERS

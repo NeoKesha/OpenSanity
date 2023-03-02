@@ -1,5 +1,76 @@
 #include "headers/Global.h"
 
+float Global::FUN_000e22f0(float* num)
+{
+	//Eats value from 0 to 65535
+	float cos;
+	float sin;
+	FUN_000d2a10(num, &cos, &sin);
+	return sin;
+}
+
+void Global::FUN_000d2a10(float* a, float* cos, float* sin)
+{
+	Global* GLOBAL = Get();
+
+	float val = *a;
+	int idx = (val / 65536.0f) * 1024.0f;
+	*cos = GLOBAL->TRIGONOMETRY_INDEXES[idx*2] / 4096.0f;
+	*sin = GLOBAL->TRIGONOMETRY_INDEXES[idx*2 + 1] / 4096.0f;
+	//TODO: this shit ain't working, made up my own
+	//Probably doesn't work since Xbox uses float10
+	/*
+	uint uVar1;
+	uint uVar2;
+	uint uVar3;
+	float fVar4;
+	float fVar5;
+	float fVar6;
+
+	uVar1 = (reinterpret_cast<int&>(*a) + 8U) >> 4;
+	uVar2 = uVar1 & 0xc00; //sign?
+	uVar3 = (reinterpret_cast<int&>(*a) + 8U) & 0xf;
+	uVar1 = uVar1 & 0x3ff; //exp?
+	if (uVar2 < 0x801) {
+		if ((uVar2 == 0x800) || (uVar2 == 0)) {
+			uVar3 = uVar3 - 8;
+			goto LAB_000d2a5f;
+		}
+		if (uVar2 != 0x400) goto LAB_000d2a5f;
+	}
+	else if (uVar2 != 0xc00) goto LAB_000d2a5f;
+	uVar1 = 0x400 - uVar1;
+	uVar3 = 7 - uVar3;
+LAB_000d2a5f:
+	fVar5 = (float)(int)GLOBAL->TRIGONOMETRY_INDEXES[uVar1 * 2] * 0.0002441406;
+	fVar6 = (float)(int)GLOBAL->TRIGONOMETRY_INDEXES[uVar1 * 2 + 1] * 0.0002441406;
+	if (uVar3 == 0) {
+		*cos = fVar5;
+		*sin = fVar6;
+	}
+	else {
+		fVar4 = GLOBAL->PI_2 * 0.0002441406 * 0.0625 * reinterpret_cast<float&>(uVar3);
+		*cos = fVar5 - fVar4 * fVar6;
+		*sin = fVar4 * fVar5 + fVar6;
+	}
+	if (uVar2 == 0x400) {
+		*cos = 0.0 - *cos;
+	}
+	else {
+		if (uVar2 == 0x800) {
+			*cos = 0.0 - *cos;
+			*sin = 0.0 - *sin;
+			return;
+		}
+		if (uVar2 == 0xc00) {
+			*sin = 0.0 - *sin;
+			return;
+		}
+	}
+	return;
+	*/
+}
+
 Global::Global() {
 	DIRECT3D8 = Direct3DCreate8(D3D_SDK_VERSION);
 	LANGUAGE_COUNT = 5;
