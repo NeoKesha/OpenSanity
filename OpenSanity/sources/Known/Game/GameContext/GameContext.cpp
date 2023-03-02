@@ -784,17 +784,66 @@ void GameContext::InitScriptPack2Array()
 
 void GameContext::InitSomeArray1()
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	GLOBAL->SOME_LIST1_LENGTH = 11;
+	for (int i = 0; i < 11; ++i) { 
+		GLOBAL->SOME_LIST1[i + 1] = i;
+	}
 }
 
 void GameContext::FUN_000f7810(int idx1, int idx2)
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	int val = -1;
+	for (int i = 0; i < GLOBAL->SOME_LIST1_LENGTH; ++i) {
+		if (GLOBAL->SOME_LIST1[i + 1] == idx2) {
+			val = i;
+			break;
+		}
+	}
+
+	if (GLOBAL->SOME_LIST1_LENGTH <= val) {
+		GLOBAL->SOME_LIST1[val + 1] = idx1;
+		++GLOBAL->SOME_LIST1_LENGTH;
+		return;
+	}
+	FUN_000f7840(GLOBAL->SOME_LIST1_LENGTH, val, idx1, GLOBAL->SOME_LIST1_LENGTH);
 }
 
-void GameContext::FUN_000f7870(int idx1, int idx2)
+bool GameContext::FUN_000f7840(int idx, int idx2, int val, int length) {
+	Global* GLOBAL = Global::Get();
+
+	do {
+		GLOBAL->SOME_LIST1[idx + 1] = GLOBAL->SOME_LIST1[idx];
+		idx = idx + -1;
+	} while (idx2 < idx);
+	GLOBAL->SOME_LIST1[idx2 + 1] = val;
+	GLOBAL->SOME_LIST1_LENGTH = length + 1;
+	return -1 < idx2;
+}
+
+bool GameContext::FUN_000f7870(int idx1, int idx2)
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	int val = -1;
+	for (int i = 0; i < GLOBAL->SOME_LIST1_LENGTH; ++i) {
+		if (GLOBAL->SOME_LIST1[i + 1] == idx2) {
+			val = i;
+			break;
+		}
+	}
+
+	if (val <= GLOBAL->SOME_LIST1_LENGTH) {
+		for (int j = GLOBAL->SOME_LIST1_LENGTH; j >= val; --j) {
+			GLOBAL->SOME_LIST1[j + 1] = GLOBAL->SOME_LIST1[j];
+		}
+	}
+	GLOBAL->SOME_LIST1[val] = idx1;
+	++GLOBAL->SOME_LIST1_LENGTH;
+	return val >= 0;
 }
 
 void GameContext::SetLanguage(int langId)

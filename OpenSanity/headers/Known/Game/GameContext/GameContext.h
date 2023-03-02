@@ -64,7 +64,9 @@ class GameContext : public GameContextAbstract {
 		void InitScriptPack2Array();
 		void InitSomeArray1();
 		void FUN_000f7810(int idx1, int idx2);
-		void FUN_000f7870(int idx1, int idx2);
+		bool FUN_000f7840(int idx, int idx2, int val, int length);
+		bool FUN_000f7870(int idx1, int idx2);
+
 		void SetLanguage(int langId);
 		int ProcessCredits(byte videoPlayerIsUp);
 		void SetupScreenAndCopyright();
