@@ -707,7 +707,7 @@ void GameContext::InitMatrixes()
 
 	for (int i = 0; i < 48; ++i) {
 		GLOBAL->MATRIX_ARRAY_1[i] = Matrix4(val);
-		float k = Global::FUN_000e22f0(&val);
+		float k = Global::TwinSin(&val);
 		GLOBAL->MATRIX_ARRAY_1[i].m34 = k * 0.125;
 		val += (65536.0f / GLOBAL->PI_2) * GLOBAL->ENV_FLOAT_15;
 	}

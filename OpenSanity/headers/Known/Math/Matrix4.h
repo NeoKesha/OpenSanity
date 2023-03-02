@@ -24,8 +24,6 @@ class Matrix4 {
 		Matrix4();
 		Matrix4(float k);
 
-		static void FUN_000d2a10(float* k, float* x, float* y);
-
 		void Multiply4443(Matrix4* mat1, Matrix4* out);
 		void FUN_00027120(Matrix4* param_1);
 		virtual void FUN_000d4000(Vector4* param_1, Vector4* param_2);

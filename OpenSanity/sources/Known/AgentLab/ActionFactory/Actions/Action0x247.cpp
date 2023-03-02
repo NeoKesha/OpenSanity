@@ -90,11 +90,11 @@ void Action0x247::ExecuteFromCallContext(uint time_clock, InstanceContext* ctx) 
 		fVar8 = (float)this->unlabelled68;
 		this->unlabelled72 = (int)DAT_003d0ed8;
 		iStack132 = (int)((FLOAT_003863a8 / FLOAT_0039d7e8) *((float)this->unlabelled40 + fVar8) * (float)this->unlabelled56);
-		fVar9 = FUN_000e22f0(&iStack132);
+		fVar9 = TwinSin(&iStack132);
 		lStack164 = __ftol2((FLOAT_003863a8 / FLOAT_0039d7e8) * (fVar9 * _DAT_0039d7dc - FLOAT_0038abe0));
 		fVar9 = FUN_000e2310(&lStack164);
 		this->unlabelled12 = (int)(fVar9 * (float)this->unlabelled64);
-		fStack136 = FUN_000e22f0(&lStack164);
+		fStack136 = TwinSin(&lStack164);
 		fStack136 = fStack136 * (float)this->unlabelled64;
 		this->unlabelled68 = (int)(fVar8 + FLOAT_0038abdc);
 		fStack128 = (float)this->unlabelled12;

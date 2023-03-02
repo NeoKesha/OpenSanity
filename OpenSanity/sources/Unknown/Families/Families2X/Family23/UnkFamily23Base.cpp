@@ -55,7 +55,7 @@ void UnkFamily23Base::Construct(int param_1, uint param_2, float param_3) {
 		this->field2_0x8 = param_1;
 		param_1 = (int)(fVar1 * param_3);
 		this->vtable = (UnkFamily23Base_VTable *)&UnkFamily23_VT_Base;
-		FUN_000d2a10(&param_1,&this->field6_0x18,&this->field7_0x1c);
+		Global::Trigonometry(&param_1,&this->field6_0x18,&this->field7_0x1c);
 		Init(this);
 		return this;
 		}
@@ -132,7 +132,7 @@ void UnkFamily23Base::Construct_5(int param_1, float param_2) {
 		this->field_0x3c = 0;
 		param_1 = (int)(fVar1 * param_2);
 		this->vtable = (UnkFamily23Base_VTable *)&UnkFamily23_VT_Base;
-		FUN_000d2a10(&param_1,&this->field6_0x18,&this->field7_0x1c);
+		Global::Trigonometry(&param_1,&this->field6_0x18,&this->field7_0x1c);
 		Init(this);
 		return this;
 		}

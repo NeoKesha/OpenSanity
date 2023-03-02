@@ -10,7 +10,7 @@ void SplineC::Transform(Matrix4* param_1) {
 		float local_54;
 		Matrix4 local_50;
 		local_58 = (int)((FLOAT_003863a8 / FLOAT_0039e238) * (this->parent).startupLevel * FLOAT_0039e238);
-		FUN_000d2a10(&local_58,&local_54,&local_5c);
+		Global::Trigonometry(&local_58,&local_54,&local_5c);
 		local_5c = FLOAT_0039e230 * local_5c * FLOAT_00386ab4;
 		FUN_000e2680(&local_50,(int)((FLOAT_003863a8 / FLOAT_0039e238) * local_5c));
 		Matrix4::Multiply4443(&local_50,param_1,param_1);

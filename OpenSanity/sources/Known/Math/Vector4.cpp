@@ -262,9 +262,9 @@ void Vector4::FromRotation(int x, int y, int z) {
 		z = (int)((float)(int)fVar1 * FLOAT_00386ab4);
 		y = (int)((float)uVar2 * FLOAT_00386ab4);
 		x = (int)((float)uVar3 * FLOAT_00386ab4);
-		FUN_000d2a10(&z,&local_10,&local_c);
-		FUN_000d2a10(&y,&local_8,&local_4);
-		FUN_000d2a10(&x,(float *)&z,(float *)&y);
+		Global::Trigonometry(&z,&local_10,&local_c);
+		Global::Trigonometry(&y,&local_8,&local_4);
+		Global::Trigonometry(&x,(float *)&z,(float *)&y);
 		this->w = (float)z * local_10 * local_8 + (float)y * local_c * local_4;
 		this->x = (float)z * local_c * local_8 - (float)y * local_10 * local_4;
 		this->y = (float)y * local_c * local_8 + (float)z * local_10 * local_4;

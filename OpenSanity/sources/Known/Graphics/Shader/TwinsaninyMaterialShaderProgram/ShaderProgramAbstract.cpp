@@ -375,7 +375,7 @@ int ShaderProgramAbstract::UpdateClock(float arg) {
 		fVar5 = this->field53_0x58 * arg + this->field51_0x50;
 		this->field51_0x50 = fVar5;
 		local_4 = (int)((fVar6 / fVar1) * fVar5 * fVar1);
-		fVar6 = FUN_000e22f0(&local_4);
+		fVar6 = TwinSin(&local_4);
 		this->field55_0x60 = fVar6;
 		}
 		else if (state == 4) {
@@ -402,7 +402,7 @@ int ShaderProgramAbstract::UpdateClock(float arg) {
 		fVar5 = this->field54_0x5c * arg + this->field52_0x54;
 		this->field52_0x54 = fVar5;
 		local_4 = (int)((fVar6 / fVar1) * fVar5 * fVar1);
-		fVar6 = FUN_000e22f0(&local_4);
+		fVar6 = TwinSin(&local_4);
 		this->field56_0x64 = fVar6;
 		}
 		else if (state == 4) {

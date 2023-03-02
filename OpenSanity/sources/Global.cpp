@@ -1,15 +1,15 @@
 #include "headers/Global.h"
 
-float Global::FUN_000e22f0(float* num)
+float Global::TwinSin(float* num)
 {
 	//Eats value from 0 to 65535
 	float cos;
 	float sin;
-	FUN_000d2a10(num, &cos, &sin);
+	Trigonometry(num, &cos, &sin);
 	return sin;
 }
 
-void Global::FUN_000d2a10(float* a, float* cos, float* sin)
+void Global::Trigonometry(float* a, float* cos, float* sin)
 {
 	Global* GLOBAL = Get();
 
@@ -17,6 +17,7 @@ void Global::FUN_000d2a10(float* a, float* cos, float* sin)
 	int idx = (val / 65536.0f) * 1024.0f;
 	*cos = GLOBAL->TRIGONOMETRY_INDEXES[idx*2] / 4096.0f;
 	*sin = GLOBAL->TRIGONOMETRY_INDEXES[idx*2 + 1] / 4096.0f;
+	//TODO: support negative values and values out range
 	//TODO: this shit ain't working, made up my own
 	//Probably doesn't work since Xbox uses float10
 	/*

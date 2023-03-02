@@ -22,8 +22,8 @@ public:
 		return instance;
 	}
 	
-	static float FUN_000e22f0(float* num);
-	static void FUN_000d2a10(float* a, float* x, float* y);
+	static float TwinSin(float* num);
+	static void Trigonometry(float* a, float* x, float* y);
 
 	//COPYRIGHT CHECK
 	//uint REFERENCE_CHECKSUM = 0xA24;

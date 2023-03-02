@@ -1457,7 +1457,7 @@ void Oleg::FUN_000b7db0() {
 		fVar17 = fVar17 + FLOAT_00386458;
 		}
 		local_20.alpha = (float)__ftol2((FLOAT_003863a8 / FLOAT_0039e238) * fVar17 * FLOAT_0038d760);
-		fVar17 = FUN_000e22f0((int *)&local_20);
+		fVar17 = TwinSin((int *)&local_20);
 		local_2c.x = fVar17 * FLOAT_00386608 + FLOAT_0038639c;
 		*(float *)(&ENV_PTR_95_0X78->field_0x0 + local_40 * 4) = local_2c.x;
 		pMVar7 = ENV_PTR_97_0X40;

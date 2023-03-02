@@ -102,7 +102,7 @@ void UnkFamily24Base::Init(int param_1, uint* param_2, int param_3) {
 		pUVar3->field4_0x10 = 0;
 		pUVar3->field_0x28 = 0;
 		pUVar3->field_0x3c = 0;
-		FUN_000d2a10(&local_8,&pUVar3->field6_0x18,&pUVar3->field7_0x1c);
+		Global::Trigonometry(&local_8,&pUVar3->field6_0x18,&pUVar3->field7_0x1c);
 		UnkFamily23Base::Init(pUVar3);
 		pUVar5 = pUVar3;
 		}
@@ -138,7 +138,7 @@ void UnkFamily24Base::Init(int param_1, uint* param_2, int param_3) {
 		pUVar3->field2_0x8 = pUVar5;
 		pUVar3->field_0x28 = 0;
 		pUVar3->field_0x3c = 0;
-		FUN_000d2a10(&local_4,&pUVar3->field6_0x18,&pUVar3->field7_0x1c);
+		Global::Trigonometry(&local_4,&pUVar3->field6_0x18,&pUVar3->field7_0x1c);
 		UnkFamily23Base::Init(pUVar3);
 		pUVar5 = pUVar3;
 		}

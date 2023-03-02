@@ -144,7 +144,7 @@ void OlegModuleAIA::FUN_000b5620() {
 		 while (iVar4 != 0);
 		}
 		local_2c = (float)(int)((FLOAT_003863a8 / FLOAT_0039e238) * DAT_003e5f78);
-		FUN_000d2a10(&local_2c,&local_24,&local_28);
+		Global::Trigonometry(&local_2c,&local_24,&local_28);
 		fVar6 = FLOAT_0038ca60;
 		this[1].parent.parent.parent.vtable = (OlegModuleAbstract_VTable *)(local_28 * FLOAT_0038b3b8);
 		DAT_003e5f78 = DAT_003e5f78 + FLOAT_0038d6b4;
