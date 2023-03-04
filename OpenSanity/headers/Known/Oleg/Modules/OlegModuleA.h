@@ -16,9 +16,9 @@ class OlegModuleA : public OlegModuleAbstract {
 		OlegModuleA();
 		OlegModuleA(float x);
 
-		void FUN_001a4010(Color param_1, Vector2* param_2, Vector2* param_3);
+		void FUN_001a4010(Color color , Vector2* v1, Vector2* v2);
 
-		static void FUN_00108ea0(Vector2* vector, uint time, uint val1, uint val2);
+		static void LerpColor(Color* color, float t, Color c1, Color c2);
 		virtual void Show(int appearTime, uint disappearTime);
 		void Hide(int appearTime, int disappearTime);
 		void FUN_001a2e30(Color color, Vector2* vec1, Vector2* vec2);
