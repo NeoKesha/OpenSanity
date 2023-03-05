@@ -188,6 +188,7 @@ class Oleg : public OlegBase {
 		void InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, SectionDataSfx* sfxData);
 		void FUN_000b18e0();
 		void FUN_000b21c0();
+		void FUN_000ad710(Vector2* vec, OlegModuleMenuBubble* bubble);
 		void CalculateStatsHUD(NodeRelated2C* data);
 		void FUN_000b7db0();
 		void FUN_000b79f0();

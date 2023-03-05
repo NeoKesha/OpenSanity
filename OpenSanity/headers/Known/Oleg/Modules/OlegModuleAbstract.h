@@ -2,6 +2,7 @@
 
 #include "headers/OpenSanityGlobal.h"
 #include "headers/Known/Math/Vector2.h"
+#include "headers/Known/Graphics/Color.h"
 
 
 class OlegModuleAbstract {
@@ -15,7 +16,7 @@ class OlegModuleAbstract {
 		SplineA * spline;
 		Vector2 field2_0x8;
 		int field_0x28;
-		int field13_0x2c;
+		Color field13_0x2c;
 		float field14_0x30;
 		float field15_0x34;
 

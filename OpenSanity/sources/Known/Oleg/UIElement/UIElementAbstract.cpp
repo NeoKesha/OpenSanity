@@ -45,17 +45,9 @@ UIElementAbstract::~UIElementAbstract()
 	}
 }
 
-void UIElementAbstract::FUN_00102210(int cnt) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall UIElementAbstract::FUN_00102210(UIElementAbstract *this,int cnt){
-		(*this->vtable->FreeMaterial)(this);
-		this->shader = (TwinsanityMaterialShader *)cnt;
-		return;
-		}
-		
-	*/
-	return;
+void UIElementAbstract::FUN_00102210(TwinsanityMaterialShader* shader) {
+	FreeMaterial();
+	this->shader = shader;
 }
 
 void UIElementAbstract::ReplaceMaterial(uint id) {

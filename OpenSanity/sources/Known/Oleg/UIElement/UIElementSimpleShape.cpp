@@ -2,57 +2,59 @@
 
 #include "headers/Known/Oleg/UIElement/UIElementBColor.h"
 #include "headers/Known/Math/Matrix4.h"
+#include "headers/Known/Math/Vector4.h"
 #include "headers/Known/Oleg/UIElement/UIElementBTransform.h"
-void UIElementSimpleShape::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall UIElementSimpleShape::Construct(UIElementSimpleShape *this){
-		(this->parent).shader = (TwinsanityMaterialShader *)0x0;
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		(this->parent).field3_0xc = 0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_B;
-		this->cnt = 0;
-		return;
-		}
-		
-	*/
-	return;
+
+UIElementSimpleShape::UIElementSimpleShape() : UIElementAbstract()
+{
+	this->cnt = 0;
 }
 
-void UIElementSimpleShape::CleanUp() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall UIElementSimpleShape::CleanUp(UIElementSimpleShape *this){
-		uint uVar1;
-		TwinsanityMaterial *section;
-		uVar1 = this->cnt;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_B;
-		if ((uVar1 & 0x100) != 0) {
-		VirtualPool::FreeMemory(this->field2_0x14);
-		VirtualPool::FreeMemory(this->field3_0x18);
-		}
-		this->cnt = 0;
-		section = (this->parent).material;
-		this->field2_0x14 = (Vector2 *)0x0;
-		this->field3_0x18 = (undefined *)0x0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_Abstract;
-		if (section != (TwinsanityMaterial *)0x0) {
-		if (section->id == 0xffffffff) {
-		TwinsanityMaterial::FreeMaterial(section);
-		VirtualPool::FreeMemory(section);
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		return;
-		}
-		(*(ENV_CLASS_187_SECTION_MATERIALS.parent)->Method4)(&ENV_CLASS_187_SECTION_MATERIALS.parent,(undefined *)section);
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		}
-		return;
-		}
-		
-	*/
-	return;
+UIElementSimpleShape::UIElementSimpleShape(int cnt) : UIElementAbstract()
+{
+	this->cnt = 0;
+	FUN_00101ff0(cnt);
 }
 
+UIElementSimpleShape::UIElementSimpleShape(int cnt, Vector2* param_2, Vector4* param_3) : UIElementAbstract()
+{
+	this->field2_0x14 = param_2;
+	this->cnt = cnt;
+	this->field3_0x18 = param_3;
+}
+
+UIElementSimpleShape::~UIElementSimpleShape()
+{
+	/*
+void __fastcall UIElementSimpleShape::CleanUp(UIElementSimpleShape *this){
+	uint uVar1;
+	TwinsanityMaterial *section;
+	uVar1 = this->cnt;
+	(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_B;
+	if ((uVar1 & 0x100) != 0) {
+	VirtualPool::FreeMemory(this->field2_0x14);
+	VirtualPool::FreeMemory(this->field3_0x18);
+	}
+	this->cnt = 0;
+	section = (this->parent).material;
+	this->field2_0x14 = (Vector2 *)0x0;
+	this->field3_0x18 = (undefined *)0x0;
+	(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_Abstract;
+	if (section != (TwinsanityMaterial *)0x0) {
+	if (section->id == 0xffffffff) {
+	TwinsanityMaterial::FreeMaterial(section);
+	VirtualPool::FreeMemory(section);
+	(this->parent).material = (TwinsanityMaterial *)0x0;
+	return;
+	}
+	(*(ENV_CLASS_187_SECTION_MATERIALS.parent)->Method4)(&ENV_CLASS_187_SECTION_MATERIALS.parent,(undefined *)section);
+	(this->parent).material = (TwinsanityMaterial *)0x0;
+	}
+	return;
+	}
+
+*/
+}
 void UIElementSimpleShape::FUN_00101f20(Matrix4* transform, UIElementBTransform* transformStruct) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -81,29 +83,18 @@ void UIElementSimpleShape::FUN_00101f20(Matrix4* transform, UIElementBTransform*
 	return;
 }
 
-void UIElementSimpleShape::FUN_00101ff0(int param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall UIElementSimpleShape::FUN_00101ff0(UIElementSimpleShape *this,int param_1){
-		Vector2 *pVVar1;
-		undefined *puVar2;
-		if ((this->cnt & 0x100U) != 0) {
-		VirtualPool::FreeMemory(this->field2_0x14);
-		VirtualPool::FreeMemory(this->field3_0x18);
-		}
-		this->cnt = 0;
-		*(char *)&this->cnt = (char)param_1;
-		this->field2_0x14 = (Vector2 *)0x0;
-		this->field3_0x18 = (undefined *)0x0;
-		this->cnt = this->cnt | 0x100;
-		pVVar1 = (Vector2 *)VirtualPool::AllocateMemory(param_1 * 8);
-		this->field2_0x14 = pVVar1;
-		puVar2 = (undefined *)VirtualPool::AllocateMemory(param_1 * 4);
-		this->field3_0x18 = puVar2;
-		return;
-		}
-		
-	*/
+void UIElementSimpleShape::FUN_00101ff0(int cnt) {
+	if ((this->cnt & 0x100U) != 0) {
+		delete this->field2_0x14;
+		delete this->field3_0x18;
+	}
+	this->cnt = 0;
+	this->cnt = cnt;
+	this->field2_0x14 = null;
+	this->field3_0x18 = null;
+	this->cnt = this->cnt | 0x100;
+	this->field2_0x14 = new Vector2[cnt];
+	this->field3_0x18 = new Vector4[cnt];
 	return;
 }
 
@@ -147,21 +138,6 @@ void UIElementSimpleShape::FUN_001090b0(Color color, UIElementBColor* colorStruc
 		 while (i < (this->cnt & 0xffU));
 		}
 		return;
-		}
-		
-	*/
-	return;
-}
-
-void UIElementSimpleShape::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementSimpleShape * __thiscall UIElementSimpleShape::Dispose(UIElementSimpleShape *this,byte param_1){
-		CleanUp(this);
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
 		}
 		
 	*/
@@ -223,41 +199,3 @@ void UIElementSimpleShape::FUN_0010eb80(Matrix4* transform, Color color) {
 	*/
 	return;
 }
-
-void UIElementSimpleShape::Construct_10(int param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementSimpleShape * __thiscall UIElementSimpleShape::Construct(UIElementSimpleShape *this,int param_1){
-		(this->parent).shader = (TwinsanityMaterialShader *)0x0;
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		(this->parent).field3_0xc = 0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_B;
-		this->cnt = 0;
-		FUN_00101ff0(this,param_1);
-		return this;
-		}
-		
-	*/
-	return;
-}
-
-void UIElementSimpleShape::Construct_11(byte param_1, uint param_2, uint param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	 WARNING: Removing unreachable block (ram,0x00114a6f) UIElementSimpleShape * __thiscall UIElementSimpleShape::Construct(UIElementSimpleShape *this,undefined param_1,Vector2 *param_2,undefined *param_3){
-		(this->parent).shader = (TwinsanityMaterialShader *)0x0;
-		(this->parent).material = (TwinsanityMaterial *)0x0;
-		(this->parent).field3_0xc = 0;
-		(this->parent).vtable = (UIElementAbstract_VTable *)&UIElement_VT_B;
-		this->cnt = 0;
-		this->cnt = 0;
-		this->field2_0x14 = param_2;
-		*(undefined *)&this->cnt = param_1;
-		this->field3_0x18 = param_3;
-		return this;
-		}
-		
-	*/
-	return;
-}
-

@@ -25,27 +25,15 @@ OlegModuleMenuBubble::~OlegModuleMenuBubble()
 }
 
 UIElementSimpleShapeA* OlegModuleMenuBubble::FUN_001a0fd0(int i, TwinsanityMaterialShader* param_2) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	UIElementSimpleShapeA * __thiscall OlegModuleMenuBubble::FUN_001a0fd0(OlegModuleMenuBubble *this,int i,TwinsanityMaterialShader *param_2){
-		byte bVar1;
-		byte bVar2;
-		UIElementSimpleShapeA *image;
-		bVar1 = this->index1;
-		bVar2 = this->field_0x89;
-		image = (UIElementSimpleShapeA *)VirtualPool::AllocateMemory(0x5c);
-		if (image == (UIElementSimpleShapeA *)0x0) {
-		image = (UIElementSimpleShapeA *)0x0;
-		}
-		else {
-		image = UIElementSimpleShapeA::Construct(image,(bVar1 + 1) * (uint)bVar2,param_2);
-		}
-		this->imageArray[i] = image;
-		return this->imageArray[i];
-		}
-		
-	*/
-	return null;
+	byte bVar1;
+	byte bVar2;
+	UIElementSimpleShapeA* image;
+
+	bVar1 = this->index1;
+	bVar2 = this->field_0x89;
+	image = new UIElementSimpleShapeA((bVar1 + 1) * (uint)bVar2, param_2);
+	this->imageArray[i] = image;
+	return this->imageArray[i];
 }
 
 void OlegModuleMenuBubble::Render(FontRenderer* renderer) {

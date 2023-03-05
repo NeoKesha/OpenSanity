@@ -118,6 +118,7 @@ public:
 	int DAT_003cff78 = 0;
 	int INT_003cff7c = 0;
 	ShaderProgramAbstract* PTR_003e2d28;
+	int INT_0039e3f8 = 8;
 
 	//GLOBAL VALUES
 	float SinTable[32768];

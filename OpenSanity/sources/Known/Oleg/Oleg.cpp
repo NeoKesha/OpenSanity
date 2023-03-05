@@ -30,6 +30,7 @@
 #include "headers/Unknown/Families/Families1X/Family10/UnkFamily10Q.h"
 #include "headers/Unknown/Families/Families1X/Family10/UnkFamily10R.h"
 #include "headers/Known/ColorTransparent.h"
+#include "headers/Known/Oleg/UIElement/UIElementSimpleShapeA.h"
 
 
 //TODO: Remove all default consfxRelatedions from consfxRelatedor and initialized to avoid double work
@@ -1007,69 +1008,86 @@ void Oleg::InitMenuPages(InputStruct* inputHandle, Font* font1, Font* font2, Sec
 }
 
 void Oleg::FUN_000b18e0() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b18e0(Oleg *this){
-		Vector2 vec1;
-		Vector2 vec2;
-		vec1.x = FLOAT_0038639c;
-		vec1.y = FLOAT_0038639c;
-		vec2.x = FLOAT_0038ab54;
-		vec2.y = FLOAT_0038adb8;
-		OlegModuleA::FUN_001a2e30(&(this->label10).parent,COLOR_WHITE,&vec2,&vec1);
-		vec2.x = FLOAT_00386608;
-		vec2.y = FLOAT_00386608;
-		vec1.x = FLOAT_00386608;
-		vec1.y = FLOAT_0038a83c;
-		OlegModuleLabelGeneric::FUN_001a4010((OlegModuleLabelGeneric *)&this->uiIcon15,COLOR_WHITE,&vec1,&vec2);
-		vec2.x = FLOAT_0038639c;
-		vec2.y = FLOAT_0038639c;
-		vec1.x = FLOAT_0038ab54;
-		vec1.y = FLOAT_0038a83c;
-		OlegModuleA::FUN_001a2e30(&(this->label11).parent,COLOR_WHITE,&vec1,&vec2);
-		vec2.x = FLOAT_00386608;
-		vec2.y = FLOAT_00386608;
-		vec1.x = FLOAT_00386608;
-		vec1.y = FLOAT_0038a83c;
-		OlegModuleLabelGeneric::FUN_001a4010((OlegModuleLabelGeneric *)&this->uiIcon16,COLOR_WHITE,&vec1,&vec2);
-		(this->label10).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon15;
-		(this->uiIcon15).parent.parent.next = (OlegModuleAbstract *)&this->label11;
-		(this->label11).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon16;
-		return;
-		}
-		
-	*/
+	Vector2 vec1;
+	Vector2 vec2;
+
+	vec1.x = 1.0;
+	vec1.y = 1.0;
+	vec2.x = 0.15;
+	vec2.y = 0.8;
+	this->label10.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &vec2, &vec1);
+	vec2.x = 0.1;
+	vec2.y = 0.1;
+	vec1.x = 0.1;
+	vec1.y = 0.9;
+	this->uiIcon15.FUN_001a4010(Color(1.0f, 1.0f, 1.0f, 1.0f), &vec2, &vec1);
+	vec2.x = 1.0;
+	vec2.y = 1.0;
+	vec1.x = 0.15;
+	vec1.y = 0.9;
+	this->label11.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &vec2, &vec1);
+	vec2.x = 0.1;
+	vec2.y = 0.1;
+	vec1.x = 0.1;
+	vec1.y = 0.9;
+	this->uiIcon16.FUN_001a4010(Color(1.0f, 1.0f, 1.0f, 1.0f), &vec2, &vec1);
+	(this->label10).next = &this->uiIcon15;
+	(this->uiIcon15).next =&this->label11;
+	(this->label11).next = &this->uiIcon16;
 	return;
 }
 
 void Oleg::FUN_000b21c0() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b21c0(Oleg *this){
-		OlegModuleMenuBubble *bubble;
-		float local_10;
-		float local_c;
-		float fStack8;
-		float local_4;
-		local_10 = FLOAT_0038639c;
-		local_c = FLOAT_0038639c;
-		fStack8 = FLOAT_00386ab4;
-		local_4 = FLOAT_00386608;
-		OlegModuleA::FUN_001a2e30(&(this->option01).parent,COLOR_WHITE,(Vector2 *)&stack0xfffffff8,(Vector2 *)&local_10);
-		fStack8 = FLOAT_0038639c;
-		local_4 = FLOAT_0038639c;
-		local_10 = FLOAT_00386ab4;
-		bubble = &this->bubble03;
-		local_c = FLOAT_00386608;
-		OlegModuleA::FUN_001a2e30(&bubble->parent,COLOR_WHITE,(Vector2 *)&local_10,(Vector2 *)&stack0xfffffff8);
-		fStack8 = FLOAT_0038a76c;
-		local_4 = FLOAT_0038a934;
-		thunk_FUN_000ad710((float *)&stack0xfffffff8,bubble);
-		(this->option01).parent.parent.next = (OlegModuleAbstract *)bubble;
-		return;
-		}
-		
-	*/
+	Vector2 vec1;
+	Vector2 vec2;
+
+	vec1.x = 1.0;
+	vec1.y = 1.0;
+	vec2.x = 0.5;
+	vec2.y = 0.1;
+	this->option01.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &vec2, &vec1);
+	vec2.x = 1.0;
+	vec2.y = 1.0;
+	vec1.x = 0.5;
+	vec1.y = 0.1;
+	this->bubble03.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &vec1, &vec2);
+	vec2.x = 0.35;
+	vec2.y = 0.05;
+	FUN_000ad710(&vec2, &this->bubble03);
+	(this->option01).next = &this->bubble03;
+	return;
+}
+
+void Oleg::FUN_000ad710(Vector2* vec, OlegModuleMenuBubble* bubble)
+
+{
+	Global* GLOBAL = Global::Get();
+	float fVar1;
+	UIElementSimpleShapeA* pUVar2;
+	UIElementSimpleShapeA* pUVar3;
+	UIElementSimpleShapeA* pUVar4;
+	UIElementSimpleShapeA* pUVar5;
+
+	pUVar2 = bubble->FUN_001a0fd0(0, &GLOBAL->ENV_CLASS_94);
+	pUVar3 = bubble->FUN_001a0fd0(1, &GLOBAL->ENV_CLASS_94);
+	pUVar4 = bubble->FUN_001a0fd0(2, &GLOBAL->ENV_CLASS_94);
+	pUVar5 = bubble->FUN_001a0fd0(3, &GLOBAL->ENV_CLASS_94);
+	(pUVar2->field11_0x2c).x = vec->x;
+	(pUVar2->field11_0x2c).y = vec->y;
+	pUVar2->field1_0x1c = Color(0.0745f, 0.37254f,1.0f,1.0f);
+	pUVar2->field16_0x38 = &GLOBAL->INT_0039e3f8;
+	(pUVar3->field11_0x2c).y = vec->y + 0.003;
+	(pUVar3->field11_0x2c).x = vec->x + 0.003;
+	pUVar3->field2_0x20 = Color(1.0f, 1.0f, 1.0f, 0.0f);
+	(pUVar4->field11_0x2c).y = vec->y + 0.01;
+	(pUVar4->field11_0x2c).x = vec->x + 0.01;
+	pUVar4->field2_0x20 = Color(1.0f, 1.0f, 1.0f, 0.0f);
+	(pUVar5->field11_0x2c).y = vec->y + 0.013;
+	(pUVar5->field11_0x2c).x = vec->x + 0.013;
+	pUVar5->field2_0x20 = Color(1.0f, 1.0f, 1.0f, 0.0f);
+	bubble->field13_0x2c = Color(0.0f,0.0f,0.0f,0.5f);
+	bubble->field14_0x30.x = 0.01f;
+	bubble->field14_0x30.y = 0.01f;
 	return;
 }
 

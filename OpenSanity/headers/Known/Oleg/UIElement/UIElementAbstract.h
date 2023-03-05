@@ -14,7 +14,7 @@ class UIElementAbstract {
 		UIElementAbstract(uint param_2, uint param_3);
 		~UIElementAbstract();
 
-		virtual void FUN_00102210(int cnt);
+		virtual void FUN_00102210(TwinsanityMaterialShader* shader);
 		virtual void ReplaceMaterial(uint id);
 		virtual void CleanUp();
 		

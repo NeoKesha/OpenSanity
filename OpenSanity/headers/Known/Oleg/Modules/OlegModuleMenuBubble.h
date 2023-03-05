@@ -10,6 +10,7 @@ class OlegModuleMenuBubble : public OlegModuleA {
 		int index2;
 		UIElementSimpleShapeA * * imageArray;
 		byte field_0x89;
+		Vector2 field14_0x30;
 
 		OlegModuleMenuBubble(float x, uint arrayLength, byte param_3, byte index1, int index2);
 		~OlegModuleMenuBubble();
