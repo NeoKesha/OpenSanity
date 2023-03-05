@@ -3,21 +3,36 @@
 #include "headers/Known/Graphics/Shader/TwinsaninyMaterialShaderProgram/Subs/ShaderProgramSub.h"
 #include "headers/Known/LevelStructure/Data/GraphicsSectionData/Texture/TwinsanityTexture.h"
 #include "headers/Known/Memory/Streams/MemoryStream/MemoryStream.h"
-void ShaderProgramAbstract::Construct() {
+
+ShaderProgramAbstract::ShaderProgramAbstract()
+{
+	this->flags = this->flags & 0x97d7ffde | 0x4400000;
+	this->field59_0x70 = 0;
+	this->texture = null;
+	this->states = this->states & 0xc0ffff80 | 0x800000;
+	this->field55_0x60 = 0.0;
+	this->field56_0x64 = 0.0;
+	this->unkSubStruct = null;
+}
+
+ShaderProgramAbstract::~ShaderProgramAbstract()
+{
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
-	ShaderProgramAbstract * __fastcall ShaderProgramAbstract::Construct(ShaderProgramAbstract *this){
-		this->flags = this->flags & 0x97d7ffde | 0x4400000;
+	void __fastcall ShaderProgramAbstract::CleanUp(ShaderProgramAbstract *this){
+		ShaderProgramSub *ptr;
 		this->vtable = (ShaderProgramAbstract_VTable *)&ShaderProgram_VT_Abstract;
-		this->field59_0x70 = 0;
-		this->texture = (TwinsanityTexture *)0x0;
-		this->states = this->states & 0xc0ffff80 | 0x800000;
-		this->field55_0x60 = 0.0;
-		this->field56_0x64 = 0.0;
-		this->unkSubStruct = (ShaderProgramSub *)0x0;
-		return this;
+		if (this->texture != (TwinsanityTexture *)0x0) {
+		TwinsanityTexture::FreeTexture(this->texture);
 		}
-		
+		ptr = this->unkSubStruct;
+		if (ptr != (ShaderProgramSub *)0x0) {
+		FUN_001fa6f0((int)ptr);
+		VirtualPool::FreeMemory(ptr);
+		}
+		return;
+		}
+
 	*/
 	return;
 }
@@ -66,27 +81,6 @@ void ShaderProgramAbstract::FUN_00104d60() {
 		INT_002a99e0 = 1;
 		DAT_002a9a40 = 1;
 		DAT_002a9ac0 = 1;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void ShaderProgramAbstract::CleanUp() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall ShaderProgramAbstract::CleanUp(ShaderProgramAbstract *this){
-		ShaderProgramSub *ptr;
-		this->vtable = (ShaderProgramAbstract_VTable *)&ShaderProgram_VT_Abstract;
-		if (this->texture != (TwinsanityTexture *)0x0) {
-		TwinsanityTexture::FreeTexture(this->texture);
-		}
-		ptr = this->unkSubStruct;
-		if (ptr != (ShaderProgramSub *)0x0) {
-		FUN_001fa6f0((int)ptr);
-		VirtualPool::FreeMemory(ptr);
-		}
 		return;
 		}
 		
@@ -329,21 +323,6 @@ void ShaderProgramAbstract::FUN_0010cd30() {
 	return;
 }
 
-void ShaderProgramAbstract::Dispose(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	ShaderProgramAbstract * __thiscall ShaderProgramAbstract::Dispose(ShaderProgramAbstract *this,byte param_1){
-		CleanUp(this);
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
-
 int ShaderProgramAbstract::UpdateClock(float arg) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -437,96 +416,9 @@ int ShaderProgramAbstract::UpdateClock(float arg) {
 		}
 		return 0;
 		}
-		
+
 	*/
 	return 0;
-}
-
-void ShaderProgramAbstract::Dispose_9() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall ShaderProgramAbstract::Dispose(ShaderProgramAbstract *this){
-		ShaderProgramSub *ptr;
-		this->vtable = (ShaderProgramAbstract_VTable *)&ShaderProgram_VT_Abstract;
-		if (this->texture != (TwinsanityTexture *)0x0) {
-		TwinsanityTexture::FreeTexture(this->texture);
-		}
-		ptr = this->unkSubStruct;
-		if (ptr != (ShaderProgramSub *)0x0) {
-		FUN_001fa6f0((int)ptr);
-		VirtualPool::FreeMemory(ptr);
-		}
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void ShaderProgramAbstract::Dispose_10() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall ShaderProgramAbstract::Dispose(ShaderProgramAbstract *this){
-		ShaderProgramSub *ptr;
-		this->vtable = (ShaderProgramAbstract_VTable *)&ShaderProgram_VT_Abstract;
-		if (this->texture != (TwinsanityTexture *)0x0) {
-		TwinsanityTexture::FreeTexture(this->texture);
-		}
-		ptr = this->unkSubStruct;
-		if (ptr != (ShaderProgramSub *)0x0) {
-		FUN_001fa6f0((int)ptr);
-		VirtualPool::FreeMemory(ptr);
-		}
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void ShaderProgramAbstract::Dispose_11() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall ShaderProgramAbstract::Dispose(ShaderProgramAbstract *this){
-		ShaderProgramSub *ptr;
-		this->vtable = (ShaderProgramAbstract_VTable *)&ShaderProgram_VT_Abstract;
-		if (this->texture != (TwinsanityTexture *)0x0) {
-		TwinsanityTexture::FreeTexture(this->texture);
-		}
-		ptr = this->unkSubStruct;
-		if (ptr != (ShaderProgramSub *)0x0) {
-		FUN_001fa6f0((int)ptr);
-		VirtualPool::FreeMemory(ptr);
-		}
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void ShaderProgramAbstract::Dispose_12(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	undefined4 * __thiscall ShaderProgramAbstract::Dispose(ShaderProgramAbstract *this,byte param_1){
-		ShaderProgramSub *ptr;
-		this->vtable = (ShaderProgramAbstract_VTable *)&ShaderProgram_VT_Abstract;
-		if (this->texture != (TwinsanityTexture *)0x0) {
-		TwinsanityTexture::FreeTexture(this->texture);
-		}
-		ptr = this->unkSubStruct;
-		if (ptr != (ShaderProgramSub *)0x0) {
-		FUN_001fa6f0((int)ptr);
-		VirtualPool::FreeMemory(ptr);
-		}
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return &this->vtable;
-		}
-		
-	*/
-	return;
 }
 
 bool ShaderProgramAbstract::IsF(int param_1) {

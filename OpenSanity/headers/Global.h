@@ -9,6 +9,7 @@
 #include "headers/ShaderWrapper.h"
 #include "headers/Known/Graphics/Decals.h"
 #include "headers/Known/Math/Matrix4.h"
+#include "headers/Known/Graphics/Shader/TwinsanityMaterialShader.h"
 
 
 class Global {
@@ -39,6 +40,7 @@ public:
 	float ENV_FLOAT_92_0_15 = 0.0f;
 	float ENV_FLOAT_15 = 6.2831855f * 0.02083333f;
 	float PI_2 = 6.2831855f;
+	TwinsanityMaterialShader ENV_CLASS_94;
 
 	//UNK ADDRESSES
 	int			DAT_003ead50;
@@ -115,6 +117,7 @@ public:
 	int DAT_00402a08;
 	int DAT_003cff78 = 0;
 	int INT_003cff7c = 0;
+	ShaderProgramAbstract* PTR_003e2d28;
 
 	//GLOBAL VALUES
 	float SinTable[32768];

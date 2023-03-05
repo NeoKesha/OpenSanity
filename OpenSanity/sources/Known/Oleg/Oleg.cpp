@@ -1827,55 +1827,43 @@ void Oleg::FUN_000b79f0() {
 
 void Oleg::FUN_000b33f0()
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	  ShaderProgramAbstract *shader;
-  UIElementAbstract *uielement;
-  int iVar1;
-  
-  shader = (ShaderProgramAbstract *)VirtualPool::AllocateMemory(0x80);
-  if (shader == (ShaderProgramAbstract *)0x0) {
-    shader = (ShaderProgramAbstract *)0x0;
-  }
-  else {
-    ShaderProgramAbstract::ConsfxRelated(shader);
-    shader->vtable = (ShaderProgramAbstract_VTable *)&PTR_Dispose_0038d440;
-    shader->id = 0xe;
-  }
-  ENV_CLASS_94.shaderType = 0x18;
-  ENV_CLASS_94.field6_0x18 = 2;
-  ENV_CLASS_94.field7_0x1c = 0;
-  ENV_CLASS_94.shaderProgramCnt = 1;
-  PTR_003e2d28 = shader;
-  ENV_CLASS_94.shaderPrograms[0] = shader;
-  (shader->vec0).x = 1.0;
-  (shader->vec0).y = 1.0;
-  (shader->vec0).z = 1.0;
-  (shader->vec0).w = 1.0;
-  PTR_003e2d28->flags = PTR_003e2d28->flags | 1;
-  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xffffffe1;
-  PTR_003e2d28->states = PTR_003e2d28->states | 0x8000000;
-  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xffffffdf;
-  PTR_003e2d28->states = PTR_003e2d28->states & 0xfeffffff;
-  PTR_003e2d28->states = PTR_003e2d28->states & 0xfdffffff;
-  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xfff7ffff;
-  PTR_003e2d28->states = PTR_003e2d28->states & 0xfffffff8;
-  PTR_003e2d28->states = PTR_003e2d28->states & 0xffffffc7;
-  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xfc7fffff;
-  PTR_003e2d28->flags = PTR_003e2d28->flags | 0x4000000;
-  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xdfffffff;
-  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xbfffffff;
-  PTR_003e2d28->flags = PTR_003e2d28->flags & 0xf7ffffff;
-  (*PTR_003e2d28->vtable->Method4)();
-  uielement = (UIElementAbstract *)&this->someIcon1;
-  iVar1 = 6;
-  do {
-    (*uielement->vtable->ReplaceShader)(uielement,&ENV_CLASS_94);
-    uielement = uielement + 2;
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
-  return;
-	*/
+	Global* GLOBAL = Global::Get();
+	ShaderProgramAbstract* shader = new ShaderProgramAbstract();
+	shader->id = 0xe;
+	UIElementAbstract* uielement;
+	int iVar1;
+	GLOBAL->ENV_CLASS_94.shaderType = 0x18;
+	GLOBAL->ENV_CLASS_94.field6_0x18 = 2;
+	GLOBAL->ENV_CLASS_94.field7_0x1c = 0;
+	GLOBAL->ENV_CLASS_94.shaderProgramCnt = 1;
+	GLOBAL->PTR_003e2d28 = shader;
+	GLOBAL->ENV_CLASS_94.shaderPrograms[0] = shader;
+	(shader->vec0).x = 1.0;
+	(shader->vec0).y = 1.0;
+	(shader->vec0).z = 1.0;
+	(shader->vec0).w = 1.0;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags | 1;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags & 0xffffffe1;
+	GLOBAL->PTR_003e2d28->states = GLOBAL->PTR_003e2d28->states | 0x8000000;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags & 0xffffffdf;
+	GLOBAL->PTR_003e2d28->states = GLOBAL->PTR_003e2d28->states & 0xfeffffff;
+	GLOBAL->PTR_003e2d28->states = GLOBAL->PTR_003e2d28->states & 0xfdffffff;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags & 0xfff7ffff;
+	GLOBAL->PTR_003e2d28->states = GLOBAL->PTR_003e2d28->states & 0xfffffff8;
+	GLOBAL->PTR_003e2d28->states = GLOBAL->PTR_003e2d28->states & 0xffffffc7;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags & 0xfc7fffff;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags | 0x4000000;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags & 0xdfffffff;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags & 0xbfffffff;
+	GLOBAL->PTR_003e2d28->flags = GLOBAL->PTR_003e2d28->flags & 0xf7ffffff;
+	GLOBAL->PTR_003e2d28->EmptyFunction();
+	this->someIcon1.ReplaceShader(&GLOBAL->ENV_CLASS_94);
+	this->crashTwinsanityLogo.ReplaceShader(&GLOBAL->ENV_CLASS_94);
+	this->someIcon2.ReplaceShader(&GLOBAL->ENV_CLASS_94);
+	this->someIcon3.ReplaceShader(&GLOBAL->ENV_CLASS_94);
+	this->someIcon4.ReplaceShader(&GLOBAL->ENV_CLASS_94);
+	this->someIcon5.ReplaceShader(&GLOBAL->ENV_CLASS_94);
+	return;
 }
 
 void Oleg::FUN_000b22a0() {
@@ -3036,9 +3024,9 @@ void Oleg::InitValues() {
 		puVar1 = &(this->material).shaderProgramCnt;
 		*puVar1 = *puVar1 + 1;
 		}
-		pSVar11 = PTR_003e2d28;
+		pSVar11 = GLOBAL->PTR_003e2d28;
 		fVar5 = FLOAT_0038639c;
-		(PTR_003e2d28->vec0).x = FLOAT_0038639c;
+		(GLOBAL->PTR_003e2d28->vec0).x = FLOAT_0038639c;
 		(pSVar11->vec0).y = fVar5;
 		(pSVar11->vec0).z = fVar5;
 		(pSVar11->vec0).w = fVar5;

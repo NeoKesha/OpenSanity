@@ -8,6 +8,8 @@ class TwinsanityMaterialShader {
 		uint shaderProgramCnt;
 		uint shaderType;
 		int field9_0x24;
+		int field6_0x18;
+		int field7_0x1c;
 
 		TwinsanityMaterialShader();
 

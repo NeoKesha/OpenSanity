@@ -11,20 +11,19 @@ class ShaderProgramAbstract {
 		Vector4 vec0;
 		int id;
 		ShaderProgramSub * unkSubStruct;
+		int field59_0x70;
+		float field55_0x60;
+		float field56_0x64;
 
-		void Construct();
+		ShaderProgramAbstract();
+		~ShaderProgramAbstract();
+
 		void FUN_000ff9d0(uint* param_1);
 		virtual void FUN_00104d60();
-		virtual void CleanUp();
 		virtual void Write(MemoryStream* stream);
 		virtual void Read(MemoryStream* stream);
 		virtual void FUN_0010cd30();
-		void Dispose(byte param_1);
 		virtual int UpdateClock(float arg);
-		void Dispose_9();
-		void Dispose_10();
-		void Dispose_11();
-		void Dispose_12(byte param_1);
 		virtual bool IsF(int param_1);
 		static int GetUnkInt();
 		virtual int GetUnkInt2(char param_1);
