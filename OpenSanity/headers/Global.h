@@ -45,6 +45,10 @@ public:
 	TwinsanityMaterialShader ENV_CLASS_94;
 	uint ENV_FLAGS_95 = 0;
 	UNV025* ENV_PTR_95_0X78;
+	Matrix4* ENV_PTR_96_0X40;
+	Matrix4* ENV_PTR_97_0X40;
+	UNV026* ENV_PTR_98_0X100;
+	UNV027* ENV_PTR_99_0X80;
 
 	//UNK ADDRESSES
 	int			DAT_003ead50;
@@ -123,6 +127,9 @@ public:
 	int INT_003cff7c = 0;
 	ShaderProgramAbstract* PTR_003e2d28;
 	int INT_0039e3f8 = 8;
+	float DAT_003e2dfc;
+	int INT_003e2df0;
+	int INT_003e2df4;
 
 	//GLOBAL VALUES
 	float SinTable[32768];

@@ -1,5 +1,9 @@
 #include "headers/Global.h"
 #include "headers/Unknown/NonVirtualClasses/UNV025.h"
+#include "headers/Known/Math/Matrix4.h"
+#include "headers/Unknown/NonVirtualClasses/UNV025.h"
+#include "headers/Unknown/NonVirtualClasses/UNV026.h"
+#include "headers/Unknown/NonVirtualClasses/UNV027.h"
 
 float Global::TwinSin(float* num)
 {
@@ -105,4 +109,9 @@ Global::Global() {
 
 	ENV_PTR_95_0X78 = new UNV025();
 	ENV_FLAGS_95 = ENV_FLAGS_95 & 0xffff001e | 0x1e;
+
+	ENV_PTR_96_0X40 = new Matrix4();
+	ENV_PTR_97_0X40 = new Matrix4();
+	ENV_PTR_98_0X100 = new UNV026();
+	ENV_PTR_99_0X80 = new UNV027();
 }

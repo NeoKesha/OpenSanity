@@ -15,10 +15,10 @@ class UIElementSimpleShapeA : public UIElementSimpleShape {
 		int field4_0x28;
 		Vector2 field5_0x2c;
 		int field6_0x34;
-		int* field7_0x38;
+		Color field7_0x38;
 		int field8_0x3c;
 		int field9_0x40;
-		float field10_0x44;
+		Color field10_0x44;
 		float field11_0x48;
 		float field12_0x4c;
 		float field13_0x50;

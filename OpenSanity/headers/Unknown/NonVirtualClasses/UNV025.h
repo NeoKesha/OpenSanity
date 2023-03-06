@@ -4,6 +4,6 @@
 
 class UNV025 {
 	public:
-
+		float array[30];
 
 };

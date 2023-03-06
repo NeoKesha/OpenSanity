@@ -20,11 +20,11 @@ UIElementSimpleShapeA::UIElementSimpleShapeA(int cnt, TwinsanityMaterialShader* 
 	(this->field5_0x2c).x = 1.0;
 	(this->field5_0x2c).y = 1.0;
 	this->field6_0x34 = 0;
-	this->field7_0x38 = (int*)0x0;
+	this->field7_0x38 = Color();
 	this->field8_0x3c = 0;
 	this->field9_0x40 = 0;
 	fVar4 = 65536.0f / fVar1;
-	this->field10_0x44 = 0.0f;
+	this->field10_0x44 = Color();
 	this->field11_0x48 = 0.0f;
 	this->field12_0x4c = fVar4 * fVar1;
 	this->field13_0x50 = 0.0;
