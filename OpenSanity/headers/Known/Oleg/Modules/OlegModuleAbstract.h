@@ -15,10 +15,9 @@ class OlegModuleAbstract {
 		OlegModuleAbstract * next;
 		SplineA * spline;
 		Vector2 field2_0x8;
-		int field_0x28;
+		uint* field_0x28;
 		Color field13_0x2c;
-		float field14_0x30;
-		float field15_0x34;
+		Vector2 field14_0x30;
 
 		OlegModuleAbstract();
 		OlegModuleAbstract(float x);

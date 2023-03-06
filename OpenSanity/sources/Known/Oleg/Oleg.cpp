@@ -350,40 +350,26 @@ bool Oleg::FUN_000c2230(int index) {
 }
 
 void Oleg::FUN_000b1c50() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b1c50(Oleg *this){
-		uint uVar1;
-		float fVar2;
-		float fVar3;
-		float fStack16;
-		float local_c;
-		float fStack8;
-		float local_4;
-		fVar2 = FLOAT_00386608;
-		uVar1 = (this->uiIcon07).parent.parent.flags;
-		(this->uiIcon07).field14_0xb0 = FLOAT_0038d088;
-		fVar3 = FLOAT_0039e228;
-		(this->uiIcon07).field15_0xb4 = FLOAT_0039e228;
-		(this->uiIcon07).field16_0xb8 = fVar3 * fVar2;
-		(this->uiIcon07).field7_0x94 = FLOAT_003865d0;
-		(this->uiIcon07).field8_0x98 = fVar2;
-		(this->uiIcon07).parent.parent.flags = uVar1 & 0xffffafff | 0x2800;
-		(this->uiIcon07).parent.parent.field13_0x2c = FLOAT_0039e2f8;
-		(this->uiIcon07).parent.parent.field14_0x30 = FLOAT_0039e2f0;
-		(this->uiIcon07).parent.parent.field15_0x34 = FLOAT_0039e2f4;
-		fStack16 = FLOAT_0038639c;
-		local_c = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option03).parent,COLOR_WHITE,&ColorTransparent_0039e304,(ColorTransparent *)&stack0xfffffff0,&ColorTransparent_0039e304);
-		fStack16 = FLOAT_0038a834;
-		local_c = FLOAT_0038b3a4;
-		fStack8 = FLOAT_00386ab4;
-		local_4 = FLOAT_0038a76c;
-		OlegModuleA::FUN_001a41b0((OlegModuleA *)&this->uiIcon07,COLOR_WHITE,(ColorTransparent *)&stack0xfffffff8,(ColorTransparent *)&stack0xfffffff0,&ColorTransparent_0039e2fc);
-		return;
-		}
-		
-	*/
+	Global* GLOBAL = Global::Get();
+	(this->uiIcon07).field11_0xb0 = 7.0;
+	(this->uiIcon07).field12_0xb4 = GLOBAL->PI_05;
+	(this->uiIcon07).field13_0xb8 = GLOBAL->PI_05 * 0.1;
+	(this->uiIcon07).field4_0x94 = 3.0;
+	(this->uiIcon07).field5_0x98 = 0.1;
+	(this->uiIcon07).flags = (this->uiIcon07).flags & 0xffffafff | 0x2800;
+	(this->uiIcon07).field13_0x2c = Color(0.0f,0.0f,0.0f,0.5f);
+	(this->uiIcon07).field14_0x30.x = 0.01f;
+	(this->uiIcon07).field14_0x30.y = 0.01f;
+
+	Vector2 v1(0.5f, 0.764f);
+	Vector2 v2(1.0f,1.0f);
+	Vector2 v3(0.5f, 0.764f);
+	this->option03.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v1, &v2, &v3);
+
+	Vector2 v4(0.5f, 0.35f);
+	Vector2 v5(0.7f, 0.45f);
+	Vector2 v6(0.5f, 0.414f);
+	this->uiIcon07.FUN_001a41b0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v4, &v5, &v6);
 	return;
 }
 
@@ -426,12 +412,12 @@ void Oleg::ProcessUI(SomeState* state, InputStruct* input, NodeRelated2C* nodeDa
 		pcVar1 = (char *)((int)&this->field1_0x310 + 1);
 		*pcVar1 = *pcVar1 + -1;
 		this->deltaTime = (int)(TicksPerTime * fVar4);
-		(this->spline0).parent.length = fVar4;
-		(this->spline0).parent.repeats = (this->spline0).parent.repeats + 1;
+		(this->spline0).length = fVar4;
+		(this->spline0).repeats = (this->spline0).repeats + 1;
 		ShowUI(this,(this->parent).uiPresetMask[0x24].high,(this->parent).uiPresetMask[0x24].low,(int)(TicksPerTime * FLOAT_00386608),(int)(TicksPerTime * FLOAT_0038cac0));
 		FUN_001a2670(this,(this->parent).uiPresetMask[0x24].high,(this->parent).uiPresetMask[0x24].low,&this->spline0);
-		if ((*(char *)((int)&this->field1_0x310 + 1) == '\0') && (1 < (this->spline0).parent.repeats)){
-		(this->spline0).parent.repeats = 1;
+		if ((*(char *)((int)&this->field1_0x310 + 1) == '\0') && (1 < (this->spline0).repeats)){
+		(this->spline0).repeats = 1;
 		}
 		}
 		else {
@@ -460,16 +446,16 @@ void Oleg::FUN_000b3210() {
 		float local_c;
 		float fStack8;
 		float local_4;
-		OlegModuleA::UnkFun(&(this->label07).parent,COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e324);
-		OlegModuleA::UnkFun(&(this->label08).parent,COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e324);
+		OlegModuleA::UnkFun(&(this->label07),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e324);
+		OlegModuleA::UnkFun(&(this->label08),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e324);
 		fStack24 = FLOAT_0038639c;
 		local_14 = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option17).parent,COLOR_WHITE,&ColorTransparent_0039e304,(ColorTransparent *)&stack0xffffffe8,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->option17),COLOR_WHITE,&ColorTransparent_0039e304,(ColorTransparent *)&stack0xffffffe8,&ColorTransparent_0039e304);
 		fStack24 = 0.0;
 		local_14 = FLOAT_0038bc0c;
 		fStack16 = FLOAT_00386ab4;
 		local_c = FLOAT_00386608;
-		OlegModuleA::FUN_001a2e90(&(this->label09).parent,COLOR_WHITE,(ColorTransparent *)&stack0xfffffff0,&ColorTransparent_0039e32c,(ColorTransparent *)&stack0xffffffe8);
+		OlegModuleA::FUN_001a2e90(&(this->label09),COLOR_WHITE,(ColorTransparent *)&stack0xfffffff0,&ColorTransparent_0039e32c,(ColorTransparent *)&stack0xffffffe8);
 		fStack16 = 0.0;
 		local_c = FLOAT_0038bc0c;
 		fStack24 = FLOAT_0038639c;
@@ -480,13 +466,13 @@ void Oleg::FUN_000b3210() {
 		OlegModuleA::FUN_001a2e90(&bubble->parent,COLOR_WHITE,(ColorTransparent *)&stack0xfffffff8,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0);
 		fStack8 = FLOAT_0038639c;
 		local_4 = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option18).parent,COLOR_WHITE,&ColorTransparent_0039e304,(ColorTransparent *)&stack0xfffffff8,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->option18),COLOR_WHITE,&ColorTransparent_0039e304,(ColorTransparent *)&stack0xfffffff8,&ColorTransparent_0039e304);
 		fStack8 = FLOAT_0038b3a4;
 		local_4 = FLOAT_0038a934;
 		thunk_FUN_000ad710((float *)&stack0xfffffff8,bubble);
-		(this->label09).parent.parent.next = (OlegModuleAbstract *)bubble;
-		(this->label08).parent.parent.next = (OlegModuleAbstract *)&this->option17;
-		(this->bubble11).parent.parent.next = (OlegModuleAbstract *)&this->option18;
+		(this->label09).next = (OlegModuleAbstract *)bubble;
+		(this->label08).next = (OlegModuleAbstract *)&this->option17;
+		(this->bubble11).next = (OlegModuleAbstract *)&this->option18;
 		return;
 		}
 		
@@ -1165,16 +1151,16 @@ void Oleg::CalculateStatsHUD(NodeRelated2C* data) {
 		TwinString::AppendInt(&tmpStr1,num1);
 		TwinString::Append(&somethingStr,tmpStr1.value);
 		TwinString::Dispose(&tmpStr1);
-		if (((byte)(this->option11).parent.parent.flags & 0xf) < 2) {
-		if (1 < ((byte)(this->option12).parent.parent.flags & 0xf)) {
+		if (((byte)(this->option11).flags & 0xf) < 2) {
+		if (1 < ((byte)(this->option12).flags & 0xf)) {
 		pOVar6 = &this->option12;
 		goto LAB_000b71d5;
 		}
-		if (1 < ((byte)(this->option13).parent.parent.flags & 0xf)) {
+		if (1 < ((byte)(this->option13).flags & 0xf)) {
 		pOVar6 = &this->option13;
 		goto LAB_000b71d5;
 		}
-		if (1 < ((byte)(this->option14).parent.parent.flags & 0xf)) {
+		if (1 < ((byte)(this->option14).flags & 0xf)) {
 		pOVar6 = &this->option14;
 		goto LAB_000b71d5;
 		}
@@ -1232,32 +1218,32 @@ void Oleg::CalculateStatsHUD(NodeRelated2C* data) {
 		fVar12 = local_5c.alpha;
 		}
 		num1 = (uint)!bVar14 << 9;
-		(this->label10).parent.parent.flags = (this->label10).parent.parent.flags & 0xfffffdff | num1;
+		(this->label10).flags = (this->label10).flags & 0xfffffdff | num1;
 		if ((bVar14) && (this->field67_0xb04 != 0)) {
 		bVar14 = true;
 		}
 		else {
 		bVar14 = false;
 		}
-		uVar10 = (this->uiIcon15).parent.parent.flags;
-		(this->uiIcon15).parent.parent.flags = uVar10 ^ ((uint)!bVar14 << 9 ^ uVar10) & 0x200;
-		(this->label11).parent.parent.flags = (this->label11).parent.parent.flags & 0xfffffdff | num1;
-		(this->uiIcon16).parent.parent.flags = (this->uiIcon16).parent.parent.flags & 0xfffffdff | num1;
+		uVar10 = (this->uiIcon15).flags;
+		(this->uiIcon15).flags = uVar10 ^ ((uint)!bVar14 << 9 ^ uVar10) & 0x200;
+		(this->label11).flags = (this->label11).flags & 0xfffffdff | num1;
+		(this->uiIcon16).flags = (this->uiIcon16).flags & 0xfffffdff | num1;
 		if (!bVar13) {
 		TwinString::Copy(&(this->wumpaCount).str,wumpaCountStr.value);
 		}
-		num1 = (this->module75).parent.parent.flags;
-		(this->module75).parent.parent.flags = num1 ^ ((uint)!bVar13 << 9 ^ num1) & 0x200;
-		num1 = (this->wumpaCount).parent.parent.flags;
-		(this->wumpaCount).parent.parent.flags = num1 ^ ((uint)bVar13 << 9 ^ num1) & 0x200;
+		num1 = (this->module75).flags;
+		(this->module75).flags = num1 ^ ((uint)!bVar13 << 9 ^ num1) & 0x200;
+		num1 = (this->wumpaCount).flags;
+		(this->wumpaCount).flags = num1 ^ ((uint)bVar13 << 9 ^ num1) & 0x200;
 		if (bVar5) {
 		fVar16 = thunk_FUN_00080590((int)local_70);
 		(this->module76).field1_0x88 = fVar16 - FLOAT_00386ab4;
 		(this->module76).image1 = this->iconsPsm2;
 		(this->module76).image2 = &this->someIcon5;
 		}
-		num1 = (this->module76).parent.parent.flags;
-		(this->module76).parent.parent.flags = num1 ^ ((uint)!bVar5 << 9 ^ num1) & 0x200;
+		num1 = (this->module76).flags;
+		(this->module76).flags = num1 ^ ((uint)!bVar5 << 9 ^ num1) & 0x200;
 		TwinString::Copy(&(this->label03).str,wumpaCountStr.value);
 		TwinString::Copy(&(this->label05).str,somethingStr.value);
 		(this->uiIcon20).field1_0x88 = &this->someIcon1 + (this->field1_0x310 & 0xff);
@@ -1270,11 +1256,11 @@ void Oleg::CalculateStatsHUD(NodeRelated2C* data) {
 		TwinString::AppendInt(&timeMinutes,num1);
 		TwinString::Append(&local_24,timeMinutes.value);
 		TwinString::Dispose(&timeMinutes);
-		if (1 < ((byte)(this->uiIcon18).parent.parent.flags & 0xf)) {
+		if (1 < ((byte)(this->uiIcon18).flags & 0xf)) {
 		TwinString::Copy(&(this->label13).str,local_24.value);
 		(this->uiIcon18).field1_0x88 = this->iconsPsm2 + (this->chunkDesc->flags >> 8 & 0xf);
 		}
-		if (1 < ((byte)(this->uiIcon11).parent.parent.flags & 0xf)) {
+		if (1 < ((byte)(this->uiIcon11).flags & 0xf)) {
 		TwinString::Copy(&(this->label04).str,local_24.value);
 		pCVar4 = this->chunkDesc;
 		(this->uiIcon11).field1_0x88 = this->iconsPsm2 + (pCVar4->flags >> 8 & 0xf);
@@ -1300,25 +1286,25 @@ void Oleg::CalculateStatsHUD(NodeRelated2C* data) {
 		}
 		}
 		bVar14 = false;
-		LAB_000b7613:num1 = (this->uiIcon21).parent.parent.flags;
-		(this->uiIcon21).parent.parent.flags = num1 ^ ((uint)!bVar14 << 9 ^ num1) & 0x200;
+		LAB_000b7613:num1 = (this->uiIcon21).flags;
+		(this->uiIcon21).flags = num1 ^ ((uint)!bVar14 << 9 ^ num1) & 0x200;
 		if ((bVar15) || (bVar13)) {
 		bVar13 = false;
 		}
 		else {
 		bVar13 = true;
 		}
-		num1 = (this->label14).parent.parent.flags;
-		(this->label14).parent.parent.flags = num1 ^ ((uint)!bVar13 << 9 ^ num1) & 0x200;
-		if (1 < ((byte)(this->uiIcon14).parent.parent.flags & 0xf)) {
-		num1 = (this->caption20).parent.parent.flags;
+		num1 = (this->label14).flags;
+		(this->label14).flags = num1 ^ ((uint)!bVar13 << 9 ^ num1) & 0x200;
+		if (1 < ((byte)(this->uiIcon14).flags & 0xf)) {
+		num1 = (this->caption20).flags;
 		if ((uint)this->field5_0x320 < 2) {
-		(this->caption20).parent.parent.flags = num1 & 0xfffffdff;
-		*(uint **)&(this->uiIcon14).parent.parent.field_0x28 = &ENV_FLAGS_95;
+		(this->caption20).flags = num1 & 0xfffffdff;
+		*(uint **)&(this->uiIcon14).field_0x28 = &ENV_FLAGS_95;
 		}
 		else {
-		(this->caption20).parent.parent.flags = num1 | 0x200;
-		*(undefined4 *)&(this->uiIcon14).parent.parent.field_0x28 = 0;
+		(this->caption20).flags = num1 | 0x200;
+		*(undefined4 *)&(this->uiIcon14).field_0x28 = 0;
 		}
 		}
 		pCVar4 = this->chunkDesc;
@@ -1345,11 +1331,11 @@ void Oleg::CalculateStatsHUD(NodeRelated2C* data) {
 		local_6c.alpha = FLOAT_00386ab4;
 		local_6c.color = FLOAT_00386ab4;
 		OlegModuleA::FUN_001a41b0((OlegModuleA *)&this->uiIcon09,COLOR_WHITE,&CStack100,&local_5c,&local_6c);
-		(this->uiIcon09).parent.parent.field13_0x2c = FLOAT_0039e2f8;
-		(this->uiIcon09).parent.parent.field14_0x30 = FLOAT_0039e2f0;
-		(this->uiIcon09).parent.parent.field15_0x34 = FLOAT_0039e2f4;
+		(this->uiIcon09).field13_0x2c = FLOAT_0039e2f8;
+		(this->uiIcon09).field14_0x30 = FLOAT_0039e2f0;
+		(this->uiIcon09).field15_0x34 = FLOAT_0039e2f4;
 		fVar12 = FLOAT_0038a830;
-		(this->uiIcon09).parent.parent.flags = (this->uiIcon09).parent.parent.flags & 0xfffffdff;
+		(this->uiIcon09).flags = (this->uiIcon09).flags & 0xfffffdff;
 		(this->uiIcon09).field7_0x94 = fVar12;
 		(this->uiIcon09).field8_0x98 = FLOAT_0038bd20;
 		}
@@ -1358,7 +1344,7 @@ void Oleg::CalculateStatsHUD(NodeRelated2C* data) {
 		this->field3_0x318 = this->field3_0x318 ^ (uVar10 << 9 ^ this->field3_0x318) & 0x1fe00;
 		thunk_FUN_000b4f10(this,1,'\0');
 		}
-		puVar1 = &(this->uiIcon09).parent.parent.flags;
+		puVar1 = &(this->uiIcon09).flags;
 		*puVar1 = *puVar1 | 0x200;
 		}
 		pUVar7 = (UnkFamily20Base *)0x0;
@@ -1682,33 +1668,33 @@ void Oleg::FUN_000b7db0() {
 		local_20.color = local_20.alpha;
 		local_2c.x = FLOAT_0038a83c;
 		local_2c.y = FLOAT_0038cae4;
-		OlegModuleA::FUN_001a2e30(&(this->caption01).parent,(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
+		OlegModuleA::FUN_001a2e30(&(this->caption01),(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
 		local_20.alpha = FLOAT_0038d548;
 		local_20.color = FLOAT_0038d548;
 		local_2c.x = FLOAT_0038a83c;
 		local_2c.y = FLOAT_0038cae4;
-		OlegModuleA::FUN_001a2e30(&(this->caption02).parent,(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
+		OlegModuleA::FUN_001a2e30(&(this->caption02),(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
 		local_20.alpha = FLOAT_0038d548;
 		local_20.color = FLOAT_0038d548;
 		local_2c.x = FLOAT_0038c9bc;
 		local_2c.y = FLOAT_0038cae4;
-		OlegModuleA::FUN_001a2e30(&(this->caption03).parent,(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
+		OlegModuleA::FUN_001a2e30(&(this->caption03),(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
 		local_20.alpha = FLOAT_0038a838;
 		local_20.color = FLOAT_0038a838;
 		local_2c.x = FLOAT_0038c9bc;
 		local_2c.y = FLOAT_0038d72c;
-		OlegModuleA::FUN_001a2e30(&(this->caption04).parent,(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
+		OlegModuleA::FUN_001a2e30(&(this->caption04),(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
 		local_20.alpha = FLOAT_0038a838;
 		local_20.color = FLOAT_0038a838;
 		local_2c.x = FLOAT_0038a83c;
 		local_2c.y = FLOAT_0038d72c;
-		OlegModuleA::FUN_001a2e30(&(this->caption05).parent,(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
+		OlegModuleA::FUN_001a2e30(&(this->caption05),(uint)COLOR_WHITE,&local_2c,(Vector2 *)&local_20);
 		local_20.alpha = FLOAT_0038639c;
 		local_20.color = FLOAT_0038639c;
 		OlegModuleA::UnkFun(&this_00->parent,COLOR_WHITE,&ColorTransparent_0039e2fc,&local_20,&ColorTransparent_0039e2fc);
 		local_20.alpha = FLOAT_0038639c;
 		local_20.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->bubble02).parent,COLOR_WHITE,&ColorTransparent_0039e304,&local_20,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->bubble02),COLOR_WHITE,&ColorTransparent_0039e304,&local_20,&ColorTransparent_0039e304);
 		*(undefined4 *)&pUVar10->field_0x44 = DAT_0039e3a8;
 		*(undefined4 *)&local_18->field_0x44 = DAT_0039e3a8;
 		*(undefined4 *)&pUVar11->field_0x44 = DAT_0039e3b0;
@@ -1744,12 +1730,12 @@ void Oleg::FUN_000b7db0() {
 		*(float *)&local_24->field_0x2c = FLOAT_0038d70c;
 		*(float *)&local_24->field_0x30 = FLOAT_0038d708;
 		local_18 = (UIElementSimpleShapeA *)FLOAT_0038b3bc;
-		(this->bubble01).parent.parent.flags = (this->bubble01).parent.parent.flags & 0xffff97ff | 0x1000;
+		(this->bubble01).flags = (this->bubble01).flags & 0xffff97ff | 0x1000;
 		local_14 = FLOAT_0038bf5c;
 		thunk_FUN_000ad710((float *)&local_18,&this->bubble02);
-		(this->uiIcon06).parent.array[1].y = -0.5;
-		(this->uiIcon06).parent.array[1].x = 0.0;
-		(this->uiIcon06).parent.parent.flags = (this->uiIcon06).parent.parent.flags & 0xffff8fff | 0x800;
+		(this->uiIcon06).array[1].y = -0.5;
+		(this->uiIcon06).array[1].x = 0.0;
+		(this->uiIcon06).flags = (this->uiIcon06).flags & 0xffff8fff | 0x800;
 		return;
 		}
 		
@@ -1758,89 +1744,69 @@ void Oleg::FUN_000b7db0() {
 }
 
 void Oleg::FUN_000b79f0() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b79f0(Oleg *this){
-		uint uVar1;
-		float fVar2;
-		float fVar3;
-		float fVar4;
-		Vector2 local_10;
-		Vector2 local_8;
-		fVar2 = ENV_COL_91_BLACK;
-		(this->uiIcon01).parent.array[1].y = ENV_COL_91_BLACK;
-		(this->uiIcon01).parent.array[1].x = fVar2;
-		(this->uiIcon01).parent.array[5].x = DAT_003e2d44;
-		(this->uiIcon01).parent.array[5].y = DAT_003e2d48;
-		(this->uiIcon01).parent.array[4].x = FLOAT_0039e344;
-		(this->uiIcon01).parent.array[4].y = FLOAT_0039e348;
-		(this->uiIcon01).parent.array[9].x = FLOAT_0039e33c;
-		(this->uiIcon01).parent.array[9].y = FLOAT_0039e340;
-		(this->uiIcon01).parent.array[8].x = FLOAT_0039e34c;
-		(this->uiIcon01).parent.array[8].y = FLOAT_0039e350;
-		(this->uiIcon01).parent.parent.flags = (this->uiIcon01).parent.parent.flags & 0xffff97ff | 0x1000;
-		fVar2 = ENV_COL_91_BLACK;
-		(this->uiIcon02).parent.array[1].y = ENV_COL_91_BLACK;
-		(this->uiIcon02).parent.array[1].x = fVar2;
-		(this->uiIcon02).parent.array[5].x = FLOAT_0039e354;
-		(this->uiIcon02).parent.array[5].y = FLOAT_0039e358;
-		(this->uiIcon02).parent.array[4].x = FLOAT_0039e364;
-		(this->uiIcon02).parent.array[4].y = FLOAT_0039e368;
-		(this->uiIcon02).parent.array[9].x = FLOAT_0039e35c;
-		(this->uiIcon02).parent.array[9].y = FLOAT_0039e360;
-		(this->uiIcon02).parent.array[8].x = FLOAT_0039e36c;
-		(this->uiIcon02).parent.array[8].y = FLOAT_0039e370;
-		fVar3 = FLOAT_0038d088;
-		fVar2 = FLOAT_00386608;
-		(this->uiIcon02).parent.parent.flags = (this->uiIcon02).parent.parent.flags & 0xffff97ff | 0x1000;
-		fVar4 = COLOR_BLACK;
-		(this->uiIcon03).parent.array[1].x = FLOAT_0039f1f8;
-		(this->uiIcon03).parent.array[1].y = fVar4;
-		(this->uiIcon03).parent.parent.flags = (this->uiIcon03).parent.parent.flags & 0xffff8fff | 0x800;
-		uVar1 = (this->uiIcon04).parent.parent.flags;
-		(this->uiIcon04).field14_0xb0 = fVar3;
-		fVar3 = FLOAT_0039e228;
-		(this->uiIcon04).field15_0xb4 = FLOAT_0039e228;
-		(this->uiIcon04).field16_0xb8 = fVar3 * fVar2;
-		(this->uiIcon04).field7_0x94 = FLOAT_003865d0;
-		local_8.y = FLOAT_0038d704;
-		local_10.x = FLOAT_0038d5b8;
-		local_10.y = FLOAT_0038bf5c;
-		local_8.x = FLOAT_0038d5b4;
-		(this->uiIcon04).field8_0x98 = fVar2;
-		(this->uiIcon04).parent.parent.flags = uVar1 & 0xffffafff | 0x2800;
-		OlegModuleLabelGeneric::FUN_001a4010((OlegModuleLabelGeneric *)&this->uiIcon04,0x7fffffff,&local_8,&local_10);
-		(this->uiIcon04).parent.parent.flags = (this->uiIcon04).parent.parent.flags & 0xffffafff | 0x2800;
-		fVar2 = FLOAT_003e2d70;
-		(this->uiIcon05).parent.array[1].y = FLOAT_0039e374;
-		(this->uiIcon05).parent.array[1].x = fVar2;
-		(this->uiIcon05).parent.array[5].x = FLOAT_0039e390;
-		(this->uiIcon05).parent.array[5].y = FLOAT_0039e394;
-		(this->uiIcon05).parent.array[4].x = FLOAT_0039e390;
-		(this->uiIcon05).parent.array[4].y = FLOAT_0039e394;
-		(this->uiIcon05).parent.array[9].x = FLOAT_0039e380;
-		(this->uiIcon05).parent.array[9].y = FLOAT_0039e384;
-		(this->uiIcon05).parent.array[8].x = FLOAT_0039e380;
-		(this->uiIcon05).parent.array[8].y = FLOAT_0039e384;
-		(this->uiIcon05).parent.parent.flags = (this->uiIcon05).parent.parent.flags & 0xffff97ff | 0x1000;
-		fVar2 = FLOAT_0039e37c;
-		(this->label01).parent.array[1].y = FLOAT_0039e378;
-		(this->label01).parent.array[1].x = fVar2;
-		(this->label01).parent.array[5].x = FLOAT_0039e388;
-		(this->label01).parent.array[5].y = FLOAT_0039e38c;
-		(this->label01).parent.array[4].x = FLOAT_0039e388;
-		(this->label01).parent.array[4].y = FLOAT_0039e38c;
-		(this->label01).parent.array[9].x = FLOAT_0039e398;
-		(this->label01).parent.array[9].y = FLOAT_0039e39c;
-		(this->label01).parent.array[8].x = FLOAT_0039e398;
-		(this->label01).parent.array[8].y = FLOAT_0039e39c;
-		(this->uiIcon01).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon02;
-		(this->uiIcon03).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon04;
-		return;
-		}
-		
-	*/
-	return;
+	(this->uiIcon01).color2 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon01).color1 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon01).array[3].x = 0.0f;
+	(this->uiIcon01).array[3].y = 0.0f;
+	(this->uiIcon01).array[2].x = 0.0f;
+	(this->uiIcon01).array[2].y = -0.15f;
+	(this->uiIcon01).array[7].x = 1.0f;
+	(this->uiIcon01).array[7].y = 0.15f;
+	(this->uiIcon01).array[6].x = 1.0f;
+	(this->uiIcon01).array[6].y = 0.0f;
+	(this->uiIcon01).flags = (this->uiIcon01).flags & 0xffff97ff | 0x1000;
+
+	(this->uiIcon02).color2 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon02).color1 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon02).array[3].x = 0.0f;
+	(this->uiIcon02).array[3].y = 0.85f;
+	(this->uiIcon02).array[2].x = 0.0f;
+	(this->uiIcon02).array[2].y = 1.0f;
+	(this->uiIcon02).array[7].x = 1.0f;
+	(this->uiIcon02).array[7].y = 1.0f;
+	(this->uiIcon02).array[6].x = 1.0f;
+	(this->uiIcon02).array[6].y = 1.15f;
+	(this->uiIcon02).flags = (this->uiIcon02).flags & 0xffff97ff | 0x1000;
+
+	(this->uiIcon03).color1 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon03).color2 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon03).flags = (this->uiIcon03).flags & 0xffff8fff | 0x800;
+
+	(this->uiIcon04).field11_0xb0 = 7.0;
+	(this->uiIcon04).field12_0xb4 = 1.5707964;
+	(this->uiIcon04).field13_0xb8 = 1.5707964 * 0.1;
+	(this->uiIcon04).field4_0x94 = 3.0;
+	(this->uiIcon04).field5_0x98 = 0.1;
+	(this->uiIcon04).flags = (this->uiIcon04).flags & 0xffffafff | 0x2800;
+	Vector2 v1(0.195f, 0.84f);
+	Vector2 v2(0.24f, 0.16f);
+	this->uiIcon04.FUN_001a4010(Color(1.0f, 1.0f, 1.0f, 0.5f),&v1,&v2);
+	(this->uiIcon04).flags = (this->uiIcon04).flags & 0xffffafff | 0x2800;
+
+	(this->uiIcon05).color2 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon05).color1 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon05).array[3].x = 0.0f;
+	(this->uiIcon05).array[3].y = 0.84f;
+	(this->uiIcon05).array[2].x = 0.0f;
+	(this->uiIcon05).array[2].y = 0.84f;
+	(this->uiIcon05).array[7].x = 1.0f;
+	(this->uiIcon05).array[7].y = 1.0f;
+	(this->uiIcon05).array[6].x = 1.0f;
+	(this->uiIcon05).array[6].y = 1.0f;
+	(this->uiIcon05).flags = (this->uiIcon05).flags & 0xffff97ff | 0x1000;
+
+	(this->label01).color2 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->label01).color1 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->label01).array[3].x = 0.5f;
+	(this->label01).array[3].y = 0.88f;
+	(this->label01).array[2].x = 0.5f;
+	(this->label01).array[2].y = 0.88f;
+	(this->label01).array[7].x = 0.5f;
+	(this->label01).array[7].y = 0.5f;
+	(this->label01).array[6].x = 0.5f;
+	(this->label01).array[6].y = 0.5f;
+	(this->uiIcon01).next = &this->uiIcon02;
+	(this->uiIcon03).next = &this->uiIcon04;
 }
 
 void Oleg::FUN_000b33f0()
@@ -1914,66 +1880,66 @@ void Oleg::FUN_000b22a0() {
 		ColorTransparent local_10;
 		local_28.alpha = FLOAT_0038639c;
 		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option04).parent,COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->option04),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
 		local_28.alpha = FLOAT_0038639c;
 		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option05).parent,COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->option05),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
 		local_28.alpha = FLOAT_0038639c;
 		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option06).parent,COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->option06),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
 		local_28.color = FLOAT_0038bc04;
 		local_30 = (int)FLOAT_0038639c;
 		local_2c = FLOAT_0038639c;
 		local_28.alpha = FLOAT_00386ab4;
 		local_38 = FLOAT_00386ab4;
 		local_34 = FLOAT_0038cb00;
-		OlegModuleA::UnkFun(&(this->caption11).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::UnkFun(&(this->caption11),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_0038a834;
 		local_28.color = FLOAT_0038a834;
-		OlegModuleA::UnkFun(&(this->caption07).parent,COLOR_WHITE,&ColorTransparent_0039e2fc,&local_28,&ColorTransparent_0039e2fc);
+		OlegModuleA::UnkFun(&(this->caption07),COLOR_WHITE,&ColorTransparent_0039e2fc,&local_28,&ColorTransparent_0039e2fc);
 		local_28.alpha = FLOAT_0038639c;
 		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option07).parent,COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->option07),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
 		local_28.alpha = FLOAT_00386ab4;
 		local_28.color = FLOAT_00386ab4;
 		local_38 = FLOAT_00386ab4;
 		local_30 = (int)FLOAT_0038a834;
 		local_2c = FLOAT_0038a834;
 		local_34 = FLOAT_0038bfe4;
-		OlegModuleA::UnkFun(&(this->caption09).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::UnkFun(&(this->caption09),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_00386ab4;
 		local_28.color = FLOAT_00386ab4;
 		local_38 = FLOAT_00386ab4;
 		local_30 = (int)FLOAT_0038a834;
 		local_2c = FLOAT_0038a834;
 		local_34 = FLOAT_0038bfe4;
-		OlegModuleA::UnkFun(&(this->caption08).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::UnkFun(&(this->caption08),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_00386ab4;
 		local_28.color = FLOAT_00386ab4;
 		local_38 = FLOAT_00386ab4;
 		local_30 = (int)FLOAT_0038a834;
 		local_2c = FLOAT_0038a834;
 		local_34 = FLOAT_0038bfe4;
-		OlegModuleA::UnkFun(&(this->caption10).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::UnkFun(&(this->caption10),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_00386ab4;
 		local_28.color = FLOAT_00386ab4;
 		local_38 = FLOAT_00386ab4;
 		local_30 = (int)FLOAT_0038adb8;
 		local_2c = FLOAT_0038adb8;
 		local_34 = FLOAT_0038a82c;
-		OlegModuleA::UnkFun(&(this->caption12).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::UnkFun(&(this->caption12),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_30 = (int)FLOAT_00386ab4;
 		local_28.alpha = FLOAT_0038ab4c;
 		local_28.color = FLOAT_0038ab4c;
-		(this->option07).parent.parent.next = (OlegModuleAbstract *)&this->caption09;
+		(this->option07).next = (OlegModuleAbstract *)&this->caption09;
 		local_2c = FLOAT_0038cb00;
-		OlegModuleA::UnkFun(&(this->caption13).parent,COLOR_WHITE,(ColorTransparent *)&local_30,&local_28,&ColorTransparent_0039e2fc);
-		OlegModuleA::UnkFun(&(this->caption14).parent,COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
+		OlegModuleA::UnkFun(&(this->caption13),COLOR_WHITE,(ColorTransparent *)&local_30,&local_28,&ColorTransparent_0039e2fc);
+		OlegModuleA::UnkFun(&(this->caption14),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
 		local_28.alpha = FLOAT_0038639c;
 		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option08).parent,COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		OlegModuleA::UnkFun(&(this->caption15).parent,COLOR_WHITE,&ColorTransparent_0039e314,&ColorTransparent_0039e31c,&ColorTransparent_0039e2fc);
-		OlegModuleA::UnkFun(&(this->caption16).parent,COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
+		OlegModuleA::UnkFun(&(this->option08),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->caption15),COLOR_WHITE,&ColorTransparent_0039e314,&ColorTransparent_0039e31c,&ColorTransparent_0039e2fc);
+		OlegModuleA::UnkFun(&(this->caption16),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
 		local_28.alpha = FLOAT_00386608;
 		local_28.color = FLOAT_0038c9bc;
 		local_30 = (int)FLOAT_00386ab4;
@@ -1981,20 +1947,20 @@ void Oleg::FUN_000b22a0() {
 		OlegModuleA::FUN_001a41b0((OlegModuleA *)&this->uiIcon08,COLOR_WHITE,(ColorTransparent *)&local_30,&local_28,&ColorTransparent_0039e304);
 		local_28.alpha = FLOAT_0038639c;
 		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option09).parent,COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		OlegModuleA::UnkFun(&(this->caption17).parent,COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
+		OlegModuleA::UnkFun(&(this->option09),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
+		OlegModuleA::UnkFun(&(this->caption17),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
 		local_28.alpha = FLOAT_0038639c;
 		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option10).parent,COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		(this->caption11).parent.parent.next = (OlegModuleAbstract *)&this->caption12;
-		(this->caption14).parent.parent.next = (OlegModuleAbstract *)&this->option08;
-		(this->caption15).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon08;
-		(this->uiIcon08).parent.parent.next = (OlegModuleAbstract *)&this->caption16;
-		(this->option05).parent.parent.next = (OlegModuleAbstract *)&this->caption07;
-		(this->caption16).parent.parent.next = (OlegModuleAbstract *)&this->option09;
-		(this->option06).parent.parent.next = (OlegModuleAbstract *)&this->caption08;
-		(this->caption13).parent.parent.next = (OlegModuleAbstract *)&this->caption14;
-		(this->caption17).parent.parent.next = (OlegModuleAbstract *)&this->option10;
+		OlegModuleA::UnkFun(&(this->option10),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
+		(this->caption11).next = (OlegModuleAbstract *)&this->caption12;
+		(this->caption14).next = (OlegModuleAbstract *)&this->option08;
+		(this->caption15).next = (OlegModuleAbstract *)&this->uiIcon08;
+		(this->uiIcon08).next = (OlegModuleAbstract *)&this->caption16;
+		(this->option05).next = (OlegModuleAbstract *)&this->caption07;
+		(this->caption16).next = (OlegModuleAbstract *)&this->option09;
+		(this->option06).next = (OlegModuleAbstract *)&this->caption08;
+		(this->caption13).next = (OlegModuleAbstract *)&this->caption14;
+		(this->caption17).next = (OlegModuleAbstract *)&this->option10;
 		local_30 = (int)OlegModuleMenuBubble::FUN_001a0fd0(&this->bubble07,0,&ENV_CLASS_94);
 		local_38 = (float)OlegModuleMenuBubble::FUN_001a0fd0(&this->bubble07,1,&ENV_CLASS_94);
 		pOVar1 = &this->bubble08;
@@ -2083,14 +2049,14 @@ void Oleg::FUN_000b22a0() {
 		local_2c = FLOAT_0038639c;
 		local_38 = FLOAT_0038d60c;
 		local_34 = FLOAT_0038d608;
-		OlegModuleA::UnkFun(&(this->bubble07).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::UnkFun(&(this->bubble07),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_00386ab4;
 		local_28.color = FLOAT_00386ab4;
 		local_30 = (int)FLOAT_0038639c;
 		local_2c = FLOAT_0038639c;
 		local_38 = FLOAT_0038d60c;
 		local_34 = FLOAT_0038d608;
-		OlegModuleA::UnkFun(&(this->progressPercent).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::UnkFun(&(this->progressPercent),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_00386ab4;
 		local_28.color = 0.0;
 		local_30 = (int)FLOAT_0038639c;
@@ -2111,7 +2077,7 @@ void Oleg::FUN_000b22a0() {
 		local_2c = FLOAT_0038639c;
 		local_38 = FLOAT_0038d5f4;
 		local_34 = FLOAT_0038d5f8;
-		OlegModuleA::FUN_001a2e90(&(this->label03).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::FUN_001a2e90(&(this->label03),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_0038bc0c;
 		local_28.color = 0.0;
 		local_30 = (int)FLOAT_00386608;
@@ -2132,7 +2098,7 @@ void Oleg::FUN_000b22a0() {
 		local_2c = FLOAT_0038639c;
 		local_38 = FLOAT_0038d5e4;
 		local_34 = FLOAT_0038d5e0;
-		OlegModuleA::FUN_001a2e90(&(this->label04).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::FUN_001a2e90(&(this->label04),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_0038bc0c;
 		local_28.color = 0.0;
 		local_30 = (int)FLOAT_0038b3c8;
@@ -2146,14 +2112,14 @@ void Oleg::FUN_000b22a0() {
 		local_2c = FLOAT_0038639c;
 		local_38 = FLOAT_0038d5bc;
 		local_34 = FLOAT_0038d5d8;
-		OlegModuleA::FUN_001a2e90(&(this->bubble06).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::FUN_001a2e90(&(this->bubble06),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_0038bc0c;
 		local_28.color = 0.0;
 		local_30 = (int)FLOAT_0038639c;
 		local_2c = FLOAT_0038639c;
 		local_38 = FLOAT_0038a828;
 		local_34 = FLOAT_0038d5d4;
-		OlegModuleA::FUN_001a2e90(&(this->label05).parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
+		OlegModuleA::FUN_001a2e90(&(this->label05),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
 		local_28.alpha = FLOAT_0038bc0c;
 		local_28.color = 0.0;
 		local_30 = (int)FLOAT_0038c850;
@@ -2184,25 +2150,25 @@ void Oleg::FUN_000b22a0() {
 		}
 		 while ((uint)local_30 < 0xd);
 		pOVar2 = this->iconArray[1];
-		(this->bubble07).parent.parent.next = (OlegModuleAbstract *)&this->progressPercent;
-		(this->bubble05).parent.parent.next = (OlegModuleAbstract *)&this->bubble06;
-		(this->bubble06).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon10;
-		(this->uiIcon10).parent.parent.next = (OlegModuleAbstract *)&this->label03;
-		(this->label03).parent.parent.next = (OlegModuleAbstract *)&this->label04;
-		(this->label04).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon11;
-		(this->uiIcon11).parent.parent.next = (OlegModuleAbstract *)&this->label05;
-		(this->label05).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon12;
+		(this->bubble07).next = (OlegModuleAbstract *)&this->progressPercent;
+		(this->bubble05).next = (OlegModuleAbstract *)&this->bubble06;
+		(this->bubble06).next = (OlegModuleAbstract *)&this->uiIcon10;
+		(this->uiIcon10).next = (OlegModuleAbstract *)&this->label03;
+		(this->label03).next = (OlegModuleAbstract *)&this->label04;
+		(this->label04).next = (OlegModuleAbstract *)&this->uiIcon11;
+		(this->uiIcon11).next = (OlegModuleAbstract *)&this->label05;
+		(this->label05).next = (OlegModuleAbstract *)&this->uiIcon12;
 		pOVar3 = this->iconArray[0];
-		(this->uiIcon12).parent.parent.next = (OlegModuleAbstract *)pOVar3;
-		(this->progressPercent).parent.parent.next = (OlegModuleAbstract *)pOVar1;
-		(this->uiIcon09).parent.parent.next = (OlegModuleAbstract *)bubble;
-		(this->bubble04).parent.parent.next = (OlegModuleAbstract *)bubble_00;
-		(this->bubble08).parent.parent.next = (OlegModuleAbstract *)&this->uiIcon09;
-		(pOVar3->parent).parent.next = (OlegModuleAbstract *)pOVar2;
-		(this->iconArray[1]->parent).parent.next = (OlegModuleAbstract *)this->iconArray[2];
-		(this->iconArray[2]->parent).parent.next = (OlegModuleAbstract *)this->iconArray[3];
-		(this->iconArray[3]->parent).parent.next = (OlegModuleAbstract *)this->iconArray[4];
-		(this->iconArray[4]->parent).parent.next = (OlegModuleAbstract *)this->iconArray[5];
+		(this->uiIcon12).next = (OlegModuleAbstract *)pOVar3;
+		(this->progressPercent).next = (OlegModuleAbstract *)pOVar1;
+		(this->uiIcon09).next = (OlegModuleAbstract *)bubble;
+		(this->bubble04).next = (OlegModuleAbstract *)bubble_00;
+		(this->bubble08).next = (OlegModuleAbstract *)&this->uiIcon09;
+		(pOVar3->parent).next = (OlegModuleAbstract *)pOVar2;
+		(this->iconArray[1]->parent).next = (OlegModuleAbstract *)this->iconArray[2];
+		(this->iconArray[2]->parent).next = (OlegModuleAbstract *)this->iconArray[3];
+		(this->iconArray[3]->parent).next = (OlegModuleAbstract *)this->iconArray[4];
+		(this->iconArray[4]->parent).next = (OlegModuleAbstract *)this->iconArray[5];
 		return;
 		}
 		
@@ -2459,49 +2425,32 @@ void Oleg::InitModuleMask() {
 }
 
 void Oleg::FUN_000b1d80() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b1d80(Oleg *this){
-		uint uVar1;
-		float fVar2;
-		float fVar3;
-		float fStack16;
-		float local_c;
-		float fStack8;
-		float local_4;
-		fVar2 = FLOAT_00386608;
-		uVar1 = (this->uiIcon23).parent.parent.flags;
-		(this->uiIcon23).field14_0xb0 = FLOAT_0038d088;
-		fVar3 = FLOAT_0039e228;
-		(this->uiIcon23).field15_0xb4 = FLOAT_0039e228;
-		(this->uiIcon23).field8_0x98 = fVar2;
-		(this->uiIcon23).parent.parent.flags = uVar1 & 0xffffafff | 0x2800;
-		(this->uiIcon23).field16_0xb8 = fVar3 * fVar2;
-		(this->uiIcon23).field7_0x94 = FLOAT_003865d0;
-		*(uint **)&(this->caption21).parent.parent.field_0x28 = &ENV_FLAGS_95;
-		fVar2 = DAT_0039e3a4;
-		(this->module86).parent.array[1].x = DAT_0039e3a0;
-		fStack16 = FLOAT_0038bc04;
-		(this->module86).parent.array[1].y = fVar2;
-		(this->module86).parent.parent.flags = (this->module86).parent.parent.flags & 0xffffa7ff | 0x2000;
-		fVar2 = COLOR_BLACK;
-		(this->uiIcon22).parent.array[1].x = FLOAT_0039f1f8;
-		(this->uiIcon22).parent.array[1].y = fVar2;
-		(this->uiIcon22).parent.parent.flags = (this->uiIcon22).parent.parent.flags & 0xffff8fff | 0x800;
-		local_c = FLOAT_0038a828;
-		fStack8 = FLOAT_0038d5bc;
-		local_4 = FLOAT_0038bf5c;
-		OlegModuleLabelGeneric::FUN_001a4010((OlegModuleLabelGeneric *)&this->uiIcon23,COLOR_WHITE,(Vector2 *)&stack0xfffffff8,(Vector2 *)&stack0xfffffff0);
-		fStack8 = FLOAT_0038a838;
-		local_4 = FLOAT_0038a838;
-		fStack16 = FLOAT_00386ab4;
-		local_c = FLOAT_0038a83c;
-		OlegModuleA::FUN_001a2e30(&(this->caption21).parent,COLOR_WHITE,(Vector2 *)&stack0xfffffff0,(Vector2 *)&stack0xfffffff8);
-		(this->uiIcon23).parent.parent.next = (OlegModuleAbstract *)&this->caption21;
-		return;
-		}
-		
-	*/
+	Global* GLOBAL = Global::Get();
+
+	(this->uiIcon23).field11_0xb0 = 7.0;
+	(this->uiIcon23).field12_0xb4 = GLOBAL->PI_05;
+	(this->uiIcon23).field5_0x98 = 0.1;
+	(this->uiIcon23).flags = (this->uiIcon23).flags & 0xffffafff | 0x2800;
+	(this->uiIcon23).field13_0xb8 = GLOBAL->PI_05 * 0.1;
+	(this->uiIcon23).field4_0x94 = 3.0;
+	
+	(this->module86).color1 = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	(this->module86).color2 = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	(this->module86).flags = (this->module86).flags & 0xffffa7ff | 0x2000;
+
+	(this->uiIcon22).color1 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon22).color2 = Color(0.0f, 0.0f, 0.0f, 0.0f);
+	(this->uiIcon22).flags = (this->uiIcon22).flags & 0xffff8fff | 0x800;
+
+	Vector2 v1(0.225f, 0.16f);
+	Vector2 v2(0.3f, 0.2f);
+	this->uiIcon23.FUN_001a4010(Color(1.0f, 1.0f, 1.0f, 1.0f), &v1, &v2);
+
+	Vector2 v3(0.5f, 0.9f);
+	Vector2 v4(0.75f, 0.75f);
+	(this->caption21).field_0x28 = &GLOBAL->ENV_FLAGS_95;
+	this->caption21.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v3, &v4);
+	(this->uiIcon23).next = &this->caption21;
 	return;
 }
 
@@ -2527,57 +2476,35 @@ void Oleg::SetInputHandles(InputStruct* inputHandle) {
 }
 
 void Oleg::FUN_000b1a40() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b1a40(Oleg *this){
-		OlegModuleMenuBubble *bubble;
-		float fVar1;
-		float fVar2;
-		uint uVar3;
-		Vector2 local_10;
-		float fStack8;
-		float local_4;
-		local_10.x = FLOAT_0038639c;
-		local_10.y = FLOAT_0038639c;
-		fStack8 = FLOAT_00386ab4;
-		local_4 = FLOAT_00386608;
-		OlegModuleA::FUN_001a2e30(&(this->option15).parent,COLOR_WHITE,(Vector2 *)&stack0xfffffff8,&local_10);
-		fStack8 = FLOAT_0038639c;
-		local_4 = FLOAT_0038639c;
-		local_10.x = FLOAT_00386ab4;
-		bubble = &this->bubble10;
-		local_10.y = FLOAT_00386608;
-		OlegModuleA::FUN_001a2e30(&bubble->parent,COLOR_WHITE,&local_10,(Vector2 *)&stack0xfffffff8);
-		fStack8 = FLOAT_0038d5b8;
-		local_4 = FLOAT_0038bf5c;
-		local_10.x = FLOAT_0038d5b4;
-		local_10.y = FLOAT_0038d5b0;
-		OlegModuleLabelGeneric::FUN_001a4010((OlegModuleLabelGeneric *)&this->uiIcon13,COLOR_WHITE,&local_10,(Vector2 *)&stack0xfffffff8);
-		fStack8 = FLOAT_0038d548;
-		local_4 = FLOAT_0038d548;
-		local_10.x = FLOAT_0038c9bc;
-		local_10.y = FLOAT_0038cae4;
-		OlegModuleA::FUN_001a2e30(&(this->caption19).parent,COLOR_WHITE,&local_10,(Vector2 *)&stack0xfffffff8);
-		fStack8 = FLOAT_0038a76c;
-		local_4 = FLOAT_0038a934;
-		thunk_FUN_000ad710((float *)&stack0xfffffff8,bubble);
-		fVar1 = FLOAT_00386608;
-		uVar3 = (this->uiIcon13).parent.parent.flags;
-		(this->uiIcon13).field14_0xb0 = FLOAT_0038d088;
-		fVar2 = FLOAT_0039e228;
-		uVar3 = uVar3 & 0xffffafff;
-		(this->uiIcon13).field15_0xb4 = FLOAT_0039e228;
-		(this->uiIcon13).field16_0xb8 = fVar2 * fVar1;
-		(this->uiIcon13).field7_0x94 = FLOAT_003865d0;
-		(this->uiIcon13).field8_0x98 = fVar1;
-		(this->uiIcon13).parent.parent.flags = uVar3 | 0x2800;
-		(this->uiIcon13).parent.parent.flags = uVar3 | 0x2800;
-		(this->option15).parent.parent.next = (OlegModuleAbstract *)bubble;
-		(this->uiIcon13).parent.parent.next = (OlegModuleAbstract *)&this->caption19;
-		return;
-		}
-		
-	*/
+	Vector2 v1(0.5f, 0.1f);
+	Vector2 v2(1.0f, 1.0f);
+	this->option15.FUN_001a2e30(Color(1.0f,1.0f,1.0f,1.0f), &v1, &v2);
+
+	Vector2 v3(0.5f, 0.1f);
+	Vector2 v4(1.0f, 1.0f);
+	this->bubble10.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v3, &v4);
+
+	Vector2 v5(0.1945f, 0.14f);
+	Vector2 v6(0.24f, 0.16f);
+	this->uiIcon13.FUN_001a4010(Color(1.0f, 1.0f, 1.0f, 1.0f), &v5, &v6);
+
+	Vector2 v7(0.075f, 0.92f);
+	Vector2 v8(0.625f, 0.625f);
+	this->caption19.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v7, &v8);
+
+	Vector2 v9(0.35f, 0.05f);
+	FUN_000ad710(&v9, &this->bubble10);
+
+	(this->uiIcon13).field11_0xb0 = 7.0;
+	(this->uiIcon13).flags = (this->uiIcon13).flags & 0xffffafff;
+	(this->uiIcon13).field12_0xb4 = 1.5707964;
+	(this->uiIcon13).field13_0xb8 = 1.5707964 * 0.1;
+	(this->uiIcon13).field4_0x94 = 3.0;
+	(this->uiIcon13).field5_0x98 = 0.1;
+	(this->uiIcon13).flags = (this->uiIcon13).flags | 0x2800;
+	(this->uiIcon13).flags = (this->uiIcon13).flags | 0x2800;
+	(this->option15).next = &this->bubble10;
+	(this->uiIcon13).next = &this->caption19;
 	return;
 }
 
@@ -2688,30 +2615,30 @@ void Oleg::FUN_000b1f60() {
 		local_1c = FLOAT_0038639c;
 		fStack24 = FLOAT_00386ab4;
 		local_14 = FLOAT_0038a934;
-		OlegModuleA::FUN_001a2e30(&(this->option11).parent,(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe8,(Vector2 *)&stack0xffffffe0);
+		OlegModuleA::FUN_001a2e30(&(this->option11),(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe8,(Vector2 *)&stack0xffffffe0);
 		fStack24 = FLOAT_0038639c;
 		local_14 = FLOAT_0038639c;
 		fStack32 = FLOAT_00386ab4;
 		local_1c = FLOAT_0038a934;
-		OlegModuleA::FUN_001a2e30(&(this->option12).parent,(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
+		OlegModuleA::FUN_001a2e30(&(this->option12),(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
 		fStack24 = FLOAT_0038639c;
 		local_14 = FLOAT_0038639c;
 		fStack32 = FLOAT_00386ab4;
 		local_1c = FLOAT_0038a934;
-		OlegModuleA::FUN_001a2e30(&(this->option13).parent,(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
+		OlegModuleA::FUN_001a2e30(&(this->option13),(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
 		fStack24 = FLOAT_0038639c;
 		local_14 = FLOAT_0038639c;
 		fStack32 = FLOAT_00386ab4;
 		local_1c = FLOAT_0038a934;
-		OlegModuleA::FUN_001a2e30(&(this->option14).parent,(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
+		OlegModuleA::FUN_001a2e30(&(this->option14),(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
 		fStack32 = FLOAT_0038d548;
 		local_c = FLOAT_0038a838;
 		fStack24 = 0.0;
 		local_14 = FLOAT_00386ab4;
 		fStack16 = FLOAT_00386ab4;
-		*(uint **)&(this->caption18).parent.parent.field_0x28 = &ENV_FLAGS_95;
+		*(uint **)&(this->caption18).field_0x28 = &ENV_FLAGS_95;
 		local_1c = fStack32;
-		OlegModuleA::FUN_001a2e90(&(this->caption18).parent,COLOR_WHITE,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xffffffe0,(ColorTransparent *)&stack0xffffffe8);
+		OlegModuleA::FUN_001a2e90(&(this->caption18),COLOR_WHITE,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xffffffe0,(ColorTransparent *)&stack0xffffffe8);
 		fStack16 = 0.0;
 		fStack24 = FLOAT_0038639c;
 		local_14 = FLOAT_0038639c;
@@ -2723,7 +2650,7 @@ void Oleg::FUN_000b1f60() {
 		fStack16 = FLOAT_0038bc04;
 		local_c = FLOAT_0038a934;
 		thunk_FUN_000ad710((float *)&stack0xfffffff0,bubble);
-		(this->caption18).parent.parent.next = (OlegModuleAbstract *)bubble;
+		(this->caption18).next = (OlegModuleAbstract *)bubble;
 		return;
 		}
 		
@@ -2772,7 +2699,7 @@ void Oleg::FUN_000b5270(int param_1, InstanceContext* param_2) {
 		int iVar3;
 		if ((short)param_2 == -1) {
 		(&this->field66_0xb00)[param_1] = 0;
-		(*(this->iconsPsm2[param_1 + -3].parent.vtable)->ReplaceShader)((UIElementAbstract *)(this->iconsPsm2 + param_1 + -3),&ENV_CLASS_94);
+		(*(this->iconsPsm2[param_1 + -3].vtable)->ReplaceShader)((UIElementAbstract *)(this->iconsPsm2 + param_1 + -3),&ENV_CLASS_94);
 		}
 		else {
 		pOVar1 = ((GameResources->parent).ogis)->elements[(uint)param_2 & 0x7fff];
@@ -2810,11 +2737,11 @@ void Oleg::ReadUI(int index, MemoryStream* stream) {
 		int iVar1;
 		(&this->screenFlags)[index] = (&this->screenFlags)[index] & 0xfffffffe;
 		if (index == 0) {
-		(*((this->crashTwinsanityLogo).parent.vtable)->Read)(&(this->crashTwinsanityLogo).parent,stream);
+		(*((this->crashTwinsanityLogo).vtable)->Read)(&(this->crashTwinsanityLogo),stream);
 		}
 		else {
 		if (index == 1) {
-		(*((this->someIcon2).parent.vtable)->Read)(&(this->someIcon2).parent,stream);
+		(*((this->someIcon2).vtable)->Read)(&(this->someIcon2),stream);
 		return;
 		}
 		if (index == 2) {
@@ -2862,11 +2789,11 @@ void Oleg::GrandALife(int param_1, char param_2) {
 		}
 		ShowUI(this,(this->parent).uiPresetMask[0x23].high,(this->parent).uiPresetMask[0x23].low,(int)TicksPerTime,(int)(TicksPerTime * FLOAT_0038cac0));
 		this_00 = &this->spline3;
-		(*((this->spline3).parent.vtable)->Reset)(&this_00->parent);
-		(this->spline3).parent.length = FLOAT_0038b3a4;
-		(this->spline3).parent.repeats = 7;
-		pOVar4 = (this->uiIcon18).parent.parent.next;
-		(this->uiIcon18).parent.parent.spline = (SplineA *)this_00;
+		(*((this->spline3).vtable)->Reset)(&this_00->parent);
+		(this->spline3).length = FLOAT_0038b3a4;
+		(this->spline3).repeats = 7;
+		pOVar4 = (this->uiIcon18).next;
+		(this->uiIcon18).spline = (SplineA *)this_00;
 		if (pOVar4 != (OlegModuleAbstract *)0x0) {
 		OlegModuleAbstract::SetSplineToAll(pOVar4,this_00);
 		}
@@ -2874,17 +2801,17 @@ void Oleg::GrandALife(int param_1, char param_2) {
 		(this->lifeIcon).field1_0x88 = this->iconsPsm2 + (this->chunkDesc->flags >> 8 & 0xf);
 		OlegModuleA::Show((OlegModuleA *)&this->lifeIcon,(int)(TicksPerTime * FLOAT_00386ab4),(int)TicksPerTime);
 		this_01 = &this->spline1;
-		(*((this->spline1).parent.vtable)->Reset)(&this_01->parent);
-		(this->spline1).parent.length = FLOAT_0038a838;
+		(*((this->spline1).vtable)->Reset)(&this_01->parent);
+		(this->spline1).length = FLOAT_0038a838;
 		this_02 = &this->spline2;
-		(this->spline1).parent.repeats = (this->spline1).parent.repeats + 1;
+		(this->spline1).repeats = (this->spline1).repeats + 1;
 		(*((this_02->parent).vtable)->Reset)(&this_02->parent);
-		(this->spline2).parent.length = FLOAT_0038a838;
-		piVar1 = &(this->spline2).parent.repeats;
+		(this->spline2).length = FLOAT_0038a838;
+		piVar1 = &(this->spline2).repeats;
 		*piVar1 = *piVar1 + 1;
-		(this->spline1).parent.next = &this_02->parent;
-		(this->lifeIcon).parent.parent.spline = (SplineA *)this_01;
-		pOVar4 = (this->lifeIcon).parent.parent.next;
+		(this->spline1).next = &this_02->parent;
+		(this->lifeIcon).spline = (SplineA *)this_01;
+		pOVar4 = (this->lifeIcon).next;
 		if (pOVar4 != (OlegModuleAbstract *)0x0) {
 		OlegModuleAbstract::SetSplineToAll(pOVar4,this_01);
 		}
@@ -3230,7 +3157,7 @@ void Oleg::InitValues() {
 		fVar6 = FLOAT_0038b3cc;
 		(this->field65_0xaf0).y = fVar5;
 		(this->field65_0xaf0).w = fVar5;
-		(this->spline4).parent.length = fVar6;
+		(this->spline4).length = fVar6;
 		@__security_check_cookie@4(iVar10);
 		return;
 		}
@@ -3293,15 +3220,15 @@ void Oleg::StartGemCrystalAnimation(int param_1) {
 		DAT_003e5f6c = FLOAT_0038639c;
 		}
 		if (param_1 == 0x23) {
-		(*((this->spline3).parent.vtable)->Reset)(&(this->spline3).parent);
-		(this->spline3).parent.length = FLOAT_0038b3a4;
-		(this->spline3).parent.repeats = 7;
+		(*((this->spline3).vtable)->Reset)(&(this->spline3));
+		(this->spline3).length = FLOAT_0038b3a4;
+		(this->spline3).repeats = 7;
 		FUN_001a2670(this,(this->parent).uiPresetMask[0x23].high,(this->parent).uiPresetMask[0x23].low,(SplineA *)&this->spline3);
 		}
 		else if (param_1 == 0x25) {
 		spline = &this->spline4;
-		(*((this->spline4).parent.vtable)->Reset)(&spline->parent);
-		piVar1 = &(this->spline4).parent.repeats;
+		(*((this->spline4).vtable)->Reset)(&spline->parent);
+		piVar1 = &(this->spline4).repeats;
 		*piVar1 = *piVar1 + 1;
 		if ((char)this->field1_0x310 == '\x14') {
 		(this->field65_0xaf0).x = DAT_003e5f60;

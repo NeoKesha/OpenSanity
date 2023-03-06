@@ -12,8 +12,8 @@ OlegModuleAbstract::OlegModuleAbstract()
 	this->spline = (SplineA*)0x0;
 	this->field_0x28 = 0;
 	this->field13_0x2c = Color(0.0f, 0.0f, 0.0f, 0.5f);
-	this->field14_0x30 = 0.0;
-	this->field15_0x34 = 0.0;
+	this->field14_0x30.x = 0.0;
+	this->field14_0x30.y = 0.0;
 	this->flags = 0;
 	this->flags = 0x1800;
 	this->startTime = 0;

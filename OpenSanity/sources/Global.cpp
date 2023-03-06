@@ -1,4 +1,5 @@
 #include "headers/Global.h"
+#include "headers/Unknown/NonVirtualClasses/UNV025.h"
 
 float Global::TwinSin(float* num)
 {
@@ -101,4 +102,7 @@ Global::Global() {
 	GetSystemTime(&time);
 	ENV_INT_114_COPYRIGHT_HASH = (time2.dwLowDateTime >> 0x10 & 0xff) + ENV_INT_114_COPYRIGHT_HASH + (time2.dwLowDateTime >> 8 & 7) * 0xcd6;
 	LANGUAGE_SELECTED = LANGUAGE_ENGLISH;
+
+	ENV_PTR_95_0X78 = new UNV025();
+	ENV_FLAGS_95 = ENV_FLAGS_95 & 0xffff001e | 0x1e;
 }

@@ -40,7 +40,11 @@ public:
 	float ENV_FLOAT_92_0_15 = 0.0f;
 	float ENV_FLOAT_15 = 6.2831855f * 0.02083333f;
 	float PI_2 = 6.2831855f;
+	float PI = 3.14159275f;
+	float PI_05 = 1.5707964;
 	TwinsanityMaterialShader ENV_CLASS_94;
+	uint ENV_FLAGS_95 = 0;
+	UNV025* ENV_PTR_95_0X78;
 
 	//UNK ADDRESSES
 	int			DAT_003ead50;
