@@ -16,6 +16,7 @@ class OlegModuleMenuBubble : public OlegModuleA {
 		~OlegModuleMenuBubble();
 
 		UIElementSimpleShapeA* FUN_001a0fd0(int i, TwinsanityMaterialShader* param_2);
+		void FUN_001a1020(float k, Vector2* vec);
 		virtual void Render(FontRenderer* renderer);
 
 };

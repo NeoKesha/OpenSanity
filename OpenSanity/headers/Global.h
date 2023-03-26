@@ -130,6 +130,9 @@ public:
 	float DAT_003e2dfc;
 	int INT_003e2df0;
 	int INT_003e2df4;
+	int INT_0039e3f0 = 0x10;
+	int INT_0039e3e0 = 0x8;
+	int INT_0039e3e8 = 0x8;
 
 	//GLOBAL VALUES
 	float SinTable[32768];

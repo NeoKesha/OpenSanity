@@ -36,6 +36,14 @@ UIElementSimpleShapeA* OlegModuleMenuBubble::FUN_001a0fd0(int i, TwinsanityMater
 	return this->imageArray[i];
 }
 
+void OlegModuleMenuBubble::FUN_001a1020(float k, Vector2* vec) {
+	Logging::LogUnimplemented(__FUNCSIG__);
+	/*
+	  UIElementSimpleShapeA::FUN_0021ab00
+            (*this->imageArray,(this->parent).array + 3,(this->parent).array + 7,k,vec);
+	*/
+}
+
 void OlegModuleMenuBubble::Render(FontRenderer* renderer) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*

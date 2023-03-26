@@ -439,47 +439,38 @@ void Oleg::ProcessUI(SomeState* state, InputStruct* input, NodeRelated2C* nodeDa
 }
 
 void Oleg::FUN_000b3210() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b3210(Oleg *this){
-		OlegModuleMenuBubble *bubble;
-		float fStack24;
-		float local_14;
-		float fStack16;
-		float local_c;
-		float fStack8;
-		float local_4;
-		OlegModuleA::UnkFun(&(this->label07),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e324);
-		OlegModuleA::UnkFun(&(this->label08),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e324);
-		fStack24 = FLOAT_0038639c;
-		local_14 = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option17),COLOR_WHITE,&ColorTransparent_0039e304,(ColorTransparent *)&stack0xffffffe8,&ColorTransparent_0039e304);
-		fStack24 = 0.0;
-		local_14 = FLOAT_0038bc0c;
-		fStack16 = FLOAT_00386ab4;
-		local_c = FLOAT_00386608;
-		OlegModuleA::FUN_001a2e90(&(this->label09),COLOR_WHITE,(ColorTransparent *)&stack0xfffffff0,&ColorTransparent_0039e32c,(ColorTransparent *)&stack0xffffffe8);
-		fStack16 = 0.0;
-		local_c = FLOAT_0038bc0c;
-		fStack24 = FLOAT_0038639c;
-		local_14 = FLOAT_0038639c;
-		fStack8 = FLOAT_00386ab4;
-		bubble = &this->bubble11;
-		local_4 = FLOAT_00386608;
-		OlegModuleA::FUN_001a2e90(&bubble->parent,COLOR_WHITE,(ColorTransparent *)&stack0xfffffff8,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0);
-		fStack8 = FLOAT_0038639c;
-		local_4 = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option18),COLOR_WHITE,&ColorTransparent_0039e304,(ColorTransparent *)&stack0xfffffff8,&ColorTransparent_0039e304);
-		fStack8 = FLOAT_0038b3a4;
-		local_4 = FLOAT_0038a934;
-		thunk_FUN_000ad710((float *)&stack0xfffffff8,bubble);
-		(this->label09).next = (OlegModuleAbstract *)bubble;
-		(this->label08).next = (OlegModuleAbstract *)&this->option17;
-		(this->bubble11).next = (OlegModuleAbstract *)&this->option18;
-		return;
-		}
-		
-	*/
+	Vector2 v1(0.5f, 0.4f);
+	Vector2 v2(0.625f, 0.625f);
+	Vector2 v3(0.5f, 0.4f);
+	this->label07.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v1, &v2, &v3);
+	this->label08.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v1, &v2, &v3);
+
+	Vector2 v4(0.5f, 0.764f);
+	Vector2 v5(1.0f, 1.0f);
+	Vector2 v6(0.5f, 0.764f);
+	this->option17.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v4, &v5, &v6);
+
+	Vector2 v7(0.5f, 0.1f);
+	Vector2 v8(0.625f, 0.625f);
+	Vector2 v9(0.0f, -0.5f);
+	this->label09.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v7, &v8, &v9);
+
+	Vector2 v10(0.5f, 0.1f);
+	Vector2 v11(1.0f, 1.0f);
+	Vector2 v12(0.0f, -0.5f);
+	this->bubble11.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v10, &v11, &v12);
+
+
+	Vector2 v13(0.5f, 0.764f);
+	Vector2 v14(1.0f, 1.0f);
+	Vector2 v15(0.5f, 0.764f);
+	this->option18.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v13, &v14, &v15);
+
+	Vector2 v16(0.45f, 0.05f);
+	FUN_000ad710(&v16, &this->bubble11);
+	(this->label09).next = &this->bubble11;
+	(this->label08).next = &this->option17;
+	(this->bubble11).next = &this->option18;
 	return;
 }
 
@@ -1645,7 +1636,7 @@ void Oleg::FUN_000b7db0() {
 	element1->field2_0x20 = Color(1.0, 1.0, 1.0, 1.0);
 	element2->field2_0x20 = Color(1.0, 1.0, 1.0, 1.0);
 	element3->field2_0x20 = Color(0.098039, 0.584313, 1.0, 1.0);
-	element4->field7_0x38 = Color(0.062745, 0.0, 0.0, 0.0);
+	element4->field7_0x38 = &GLOBAL->INT_0039e3f0;
 	element5->field2_0x20 = Color(1.0, 1.0, 1.0, 1.0);
 	element6->field2_0x20 = Color(1.0, 1.0, 1.0, 1.0);
 	element7->field2_0x20 = Color(1.0, 1.0, 1.0, 0.0);
@@ -1785,328 +1776,283 @@ void Oleg::FUN_000b33f0()
 }
 
 void Oleg::FUN_000b22a0() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b22a0(Oleg *this){
-		OlegModuleMenuBubble *pOVar1;
-		OlegModuleMenuBubble *bubble;
-		OlegModuleMenuBubble *bubble_00;
-		OlegModuleIcon *pOVar2;
-		OlegModuleIcon *pOVar3;
-		float fVar4;
-		float fVar5;
-		float fVar6;
-		float fVar7;
-		float fVar8;
-		undefined4 uVar9;
-		UIElementSimpleShapeA *pUVar10;
-		UIElementSimpleShapeA *pUVar11;
-		UIElementSimpleShapeA *pUVar12;
-		UIElementSimpleShapeA *pUVar13;
-		float local_38;
-		float local_34;
-		int local_30;
-		float local_2c;
-		ColorTransparent local_28;
-		ColorTransparent local_20;
-		float fStack24;
-		float local_14;
-		ColorTransparent local_10;
-		local_28.alpha = FLOAT_0038639c;
-		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option04),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		local_28.alpha = FLOAT_0038639c;
-		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option05),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		local_28.alpha = FLOAT_0038639c;
-		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option06),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		local_28.color = FLOAT_0038bc04;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_28.alpha = FLOAT_00386ab4;
-		local_38 = FLOAT_00386ab4;
-		local_34 = FLOAT_0038cb00;
-		OlegModuleA::UnkFun(&(this->caption11),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038a834;
-		local_28.color = FLOAT_0038a834;
-		OlegModuleA::UnkFun(&(this->caption07),COLOR_WHITE,&ColorTransparent_0039e2fc,&local_28,&ColorTransparent_0039e2fc);
-		local_28.alpha = FLOAT_0038639c;
-		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option07),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		local_28.alpha = FLOAT_00386ab4;
-		local_28.color = FLOAT_00386ab4;
-		local_38 = FLOAT_00386ab4;
-		local_30 = (int)FLOAT_0038a834;
-		local_2c = FLOAT_0038a834;
-		local_34 = FLOAT_0038bfe4;
-		OlegModuleA::UnkFun(&(this->caption09),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_00386ab4;
-		local_28.color = FLOAT_00386ab4;
-		local_38 = FLOAT_00386ab4;
-		local_30 = (int)FLOAT_0038a834;
-		local_2c = FLOAT_0038a834;
-		local_34 = FLOAT_0038bfe4;
-		OlegModuleA::UnkFun(&(this->caption08),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_00386ab4;
-		local_28.color = FLOAT_00386ab4;
-		local_38 = FLOAT_00386ab4;
-		local_30 = (int)FLOAT_0038a834;
-		local_2c = FLOAT_0038a834;
-		local_34 = FLOAT_0038bfe4;
-		OlegModuleA::UnkFun(&(this->caption10),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_00386ab4;
-		local_28.color = FLOAT_00386ab4;
-		local_38 = FLOAT_00386ab4;
-		local_30 = (int)FLOAT_0038adb8;
-		local_2c = FLOAT_0038adb8;
-		local_34 = FLOAT_0038a82c;
-		OlegModuleA::UnkFun(&(this->caption12),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_30 = (int)FLOAT_00386ab4;
-		local_28.alpha = FLOAT_0038ab4c;
-		local_28.color = FLOAT_0038ab4c;
-		(this->option07).next = (OlegModuleAbstract *)&this->caption09;
-		local_2c = FLOAT_0038cb00;
-		OlegModuleA::UnkFun(&(this->caption13),COLOR_WHITE,(ColorTransparent *)&local_30,&local_28,&ColorTransparent_0039e2fc);
-		OlegModuleA::UnkFun(&(this->caption14),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
-		local_28.alpha = FLOAT_0038639c;
-		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option08),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		OlegModuleA::UnkFun(&(this->caption15),COLOR_WHITE,&ColorTransparent_0039e314,&ColorTransparent_0039e31c,&ColorTransparent_0039e2fc);
-		OlegModuleA::UnkFun(&(this->caption16),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
-		local_28.alpha = FLOAT_00386608;
-		local_28.color = FLOAT_0038c9bc;
-		local_30 = (int)FLOAT_00386ab4;
-		local_2c = FLOAT_0038d64c;
-		OlegModuleA::FUN_001a41b0((OlegModuleA *)&this->uiIcon08,COLOR_WHITE,(ColorTransparent *)&local_30,&local_28,&ColorTransparent_0039e304);
-		local_28.alpha = FLOAT_0038639c;
-		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option09),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		OlegModuleA::UnkFun(&(this->caption17),COLOR_WHITE,&ColorTransparent_0039e324,&ColorTransparent_0039e32c,&ColorTransparent_0039e2fc);
-		local_28.alpha = FLOAT_0038639c;
-		local_28.color = FLOAT_0038639c;
-		OlegModuleA::UnkFun(&(this->option10),COLOR_WHITE,&ColorTransparent_0039e304,&local_28,&ColorTransparent_0039e304);
-		(this->caption11).next = (OlegModuleAbstract *)&this->caption12;
-		(this->caption14).next = (OlegModuleAbstract *)&this->option08;
-		(this->caption15).next = (OlegModuleAbstract *)&this->uiIcon08;
-		(this->uiIcon08).next = (OlegModuleAbstract *)&this->caption16;
-		(this->option05).next = (OlegModuleAbstract *)&this->caption07;
-		(this->caption16).next = (OlegModuleAbstract *)&this->option09;
-		(this->option06).next = (OlegModuleAbstract *)&this->caption08;
-		(this->caption13).next = (OlegModuleAbstract *)&this->caption14;
-		(this->caption17).next = (OlegModuleAbstract *)&this->option10;
-		local_30 = (int)OlegModuleMenuBubble::FUN_001a0fd0(&this->bubble07,0,&ENV_CLASS_94);
-		local_38 = (float)OlegModuleMenuBubble::FUN_001a0fd0(&this->bubble07,1,&ENV_CLASS_94);
-		pOVar1 = &this->bubble08;
-		pUVar10 = OlegModuleMenuBubble::FUN_001a0fd0(pOVar1,0,&ENV_CLASS_94);
-		pUVar11 = OlegModuleMenuBubble::FUN_001a0fd0(pOVar1,1,&ENV_CLASS_94);
-		pUVar12 = OlegModuleMenuBubble::FUN_001a0fd0(pOVar1,2,&ENV_CLASS_94);
-		pUVar13 = OlegModuleMenuBubble::FUN_001a0fd0(&this->bubble08,3,&ENV_CLASS_94);
-		*(undefined4 *)(local_30 + 0x1c) = DAT_0039e3cc;
-		*(undefined **)(local_30 + 0x38) = &DAT_0039e3f0;
-		*(float *)(local_30 + 0x2c) = FLOAT_0038c9bc;
-		*(float *)(local_30 + 0x30) = FLOAT_00386608;
-		*(undefined4 *)((int)local_38 + 0x20) = DAT_0039e3d0;
-		*(float *)((int)local_38 + 0x2c) = FLOAT_0038d648;
-		*(float *)((int)local_38 + 0x30) = FLOAT_0038d644;
-		uVar9 = DAT_0039e3c0;
-		*(undefined4 *)&pUVar10->field_0x48 = DAT_0039e3bc;
-		*(undefined4 *)&pUVar10->field_0x4c = uVar9;
-		pUVar10->field1_0x1c = DAT_0039e3d8;
-		pUVar10->field2_0x20 = DAT_0039e3d8;
-		*(undefined **)&pUVar10->field_0x3c = &DAT_0039e3e0;
-		fVar8 = FLOAT_0038d640;
-		fVar7 = FLOAT_0038d63c;
-		fVar6 = FLOAT_0038d638;
-		fVar5 = FLOAT_0038d634;
-		fVar4 = FLOAT_0038bfe4;
-		*(undefined **)&pUVar10->field_0x40 = &DAT_0039e3e8;
-		*(undefined4 *)&pUVar10->field_0x44 = DAT_0039e3ac;
-		*(float *)&pUVar10->field_0x24 = fVar8;
-		*(float *)&pUVar10->field_0x28 = fVar7;
-		*(float *)&pUVar10->field_0x2c = fVar4;
-		*(float *)&pUVar10->field_0x30 = fVar6;
-		uVar9 = DAT_0039e3c0;
-		*(undefined4 *)&pUVar11->field_0x48 = DAT_0039e3bc;
-		*(undefined4 *)&pUVar11->field_0x4c = uVar9;
-		pUVar11->field1_0x1c = DAT_0039e3dc;
-		pUVar11->field2_0x20 = DAT_0039e3d8;
-		*(undefined **)&pUVar11->field_0x3c = &DAT_0039e3e0;
-		*(undefined **)&pUVar11->field_0x40 = &DAT_0039e3e0;
-		*(undefined4 *)&pUVar11->field_0x44 = DAT_0039e3ac;
-		*(float *)&pUVar11->field_0x24 = fVar5;
-		*(float *)&pUVar11->field_0x28 = FLOAT_0038d630;
-		*(float *)&pUVar11->field_0x2c = fVar8;
-		*(float *)&pUVar11->field_0x30 = fVar7;
-		uVar9 = DAT_0039e3c0;
-		*(undefined4 *)&pUVar12->field_0x48 = DAT_0039e3bc;
-		*(undefined4 *)&pUVar12->field_0x4c = uVar9;
-		pUVar12->field1_0x1c = DAT_0039e3d8;
-		pUVar12->field2_0x20 = DAT_0039e3dc;
-		*(undefined **)&pUVar12->field_0x3c = &DAT_0039e3e8;
-		*(undefined **)&pUVar12->field_0x40 = &DAT_0039e3e8;
-		*(undefined4 *)&pUVar12->field_0x44 = DAT_0039e3ac;
-		*(float *)&pUVar12->field_0x24 = fVar4;
-		fVar4 = FLOAT_0038d62c;
-		*(float *)&pUVar12->field_0x28 = fVar6;
-		*(float *)&pUVar12->field_0x2c = fVar4;
-		*(float *)&pUVar12->field_0x30 = FLOAT_0038d628;
-		uVar9 = DAT_0039e3b8;
-		fVar4 = FLOAT_0038d624;
-		*(undefined4 *)&pUVar13->field_0x48 = DAT_0039e3b4;
-		*(undefined4 *)&pUVar13->field_0x4c = uVar9;
-		pUVar13->field1_0x1c = DAT_0039e3d4;
-		pUVar13->field2_0x20 = DAT_0039e3d4;
-		*(undefined **)&pUVar13->field_0x3c = &DAT_0039e3e0;
-		*(undefined **)&pUVar13->field_0x40 = &DAT_0039e3e8;
-		*(undefined4 *)&pUVar13->field_0x44 = DAT_0039e3ac;
-		*(float *)&pUVar13->field_0x24 = fVar4;
-		*(float *)&pUVar13->field_0x28 = FLOAT_0038d620;
-		*(float *)&pUVar13->field_0x2c = FLOAT_0038d61c;
-		*(float *)&pUVar13->field_0x30 = FLOAT_0038d618;
-		local_28.color = FLOAT_0038d610;
-		pOVar1 = &this->bubble08;
-		bubble = &this->bubble04;
-		local_28.alpha = FLOAT_0038d614;
-		*(uint *)&(this->bubble08).cnt = *(uint *)&(this->bubble08).cnt | 0x1000000;
-		thunk_FUN_000ad710(&local_28.alpha,bubble);
-		bubble_00 = &this->bubble05;
-		local_28.alpha = FLOAT_0038d614;
-		local_28.color = FLOAT_0038d610;
-		thunk_FUN_000ad710(&local_28.alpha,bubble_00);
-		local_28.alpha = FLOAT_0038d614;
-		local_28.color = FLOAT_0038d610;
-		thunk_FUN_000ad710(&local_28.alpha,&this->bubble06);
-		local_28.alpha = FLOAT_00386ab4;
-		local_28.color = FLOAT_00386ab4;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038d60c;
-		local_34 = FLOAT_0038d608;
-		OlegModuleA::UnkFun(&(this->bubble07),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_00386ab4;
-		local_28.color = FLOAT_00386ab4;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038d60c;
-		local_34 = FLOAT_0038d608;
-		OlegModuleA::UnkFun(&(this->progressPercent),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_00386ab4;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038d604;
-		local_34 = FLOAT_0038d600;
-		OlegModuleA::FUN_001a2e90(&pOVar1->parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038d5fc;
-		local_34 = FLOAT_0038d5f8;
-		OlegModuleA::FUN_001a2e90(&bubble->parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038d5f4;
-		local_34 = FLOAT_0038d5f8;
-		OlegModuleA::FUN_001a2e90(&(this->label03),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_00386608;
-		local_2c = FLOAT_0038b3c8;
-		local_38 = FLOAT_0038d5f0;
-		local_34 = FLOAT_0038d5ec;
-		OlegModuleA::FUN_001a40a0((OlegModuleA *)&this->uiIcon10,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038a828;
-		local_34 = FLOAT_0038d5e8;
-		OlegModuleA::FUN_001a2e90(&bubble_00->parent,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038d5e4;
-		local_34 = FLOAT_0038d5e0;
-		OlegModuleA::FUN_001a2e90(&(this->label04),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038b3c8;
-		local_2c = FLOAT_0038b3c8;
-		local_38 = FLOAT_0038d5f0;
-		local_34 = FLOAT_0038d5dc;
-		OlegModuleA::FUN_001a40a0((OlegModuleA *)&this->uiIcon11,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038d5bc;
-		local_34 = FLOAT_0038d5d8;
-		OlegModuleA::FUN_001a2e90(&(this->bubble06),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038639c;
-		local_2c = FLOAT_0038639c;
-		local_38 = FLOAT_0038a828;
-		local_34 = FLOAT_0038d5d4;
-		OlegModuleA::FUN_001a2e90(&(this->label05),COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		local_28.alpha = FLOAT_0038bc0c;
-		local_28.color = 0.0;
-		local_30 = (int)FLOAT_0038c850;
-		local_2c = FLOAT_0038d5d0;
-		local_38 = FLOAT_0038d5cc;
-		local_34 = FLOAT_0038d5d8;
-		OlegModuleA::FUN_001a40a0((OlegModuleA *)&this->uiIcon12,COLOR_WHITE,(ColorTransparent *)&local_38,(ColorTransparent *)&local_30,&local_28);
-		(this->uiIcon10).field7_0x94 = FLOAT_0038b718;
-		(this->uiIcon10).field8_0x98 = FLOAT_00386608;
-		(this->uiIcon11).field10_0xa0 = FLOAT_0038d5c8;
-		(this->uiIcon11).field12_0xa8 = FLOAT_0038d5c4;
-		(this->uiIcon11).field14_0xb0 = FLOAT_0038639c;
-		(this->uiIcon11).field16_0xb8 = FLOAT_0039e230 * FLOAT_0038cb00;
-		(this->uiIcon12).field10_0xa0 = FLOAT_0038a834;
-		local_38 = (float)this->iconArray;
-		(this->uiIcon12).field12_0xa8 = FLOAT_0038b3b8;
-		local_30 = 1;
-		do {
-		local_28.alpha = (float)local_30 * FLOAT_0038d5c0;
-		FUN_001a1020((int)pOVar1,local_28.alpha,&local_10.alpha);
-		local_20.alpha = FLOAT_00386ab4;
-		local_20.color = 0;
-		fStack24 = FLOAT_00386608;
-		local_14 = FLOAT_00386608;
-		OlegModuleA::FUN_001a40a0(*(OlegModuleA **)local_38,COLOR_WHITE,&local_10,(ColorTransparent *)&stack0xffffffe8,&local_20);
-		local_38 = (float)((int)local_38 + 4);
-		local_30 = local_30 + 2;
-		}
-		 while ((uint)local_30 < 0xd);
-		pOVar2 = this->iconArray[1];
-		(this->bubble07).next = (OlegModuleAbstract *)&this->progressPercent;
-		(this->bubble05).next = (OlegModuleAbstract *)&this->bubble06;
-		(this->bubble06).next = (OlegModuleAbstract *)&this->uiIcon10;
-		(this->uiIcon10).next = (OlegModuleAbstract *)&this->label03;
-		(this->label03).next = (OlegModuleAbstract *)&this->label04;
-		(this->label04).next = (OlegModuleAbstract *)&this->uiIcon11;
-		(this->uiIcon11).next = (OlegModuleAbstract *)&this->label05;
-		(this->label05).next = (OlegModuleAbstract *)&this->uiIcon12;
-		pOVar3 = this->iconArray[0];
-		(this->uiIcon12).next = (OlegModuleAbstract *)pOVar3;
-		(this->progressPercent).next = (OlegModuleAbstract *)pOVar1;
-		(this->uiIcon09).next = (OlegModuleAbstract *)bubble;
-		(this->bubble04).next = (OlegModuleAbstract *)bubble_00;
-		(this->bubble08).next = (OlegModuleAbstract *)&this->uiIcon09;
-		(pOVar3->parent).next = (OlegModuleAbstract *)pOVar2;
-		(this->iconArray[1]->parent).next = (OlegModuleAbstract *)this->iconArray[2];
-		(this->iconArray[2]->parent).next = (OlegModuleAbstract *)this->iconArray[3];
-		(this->iconArray[3]->parent).next = (OlegModuleAbstract *)this->iconArray[4];
-		(this->iconArray[4]->parent).next = (OlegModuleAbstract *)this->iconArray[5];
-		return;
-		}
-		
-	*/
+	Global* GLOBAL = Global::Get();
+
+	Vector2 v1(0.5f, 0.764f);
+	Vector2 v2(1.0f, 1.0f);
+	Vector2 v3(0.5f, 0.764f);
+	this->option04.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v1, &v2, &v3);
+
+	Vector2 v4(0.5f, 0.764f);
+	Vector2 v5(1.0f, 1.0f);
+	Vector2 v6(0.5f, 0.764f);
+	this->option05.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v4, &v5, &v6);
+
+	Vector2 v7(0.5f, 0.764f);
+	Vector2 v8(1.0f, 1.0f);
+	Vector2 v9(0.5f, 0.764f);
+	this->option06.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v7, &v8, &v9);
+
+	Vector2 v10(0.5f, 0.3f);
+	Vector2 v11(1.0f, 1.0f);
+	Vector2 v12(0.5f, 0.25f);
+	this->caption11.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v10, &v11, &v12);
+
+	Vector2 v13(0.5f, 0.414);
+	Vector2 v14(0.7f, 0.7f);
+	Vector2 v15(0.5f, 0.414);
+	this->caption07.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v13, &v14, &v15);
+
+	Vector2 v16(0.5f, 0.764f);
+	Vector2 v17(1.0f, 1.0f);
+	Vector2 v18(0.5f, 0.764f);
+	this->option07.next = &this->caption09;
+	this->caption07.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v16, &v17, &v18);
+
+	Vector2 v19(0.5f, 0.42f);
+	Vector2 v20(0.7f, 0.7f);
+	Vector2 v21(0.5f, 0.5f);
+	this->caption09.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v19, &v20, &v21);
+
+	Vector2 v22(0.5f, 0.42f);
+	Vector2 v23(0.7f, 0.7f);
+	Vector2 v24(0.5f, 0.5f);
+	this->caption08.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v22, &v23, &v24);
+
+	Vector2 v25(0.5f, 0.42f);
+	Vector2 v26(0.7f, 0.7f);
+	Vector2 v27(0.5f, 0.5f);
+	this->caption10.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v25, &v26, &v27);
+
+	Vector2 v28(0.5f, 0.4f);
+	Vector2 v29(0.8f, 0.8f);
+	Vector2 v30(0.5f, 0.5f);
+	this->caption12.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v28, &v29, &v30);
+
+
+	Vector2 v31(0.5f, 0.25f);
+	Vector2 v32(0.85f, 0.85f);
+	Vector2 v33(0.5f, 0.414f);
+	this->caption13.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v31, &v32, &v33);
+
+	Vector2 v34(0.5f, 0.4f);
+	Vector2 v35(0.625f, 0.625f);
+	Vector2 v36(0.5f, 0.414f);
+	this->caption14.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v34, &v35, &v36);
+
+	Vector2 v37(0.5f, 0.764f);
+	Vector2 v38(1.0f, 1.0f);
+	Vector2 v39(0.5f, 0.414f);
+	this->option08.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v37, &v38, &v39);
+
+	Vector2 v40(0.5f, 0.15f);
+	Vector2 v41(0.75f, 0.75f);
+	Vector2 v42(0.5f, 0.414f);
+	this->caption15.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v40, &v41, &v42);
+
+	Vector2 v43(0.5f, 0.4f);
+	Vector2 v44(0.625f, 0.625f);
+	Vector2 v45(0.5f, 0.414f);
+	this->caption16.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v43, &v44, &v45);
+
+	Vector2 v46(0.5f, 0.675f);
+	Vector2 v47(0.1f, 0.075f);
+	Vector2 v48(0.5f, 0.764f);
+	this->uiIcon08.FUN_001a41b0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v46, &v47, &v48);
+
+	Vector2 v49(0.5f, 0.764f);
+	Vector2 v50(1.0f, 1.0f);
+	Vector2 v51(0.5f, 0.764f);
+	this->option09.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v49, &v50, &v51);
+
+	Vector2 v52(0.5f, 0.4f);
+	Vector2 v53(0.625f, 0.625f);
+	Vector2 v54(0.5f, 0.414f);
+	this->caption16.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v52, &v53, &v54);
+
+	Vector2 v55(0.5f, 0.764f);
+	Vector2 v56(1.0f, 1.0f);
+	Vector2 v57(0.5f, 0.764f);
+	this->option10.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v55, &v56, &v57);
+
+	(this->caption11).next = &this->caption12;
+	(this->caption14).next = &this->option08;
+	(this->caption15).next = &this->uiIcon08;
+	(this->uiIcon08).next = &this->caption16;
+	(this->option05).next = &this->caption07;
+	(this->caption16).next = &this->option09;
+	(this->option06).next = &this->caption08;
+	(this->caption13).next = &this->caption14;
+	(this->caption17).next = &this->option10;
+	UIElementSimpleShapeA* shapeA0 = this->bubble07.FUN_001a0fd0(0, &GLOBAL->ENV_CLASS_94);
+	UIElementSimpleShapeA* shapeA1 = this->bubble07.FUN_001a0fd0(1, &GLOBAL->ENV_CLASS_94);
+	UIElementSimpleShapeA* shapeB0 = this->bubble08.FUN_001a0fd0(0, &GLOBAL->ENV_CLASS_94);
+	UIElementSimpleShapeA* shapeB1 = this->bubble08.FUN_001a0fd0(1, &GLOBAL->ENV_CLASS_94);
+	UIElementSimpleShapeA* shapeB2 = this->bubble08.FUN_001a0fd0(2, &GLOBAL->ENV_CLASS_94);
+	UIElementSimpleShapeA* shapeB3 = this->bubble08.FUN_001a0fd0(3, &GLOBAL->ENV_CLASS_94);
+
+	shapeA0->field1_0x1c = Color(0.09803f, 0.58431f, 1.0f, 1.0f);
+	shapeA0->field7_0x38 = &GLOBAL->INT_0039e3f0;
+	(shapeA0->field5_0x2c).x = 0.075;
+	(shapeA0->field5_0x2c).y = 0.1;
+
+	shapeA1->field2_0x20 = Color(0.09803f, 0.58431f, 1.0f, 0.0f);
+	(shapeA1->field5_0x2c).x = 0.077;
+	(shapeA1->field5_0x2c).y = 0.102;
+	shapeB0->field11_0x48 = Color(0.40392f, 0.90196f,1.0f,1.0f);
+	shapeB0->field12_0x4c = Color(0.75686f, 0.33725f, 0.0f, 0.0f);
+	shapeB0->field1_0x1c = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	shapeB0->field2_0x20 = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	shapeB0->field8_0x3c = &GLOBAL->INT_0039e3e0;
+	shapeB0->field9_0x40 = &GLOBAL->INT_0039e3e8;
+	shapeB0->field10_0x44 = Color(0.93333f, 0.054901f, 0.0f, 0.0f);
+	shapeB0->field3_0x24.x = 0.33;
+	shapeB0->field3_0x24.y = 0.308;
+	(shapeB0->field5_0x2c).x = 0.42;
+	(shapeB0->field5_0x2c).y = 0.392;
+	shapeB1->field11_0x48 = Color(0.40392f, 0.90196f, 1.0f, 1.0f);
+	shapeB1->field12_0x4c = Color(0.75686f, 0.33725f, 0.0f, 0.0f);
+	shapeB1->field1_0x1c = Color(1.0f, 1.0f, 1.0f, 0.0f);
+	shapeB1->field2_0x20 = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	shapeB1->field8_0x3c = &GLOBAL->INT_0039e3e0;
+	shapeB1->field9_0x40 = &GLOBAL->INT_0039e3e0;
+	shapeB1->field10_0x44 = Color(0.93333f, 0.054901f, 0.0f, 0.0f);
+	shapeB1->field3_0x24.x = 0.325;
+	shapeB1->field3_0x24.y = 0.303;
+	(shapeB1->field5_0x2c).x = 0.33;
+	(shapeB1->field5_0x2c).y = 0.308;
+	shapeB2->field11_0x48 = Color(0.40392f, 0.90196f, 1.0f, 1.0f);
+	shapeB2->field12_0x4c = Color(0.75686f, 0.33725f, 0.0f, 0.0f);
+	shapeB2->field1_0x1c = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	shapeB2->field2_0x20 = Color(1.0f, 1.0f, 1.0f, 0.0f);
+	shapeB2->field8_0x3c = &GLOBAL->INT_0039e3e8;
+	shapeB2->field9_0x40 = &GLOBAL->INT_0039e3e8;
+	shapeB2->field10_0x44 = Color(0.93333f, 0.054901f, 0.0f, 0.0f);
+	shapeB2->field3_0x24.x = 0.42;
+	shapeB2->field3_0x24.y = 0.392;
+	(shapeB2->field5_0x2c).x = 0.425;
+	(shapeB2->field5_0x2c).y = 0.397;
+	shapeB3->field11_0x48 = Color(0.113725f, 0.90588f, 1.0f, 1.0f);
+	shapeB3->field12_0x4c = Color(0.33333f, 0.33333f, 0.0f, 0.0f);
+	shapeB3->field1_0x1c = Color(0.32156f, 1.0f, 0.89803f, 1.0f);
+	shapeB3->field2_0x20 = Color(0.32156f, 1.0f, 0.89803f, 1.0f);
+	shapeB3->field8_0x3c = &GLOBAL->INT_0039e3e0;
+	shapeB3->field9_0x40 = &GLOBAL->INT_0039e3e8;
+	shapeB3->field10_0x44 = Color(0.93333f, 0.054901f, 0.0f, 0.0f);
+	shapeB3->field3_0x24.x = 0.338;
+	shapeB3->field3_0x24.y = 0.315;
+	(shapeB3->field5_0x2c).x = 0.413;
+	(shapeB3->field5_0x2c).y = 0.385;
+
+	(this->bubble08).cnt |= 0x1000000;
+	Vector2 v57fuckme(0.066f, 0.088f);
+	FUN_000ad710(&v57fuckme, &this->bubble04);
+
+	Vector2 v58(0.066f, 0.088f);
+	FUN_000ad710(&v58, &this->bubble05);
+
+	Vector2 v59(0.066f, 0.088f);
+	FUN_000ad710(&v59, &this->bubble06);
+
+
+	Vector2 v60(0.71f, 0.564f);
+	Vector2 v61(1.0f, 1.0f);
+	Vector2 v62(0.5f, 0.5f);
+	this->bubble07.UnkFun( Color(1.0f, 1.0f, 1.0f, 1.0f), &v60, &v61, &v62);
+
+	Vector2 v63(0.71f, 0.564f);
+	Vector2 v64(1.0f, 1.0f);
+	Vector2 v65(0.5f, 0.5f);
+	this->progressPercent.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v63, &v64, &v65);
+
+	Vector2 v66(0.53f, 0.422f);
+	Vector2 v67(1.0f, 1.0f);
+	Vector2 v68(0.5f, 0.5f);
+	this->bubble08.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v66, &v67, &v68);
+
+	Vector2 v69(0.19f, 0.214f);
+	Vector2 v70(1.0f, 1.0f);
+	Vector2 v71(-0.5f, 0.0f);
+	this->bubble04.UnkFun(Color(1.0f, 1.0f, 1.0f, 1.0f), &v69, &v70, &v71);
+
+	Vector2 v72(0.175f, 0.214f);
+	Vector2 v73(1.0f, 1.0f);
+	Vector2 v74(-0.5f, 0.0f);
+	this->label03.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v72, &v73, &v74);
+
+	Vector2 v75(0.213f, 0.199f);
+	Vector2 v76(0.1f, 0.13f);
+	Vector2 v77(-0.5f, 0.0f);
+	this->uiIcon10.FUN_001a40a0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v75, &v76, &v77);
+
+	Vector2 v78(0.2f, 0.444f);
+	Vector2 v79(1.0f, 1.0f);
+	Vector2 v80(-0.5f, 0.0f);
+	this->bubble05.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v78, &v79, &v80);
+
+	Vector2 v81(0.168f, 0.454f);
+	Vector2 v82(1.0f, 1.0f);
+	Vector2 v83(-0.5f, 0.0f);
+	this->label04.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v81, &v82, &v83);
+
+	Vector2 v84(0.213f, 0.427f);
+	Vector2 v85(0.13f, 0.13f);
+	Vector2 v86(-0.5f, 0.0f);
+	this->uiIcon11.FUN_001a40a0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v84, &v85, &v86);
+
+	Vector2 v87(0.225f, 0.664f);
+	Vector2 v88(1.0f, 1.0f);
+	Vector2 v89(-0.5f, 0.0f);
+	this->bubble06.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v87, &v88, &v89);
+
+	Vector2 v90(0.2f, 0.665f);
+	Vector2 v91(1.0f, 1.0f);
+	Vector2 v92(-0.5f, 0.0f);
+	this->label05.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v90, &v91, &v92);
+
+	Vector2 v93(0.245f, 0.664f);
+	Vector2 v94(0.125f, 0.28f);
+	Vector2 v95(-0.5f, 0.0f);
+	this->uiIcon12.FUN_001a40a0(Color(1.0f, 1.0f, 1.0f, 1.0f), &v93, &v94, &v95);
+
+	(this->uiIcon10).field4_0x94 = 1.3;
+	(this->uiIcon10).field5_0x98 = 0.1;
+	(this->uiIcon11).field7_0xa0 = 0.37;
+	(this->uiIcon11).field9_0xa8 = 0.0037;
+	(this->uiIcon11).field11_0xb0 = 1.0;
+	(this->uiIcon11).field13_0xb8 = 0.7853982 * 0.25;
+	(this->uiIcon12).field7_0xa0 = 0.7;
+	(this->uiIcon12).field9_0xa8 = 0.005;
+
+	int idx = 0;
+	for (int i = 1; i < 13; i += 2) {
+		Vector2 out;
+		OlegModuleIcon* ptr = this->iconArray[idx];
+		float val = i * 0.08333334;
+		this->bubble08.FUN_001a1020(val, &out);
+		Vector2 vec1(0.5f, 0.0f);
+		Vector2 vec2(0.1f, 0.1f);
+		ptr->FUN_001a40a0(Color(1.0f, 1.0f, 1.0f, 1.0f), &out, &vec2, &vec1);
+		++idx;
+	}
+	(this->bubble07).next = &this->progressPercent;
+	(this->bubble05).next = &this->bubble06;
+	(this->bubble06).next = &this->uiIcon10;
+	(this->uiIcon10).next = &this->label03;
+	(this->label03).next = &this->label04;
+	(this->label04).next = &this->uiIcon11;
+	(this->uiIcon11).next = &this->label05;
+	(this->label05).next = &this->uiIcon12;
+	(this->uiIcon12).next = this->iconArray[0];
+	(this->progressPercent).next = &this->bubble08;
+	(this->uiIcon09).next = &this->bubble04;
+	(this->bubble04).next = &this->bubble05;
+	(this->bubble08).next = &this->uiIcon09;
+	this->iconArray[0]->next = this->iconArray[1];
+	this->iconArray[1]->next = this->iconArray[2];
+	this->iconArray[2]->next = this->iconArray[3];
+	this->iconArray[3]->next = this->iconArray[4];
+	this->iconArray[4]->next = this->iconArray[5];
 	return;
 }
 
@@ -2535,60 +2481,38 @@ OlegModuleLabelSelectable* Oleg::GetSelectedLabel() {
 }
 
 void Oleg::FUN_000b1f60() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall Oleg::FUN_000b1f60(Oleg *this){
-		OlegModuleMenuBubble *bubble;
-		float fStack32;
-		float local_1c;
-		float fStack24;
-		float local_14;
-		float fStack16;
-		float local_c;
-		fStack32 = FLOAT_0038639c;
-		local_1c = FLOAT_0038639c;
-		fStack24 = FLOAT_00386ab4;
-		local_14 = FLOAT_0038a934;
-		OlegModuleA::FUN_001a2e30(&(this->option11),(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe8,(Vector2 *)&stack0xffffffe0);
-		fStack24 = FLOAT_0038639c;
-		local_14 = FLOAT_0038639c;
-		fStack32 = FLOAT_00386ab4;
-		local_1c = FLOAT_0038a934;
-		OlegModuleA::FUN_001a2e30(&(this->option12),(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
-		fStack24 = FLOAT_0038639c;
-		local_14 = FLOAT_0038639c;
-		fStack32 = FLOAT_00386ab4;
-		local_1c = FLOAT_0038a934;
-		OlegModuleA::FUN_001a2e30(&(this->option13),(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
-		fStack24 = FLOAT_0038639c;
-		local_14 = FLOAT_0038639c;
-		fStack32 = FLOAT_00386ab4;
-		local_1c = FLOAT_0038a934;
-		OlegModuleA::FUN_001a2e30(&(this->option14),(uint)COLOR_WHITE,(Vector2 *)&stack0xffffffe0,(Vector2 *)&stack0xffffffe8);
-		fStack32 = FLOAT_0038d548;
-		local_c = FLOAT_0038a838;
-		fStack24 = 0.0;
-		local_14 = FLOAT_00386ab4;
-		fStack16 = FLOAT_00386ab4;
-		*(uint **)&(this->caption18).field_0x28 = &ENV_FLAGS_95;
-		local_1c = fStack32;
-		OlegModuleA::FUN_001a2e90(&(this->caption18),COLOR_WHITE,(ColorTransparent *)&stack0xfffffff0,(ColorTransparent *)&stack0xffffffe0,(ColorTransparent *)&stack0xffffffe8);
-		fStack16 = 0.0;
-		fStack24 = FLOAT_0038639c;
-		local_14 = FLOAT_0038639c;
-		bubble = &this->bubble09;
-		local_c = FLOAT_00386ab4;
-		fStack32 = FLOAT_00386ab4;
-		local_1c = FLOAT_0038a838;
-		OlegModuleA::FUN_001a2e90(&bubble->parent,COLOR_WHITE,(ColorTransparent *)&stack0xffffffe0,(ColorTransparent *)&stack0xffffffe8,(ColorTransparent *)&stack0xfffffff0);
-		fStack16 = FLOAT_0038bc04;
-		local_c = FLOAT_0038a934;
-		thunk_FUN_000ad710((float *)&stack0xfffffff0,bubble);
-		(this->caption18).next = (OlegModuleAbstract *)bubble;
-		return;
-		}
-		
-	*/
+	Global* GLOBAL = Global::Get();
+	Vector2 v1(0.5f, 0.05f); 
+	Vector2 v2(1.0f, 1.0f);
+
+	this->option11.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v1, &v2);
+
+	Vector2 v3(0.5f, 0.05f);
+	Vector2 v4(1.0f, 1.0f);
+	this->option12.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v3, &v4);
+
+	Vector2 v5(0.5f, 0.05f);
+	Vector2 v6(1.0f, 1.0f);
+	this->option13.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v5, &v6);
+
+	Vector2 v7(0.5f, 0.05f);
+	Vector2 v8(1.0f, 1.0f);
+	this->option14.FUN_001a2e30(Color(1.0f, 1.0f, 1.0f, 1.0f), &v7, &v8);
+
+	Vector2 v9(0.625f, 0.625f);
+	Vector2 v10(0.5f, 0.75f);
+	Vector2 v11(0.0f, 0.5f);
+	this->caption18.field_0x28 = &GLOBAL->ENV_FLAGS_95;
+	this->caption18.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v9, &v10, &v11);
+
+	Vector2 v12(0.0f, 0.05f);
+	Vector2 v13(1.0f, 1.0f);
+	Vector2 v14(0.5f, 0.75f);
+	this->bubble09.FUN_001a2e90(Color(1.0f, 1.0f, 1.0f, 1.0f), &v12, &v13, &v14);
+
+	Vector2 v15(0.3f, 0.05f);
+	FUN_000ad710(&v15,&this->bubble09);
+	this->caption18.next = &this->bubble09;
 	return;
 }
 
