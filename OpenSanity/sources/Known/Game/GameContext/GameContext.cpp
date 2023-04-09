@@ -786,12 +786,61 @@ void GameContext::TickFrameNumber()
 
 void GameContext::InitScriptPack1Array()
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	GLOBAL->UINT_003cfea0 = 0;
+	GLOBAL->DAT_003cfea4 = 0;
+	GLOBAL->ACTION_ARRAY_1[0] = null;
+	GLOBAL->ACTION_ARRAY_1[1] = null;
+	GLOBAL->ACTION_ARRAY_1[2] = null;
+	GLOBAL->ACTION_ARRAY_1[3] = null;
+	GLOBAL->ACTION_ARRAY_1[4] = null;
+	GLOBAL->Float5Array[0] = 0.0;
+	GLOBAL->Float5Array[1] = 0.0;
+	GLOBAL->Float5Array[2] = 0.0;
+	GLOBAL->Float5Array[3] = 0.0;
+	GLOBAL->Float5Array[4] = 0.0;
+	GLOBAL->SCRIPT_PACK_ARRAY_1[0] = null
+	GLOBAL->SCRIPT_PACK_ARRAY_1[1] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_1[2] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_1[3] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_1[4] = null;
 }
 
 void GameContext::InitScriptPack2Array()
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
+	Global* GLOBAL = Global::Get();
+
+	GLOBAL->UINT_003cfecc = 0;
+	GLOBAL->UINT_003cfed0 = 0;
+	GLOBAL->DAT_003cfed4 = 0;
+	GLOBAL->Float9Array[0] = 0.0;
+	GLOBAL->Float9Array[1] = 0.0;
+	GLOBAL->Float9Array[2] = 0.0;
+	GLOBAL->Float9Array[3] = 0.0;
+	GLOBAL->Float9Array[4] = 0.0;
+	GLOBAL->Float9Array[5] = 0.0;
+	GLOBAL->Float9Array[6] = 0.0;
+	GLOBAL->Float9Array[7] = 0.0;
+	GLOBAL->Float9Array[8] = 0.0;
+	GLOBAL->ACTION_ARRAY_2[0] = null;
+	GLOBAL->ACTION_ARRAY_2[1] = null;
+	GLOBAL->ACTION_ARRAY_2[2] = null;
+	GLOBAL->ACTION_ARRAY_2[3] = null;
+	GLOBAL->ACTION_ARRAY_2[4] = null;
+	GLOBAL->ACTION_ARRAY_2[5] = null;
+	GLOBAL->ACTION_ARRAY_2[6] = null;
+	GLOBAL->ACTION_ARRAY_2[7] = null;
+	GLOBAL->ACTION_ARRAY_2[8] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[0] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[1] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[2] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[3] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[4] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[5] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[6] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[7] = null;
+	GLOBAL->SCRIPT_PACK_ARRAY_2[8] = null;
 }
 
 void GameContext::InitSomeArray1()

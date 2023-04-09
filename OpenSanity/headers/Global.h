@@ -133,6 +133,17 @@ public:
 	int INT_0039e3f0 = 0x10;
 	int INT_0039e3e0 = 0x8;
 	int INT_0039e3e8 = 0x8;
+	uint UINT_003cfea0 = 0;
+	uint DAT_003cfea4 = 0;
+	ActionAbstract*  ACTION_ARRAY_1[5];
+	float Float5Array[5];
+	GameObjectScriptPack* SCRIPT_PACK_ARRAY_1[5];
+	uint UINT_003cfecc = 0;
+	uint UINT_003cfed0 = 0;
+	uint DAT_003cfed4 = 0;
+	ActionAbstract* ACTION_ARRAY_2[9];
+	float Float9Array[9];
+	GameObjectScriptPack* SCRIPT_PACK_ARRAY_2[9];
 
 	//GLOBAL VALUES
 	float SinTable[32768];
