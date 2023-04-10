@@ -164,10 +164,10 @@ void UnkRMRelated::TestSpace() {
 	return;
 }
 
-void UnkRMRelated::AddSection(UnkRMRelated** section) {
+void UnkRMRelated::AddReader(FileReaderHelper** reader) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
-	void __thiscall UnkRMRelated::AddSection(UnkRMRelated *this,UnkRMRelated **section){
+	void __thiscall UnkRMRelated::AddReader(UnkRMRelated *this,UnkRMRelated **section){
 		uint in_EAX;
 		uint i;
 		short index;

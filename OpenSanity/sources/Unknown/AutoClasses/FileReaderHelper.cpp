@@ -378,28 +378,9 @@ bool FileReaderHelper::ReadFileToBuffer(int offset, uint size, byte* buffer, uin
 }
 
 FileReaderHelper* FileReaderHelper::Create(UnkRMRelated* src) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-
-	FileReaderHelper* memPtr;
 	FileReaderHelper* instance;
-	UnkRMRelated** section_00;
-	UnkRMRelated* section;
-	section = src;
-	instance = new FileReaderHelper();
-	section_00 = &section;
-
-	//TODO: RESOLVE CONFLICT
-	/*
-	  section_00 = &section;
-	  section = (UnkRMRelated *)this;
-	  UnkRMRelated::AddSection(src,section_00); // FileReaderHelper passed as UnkRMRelated
-	*/
-	//src->AddSection(&instance);
-	//*(char*)&instance->flags = 0;
-	//if (((uint)instance->flags >> 0x11 & 1) != 0) {
-	//	instance->flags = instance->flags & 0xfffdffff;
-	//}
-	//instance->flags = instance->flags | 0x20000;
+	instance = new FileReaderHelper(src);
+	src->AddReader(&instance);
 	return instance;
 }
 

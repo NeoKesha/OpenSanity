@@ -19,6 +19,6 @@ class UnkRMRelated {
 		void AddCollection(UnkRMRelated** collection);
 		void Expand();
 		void TestSpace();
-		void AddSection(UnkRMRelated** section);
+		void AddReader(FileReaderHelper** reader);
 		
 };
