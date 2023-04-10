@@ -800,7 +800,7 @@ void GameContext::InitScriptPack1Array()
 	GLOBAL->Float5Array[2] = 0.0;
 	GLOBAL->Float5Array[3] = 0.0;
 	GLOBAL->Float5Array[4] = 0.0;
-	GLOBAL->SCRIPT_PACK_ARRAY_1[0] = null
+	GLOBAL->SCRIPT_PACK_ARRAY_1[0] = null;
 	GLOBAL->SCRIPT_PACK_ARRAY_1[1] = null;
 	GLOBAL->SCRIPT_PACK_ARRAY_1[2] = null;
 	GLOBAL->SCRIPT_PACK_ARRAY_1[3] = null;
