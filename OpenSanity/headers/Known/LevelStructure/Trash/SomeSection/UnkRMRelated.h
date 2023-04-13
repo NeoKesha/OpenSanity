@@ -5,20 +5,19 @@
 class UnkRMRelated {
 	public:
 		int field7_0x14;
-		short cnt;
-		short num12;
-		short occupiedCnt;
+		short capacity;
+		short expansion;
+		short count;
 		short lastIndexId;
 		short * indexes;
-		UnkRMRelated * * elements;
+		FileReaderHelper* * readers;
 
 		UnkRMRelated();
 		UnkRMRelated(int elementCount);
 		~UnkRMRelated();
 
-		void AddCollection(UnkRMRelated** collection);
+		void Populate(FileReaderHelper** collection);
 		void Expand();
-		void TestSpace();
 		void AddReader(FileReaderHelper** reader);
 		
 };

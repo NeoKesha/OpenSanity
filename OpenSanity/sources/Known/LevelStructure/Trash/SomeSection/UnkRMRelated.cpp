@@ -2,7 +2,7 @@
 
 UnkRMRelated::~UnkRMRelated() {
 	delete indexes;
-	delete elements;
+	delete readers;
 }
 
 UnkRMRelated::UnkRMRelated(int elementCount) {
@@ -18,15 +18,15 @@ UnkRMRelated::UnkRMRelated(int elementCount) {
 	sVar3 = sNumQuarter + 10;
 	numSign = elementCount & 0x80000001;
 	even = numSign == 0;
-	this->cnt = elementCount;
-	this->num12 = sVar3;
-	this->occupiedCnt = 0;
+	this->capacity = elementCount;
+	this->expansion = sVar3;
+	this->count = 0;
 	this->lastIndexId = 0;
 	if (numSign < 0) {
 		even = (numSign - 1 | 0xfffffffe) == 0xffffffff;
 	}
 	if (!even) {
-		this->cnt = elementCount + 1;
+		this->capacity = elementCount + 1;
 	}
 	numSign = sVar3 & 0x80000001;
 	even = numSign == 0;
@@ -34,158 +34,100 @@ UnkRMRelated::UnkRMRelated(int elementCount) {
 		even = (numSign - 1 | 0xfffffffe) == 0xffffffff;
 	}
 	if (!even) {
-		this->num12 = sNumQuarter + 0xb;
+		this->expansion = sNumQuarter + 0xb;
 	}
-	this->indexes = new short[this->cnt];
-	this->elements = new UnkRMRelated * [this->cnt];
+	this->indexes = new short[this->capacity];
+	this->readers = new FileReaderHelper * [this->capacity];
 	i = 0;
-	if (0 < this->cnt) {
+	if (0 < this->capacity) {
 		do {
 			this->indexes[i] = i + 1;
 			i = i + 1;
-		} while (i < this->cnt);
+		} while (i < this->capacity);
 	}
-	this->indexes[this->cnt + -1] = -2;
+	this->indexes[this->capacity + -1] = -2;
 	this->field7_0x14 = 1;
 }
 
 
-void UnkRMRelated::AddCollection(UnkRMRelated** collection) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall UnkRMRelated::AddCollection(UnkRMRelated *this,UnkRMRelated **collection){
-		int iVar1;
-		iVar1 = 0;
-		if (0 < this->cnt) {
-		do {
-		if (this->indexes[iVar1] == -1) {
-		this->elements[iVar1] = collection[iVar1];
+void UnkRMRelated::Populate(FileReaderHelper** collection) {
+	for (int i = 0; i < this->capacity; ++i) {
+		if (this->indexes[i] == -1) {
+			this->readers[i] = collection[i];
 		}
-		iVar1 = iVar1 + 1;
-		}
-		 while (iVar1 < this->cnt);
-		}
-		return;
-		}
-		
-	*/
+	}
 	return;
 }
 
 void UnkRMRelated::Expand() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall UnkRMRelated::Expand(UnkRMRelated *this){
-		UnkRMRelated **collection;
-		UnkRMRelated **ppUVar1;
-		undefined4 *puVar2;
-		int iVar3;
-		uint uVar4;
-		uint uVar5;
-		undefined4 *puVar6;
-		bool bVar7;
-		uVar4 = (int)this->cnt & 0x80000001;
-		bVar7 = uVar4 == 0;
-		if ((int)uVar4 < 0) {
+	FileReaderHelper** oldPointerArray;
+	FileReaderHelper** newPointerArray;
+	short* newIndexArray;
+	int iVar3;
+	uint uVar4;
+	uint uVar5;
+	bool bVar7;
+	uVar4 = (int)this->capacity & 0x80000001;
+	bVar7 = uVar4 == 0;
+	if ((int)uVar4 < 0) {
 		bVar7 = (uVar4 - 1 | 0xfffffffe) == 0xffffffff;
-		}
-		if (!bVar7) {
-		this->cnt = this->cnt + 1;
-		}
-		uVar4 = (int)this->num12 & 0x80000001;
-		bVar7 = uVar4 == 0;
-		if ((int)uVar4 < 0) {
+	}
+	if (!bVar7) {
+		this->capacity = this->capacity + 1;
+	}
+	uVar4 = (int)this->expansion & 0x80000001;
+	bVar7 = uVar4 == 0;
+	if ((int)uVar4 < 0) {
 		bVar7 = (uVar4 - 1 | 0xfffffffe) == 0xffffffff;
+	}
+	if (!bVar7) {
+		this->expansion = this->expansion + 1;
+	}
+	newPointerArray = new FileReaderHelper * [this->expansion + this->capacity];
+	newIndexArray = new short[this->expansion + this->capacity];
+	if (this->capacity != 0) {
+		oldPointerArray = this->readers;
+		this->readers = newPointerArray;
+		Populate(oldPointerArray);
+		uVar5 = this->capacity * 2;
+		short* indexPtr = newIndexArray;
+		for (int i = uVar5 / 4; i != 0; --i) {
+			*indexPtr = -1;
+			++indexPtr;
 		}
-		if (!bVar7) {
-		this->num12 = this->num12 + 1;
+		for (int i = uVar5 & 3; i != 0; --i) {
+			*indexPtr = 255;
+			++indexPtr;
 		}
-		ppUVar1 = (UnkRMRelated **)VirtualPool::AllocateMemory(((int)this->num12 + (int)this->cnt) * 4);
-		puVar2 = (undefined4 *)VirtualPool::AllocateMemory(((int)this->num12 + (int)this->cnt) * 2);
-		if (this->cnt != 0) {
-		collection = this->elements;
-		this->elements = ppUVar1;
-		AddCollection(this,collection);
-		uVar5 = (int)this->cnt << 1;
-		puVar6 = puVar2;
-		for (uVar4 = uVar5 >> 2;
-		 uVar4 != 0;
-		 uVar4 = uVar4 - 1) {
-		*puVar6 = 0xffffffff;
-		puVar6 = puVar6 + 1;
-		}
-		for (uVar5 = uVar5 & 3;
-		 uVar5 != 0;
-		 uVar5 = uVar5 - 1) {
-		*(undefined *)puVar6 = 0xff;
-		puVar6 = (undefined4 *)((int)puVar6 + 1);
-		}
-		VirtualPool::FreeMemory(collection);
-		VirtualPool::FreeMemory(this->indexes);
-		}
-		iVar3 = (int)this->cnt;
-		if (iVar3 < this->num12 + iVar3) {
-		do {
-		*(short *)((int)puVar2 + iVar3 * 2) = (short)iVar3 + 1;
-		iVar3 = iVar3 + 1;
-		}
-		 while (iVar3 < (int)this->num12 + (int)this->cnt);
-		}
-		*(undefined2 *)((int)puVar2 + iVar3 * 2 + -2) = 0xfffe;
-		this->elements = ppUVar1;
-		this->indexes = (short *)puVar2;
-		this->lastIndexId = this->cnt;
-		this->cnt = this->num12 + this->cnt;
-		return;
-		}
-		
-	*/
-	return;
-}
-
-void UnkRMRelated::TestSpace() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall UnkRMRelated::TestSpace(UnkRMRelated *this){
-		short sVar1;
-		if (this->occupiedCnt < this->cnt) {
-		sVar1 = this->lastIndexId;
-		this->lastIndexId = this->indexes[sVar1];
-		this->indexes[sVar1] = -1;
-		this->occupiedCnt = this->occupiedCnt + 1;
-		return;
-		}
-		Expand(this);
-		TestSpace(this);
-		return;
-		}
-		
-	*/
+		delete oldPointerArray;
+		delete this->indexes;
+	}
+	for (int i = this->capacity; i < this->capacity + this->expansion; ++i) {
+		newIndexArray[i] = i + 1;
+	}
+	newIndexArray[this->capacity + this->expansion - 1] = 0xFFFE;
+	this->readers = newPointerArray;
+	this->indexes = newIndexArray;
+	this->lastIndexId = this->capacity;
+	this->capacity = this->expansion + this->capacity;
 	return;
 }
 
 void UnkRMRelated::AddReader(FileReaderHelper** reader) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __thiscall UnkRMRelated::AddReader(UnkRMRelated *this,UnkRMRelated **section){
-		uint in_EAX;
-		uint i;
-		short index;
-		i = in_EAX & 0xffff0000 | (uint)(ushort)this->occupiedCnt;
-		if (this->occupiedCnt < this->cnt) {
-		index = this->lastIndexId;
-		this->lastIndexId = this->indexes[index];
-		this->indexes[index] = -1;
-		this->occupiedCnt = this->occupiedCnt + 1;
-		this->elements[index] = *section;
-		return;
-		}
-		Expand(this);
-		TestSpace(this);
-		this->elements[i] = *section;
-		return;
-		}
-		
-	*/
+	if (this->count < this->capacity) {
+		int prevIndex = this->lastIndexId;
+		this->lastIndexId = this->indexes[this->lastIndexId];
+		this->indexes[prevIndex] = -1;
+		this->count = this->count + 1;
+		this->readers[prevIndex] = *reader;
+	}
+	else {
+		Expand();
+		int prevIndex = this->lastIndexId;
+		this->lastIndexId = this->indexes[this->lastIndexId];
+		this->indexes[prevIndex] = -1;
+		this->count = this->count + 1;
+		this->readers[prevIndex] = *reader;
+	}
 	return;
 }
