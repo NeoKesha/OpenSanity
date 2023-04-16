@@ -2,67 +2,50 @@
 
 #include "headers/Known/Game/Chunks/ChunkData.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
-void AutoClass52::Construct(ChunkData* param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	AutoClass52 * __thiscall AutoClass52::Construct(AutoClass52 *this,ChunkData *param_1){
-		(this->chunkName).value = (char *)0x0;
-		(this->chunkName).strLength = 0;
-		(this->chunkName).strSize = 0;
-		this->field2_0x20 = 0;
-		if (param_1 != (ChunkData *)0x0) {
-		TwinString::Copy(&this->chunkName,(param_1->chunkName2).value);
-		}
-		return this;
-		}
-		
-	*/
-	return;
+
+AutoClass52::AutoClass52(ChunkData* param_1) : chunkName()
+{
+	this->field2_0x20 = 0;
+	if (param_1 != (ChunkData*)0x0) {
+		this->chunkName.Copy(param_1->chunkName.value);
+	}
 }
 
-AutoClass52* AutoClass52::Cosntruct(AutoClass52* other) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	AutoClass52 * __thiscall AutoClass52::Cosntruct(AutoClass52 *this,AutoClass52 *other){
-		(this->vec1).x = (other->vec1).x;
-		(this->vec1).y = (other->vec1).y;
-		(this->vec1).z = (other->vec1).z;
-		(this->vec1).w = (other->vec1).w;
-		(this->vec2).x = (other->vec2).x;
-		(this->vec2).y = (other->vec2).y;
-		(this->vec2).z = (other->vec2).z;
-		(this->vec2).w = (other->vec2).w;
-		this->field2_0x20 = other->field2_0x20;
-		(this->chunkName).value = (char *)0x0;
-		(this->chunkName).strLength = 0;
-		(this->chunkName).strSize = 0;
-		TwinString::Copy(&this->chunkName,(other->chunkName).value);
-		return this;
-		}
-		
-	*/
-	return null;
+AutoClass52::AutoClass52(AutoClass52* other)
+{
+	(this->vec1).x = (other->vec1).x;
+	(this->vec1).y = (other->vec1).y;
+	(this->vec1).z = (other->vec1).z;
+	(this->vec1).w = (other->vec1).w;
+	(this->vec2).x = (other->vec2).x;
+	(this->vec2).y = (other->vec2).y;
+	(this->vec2).z = (other->vec2).z;
+	(this->vec2).w = (other->vec2).w;
+	this->field2_0x20 = other->field2_0x20;
+	(this->chunkName).value = (char*)0x0;
+	(this->chunkName).strLength = 0;
+	(this->chunkName).strSize = 0;
+	this->chunkName.Copy(other->chunkName.value);
 }
+
+AutoClass52::~AutoClass52()
+{
+
+}
+
 
 AutoClass52* AutoClass52::Copy(AutoClass52* other) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	AutoClass52 * __thiscall AutoClass52::Copy(AutoClass52 *this,AutoClass52 *other){
-		(this->vec1).x = (other->vec1).x;
-		(this->vec1).y = (other->vec1).y;
-		(this->vec1).z = (other->vec1).z;
-		(this->vec1).w = (other->vec1).w;
-		(this->vec2).x = (other->vec2).x;
-		(this->vec2).y = (other->vec2).y;
-		(this->vec2).z = (other->vec2).z;
-		(this->vec2).w = (other->vec2).w;
-		this->field2_0x20 = other->field2_0x20;
-		TwinString::Copy(&this->chunkName,(other->chunkName).value);
-		return this;
-		}
-		
-	*/
-	return null;
+	(this->vec1).x = (other->vec1).x;
+	(this->vec1).y = (other->vec1).y;
+	(this->vec1).z = (other->vec1).z;
+	(this->vec1).w = (other->vec1).w;
+	(this->vec2).x = (other->vec2).x;
+	(this->vec2).y = (other->vec2).y;
+	(this->vec2).z = (other->vec2).z;
+	(this->vec2).w = (other->vec2).w;
+	this->field2_0x20 = other->field2_0x20;
+	this->chunkName.Copy(other->chunkName.value);
+	return this;
 }
 
 void AutoClass52::FUN_000f6ab0(InstanceContext* ctx, byte param_2) {

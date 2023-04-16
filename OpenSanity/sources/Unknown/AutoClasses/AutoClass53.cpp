@@ -3,6 +3,17 @@
 #include "headers/Known/Game/Chunks/ChunkDesc.h"
 #include "headers/Unknown/Families/Families1X/Family16/UnkFamily16A.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
+
+AutoClass53::AutoClass53() : str(), unkStruct1((ChunkData*)null), unkStruct2((ChunkData*)null){
+	this->index = -1;
+	this->flags = 0;
+}
+
+AutoClass53::~AutoClass53()
+{
+
+}
+
 bool AutoClass53::FUN_000b9fe0(int type, ChunkDesc* desc, UnkFamily16A* defaultRm) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*

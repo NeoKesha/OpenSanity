@@ -5,25 +5,44 @@
 #include "headers/Unknown/Families/Families1X/Family16/UnkFamily16A.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
 
-ChunkDesc::ChunkDesc()
+ChunkDesc::ChunkDesc() : chunkName(), unkString1(), unkString2()
 {
-	Logging::LogUnimplemented(__FUNCSIG__);
+	AutoClass53* puVar1;
+	AutoClass53* puVar2;
+	AutoClass53* puVar3;
+	int i;
+	uint* puVar4;
+	puVar4 = this->uintArray;
+	for (i = 0x10;
+		i != 0;
+		i = i + -1) {
+		*puVar4 = 0;
+		puVar4 = puVar4 + 1;
+	}
+	this->playerInstanceContexts[0] = (InstanceContextRefCounter*)0x0;
+	this->playerInstanceContexts[1] = (InstanceContextRefCounter*)0x0;
+	this->playerInstanceContexts[2] = (InstanceContextRefCounter*)0x0;
+	this->playerInstanceContexts[3] = (InstanceContextRefCounter*)0x0;
+	this->playerInstanceContexts[4] = (InstanceContextRefCounter*)0x0;
+	this->playerInstanceContexts[5] = (InstanceContextRefCounter*)0x0;
+	this->flags2 = 0;
+	this->flags = 0;
+	this->someTime = 0;
+	this->ticks = 0;
+
+	this->slot1 = new AutoClass53();
+	this->slot2 = new AutoClass53();
+	this->slot3 = new AutoClass53();
+	InitPlayerContexts(0, null);
 }
 ChunkDesc::~ChunkDesc()
 {
 	Logging::LogUnimplemented(__FUNCSIG__);
 }
 void ChunkDesc::ResetStrings() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall ChunkDesc::ResetStrings(ChunkDesc *this){
-		TwinString::Copy(&this->chunkName,"");
-		TwinString::Copy(&this->unkString1,"");
-		TwinString::Copy(&this->unkString2,"");
-		return;
-		}
-		
-	*/
+	chunkName.Set("");
+	unkString1.Set("");
+	unkString2.Set("");
 	return;
 }
 
@@ -43,91 +62,6 @@ bool ChunkDesc::ReloadLevel(UnkFamily16A* _default) {
 		
 	*/
 	return false;
-}
-
-void ChunkDesc::Construct() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	ChunkDesc * __fastcall ChunkDesc::Construct(ChunkDesc *this){
-		AutoClass53 *puVar1;
-		AutoClass53 *puVar2;
-		AutoClass53 *puVar3;
-		int i;
-		uint *puVar4;
-		(this->chunkName).value = (char *)0x0;
-		(this->chunkName).strLength = 0;
-		(this->chunkName).strSize = 0;
-		(this->unkString1).value = (char *)0x0;
-		(this->unkString1).strLength = 0;
-		(this->unkString1).strSize = 0;
-		(this->unkString2).value = (char *)0x0;
-		(this->unkString2).strLength = 0;
-		(this->unkString2).strSize = 0;
-		puVar4 = this->uintArray;
-		for (i = 0x10;
-		 i != 0;
-		 i = i + -1) {
-		*puVar4 = 0;
-		puVar4 = puVar4 + 1;
-		}
-		this->playerInstanceContexts[0] = (InstanceContextRefCounter *)0x0;
-		this->playerInstanceContexts[1] = (InstanceContextRefCounter *)0x0;
-		this->playerInstanceContexts[2] = (InstanceContextRefCounter *)0x0;
-		this->playerInstanceContexts[3] = (InstanceContextRefCounter *)0x0;
-		this->playerInstanceContexts[4] = (InstanceContextRefCounter *)0x0;
-		this->playerInstanceContexts[5] = (InstanceContextRefCounter *)0x0;
-		this->flags2 = 0;
-		this->flags = 0;
-		this->someTime = 0;
-		this->ticks = 0;
-		puVar1 = (AutoClass53 *)VirtualPool::AllocateMemory(0x80);
-		if (puVar1 == (AutoClass53 *)0x0) {
-		puVar1 = (AutoClass53 *)0x0;
-		}
-		else {
-		(puVar1->str).value = (char *)0x0;
-		(puVar1->str).strLength = 0;
-		(puVar1->str).strSize = 0;
-		puVar1->index = -1;
-		AutoClass52::Construct(&puVar1->unkStruct1,(ChunkData *)0x0);
-		AutoClass52::Construct(&puVar1->unkStruct2,(ChunkData *)0x0);
-		puVar1->flags = 0;
-		}
-		this->slot1 = puVar1;
-		puVar2 = (AutoClass53 *)VirtualPool::AllocateMemory(0x80);
-		if (puVar2 == (AutoClass53 *)0x0) {
-		puVar2 = (AutoClass53 *)0x0;
-		}
-		else {
-		(puVar2->str).value = (char *)0x0;
-		(puVar2->str).strLength = 0;
-		(puVar2->str).strSize = 0;
-		puVar2->index = -1;
-		AutoClass52::Construct(&puVar2->unkStruct1,(ChunkData *)0x0);
-		AutoClass52::Construct(&puVar2->unkStruct2,(ChunkData *)0x0);
-		puVar2->flags = 0;
-		}
-		this->slot2 = puVar2;
-		puVar3 = (AutoClass53 *)VirtualPool::AllocateMemory(0x80);
-		if (puVar3 == (AutoClass53 *)0x0) {
-		puVar3 = (AutoClass53 *)0x0;
-		}
-		else {
-		(puVar3->str).value = (char *)0x0;
-		(puVar3->str).strLength = 0;
-		(puVar3->str).strSize = 0;
-		puVar3->index = -1;
-		AutoClass52::Construct(&puVar3->unkStruct1,(ChunkData *)0x0);
-		AutoClass52::Construct(&puVar3->unkStruct2,(ChunkData *)0x0);
-		puVar3->flags = 0;
-		}
-		this->slot3 = puVar3;
-		InitPlayerContexts(this,0,(UnkFamily16A *)0x0);
-		return this;
-		}
-		
-	*/
-	return;
 }
 
 int ChunkDesc::CountSomething2() {
