@@ -9,11 +9,6 @@ AutoClass53::AutoClass53() : str(), unkStruct1((ChunkData*)null), unkStruct2((Ch
 	this->flags = 0;
 }
 
-AutoClass53::~AutoClass53()
-{
-
-}
-
 bool AutoClass53::FUN_000b9fe0(int type, ChunkDesc* desc, UnkFamily16A* defaultRm) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -98,7 +93,7 @@ bool AutoClass53::FUN_000b9fe0(int type, ChunkDesc* desc, UnkFamily16A* defaultR
 	return false;
 }
 
-void AutoClass53::FUN_000ae330(uint param_1, uint param_2, UnkFamily16A* defaultRm) {
+void AutoClass53::FUN_000ae330(uint param_1, ChunkDesc* desc, UnkFamily16A* defaultRm) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall AutoClass53::FUN_000ae330(AutoClass53 *this,undefined4 param_1,undefined4 param_2,UnkFamily16A *defaultRm){

@@ -4,6 +4,9 @@
 #include "headers/Known/TwinString.h"
 #include "headers/Unknown/Families/Families1X/Family16/UnkFamily16A.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContext.h"
+#include "headers/Known/Game/InstanceSystem/InstanceContextRefCounter.h"
+#include "headers/Known/Time/Clock.h"
+#include "headers/Global.h"
 
 ChunkDesc::ChunkDesc() : chunkName(), unkString1(), unkString2()
 {
@@ -219,126 +222,133 @@ int ChunkDesc::CountSomething1() {
 }
 
 AutoClass53* ChunkDesc::InitPlayerContexts(int type, UnkFamily16A* defaultRm) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	AutoClass53 * __thiscall ChunkDesc::InitPlayerContexts(ChunkDesc *this,int type,UnkFamily16A *defaultRm){
-		char cVar1;
-		bool bVar2;
-		InstanceNodeInstance *nodeInstance;
-		uint characterIndex;
-		InstanceContext *ctx2;
-		int i;
-		AutoClass53 *result;
-		InstanceContextRefCounter **playerContexts;
-		uint *puVar3;
-		Clock *clock;
-		InstanceContext *ctx1;
-		result = (AutoClass53 *)0x0;
-		this->unkField10 = 0;
-		this->someDTime = 0;
-		this->flags = this->flags & 0xfffffff0;
-		this->flags2 = this->flags2 & 0xfff03fff;
-		playerContexts = this->playerInstanceContexts;
-		i = 6;
-		do {
-		if (((*playerContexts != (InstanceContextRefCounter *)0x0) &&(ctx1 = (*playerContexts)->ctx, ctx1 != (InstanceContext *)0x0)) &&(nodeInstance = (InstanceNodeInstance *)InstanceDataList::GetNode(&ctx1->nodes,Instance),nodeInstance != (InstanceNodeInstance *)0x0)) {
-		InstanceNodeInstance::Dispose(nodeInstance);
+	char cVar1;
+	bool bVar2;
+	InstanceNodeInstance* nodeInstance;
+	uint characterIndex;
+	InstanceContext* ctx2;
+	int i;
+	AutoClass53* result;
+	InstanceContextRefCounter** playerContexts;
+	uint* puVar3;
+	Clock* clock;
+	InstanceContext* ctx1;
+
+	result = (AutoClass53*)0x0;
+	this->unkField10 = 0;
+	this->someDTime = 0;
+	this->flags = this->flags & 0xfffffff0;
+	this->flags2 = this->flags2 & 0xfff03fff;
+	playerContexts = this->playerInstanceContexts;
+
+	Global* GLOBAL = Global::Get();
+
+	for (int i = 6; i > 0; i--) {
+		if (playerContexts[i] != null && playerContexts[i]->ctx != null) {
+			InstanceNodeAbstract* instance = playerContexts[i]->ctx->nodes.GetNode(ComponentId::ID_NODE_INSTANCE);
+			if (instance != null) {
+				delete instance;
+			}
 		}
-		playerContexts = playerContexts + 1;
-		i = i + -1;
-		}
-		 while (i != 0);
-		switch(type) {
-		case 0:case 1:this->flags2 = this->flags2 & 0xffffc280 | 0x280;
+	}
+
+	switch (type) {
+	case 0:
+	case 1:
+		this->flags2 = this->flags2 & 0xffffc280 | 0x280;
 		this->flags = this->flags & 0x8000661f | 0x6610;
-		clock = GlobalClock;
-		this->ticks = (int)(TicksPerTime * FLOAT_00386394);
+		clock = GLOBAL->CLOCK;
+		this->ticks = (int)(GLOBAL->TICKS_PER_TIME * 0.0);
 		this->someTime = clock->timeArray[2].time1;
 		if (type == 1) {
-		cVar1 = AutoClass53::thunk_FUN_000b9fe0(this->slot2,1,this,defaultRm);
-		LAB_000bad27:if (cVar1 != '\0') {
-		result = this->slot2;
-		}
-		}
-		else {
-		if (defaultRm != (UnkFamily16A *)0x0) {
-		characterIndex = this->flags >> 8 & 0xf;
-		if (characterIndex == 6) {
-		ctx1 = (InstanceContext *)0x0;
-		}
-		else if (this->playerInstanceContexts[characterIndex] == (InstanceContextRefCounter *)0x0) {
-		ctx1 = (InstanceContext *)0x0;
+			cVar1 = this->slot2->FUN_000b9fe0(1, this, defaultRm);
+			if (cVar1 != '\0') {
+				result = this->slot2;
+			}
 		}
 		else {
-		ctx1 = this->playerInstanceContexts[characterIndex]->ctx;
+			if (defaultRm != null) {
+				characterIndex = this->flags >> 8 & 0xf;
+				if (characterIndex == 6) {
+					ctx1 = null;
+				}
+				else if (this->playerInstanceContexts[characterIndex] == null) {
+					ctx1 = null;
+				}
+				else {
+					ctx1 = this->playerInstanceContexts[characterIndex]->ctx;
+				}
+				characterIndex = this->flags >> 0xc & 0xf;
+				if (characterIndex == 6) {
+					ctx2 = null;
+				}
+				else if (this->playerInstanceContexts[characterIndex] == (InstanceContextRefCounter*)0x0) {
+					ctx2 = null;
+				}
+				else {
+					ctx2 = this->playerInstanceContexts[characterIndex]->ctx;
+				}
+				cVar1 = this->slot2->FUN_000b58f0(1, defaultRm, ctx1, ctx1, ctx2);
+				if (cVar1 != '\0') {
+					result = this->slot2;
+				}
+			}
+			this->slot2->FUN_000ae330(type, this, null);
 		}
-		characterIndex = this->flags >> 0xc & 0xf;
-		if (characterIndex == 6) {
-		ctx2 = (InstanceContext *)0x0;
-		}
-		else if (this->playerInstanceContexts[characterIndex] == (InstanceContextRefCounter *)0x0) {
-		ctx2 = (InstanceContext *)0x0;
-		}
-		else {
-		ctx2 = this->playerInstanceContexts[characterIndex]->ctx;
-		}
-		cVar1 = AutoClass53::thunk_FUN_000b58f0(this->slot2,1,defaultRm,ctx1,ctx1,ctx2);
-		goto LAB_000bad27;
-		}
-		AutoClass53::thunk_FUN_000ae330(this->slot2,type,this,(UnkFamily16A *)0x0);
-		}
-		AutoClass53::thunk_FUN_000ae330(this->slot1,type,this,defaultRm);
-		AutoClass53::thunk_FUN_000ae330(this->slot3,type,this,defaultRm);
+
+		this->slot1->FUN_000ae330(type, this, defaultRm);
+		this->slot3->FUN_000ae330(type, this, defaultRm);
 		puVar3 = this->uintArray;
-		for (i = 0x10;
-		 i != 0;
-		 i = i + -1) {
-		*puVar3 = 0;
-		puVar3 = puVar3 + 1;
+		for (i = 0x10; i != 0; i = i + -1) {
+			*puVar3 = 0;
+			puVar3 = puVar3 + 1;
 		}
 		break;
-		case 2:this->flags2 = this->flags2 & 0xffffff80;
-		bVar2 = AutoClass53::thunk_FUN_000b9fe0(this->slot3,2,this,defaultRm);
+	case 2:
+		this->flags2 = this->flags2 & 0xffffff80;
+		bVar2 = this->slot3->FUN_000b9fe0(2, this, defaultRm);
 		i = 2;
 		if (bVar2 == false) {
-		LAB_000badd1:bVar2 = AutoClass53::thunk_FUN_000b9fe0(this->slot2,i,this,defaultRm);
-		if (bVar2 == false) {
-		return (AutoClass53 *)0x0;
-		}
-		result = this->slot2;
-		}
-		else {
-		result = this->slot3;
-		AutoClass53::thunk_FUN_000ae330(this->slot1,2,this,defaultRm);
-		}
-		break;
-		case 3:bVar2 = AutoClass53::thunk_FUN_000b9fe0(this->slot1,3,this,defaultRm);
-		if (bVar2 == false) {
-		bVar2 = AutoClass53::thunk_FUN_000b9fe0(this->slot3,3,this,defaultRm);
-		if (bVar2 == false) {
-		i = 3;
-		goto LAB_000badd1;
-		}
-		result = this->slot3;
+			bVar2 = this->slot2->FUN_000b9fe0(i, this, defaultRm);
+			if (bVar2 == false) {
+				return null;
+			}
+			result = this->slot2;
 		}
 		else {
-		result = this->slot1;
+			result = this->slot3;
+			this->slot1->FUN_000ae330(2, this, defaultRm);
 		}
 		break;
-		default:goto switchD_000bac57_caseD_4;
+	case 3:
+		bVar2 = this->slot1->FUN_000b9fe0(3, this, defaultRm);
+		if (bVar2 == false) {
+			bVar2 = this->slot3->FUN_000b9fe0(3, this, defaultRm);
+			if (bVar2 == false) {
+				i = 3;
+				bVar2 = this->slot2->FUN_000b9fe0(i, this, defaultRm);
+				if (bVar2 == false) {
+					return null;
+				}
+				result = this->slot2;
+			}
+			result = this->slot3;
 		}
-		if (result != (AutoClass53 *)0x0) {
+		else {
+			result = this->slot1;
+		}
+		break;
+	default:
+		return null;
+	}
+	if (result != null) {
 		characterIndex = this->flags ^ (result->flags << 2 ^ this->flags) & 0xf0;
 		this->flags = characterIndex;
 		characterIndex = (result->flags << 2 ^ characterIndex) & 0xf00 ^ characterIndex;
 		this->flags = characterIndex;
 		this->flags = (result->flags << 2 ^ characterIndex) & 0xf000 ^ characterIndex;
 		return result;
-		}
-		switchD_000bac57_caseD_4:return (AutoClass53 *)0x0;
-		}
-		
-	*/
+	}
 	return null;
 }
 
