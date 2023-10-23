@@ -10,6 +10,9 @@
 #include "headers/Known/Sound/UnkStruct.h"
 #include "headers/Global.h"
 #include <stdio.h>
+#include <tlhelp32.h>
+#include <psapi.h>
+#include <tchar.h>
 
 bool isVideoPlayerValid(Global* GLOBAL);
 void HandleWinApiUpdates();
@@ -29,7 +32,80 @@ void DirectSoundDoWork();
 int RegisterScreenSurfaces();
 void ReleaseScreenSurfaces();
 
+int mainDebugger();
+int mainTwinsanity(int argc, char** argv);
+
 int main(int argc, char** argv) {
+    if (argc > 1 && strcmp(argv[1], "DEBUG") == 0) {
+        return mainDebugger();
+    }
+    return mainTwinsanity(argc, argv);
+}
+
+int FindProcessId(const WCHAR* processName) {
+    PROCESSENTRY32 processEntry;
+    processEntry.dwSize = sizeof(PROCESSENTRY32);
+    HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (hSnapshot == INVALID_HANDLE_VALUE) {
+        return -1;
+    }
+    BOOL hResult = Process32First(hSnapshot, &processEntry);
+    while (hResult) {
+        if (_wcsicmp(processEntry.szExeFile, processName) == 0) {
+            CloseHandle(hSnapshot);
+            return processEntry.th32ProcessID;
+        }
+        hResult = Process32Next(hSnapshot, &processEntry);
+    }
+
+    CloseHandle(hSnapshot);
+    return -1;
+}
+
+const wchar_t* EMULATOR_PROCESS_NAME = L"cxbxr-ldr.exe";
+const LPVOID STATIC_MEMORY_BASE_ADDRESS = (LPVOID)0x00010000;
+const SIZE_T STATIC_MEMORY_PAGE_SIZE = 0x00410000;
+const LPVOID DYNAMIC_MEMORY_BASE_ADDRESS = (LPVOID)0x0D8B0000;
+const SIZE_T DYNAMIC_MEMORY_PAGE_SIZE = 0x01500000;
+
+const GameContext** GAME_CONTEXT_PTR_ADDR = (const GameContext**)0x003E6BD4;
+
+int mainDebugger() {
+    int pid = FindProcessId(EMULATOR_PROCESS_NAME);
+
+    HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, 0, pid);
+    LPVOID twinStaticMem =  VirtualAlloc(STATIC_MEMORY_BASE_ADDRESS, STATIC_MEMORY_PAGE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
+    LPVOID twinDynamicMem = VirtualAlloc(DYNAMIC_MEMORY_BASE_ADDRESS, DYNAMIC_MEMORY_PAGE_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+
+    SIZE_T read;
+    SIZE_T write;
+    if (twinDynamicMem != NULL) {
+        ReadProcessMemory(processHandle, DYNAMIC_MEMORY_BASE_ADDRESS, twinDynamicMem, DYNAMIC_MEMORY_PAGE_SIZE, &read);
+    }
+    else {
+        Logging::Log("COULDN'T ALLOCATE DYNAMIC PAGE");
+        VirtualFree(STATIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
+        VirtualFree(DYNAMIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
+        return -1;
+    }
+    if (twinStaticMem != NULL) {
+        ReadProcessMemory(processHandle, STATIC_MEMORY_BASE_ADDRESS, twinStaticMem, STATIC_MEMORY_PAGE_SIZE, &read);
+    }
+    else {
+        Logging::Log("COULDN'T ALLOCATE STATIC PAGE");
+        VirtualFree(STATIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
+        VirtualFree(DYNAMIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
+        return -1;
+    }
+    CloseHandle(processHandle);
+    const GameContext* context = *GAME_CONTEXT_PTR_ADDR;
+    printf("Startup Level: %s\n", context->startupLevel.value);
+    VirtualFree((LPVOID)0x00010000, 0, MEM_RELEASE);
+    VirtualFree((LPVOID)0x0D8B0000, 0, MEM_RELEASE);
+    return -1;
+}
+
+int mainTwinsanity(int argc, char** argv) {
     Global* GLOBAL = GLOBAL->Get();
     bool videoPlayerIsUp;
     char* pcVar2;
