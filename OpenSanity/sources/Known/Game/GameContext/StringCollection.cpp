@@ -4,13 +4,13 @@
 int StringCollection::AddString(TwinString* str) {
 	if (this->strCnt == this->capacity) {
 		int cnt = this->cnt2 + this->capacity;
-		TwinString** strArray = new TwinString * [cnt];
+		TwinString* strArray = new TwinString [cnt];
 		for (int i = 0; i < cnt; ++i) {
-			strArray[i] = new TwinString();
+			strArray[i] = TwinString();
 		}
 		for (int i = 0; i < this->strCnt; ++i) {
-			strArray[i]->Copy(this->array[i]->value);
-			delete this->array[i];
+			strArray[i].Copy(this->array[i].value);
+			delete this->array[i].value;
 		}
 		delete this->array;
 
@@ -18,7 +18,7 @@ int StringCollection::AddString(TwinString* str) {
 		this->array = strArray;
 	}
 
-	this->array[this->strCnt]->Copy(str->value);
+	this->array[this->strCnt].Copy(str->value);
 	this->strCnt = strCnt + 1;
 	return strCnt - 1;
 }
@@ -35,9 +35,9 @@ StringCollection::StringCollection(uint cnt) {
 	this->strCnt = 0;
 	this->capacity = cnt;
 	this->cnt2 = cnt;
-	this->array = new TwinString*[cnt];
+	this->array = new TwinString[cnt];
 	for (int i = 0; i < cnt; ++i) {
-		this->array[i] = new TwinString();
+		this->array[i] = TwinString();
 	}
 }
 
