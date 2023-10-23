@@ -8,6 +8,7 @@ class SectionDataOGIBase : public CodeSectionDataAbstract {
 		uint flags;
 		OGI * * elements;
 		short * indexes;
+		uint reserved;
 		ResourceListOGI * ogiList;
 
 		void Construct(uint cnt, byte param_2);

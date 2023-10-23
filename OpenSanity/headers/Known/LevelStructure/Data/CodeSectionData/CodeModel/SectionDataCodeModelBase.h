@@ -8,6 +8,7 @@ class SectionDataCodeModelBase : public CodeSectionDataAbstract {
 		uint flags;
 		CodeModel * * elements;
 		short * indexes;
+		uint reserved;
 		ResourceListCodeModel * codeModelList;
 
 		void Construct(uint cnt, byte param_2);

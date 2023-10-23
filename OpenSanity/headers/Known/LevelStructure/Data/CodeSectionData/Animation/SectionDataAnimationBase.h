@@ -8,6 +8,7 @@ class SectionDataAnimationBase : public CodeSectionDataAbstract {
 		uint flags;
 		Animation * * elements;
 		short * indexes;
+		uint reserved;
 		ResourceListAnimation * animationList;
 
 		void Construct(uint param_1, byte param_2);

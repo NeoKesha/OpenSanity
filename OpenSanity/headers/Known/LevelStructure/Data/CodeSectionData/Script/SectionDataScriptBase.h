@@ -8,6 +8,7 @@ class SectionDataScriptBase : public CodeSectionDataAbstract {
 		uint flags;
 		ScriptAbstract * * elements;
 		short * indexes;
+		uint reserved;
 		ResourceListScript * scriptList;
 
 		ScriptAbstract* InitScript(ushort index);

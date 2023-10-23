@@ -8,6 +8,7 @@ class SectionDataGameObjectBase : public CodeSectionDataAbstract {
 		uint elementsCount;
 		GameObject * * elements;
 		short * indexes;
+		uint reserved;
 		ResourceListGameObject * gameObjectList;
 
 		GameObject* InitGameObject(ushort index);

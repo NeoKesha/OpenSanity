@@ -8,6 +8,7 @@
 class GameObject {
 	public:
 		int index;
+		char db[12];
 		TwinString gameObjectName;
 		ParameterTable * parameters;
 		GameObjectResourceReferences * references;
