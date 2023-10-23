@@ -5,12 +5,14 @@
 
 class GameResourceManagerBase {
 	public:
-		GameResources * gameResources;
-		CollectionInstanceTemplate collectionInstanceTemplate;
 		int field1_0x4;
 		int field2_0x8;
-		int field4_0x10;
 		int field3_0xc;
+		short field4_0x10;
+		short reserved;
+		GameResources * gameResources;
+		CollectionInstanceTemplate collectionInstanceTemplate;
+
 
 		virtual InstanceContext* UnkMethod7(ChunkMeta* chunkMeta, GameObject* gameObject, Instance* instance, InstanceContext* instanceContext);
 		GameResourceManagerBase();

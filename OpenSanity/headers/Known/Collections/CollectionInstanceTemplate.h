@@ -9,6 +9,6 @@ class CollectionInstanceTemplate {
 		int capacity;
 		int expansion;
 
-		virtual int Add(InstanceTemplate* element);
+		int Add(InstanceTemplate* element);
 
 };
