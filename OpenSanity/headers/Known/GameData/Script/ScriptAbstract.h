@@ -5,7 +5,7 @@
 
 class ScriptAbstract {
 	public:
-		int reserved;
+		void* ptr;
 		int index;
 		uint flags;
 		TwinString name;

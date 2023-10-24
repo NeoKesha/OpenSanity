@@ -7,15 +7,16 @@
 class FontRenderer {
 	public:
 		Renderer * renderer;
+		AutoClass25* field1_0x4;
 		ScreenInfoExt * screenInfoExt;
 		int flags;
 		Color color;
+		int reserved;
 		FontCollection fontCollection;
 		Font * font;
 		float originX;
 		float originY;
 
-		AutoClass25* field1_0x4;
 		int field13_0x34;
 		int field14_0x38;
 		int field20_0x50;
@@ -30,9 +31,9 @@ class FontRenderer {
 		int field19_0x4c;
 		int field25_0x64;
 
-		virtual void DrawAll();
+		void DrawAll();
 		void Render();
-		virtual void DrawText_Twins(float x, float y, char* str);
+		void DrawText_Twins(float x, float y, char* str);
 		FontRenderer();
 		FontRenderer(Renderer* renderer, ScreenInfo* screen);
 
