@@ -13,11 +13,13 @@
 
 class GameController {
 	public:
+		byte reserved1[8];
 		int state;
 		uint flags;
 		uint flags2;
 		int waitTime;
 		uint progressCounter;
+		uint field13_0x1c;
 		uint progressGoal;
 		int timeFromStart;
 		int timeRelated;
@@ -32,15 +34,20 @@ class GameController {
 		FMVIndex fmvIndex;
 		TwinString galleryName;
 		Font font;
+		uint reserved3;
+		AutoClass25 field32_0xb0;
+		byte reserved4[8];
 		InstanceNodeKSubA unkStruct3;
 		InstanceNodeKSubC field42_0x4a0;
+		byte reserved5[12];
 		ChunkDesc chunkDescriptor;
 		AutoClass56 unkStruct;
 		ChunkDesc * chunkDesc;
+		byte reserved6[8];
 		Oleg oleg;
+		byte reserved7[8];
 		Credits * credits;
-		AutoClass25 field32_0xb0;
-		int field13_0x1c;
+		byte reserved8[12];
 
 		GameController(InputStruct* inputHandle, InputStruct* inputHandle2, FontRenderer* fontRenderer, UnkFamily16A* defaultRm, GameResourceManager* resourceManager, GameResources* gameResources);
 
