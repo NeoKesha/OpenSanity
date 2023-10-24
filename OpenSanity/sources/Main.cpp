@@ -10,6 +10,7 @@
 #include "headers/Known/Sound/UnkStruct.h"
 #include "headers/Global.h"
 #include <stdio.h>
+#include <winnt.h>
 #include <tlhelp32.h>
 #include <psapi.h>
 #include <tchar.h>
@@ -63,30 +64,49 @@ int FindProcessId(const WCHAR* processName) {
 }
 
 const wchar_t* EMULATOR_PROCESS_NAME = L"cxbxr-ldr.exe";
-const SIZE_T STATIC_MEMORY_CUTOFF = 0x00200000;
-const LPVOID STATIC_MEMORY_BASE_ADDRESS = (LPVOID)(0x00010000 + STATIC_MEMORY_CUTOFF);
-const SIZE_T STATIC_MEMORY_PAGE_SIZE = 0x00410000 - STATIC_MEMORY_CUTOFF;
-const LPVOID DYNAMIC_MEMORY_BASE_ADDRESS = (LPVOID)0x0D8B0000;
+const LPVOID STATIC_MEMORY_BASE_ADDRESS = (LPVOID)(0x00010000);
+const SIZE_T STATIC_MEMORY_PAGE_SIZE = 0x0410000;
+//const LPVOID DYNAMIC_MEMORY_BASE_ADDRESS = (LPVOID)0x0D8F0000;
 const SIZE_T DYNAMIC_MEMORY_PAGE_SIZE = 0x01500000;
 
 const GameContext** GAME_CONTEXT_PTR_ADDR = (const GameContext**)0x003E6BD4;
 
+LPVOID twinStaticMem = VirtualAlloc(STATIC_MEMORY_BASE_ADDRESS, STATIC_MEMORY_PAGE_SIZE, MEM_RESERVE, PAGE_READWRITE);
+LPVOID twinDynamicMem = NULL;
+
+LPVOID findDynamicMemoryOffset(HANDLE process) {
+    MEMORY_BASIC_INFORMATION memoryBasicInfo;
+    SYSTEM_INFO systemInfo;
+    GetSystemInfo(&systemInfo);
+    LPVOID ptr = STATIC_MEMORY_BASE_ADDRESS;
+    while (ptr < systemInfo.lpMaximumApplicationAddress) {
+        VirtualQueryEx(process, ptr, &memoryBasicInfo, sizeof(memoryBasicInfo));
+        ptr = (LPVOID)((DWORD)(memoryBasicInfo.BaseAddress) + (DWORD)(memoryBasicInfo.RegionSize));
+        if (memoryBasicInfo.RegionSize == DYNAMIC_MEMORY_PAGE_SIZE) {
+            return memoryBasicInfo.BaseAddress;
+        }
+    }
+
+    return NULL;
+}
+
 int mainDebugger() {
     int pid = FindProcessId(EMULATOR_PROCESS_NAME);
-
     HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, 0, pid);
-    LPVOID twinStaticMem =  VirtualAlloc(STATIC_MEMORY_BASE_ADDRESS, STATIC_MEMORY_PAGE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
-    LPVOID twinDynamicMem = VirtualAlloc(DYNAMIC_MEMORY_BASE_ADDRESS, DYNAMIC_MEMORY_PAGE_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+
+    LPVOID dynamicMemoryPtr = findDynamicMemoryOffset(processHandle);
+    twinStaticMem =  VirtualAlloc(STATIC_MEMORY_BASE_ADDRESS, STATIC_MEMORY_PAGE_SIZE, MEM_COMMIT | MEM_TOP_DOWN, PAGE_READWRITE);
+    twinDynamicMem = VirtualAlloc(dynamicMemoryPtr, DYNAMIC_MEMORY_PAGE_SIZE, MEM_RESERVE |MEM_COMMIT , PAGE_READWRITE);
 
     SIZE_T read;
     SIZE_T write;
     if (twinDynamicMem != NULL) {
-        ReadProcessMemory(processHandle, DYNAMIC_MEMORY_BASE_ADDRESS, twinDynamicMem, DYNAMIC_MEMORY_PAGE_SIZE, &read);
+        ReadProcessMemory(processHandle, dynamicMemoryPtr, twinDynamicMem, DYNAMIC_MEMORY_PAGE_SIZE, &read);
     }
     else {
         Logging::Log("COULDN'T ALLOCATE DYNAMIC PAGE");
         VirtualFree(STATIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
-        VirtualFree(DYNAMIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
+        VirtualFree(dynamicMemoryPtr, 0, MEM_RELEASE);
         return -1;
     }
     if (twinStaticMem != NULL) {
@@ -95,7 +115,7 @@ int mainDebugger() {
     else {
         Logging::Log("COULDN'T ALLOCATE STATIC PAGE");
         VirtualFree(STATIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
-        VirtualFree(DYNAMIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
+        VirtualFree(dynamicMemoryPtr, 0, MEM_RELEASE);
         return -1;
     }
     CloseHandle(processHandle);
