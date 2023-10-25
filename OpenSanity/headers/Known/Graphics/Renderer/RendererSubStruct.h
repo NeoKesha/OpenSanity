@@ -4,11 +4,11 @@
 
 class RendererSubStruct {
 	public:
-		short capacity;
 		short count;
+		short expansion;
+		short capacity;
 		short lastIndex;
 		short * indexArray;
-		int expansion;
 		FontRenderer * * pointerArray;
 
 		RendererSubStruct();

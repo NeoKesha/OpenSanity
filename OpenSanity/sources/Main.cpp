@@ -14,6 +14,7 @@
 #include <tlhelp32.h>
 #include <psapi.h>
 #include <tchar.h>
+#include <iostream>
 
 bool isVideoPlayerValid(Global* GLOBAL);
 void HandleWinApiUpdates();
@@ -66,12 +67,15 @@ int FindProcessId(const WCHAR* processName) {
 const wchar_t* EMULATOR_PROCESS_NAME = L"cxbxr-ldr.exe";
 const LPVOID STATIC_MEMORY_BASE_ADDRESS = (LPVOID)(0x00010000);
 const SIZE_T STATIC_MEMORY_PAGE_SIZE = 0x0410000;
-//const LPVOID DYNAMIC_MEMORY_BASE_ADDRESS = (LPVOID)0x0D8F0000;
 const SIZE_T DYNAMIC_MEMORY_PAGE_SIZE = 0x01500000;
 
 const GameContext** GAME_CONTEXT_PTR_ADDR = (const GameContext**)0x003E6BD4;
+const Renderer** RENDERER_PTR_ADDR = (const Renderer**)0x003E6BE8;
+const Clock** GLOBAL_CLOCK_PTR_ADDR = (const Clock**)0x003E6BEC;
+const InputController** INPUT_CONTROLLER_PTR_ADDR = (const InputController**)0x003E6BDC;
+const VideoPlayer** VIDEO_PLAYER_PTR_ADDR = (const VideoPlayer**)0x003E6BE0;
 
-LPVOID twinStaticMem = VirtualAlloc(STATIC_MEMORY_BASE_ADDRESS, STATIC_MEMORY_PAGE_SIZE, MEM_RESERVE, PAGE_READWRITE);
+LPVOID twinStaticMem = NULL;
 LPVOID twinDynamicMem = NULL;
 
 LPVOID findDynamicMemoryOffset(HANDLE process) {
@@ -90,12 +94,23 @@ LPVOID findDynamicMemoryOffset(HANDLE process) {
     return NULL;
 }
 
+void UpdateMem(HANDLE processHandle, LPVOID dynamicMemoryPtr) {
+    SIZE_T read;
+    ReadProcessMemory(processHandle, dynamicMemoryPtr, twinDynamicMem, DYNAMIC_MEMORY_PAGE_SIZE, &read);
+    ReadProcessMemory(processHandle, STATIC_MEMORY_BASE_ADDRESS, twinStaticMem, STATIC_MEMORY_PAGE_SIZE, &read);
+}
+
+void Send(HANDLE processHandle, LPVOID ptr, void* object, size_t size) {
+    SIZE_T write;
+    WriteProcessMemory(processHandle, ptr, object, size, &write);
+}
+
 int mainDebugger() {
     int pid = FindProcessId(EMULATOR_PROCESS_NAME);
-    HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, 0, pid);
+    HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_VM_WRITE, 0, pid);
 
     LPVOID dynamicMemoryPtr = findDynamicMemoryOffset(processHandle);
-    twinStaticMem =  VirtualAlloc(STATIC_MEMORY_BASE_ADDRESS, STATIC_MEMORY_PAGE_SIZE, MEM_COMMIT | MEM_TOP_DOWN, PAGE_READWRITE);
+    twinStaticMem =  VirtualAlloc(STATIC_MEMORY_BASE_ADDRESS, STATIC_MEMORY_PAGE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
     twinDynamicMem = VirtualAlloc(dynamicMemoryPtr, DYNAMIC_MEMORY_PAGE_SIZE, MEM_RESERVE |MEM_COMMIT , PAGE_READWRITE);
 
     SIZE_T read;
@@ -118,9 +133,30 @@ int mainDebugger() {
         VirtualFree(dynamicMemoryPtr, 0, MEM_RELEASE);
         return -1;
     }
-    CloseHandle(processHandle);
-    const GameContext* context = *GAME_CONTEXT_PTR_ADDR;
+    
+    GameContext* context = (GameContext*)*GAME_CONTEXT_PTR_ADDR;
+    Renderer* renderer = (Renderer*)*RENDERER_PTR_ADDR;
+    Clock* clock = (Clock*)*GLOBAL_CLOCK_PTR_ADDR;
+    InputController* inputController = (InputController*)*INPUT_CONTROLLER_PTR_ADDR;
+    VideoPlayer* videoPlayer = (VideoPlayer*)*VIDEO_PLAYER_PTR_ADDR;
     printf("Startup Level: %s\n", context->startupLevel.value);
+
+    char input = '\n';
+    while (input != 'x') {
+        UpdateMem(processHandle, dynamicMemoryPtr);
+        printf("Current vec: (%f, %f)\n", renderer->vec.x, renderer->vec.y);
+        //Do your debug here
+        float x = 0.0f;
+        float y = 0.0f;
+        std::cin >> x;
+        std::cin >> y;
+        renderer->vec.x = x;
+        renderer->vec.y = y;
+        Send(processHandle, renderer, renderer, sizeof(Renderer));
+        input = getchar();
+    }
+
+    CloseHandle(processHandle);
     VirtualFree((LPVOID)0x00010000, 0, MEM_RELEASE);
     VirtualFree((LPVOID)0x0D8B0000, 0, MEM_RELEASE);
     return -1;

@@ -5,20 +5,19 @@
 
 class Clock {
 	public:
-		uint prevTime;
-		uint deltaTimeTicks;
+		uint prevTime; //each tick added deltaTime?
+		uint deltaTimeTicks; //should be around 93-94
 		UnkTimePack timeArray[8];
-		int fps;
+		int fps; //60
+		uint divisions;
 		uint frequencyLow;
 		uint frequencyHigh;
-		uint startTimestampLow;
-		uint startTimestampHigh;
-		uint timestampHigh;
-		uint timestampLow;
-
 		int field7_0x78;
 		int field8_0x7c;
-		uint divisions;
+		uint startTimestampLow;
+		uint startTimestampHigh;
+		uint timestampLow;
+		uint timestampHigh;
 
 		Clock(int fps);
 
