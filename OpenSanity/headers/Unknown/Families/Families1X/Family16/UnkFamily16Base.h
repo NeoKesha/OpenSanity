@@ -6,14 +6,12 @@
 class UnkFamily16Base {
 	public:
 		int flags;
-		AutoClass16 * recordArray[1];
-		ushort index;
-		uint unk;
+		AutoClass16 * recordArray[512];
 		SectionRM * rmSection;
 		IndexToIdList * indexToIdList;
 		GameResources * gameResources;
-		UnkFamily16Sub unkStruct;
 		UnkFamily17Base* field2046_0x814;
+		UnkFamily16Sub unkStruct;
 
 		UnkFamily16Base();
 		UnkFamily16Base(GameResources* gameResources, byte isRB, byte isWB);

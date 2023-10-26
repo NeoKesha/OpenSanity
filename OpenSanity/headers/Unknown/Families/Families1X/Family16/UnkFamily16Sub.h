@@ -6,6 +6,7 @@ class UnkFamily16Sub {
 	public:
 		InstanceContext* ctxArray[512];
 		short cnt;
+		short reserved;
 
 		void InitSubStructArray();
 		virtual void FUN_000f79a0(InstanceContext* ctx);

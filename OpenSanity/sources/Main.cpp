@@ -75,6 +75,8 @@ const Clock** GLOBAL_CLOCK_PTR_ADDR = (const Clock**)0x003E6BEC;
 const InputController** INPUT_CONTROLLER_PTR_ADDR = (const InputController**)0x003E6BDC;
 const VideoPlayer** VIDEO_PLAYER_PTR_ADDR = (const VideoPlayer**)0x003E6BE0;
 
+byte reservation[STATIC_MEMORY_PAGE_SIZE];
+
 LPVOID twinStaticMem = NULL;
 LPVOID twinDynamicMem = NULL;
 
@@ -94,6 +96,18 @@ LPVOID findDynamicMemoryOffset(HANDLE process) {
     return NULL;
 }
 
+
+void PrepareMemory() {
+    MEMORY_BASIC_INFORMATION memoryBasicInfo;
+    SYSTEM_INFO systemInfo;
+    GetSystemInfo(&systemInfo);
+    LPVOID ptr = STATIC_MEMORY_BASE_ADDRESS;
+    while ((SIZE_T)ptr < (SIZE_T)STATIC_MEMORY_BASE_ADDRESS + STATIC_MEMORY_PAGE_SIZE) {
+        VirtualQuery(ptr, &memoryBasicInfo, sizeof(memoryBasicInfo));
+        VirtualFree(ptr, 0, MEM_RELEASE);
+        ptr = (LPVOID)((DWORD)(memoryBasicInfo.BaseAddress) + (DWORD)(memoryBasicInfo.RegionSize));
+    }
+}
 void UpdateMem(HANDLE processHandle, LPVOID dynamicMemoryPtr) {
     SIZE_T read;
     ReadProcessMemory(processHandle, dynamicMemoryPtr, twinDynamicMem, DYNAMIC_MEMORY_PAGE_SIZE, &read);
@@ -106,6 +120,7 @@ void Send(HANDLE processHandle, LPVOID ptr, void* object, size_t size) {
 }
 
 int mainDebugger() {
+    //PrepareMemory(); //Won't work. Will crash
     int pid = FindProcessId(EMULATOR_PROCESS_NAME);
     HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_VM_WRITE, 0, pid);
 

@@ -7,15 +7,24 @@ class AutoClass16 {
 	public:
 		TwinString levelName;
 		ushort strCnt;
+		ushort padding;
 		UnkFamily16A * defaultRm;
 		ChunkDataRefCounter * chunkData;
 		IndexToIdList * indexToIdList;
+		UnkFamily15A* unk1;
+		UnkFamily15A* unk2;
+		short unk3;
+		short padding2;
+		UnkFamily12Base* unk4;
+		int reserved1;
+		int reserved2;
+		int reserved3;
 
-		virtual void FUN_001b3970();
+		void FUN_001b3970();
 		InstanceContext* GetInstanceContextById(short index);
 		void FUN_001b5950();
 		void FUN_001b59d0();
-		virtual void CleanUp();
+		void CleanUp();
 		void Dispose();
 		void Dispose_6(byte param_1);
 		void FUN_001b1ca0(UnkFamily15A* param_1);

@@ -8,8 +8,8 @@ class SectionDataSfxBase : public CodeSectionDataAbstract {
 		uint flags;
 		Sfx * * elements;
 		short * indexes;
-		ResourceListSound * sfxList;
 		int field4_0x10;
+		ResourceListSound * sfxList;
 
 		SectionDataSfxBase();
 		SectionDataSfxBase(uint elementCount, byte param_2);

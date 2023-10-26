@@ -5,5 +5,5 @@
 class CodeSectionDataAbstract {
 	public:
 
-
+		virtual void CleanUp() = 0;
 };
