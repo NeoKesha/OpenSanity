@@ -11,6 +11,7 @@ class RendererText {
 		float originX;
 		float originY;
 		Color color;
+		int reserved;
 		TwinString str;
 
 

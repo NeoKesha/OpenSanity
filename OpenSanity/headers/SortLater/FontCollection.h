@@ -7,7 +7,6 @@ class FontCollection {
 		AutoClass58 * * fonts;
 		int fontsCount;
 		int totalSpace;
-
 		int field3_0xc;
 
 		void CleanUp();
