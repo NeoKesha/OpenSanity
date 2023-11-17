@@ -15,6 +15,141 @@
 #include <psapi.h>
 #include <tchar.h>
 #include <iostream>
+#include <fstream>
+#include <map>
+#include <vector>
+#include <stack>
+
+class FieldDesc {
+public:
+    std::string type;
+    std::string name;
+    bool isPointer;
+    bool isStruct;
+    bool isArray;
+    size_t offset;
+    size_t size;
+    size_t elements;
+    size_t elementSize;
+
+    void Read(std::ifstream& stream) {
+        byte typeLength = 0;
+        byte nameLength = 0;
+        stream.read((char*)&typeLength, sizeof(typeLength));
+        char* typeBuff = new char[typeLength + 1];
+        stream.read(typeBuff, typeLength);
+        typeBuff[typeLength] = 0;
+        stream.read((char*)&nameLength, sizeof(nameLength));
+        char* nameBuff = new char[nameLength + 1];
+        nameBuff[nameLength] = 0;
+        stream.read(nameBuff, nameLength);
+        type.assign(typeBuff);
+        name.assign(nameBuff);
+
+        stream.read((char*)&offset, sizeof(offset));
+        stream.read((char*)&size, sizeof(size));
+
+        byte flag = 0;
+
+        stream.read((char*)&flag, sizeof(flag));
+        isPointer = (flag == 1);
+        stream.read((char*)&flag, sizeof(flag));
+        isStruct = (flag == 1);
+        stream.read((char*)&flag, sizeof(flag));
+        isArray = (flag == 1);
+
+        stream.read((char*)&elements, sizeof(elements));
+        stream.read((char*)&elementSize, sizeof(elementSize));
+
+        delete[] typeBuff;
+        delete[] nameBuff;
+    }
+};
+
+
+class TwinsanitySymbol {
+public:
+    std::string className;
+    std::string parentName;
+    bool isVirtual;
+    size_t size;
+    size_t fieldCount;
+
+    std::vector<FieldDesc*>* fields = new std::vector<FieldDesc*>();
+
+    void Read(std::ifstream& stream) {
+        byte classNameLength = 0;
+        byte parentNameLength = 0;
+        stream.read((char*)&classNameLength, sizeof(classNameLength));
+        char* classNameBuff = new char[classNameLength + 1];
+        classNameBuff[classNameLength] = 0;
+        stream.read(classNameBuff, classNameLength);
+        stream.read((char*)&parentNameLength, sizeof(parentNameLength));
+        char* parentNameBuff = new char[parentNameLength + 1];
+        parentNameBuff[parentNameLength] = 0;
+        stream.read(parentNameBuff, parentNameLength);
+        className.assign(classNameBuff);
+        parentName.assign(parentNameBuff);
+
+        byte flag = 0;
+        stream.read((char*)&flag, sizeof(flag));
+        isVirtual = flag == 1;
+
+        stream.read((char*)&size, sizeof(size));
+        stream.read((char*)&fieldCount, sizeof(fieldCount));
+        for (int i = 0; i < fieldCount; ++i) {
+            FieldDesc* field = new FieldDesc();
+            field->Read(stream);
+            fields->push_back(field);
+        }
+
+        delete[] classNameBuff;
+        delete[] parentNameBuff;
+    }
+
+    ~TwinsanitySymbol() {
+        for (int i = 0; i < fieldCount; ++i) {
+            FieldDesc* field = fields->at(i);
+            delete field;
+        }
+
+        delete fields;
+    }
+};
+
+class SymbolDatabase {
+public:
+
+    uint symbolCount;
+    std::map<std::string, TwinsanitySymbol*>* symbols;
+
+
+    SymbolDatabase() {
+        symbolCount = 0;
+        symbols = new std::map<std::string, TwinsanitySymbol*>();
+    }
+    SymbolDatabase(std::string path) : SymbolDatabase() {
+        std::ifstream stream;
+        stream.open(path, std::ios::in | std::ios::binary);
+
+        stream.read((char*) & symbolCount, sizeof(symbolCount));
+        for (uint i = 0; i < symbolCount; ++i) {
+            TwinsanitySymbol* symbol = new TwinsanitySymbol();
+            symbol->Read(stream);
+            symbols->insert({ std::string(symbol->className.c_str()), symbol});
+        }
+    }
+
+    ~SymbolDatabase() {
+        for (auto iterator = symbols->begin(); iterator != symbols->end(); iterator++)
+        {
+            TwinsanitySymbol* symbol = iterator->second;
+            delete symbol;
+        }
+
+        delete symbols;
+    }
+};
 
 bool isVideoPlayerValid(Global* GLOBAL);
 void HandleWinApiUpdates();
@@ -35,6 +170,9 @@ int RegisterScreenSurfaces();
 void ReleaseScreenSurfaces();
 
 int mainDebugger();
+FieldDesc* findField(TwinsanitySymbol* symbol, std::string name);
+void pushField(const std::string name, std::string valueStr);
+void printSymbol(void* ptr, std::string symbolName);
 int mainTwinsanity(int argc, char** argv);
 
 int main(int argc, char** argv) {
@@ -77,8 +215,13 @@ const VideoPlayer** VIDEO_PLAYER_PTR_ADDR = (const VideoPlayer**)0x003E6BE0;
 
 byte reservation[STATIC_MEMORY_PAGE_SIZE];
 
+HANDLE processHandle = INVALID_HANDLE_VALUE;
 LPVOID twinStaticMem = NULL;
 LPVOID twinDynamicMem = NULL;
+SymbolDatabase* database = NULL;
+void* currentPtr = null;
+std::string currentSymbol;
+std::stack<std::pair<void*, std::string>> symbolStack;
 
 LPVOID findDynamicMemoryOffset(HANDLE process) {
     MEMORY_BASIC_INFORMATION memoryBasicInfo;
@@ -122,7 +265,7 @@ void Send(HANDLE processHandle, LPVOID ptr, void* object, size_t size) {
 int mainDebugger() {
     //PrepareMemory(); //Won't work. Will crash
     int pid = FindProcessId(EMULATOR_PROCESS_NAME);
-    HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_VM_WRITE, 0, pid);
+    processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_VM_WRITE, 0, pid);
 
     LPVOID dynamicMemoryPtr = findDynamicMemoryOffset(processHandle);
     twinStaticMem =  VirtualAlloc(STATIC_MEMORY_BASE_ADDRESS, STATIC_MEMORY_PAGE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
@@ -148,6 +291,13 @@ int mainDebugger() {
         VirtualFree(dynamicMemoryPtr, 0, MEM_RELEASE);
         return -1;
     }
+
+    std::ifstream defaultSymbolFile("twindb.tsf");
+    if (defaultSymbolFile.good()) {
+        defaultSymbolFile.close();
+        database = new SymbolDatabase("twindb.tsf");
+        printf("%d symbols are loaded\n", database->symbolCount);
+    }
     
     GameContext* context = (GameContext*)*GAME_CONTEXT_PTR_ADDR;
     Renderer* renderer = (Renderer*)*RENDERER_PTR_ADDR;
@@ -155,26 +305,228 @@ int mainDebugger() {
     InputController* inputController = (InputController*)*INPUT_CONTROLLER_PTR_ADDR;
     VideoPlayer* videoPlayer = (VideoPlayer*)*VIDEO_PLAYER_PTR_ADDR;
     printf("Startup Level: %s\n", context->startupLevel.value);
-
-    char input = '\n';
-    while (input != 'x') {
+    std::string cmd;
+    currentPtr = context;
+    currentSymbol = "GameContext";
+    while (true) {
         UpdateMem(processHandle, dynamicMemoryPtr);
-        printf("Current vec: (%f, %f)\n", renderer->vec.x, renderer->vec.y);
-        //Do your debug here
-        float x = 0.0f;
-        float y = 0.0f;
-        std::cin >> x;
-        std::cin >> y;
-        renderer->vec.x = x;
-        renderer->vec.y = y;
-        Send(processHandle, renderer, renderer, sizeof(Renderer));
-        input = getchar();
+        std::cin >> cmd;
+        if (cmd.compare("exit") == 0) {
+            break;
+        }
+        if (cmd.compare("symbol") == 0) {
+            if (database != null) {
+                delete database;
+            }
+            std::string path;
+            std::cin >> path;
+            database = new SymbolDatabase(path);
+            printf("%d symbols are loaded\n", database->symbolCount);
+        }
+        if (cmd.compare("push") == 0) {
+            if (database == null) {
+                printf("Symbols are not loaded. Use \"symbol <path> \" command to load symbol file\n");
+            }
+            else {
+                std::string item;
+                std::cin >> item;
+                std::string value;
+                std::cin >> value;
+                pushField(item, value);
+            }
+        }
+        if (cmd.compare("go") == 0) {
+            if (database == null) {
+                printf("Symbols are not loaded. Use \"symbol <path> \" command to load symbol file\n");
+            }
+            else {
+                std::string item;
+                std::cin >> item;
+                if (item.compare("GameContext") == 0) {
+                    currentPtr = context;
+                    currentSymbol = "GameContext";
+                }
+                else if (item.compare("Renderer") == 0) {
+                    currentPtr = renderer;
+                    currentSymbol = "Renderer";
+                }
+                else if (item.compare("Clock") == 0) {
+                    currentPtr = clock;
+                    currentSymbol = "Clock";
+                }
+                else if (item.compare("InputController") == 0) {
+                    currentPtr = inputController;
+                    currentSymbol = "InputController";
+                }
+                else if (item.compare("VideoPlayer") == 0) {
+                    currentPtr = videoPlayer;
+                    currentSymbol = "VideoPlayer";
+                }
+                else {
+                    TwinsanitySymbol* symbol = database->symbols->find(currentSymbol)->second;
+                    FieldDesc* field = findField(symbol, item);
+                    if (field == null) {
+                        printf("Field not found\n");
+                    }
+                    else if ((field->isPointer || field->isStruct) && !field->isArray){
+                        symbolStack.push({ currentPtr, currentSymbol });
+                        void* newPtr = null;
+                        if (field->isStruct) {
+                            newPtr = (void*)((char*)currentPtr + field->offset);
+                        }
+                        else if (field->isPointer) {
+                            newPtr = (void*)(*(uint*)((char*)currentPtr + field->offset)); //AAAAAAAAA
+                        }
+                        currentPtr = newPtr;
+                        currentSymbol = field->type;
+                    }
+                    else {
+                        printf("Type is unsupported\n");
+                    }
+                }
+            }
+        }
+        if (cmd.compare("back") == 0) {
+            if (database == null) {
+                printf("Symbols are not loaded. Use \"symbol <path> \" command to load symbol file\n");
+            }
+            else if (symbolStack.empty()) {
+                printf("Can't go back\n");
+            }
+            else {
+                auto previous = symbolStack.top();
+                symbolStack.pop();
+                currentPtr = previous.first;
+                currentSymbol = previous.second;
+            }
+        }
+        if (cmd.compare("print") == 0) {
+            if (database == null) {
+                printf("Symbols are not loaded. Use \"symbol <path> \" command to load symbol file\n");
+            }
+            else {
+                printSymbol(currentPtr, currentSymbol);
+            }
+        }
     }
 
     CloseHandle(processHandle);
     VirtualFree((LPVOID)0x00010000, 0, MEM_RELEASE);
     VirtualFree((LPVOID)0x0D8B0000, 0, MEM_RELEASE);
     return -1;
+}
+
+FieldDesc* findField(TwinsanitySymbol* symbol, std::string name) {
+    if (!symbol->parentName.empty()) {
+        TwinsanitySymbol* parentSymbol = database->symbols->find(symbol->parentName)->second;
+        FieldDesc* result = findField(parentSymbol, name);
+        if (result != null) {
+            return result;
+        }
+    }
+    for (int i = 0; i < symbol->fieldCount; ++i) {
+        if (symbol->fields->at(i)->name.compare(name) == 0) {
+            return symbol->fields->at(i);
+        }
+    }
+    return null;
+}
+
+void printSymbol(void* ptr, const std::string symbolName) {
+    TwinsanitySymbol* symbol = database->symbols->find(symbolName)->second;
+    if (symbol->parentName.length() > 0) {
+        printSymbol(ptr, symbol->parentName);
+    }  
+    printf("%s: \n", symbol->className.c_str());
+    for (int i = 0; i < symbol->fieldCount; ++i) {
+        FieldDesc* field = symbol->fields->at(i);
+        if (field->type.compare("int") == 0) {
+            int* value = (int*)((char*)ptr + field->offset);
+            printf("  %s %s = %08x\n", field->type.c_str(), field->name.c_str(), *value);
+        }
+        else if (field->type.compare("uint") == 0) {
+            uint* value = (uint*)((char*)ptr + field->offset);
+            printf("  %s %s = %08x\n", field->type.c_str(), field->name.c_str(), *value);
+        }
+        else if (field->type.compare("float") == 0) {
+            float* value = (float*)((char*)ptr + field->offset);
+            printf("  %s %s = %f\n", field->type.c_str(), field->name.c_str(), *value);
+        }
+        else if (field->type.compare("short") == 0) {
+            short* value = (short*)((char*)ptr + field->offset);
+            printf("  %s %s = %04x\n", field->type.c_str(), field->name.c_str(), *value);
+        }
+        else if (field->type.compare("ushort") == 0) {
+            ushort* value = (ushort*)((char*)ptr + field->offset);
+            printf("  %s %s = %04x\n", field->type.c_str(), field->name.c_str(), *value);
+        }
+        else if (field->type.compare("byte") == 0) {
+            byte* value = (byte*)((char*)ptr + field->offset);
+            printf("  %s %s = %02x\n", field->type.c_str(), field->name.c_str(), *value);
+        }
+        else if (field->type.compare("TwinString") == 0) {
+            TwinString* str = null;
+            if (field->isPointer) {
+                str = *(TwinString**)((char*)ptr + field->offset);
+            }
+            else {
+                str = (TwinString*)((char*)ptr + field->offset);
+            }
+            printf("  %s %s = %s\n", field->type.c_str(), field->name.c_str(), str->value);
+        }
+        else if (field->isStruct && !field->isArray){
+            void* fieldPtr = (char*)ptr + field->offset;
+            printf("  %s %s (%08x)\n", field->type.c_str(), field->name.c_str(), (uint)fieldPtr);
+        }
+        else if (field->isPointer && !field->isArray) {
+            uint fieldPtr = *(uint*)((char*)ptr + field->offset);
+            printf("  %s %s (%08x)\n", field->type.c_str(), field->name.c_str(), fieldPtr);
+        }
+        else {
+            printf("  %s %s\n", field->type.c_str(), field->name.c_str());
+        }
+    }
+}
+
+void pushField(const std::string name, std::string valueStr) {
+    TwinsanitySymbol* symbol = database->symbols->find(currentSymbol)->second;
+    FieldDesc* field = findField(symbol, name);
+    if (field == null) {
+        printf("Field not found\n");
+        return;
+    }
+    void* targetPointer = (void*)((char*)currentPtr + field->offset);
+    if (field->type.compare("int") == 0) {
+        int value = atoi(valueStr.c_str());
+        Send(processHandle, targetPointer, &value, sizeof(value));
+    }
+    else if (field->type.compare("uint") == 0) {
+        uint value = (uint)atoll(valueStr.c_str());
+        Send(processHandle, targetPointer, &value, sizeof(value));
+    }
+    else if (field->type.compare("float") == 0) {
+        float value = atof(valueStr.c_str());
+        Send(processHandle, targetPointer, &value, sizeof(value));
+    }
+    else if (field->type.compare("short") == 0) {
+        short value = (short)atoi(valueStr.c_str());
+        Send(processHandle, targetPointer, &value, sizeof(value));
+    }
+    else if (field->type.compare("ushort") == 0) {
+        ushort value = (ushort)atoi(valueStr.c_str());
+        Send(processHandle, targetPointer, &value, sizeof(value));
+    }
+    else if (field->type.compare("byte") == 0) {
+        byte value = (byte)atoi(valueStr.c_str());
+        Send(processHandle, targetPointer, &value, sizeof(value));
+    }
+    else if (field->isPointer && !field->isArray) {
+        uint value = (uint)atoll(valueStr.c_str());
+        Send(processHandle, targetPointer, &value, sizeof(value));
+    }
+    else {
+        printf("Unsupported\n");
+    }
 }
 
 int mainTwinsanity(int argc, char** argv) {
