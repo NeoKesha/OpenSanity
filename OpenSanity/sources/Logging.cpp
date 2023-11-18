@@ -1,5 +1,4 @@
 #include "headers/Logging.h"
-#include <stdio.h>
 #include <unordered_set>
 
 void Logging::Log(const char* msg) {
