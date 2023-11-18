@@ -19,6 +19,7 @@
 #include <map>
 #include <vector>
 #include <stack>
+#include <memory>
 
 class FieldDesc {
 public:
@@ -71,11 +72,11 @@ class TwinsanitySymbol {
 public:
     std::string className;
     std::string parentName;
-    bool isVirtual;
-    size_t size;
-    size_t fieldCount;
+    bool isVirtual{ false };
+    size_t size{ 0 };
+    size_t fieldCount{ 0 };
 
-    std::vector<FieldDesc*>* fields = new std::vector<FieldDesc*>();
+    std::vector<std::unique_ptr<FieldDesc>> fields{};
 
     void Read(std::ifstream& stream) {
         byte classNameLength = 0;
@@ -98,22 +99,13 @@ public:
         stream.read((char*)&size, sizeof(size));
         stream.read((char*)&fieldCount, sizeof(fieldCount));
         for (int i = 0; i < fieldCount; ++i) {
-            FieldDesc* field = new FieldDesc();
+            std::unique_ptr<FieldDesc> field = std::make_unique<FieldDesc>();
             field->Read(stream);
-            fields->push_back(field);
+            fields.push_back(std::move(field));
         }
 
         delete[] classNameBuff;
         delete[] parentNameBuff;
-    }
-
-    ~TwinsanitySymbol() {
-        for (int i = 0; i < fieldCount; ++i) {
-            FieldDesc* field = fields->at(i);
-            delete field;
-        }
-
-        delete fields;
     }
 };
 
@@ -121,12 +113,11 @@ class SymbolDatabase {
 public:
 
     uint symbolCount;
-    std::map<std::string, TwinsanitySymbol*>* symbols;
+    std::map<std::string, std::unique_ptr<TwinsanitySymbol>> symbols{};
 
 
     SymbolDatabase() {
         symbolCount = 0;
-        symbols = new std::map<std::string, TwinsanitySymbol*>();
     }
     SymbolDatabase(std::string path) : SymbolDatabase() {
         std::ifstream stream;
@@ -134,20 +125,10 @@ public:
 
         stream.read((char*) & symbolCount, sizeof(symbolCount));
         for (uint i = 0; i < symbolCount; ++i) {
-            TwinsanitySymbol* symbol = new TwinsanitySymbol();
+            auto symbol = std::make_unique<TwinsanitySymbol>();
             symbol->Read(stream);
-            symbols->insert({ std::string(symbol->className.c_str()), symbol});
+            symbols.insert({ std::string(symbol->className.c_str()), std::move(symbol)});
         }
-    }
-
-    ~SymbolDatabase() {
-        for (auto iterator = symbols->begin(); iterator != symbols->end(); iterator++)
-        {
-            TwinsanitySymbol* symbol = iterator->second;
-            delete symbol;
-        }
-
-        delete symbols;
     }
 };
 
@@ -277,7 +258,7 @@ int mainDebugger() {
         ReadProcessMemory(processHandle, dynamicMemoryPtr, twinDynamicMem, DYNAMIC_MEMORY_PAGE_SIZE, &read);
     }
     else {
-        Logging::Log("COULDN'T ALLOCATE DYNAMIC PAGE");
+        Logging::LogFormat("COULDN'T ALLOCATE DYNAMIC PAGE. Error: %d", GetLastError());
         VirtualFree(STATIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
         VirtualFree(dynamicMemoryPtr, 0, MEM_RELEASE);
         return -1;
@@ -286,11 +267,12 @@ int mainDebugger() {
         ReadProcessMemory(processHandle, STATIC_MEMORY_BASE_ADDRESS, twinStaticMem, STATIC_MEMORY_PAGE_SIZE, &read);
     }
     else {
-        Logging::Log("COULDN'T ALLOCATE STATIC PAGE");
+        Logging::LogFormat("COULDN'T ALLOCATE STATIC PAGE. Error: %d", GetLastError());
         VirtualFree(STATIC_MEMORY_BASE_ADDRESS, 0, MEM_RELEASE);
         VirtualFree(dynamicMemoryPtr, 0, MEM_RELEASE);
         return -1;
     }
+    
 
     std::ifstream defaultSymbolFile("twindb.tsf");
     if (defaultSymbolFile.good()) {
@@ -363,7 +345,7 @@ int mainDebugger() {
                     currentSymbol = "VideoPlayer";
                 }
                 else {
-                    TwinsanitySymbol* symbol = database->symbols->find(currentSymbol)->second;
+                    TwinsanitySymbol* symbol = database->symbols.find(currentSymbol)->second.get();
                     FieldDesc* field = findField(symbol, item);
                     if (field == null) {
                         printf("Field not found\n");
@@ -418,28 +400,28 @@ int mainDebugger() {
 
 FieldDesc* findField(TwinsanitySymbol* symbol, std::string name) {
     if (!symbol->parentName.empty()) {
-        TwinsanitySymbol* parentSymbol = database->symbols->find(symbol->parentName)->second;
+        TwinsanitySymbol* parentSymbol = database->symbols.find(symbol->parentName)->second.get();
         FieldDesc* result = findField(parentSymbol, name);
         if (result != null) {
             return result;
         }
     }
     for (int i = 0; i < symbol->fieldCount; ++i) {
-        if (symbol->fields->at(i)->name.compare(name) == 0) {
-            return symbol->fields->at(i);
+        if (symbol->fields.at(i)->name.compare(name) == 0) {
+            return symbol->fields.at(i).get();
         }
     }
     return null;
 }
 
 void printSymbol(void* ptr, const std::string symbolName) {
-    TwinsanitySymbol* symbol = database->symbols->find(symbolName)->second;
+    TwinsanitySymbol* symbol = database->symbols.find(symbolName)->second.get();
     if (symbol->parentName.length() > 0) {
         printSymbol(ptr, symbol->parentName);
     }  
     printf("%s: \n", symbol->className.c_str());
     for (int i = 0; i < symbol->fieldCount; ++i) {
-        FieldDesc* field = symbol->fields->at(i);
+        FieldDesc* field = symbol->fields.at(i).get();
         if (field->type.compare("int") == 0) {
             int* value = (int*)((char*)ptr + field->offset);
             printf("  %s %s = %08x\n", field->type.c_str(), field->name.c_str(), *value);
@@ -489,7 +471,7 @@ void printSymbol(void* ptr, const std::string symbolName) {
 }
 
 void pushField(const std::string name, std::string valueStr) {
-    TwinsanitySymbol* symbol = database->symbols->find(currentSymbol)->second;
+    TwinsanitySymbol* symbol = database->symbols.find(currentSymbol)->second.get();
     FieldDesc* field = findField(symbol, name);
     if (field == null) {
         printf("Field not found\n");

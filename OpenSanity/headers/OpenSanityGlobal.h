@@ -4,7 +4,7 @@
 #include <d3dx8.h>
 #include <dsound.h>
 
-#define null (nullptr)
+constexpr auto null = (nullptr);
 
 typedef unsigned int uint;
 typedef unsigned char byte;
