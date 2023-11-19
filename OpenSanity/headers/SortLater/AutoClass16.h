@@ -3,7 +3,7 @@
 #include "headers/OpenSanityGlobal.h"
 #include "headers/Known/TwinString.h"
 
-class AutoClass16 {
+class Chunk {
 	public:
 		TwinString levelName;
 		ushort strCnt;

@@ -617,7 +617,7 @@ void SectionRM::ReadRM(int sectionId, uint sectionOffset, MemoryStream* stream) 
 	return;
 }
 
-void SectionRM::Construct_16(AutoClass16* param_1) {
+void SectionRM::Construct_16(Chunk* param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	SectionRM * __thiscall SectionRM::Construct(SectionRM *this,AutoClass16 *param_1){

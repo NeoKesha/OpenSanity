@@ -7,6 +7,6 @@ class CollectionInstanceWrapper {
 		CollectionInstance * collectionPtr;
 
 		void CreateCollection(int cnt);
-		virtual void Add(Instance* element);
+		void Add(Instance* element);
 
 };

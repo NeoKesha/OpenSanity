@@ -7,6 +7,6 @@ class CollectionPathWrapper {
 		CollectionPath * collectionPtr;
 
 		void CreateCollection(int cnt);
-		virtual void Add(Path* param_1);
+		void Add(Path* param_1);
 
 };

@@ -26,12 +26,13 @@ class InstanceSectionResources {
 		CollectionCameraTriggerWrapper cameras;
 		CollectionCollisionSurfaceWrapper collisionSurfaces;
 		InstanceContextList * ctxList;
+		int unk1;
 		CollectionPosition * collectionPosition;
 		CollectionPath * collectionPath;
 
-		virtual void Add(ushort param_1, ushort param_2, AiPosition* element);
-		virtual void AddAiPath(CollectionAiPath* collection, ushort param_2, AiPath* element);
-		virtual bool AddInstance(CollectionInstance* collection, int ctxCnt, Instance* element);
+		void Add(ushort param_1, ushort param_2, AiPosition* element);
+		void AddAiPath(CollectionAiPath* collection, ushort param_2, AiPath* element);
+		bool AddInstance(CollectionInstance* collection, int ctxCnt, Instance* element);
 		byte FUN_001b4e20(UnkFamily27Wrapper* param_1, int param_2);
 		byte FUN_001b4f80(UnkFamily27Wrapper* param_1, int param_2);
 		byte FUN_001b50e0(UnkFamily27Wrapper* param_1, int param_2);
@@ -48,9 +49,9 @@ class InstanceSectionResources {
 		uint DoTriggers(UnkFamily27Wrapper* param_1);
 		uint DoCameras(UnkFamily27Wrapper* param_1);
 		bool DoSurfaces(UnkFamily27Wrapper* param_1);
-		virtual void AddTriggger(CollectionTrigger* collection, uint param_2, Trigger* element);
-		virtual void AddCameraTrigger(uint param_1, uint param_2, CameraTrigger* element);
-		virtual void FUN_001b7410();
+		void AddTriggger(CollectionTrigger* collection, uint param_2, Trigger* element);
+		void AddCameraTrigger(uint param_1, uint param_2, CameraTrigger* element);
+		void FUN_001b7410();
 		bool FUN_001b7ff0(UnkFamily27Wrapper* param_1, int cnt);
 		bool DoPositions(UnkFamily27Wrapper* param_1);
 		bool FUN_001b8170(UnkFamily27Wrapper* param_1);

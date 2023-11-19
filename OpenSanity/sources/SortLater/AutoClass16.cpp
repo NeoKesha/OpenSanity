@@ -7,7 +7,7 @@
 #include "headers/Known/Game/Chunks/ChunkData.h"
 #include "headers/Unknown/Families/Families1X/Family16/UnkFamily16A.h"
 #include "headers/Unknown/Families/Families1X/Family16/UnkFamily16Base.h"
-void AutoClass16::FUN_001b3970() {
+void Chunk::FUN_001b3970() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall AutoClass16::FUN_001b3970(AutoClass16 *this){
@@ -39,7 +39,7 @@ void AutoClass16::FUN_001b3970() {
 	return;
 }
 
-InstanceContext* AutoClass16::GetInstanceContextById(short index) {
+InstanceContext* Chunk::GetInstanceContextById(short index) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	 WARNING: Function: __chkstk replaced with injection: alloca_probe InstanceContext * __thiscall AutoClass16::GetInstanceContextById(AutoClass16 *this,short index){
@@ -75,7 +75,7 @@ InstanceContext* AutoClass16::GetInstanceContextById(short index) {
 	return null;
 }
 
-void AutoClass16::FUN_001b5950() {
+void Chunk::FUN_001b5950() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall AutoClass16::FUN_001b5950(AutoClass16 *this){
@@ -109,7 +109,7 @@ void AutoClass16::FUN_001b5950() {
 	return;
 }
 
-void AutoClass16::FUN_001b59d0() {
+void Chunk::FUN_001b59d0() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall AutoClass16::FUN_001b59d0(AutoClass16 *this){
@@ -141,7 +141,7 @@ void AutoClass16::FUN_001b59d0() {
 	return;
 }
 
-void AutoClass16::CleanUp() {
+void Chunk::CleanUp() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall AutoClass16::CleanUp(AutoClass16 *this){
@@ -183,7 +183,7 @@ void AutoClass16::CleanUp() {
 	return;
 }
 
-void AutoClass16::Dispose() {
+void Chunk::Dispose() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall AutoClass16::Dispose(AutoClass16 *this){
@@ -206,7 +206,7 @@ void AutoClass16::Dispose() {
 	return;
 }
 
-void AutoClass16::Dispose_6(byte param_1) {
+void Chunk::Dispose_6(byte param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	AutoClass16 * __thiscall AutoClass16::Dispose(AutoClass16 *this,byte param_1){
@@ -232,7 +232,7 @@ void AutoClass16::Dispose_6(byte param_1) {
 	return;
 }
 
-void AutoClass16::FUN_001b1ca0(UnkFamily15A* param_1) {
+void Chunk::FUN_001b1ca0(UnkFamily15A* param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __thiscall AutoClass16::FUN_001b1ca0(AutoClass16 *this,UnkFamily15A *param_1){
@@ -244,7 +244,7 @@ void AutoClass16::FUN_001b1ca0(UnkFamily15A* param_1) {
 	return;
 }
 
-void AutoClass16::Construct(char* str, short strCnt, ChunkData* chunkData, UnkFamily16Base* defaultRm, UnkFamily15A* ptr) {
+void Chunk::Construct(char* str, short strCnt, ChunkData* chunkData, UnkFamily16Base* defaultRm, UnkFamily15A* ptr) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	AutoClass16 * __thiscall AutoClass16::Construct(AutoClass16 *this,char *str,short strCnt,ChunkData *chunkData,UnkFamily16Base *defaultRm,UnkFamily15A *ptr){
@@ -274,7 +274,7 @@ void AutoClass16::Construct(char* str, short strCnt, ChunkData* chunkData, UnkFa
 	return;
 }
 
-void AutoClass16::CreateIndexMapping() {
+void Chunk::CreateIndexMapping() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	void __fastcall AutoClass16::CreateIndexMapping(AutoClass16 *this){

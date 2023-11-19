@@ -7,6 +7,6 @@ class CollectionAiPositionWrapper {
 		CollectionAiPosition * collectionPtr;
 
 		void CreateCollection(int cnt);
-		virtual void Add(AiPosition* element);
+		void Add(AiPosition* element);
 
 };

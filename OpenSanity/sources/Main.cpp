@@ -243,6 +243,19 @@ void Send(HANDLE processHandle, LPVOID ptr, void* object, size_t size) {
     WriteProcessMemory(processHandle, ptr, object, size, &write);
 }
 
+void printHelp() {
+    printf("Usage:\n");
+    printf("  help: print this message\n");
+    printf("  exit: exit application\n");
+    printf("  symbol <path>: load debug symbol file. If present in debugger folder, twindb.tsf will be loaded automatically\n");
+    printf("  go <where>: set watcher to specific pointer of memory. <where> can be\n");
+    printf("    - Global object, such as: GameContext, Renderer, Clock, InputController, VideoPlayer\n");
+    printf("    - Variable of current viewed object\n");
+    printf("  print: print variables of current viewed object. By default it's GameContext\n");
+    printf("  push <variable> <value>: send new value to variable of viewed object\n");
+    printf("  back: go to previous memory point\n");
+}
+
 int mainDebugger() {
     //PrepareMemory(); //Won't work. Will crash
     int pid = FindProcessId(EMULATOR_PROCESS_NAME);
@@ -280,19 +293,23 @@ int mainDebugger() {
         database = new SymbolDatabase("twindb.tsf");
         printf("%d symbols are loaded\n", database->symbolCount);
     }
-    
+    printf("Twinsanity Debugger booted up successfully\n");
+    printHelp();
     GameContext* context = (GameContext*)*GAME_CONTEXT_PTR_ADDR;
     Renderer* renderer = (Renderer*)*RENDERER_PTR_ADDR;
     Clock* clock = (Clock*)*GLOBAL_CLOCK_PTR_ADDR;
     InputController* inputController = (InputController*)*INPUT_CONTROLLER_PTR_ADDR;
     VideoPlayer* videoPlayer = (VideoPlayer*)*VIDEO_PLAYER_PTR_ADDR;
-    printf("Startup Level: %s\n", context->startupLevel.value);
     std::string cmd;
     currentPtr = context;
     currentSymbol = "GameContext";
+    
     while (true) {
         UpdateMem(processHandle, dynamicMemoryPtr);
         std::cin >> cmd;
+        if (cmd.compare("help") == 0) {
+            printHelp();
+        }
         if (cmd.compare("exit") == 0) {
             break;
         }

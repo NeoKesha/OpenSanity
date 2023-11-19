@@ -34,7 +34,7 @@ class SectionRM : public SectionAbstract {
 		void Dispose(byte param_1);
 		virtual uint FUN_001b89a0(byte param_1, MemoryStream* stream);
 		virtual void ReadRM(int sectionId, uint sectionOffset, MemoryStream* stream);
-		void Construct_16(AutoClass16* param_1);
+		void Construct_16(Chunk* param_1);
 		virtual void Write(int index, MemoryStream* stream);
 		virtual int GetElementCount();
 		static byte ReturnNum();

@@ -6,7 +6,7 @@
 class UnkFamily16Base {
 	public:
 		int flags;
-		AutoClass16 * recordArray[512];
+		Chunk * loadedChunks[512];
 		SectionRM * rmSection;
 		IndexToIdList * indexToIdList;
 		GameResources * gameResources;
@@ -17,10 +17,10 @@ class UnkFamily16Base {
 		UnkFamily16Base(GameResources* gameResources, byte isRB, byte isWB);
 		~UnkFamily16Base();
 
-		virtual AutoClass16* FindRecord(char* str);
+		virtual Chunk* FindRecord(char* str);
 		virtual void CleanUp();
 		virtual void FUN_001b9260(MemoryStream* stream);
-		virtual AutoClass16* AddNewRecord(char* name, ChunkData* param_2);
+		virtual Chunk* AddNewRecord(char* name, ChunkData* param_2);
 		virtual bool CleanUpElement();
 
 };

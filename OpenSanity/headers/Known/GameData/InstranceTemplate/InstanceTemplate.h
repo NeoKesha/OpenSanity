@@ -13,6 +13,8 @@ class InstanceTemplate {
 		short objectId;
 		byte unkByte1;
 		byte unkByte2;
+		byte unkByte5;
+		byte unkByte6;
 		InstanceTemplateIdList idList;
 		ParameterTable unkStruct;
 
@@ -20,6 +22,6 @@ class InstanceTemplate {
 		void Read(MemoryStream* stream);
 		bool FUN_001ace00(UnkFamily27Wrapper* param_1);
 		void Construct_3(MemoryStream* stream);
-		virtual void Write(MemoryStream* stream);
+		void Write(MemoryStream* stream);
 
 };

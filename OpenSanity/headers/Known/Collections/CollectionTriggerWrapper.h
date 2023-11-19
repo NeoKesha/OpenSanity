@@ -7,6 +7,6 @@ class CollectionTriggerWrapper {
 		CollectionTrigger * collectionPtr;
 
 		void CreateCollection(int cnt);
-		virtual void Add(Trigger* element);
+		void Add(Trigger* element);
 
 };

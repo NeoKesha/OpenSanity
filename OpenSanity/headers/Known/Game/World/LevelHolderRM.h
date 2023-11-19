@@ -6,7 +6,7 @@
 class LevelHolderRM : public LevelHolderAbstract {
 	public:
 		SectionRM * section;
-		AutoClass16 * ptr;
+		Chunk * ptr;
 
 		void Construct(WorldChunk* param_1);
 		void Dispose();

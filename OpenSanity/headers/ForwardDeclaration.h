@@ -154,7 +154,7 @@ class AutoClass62;
 class SplineB;
 class UnkSfxCollection;
 class UnkFamily15A;
-class AutoClass16;
+class Chunk;
 class SectionReaderRM;
 class CollisionData;
 class SectionReaderCollisionData;

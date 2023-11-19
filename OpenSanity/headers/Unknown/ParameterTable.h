@@ -13,7 +13,7 @@ class ParameterTable {
 		CollectionFloats floats;
 		CollectionInts ints;
 
-		uint GetInt(int index);
+		virtual uint GetInt(int index);
 		void Construct(int param_1);
 		void Construct_2(MemoryStream* stream);
 		void Dispose(byte param_1);

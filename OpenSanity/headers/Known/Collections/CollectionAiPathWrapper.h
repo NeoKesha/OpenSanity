@@ -7,6 +7,6 @@ class CollectionAiPathWrapper {
 		CollectionAiPath * collectionPtr;
 
 		void CreateCollection(int cnt);
-		virtual void Add(AiPath* param_1);
+		void Add(AiPath* param_1);
 
 };

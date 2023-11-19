@@ -6,6 +6,7 @@
 #include "headers/Known/GameData/OGI/OGIType2.h"
 void OGI::Construct() {
 	Logging::LogUnimplemented(__FUNCSIG__);
+	sizeof(OGI);
 	/*
 	OGI * __fastcall OGI::Construct(OGI *this){
 		*(undefined2 *)&this->field0_0x0 = 0;

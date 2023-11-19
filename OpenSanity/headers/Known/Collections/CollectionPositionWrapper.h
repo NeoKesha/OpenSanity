@@ -7,6 +7,6 @@ class CollectionPositionWrapper {
 		CollectionPosition * collectionPtr;
 
 		void CreateCollection(int cnt);
-		virtual int Add(Position* element);
+		int Add(Position* element);
 
 };

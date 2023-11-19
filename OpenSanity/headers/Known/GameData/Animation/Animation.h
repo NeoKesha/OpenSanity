@@ -5,15 +5,16 @@
 
 class Animation {
 	public:
+		uint unk;
 		uint index;
 		int flags;
 		AnimationBlob blob1;
 		AnimationBlob blob2;
 
 		void Construct();
-		virtual void DisposeBlobs();
+		void DisposeBlobs();
 		void Read(MemoryStream* stream);
-		virtual void Write(MemoryStream* stream);
+		void Write(MemoryStream* stream);
 		void Construct_4(MemoryStream* stream);
 
 };

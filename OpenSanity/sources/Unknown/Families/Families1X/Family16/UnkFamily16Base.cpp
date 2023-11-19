@@ -46,7 +46,7 @@ UnkFamily16Base::~UnkFamily16Base()
 	delete indexToIdList;
 }
 
-AutoClass16* UnkFamily16Base::FindRecord(char* str) {
+Chunk* UnkFamily16Base::FindRecord(char* str) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	AutoClass16 * __thiscall UnkFamily16Base::FindRecord(UnkFamily16Base *this,char *str){
@@ -191,7 +191,7 @@ void UnkFamily16Base::FUN_001b9260(MemoryStream* stream) {
 	return;
 }
 
-AutoClass16* UnkFamily16Base::AddNewRecord(char* name, ChunkData* param_2) {
+Chunk* UnkFamily16Base::AddNewRecord(char* name, ChunkData* param_2) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	AutoClass16 * __thiscall UnkFamily16Base::AddNewRecord(UnkFamily16Base *this,char *name,ChunkData *param_2){

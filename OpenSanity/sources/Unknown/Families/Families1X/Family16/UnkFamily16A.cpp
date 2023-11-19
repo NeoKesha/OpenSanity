@@ -137,7 +137,7 @@ void UnkFamily16A::LoadShadows(bool unpacked) {
 	return;
 }
 
-AutoClass16* UnkFamily16A::FUN_001b1e00(short param_1) {
+Chunk* UnkFamily16A::FUN_001b1e00(short param_1) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	AutoClass16 * __thiscall UnkFamily16A::FUN_001b1e00(UnkFamily16A *this,short param_1){
@@ -382,7 +382,7 @@ void UnkFamily16A::LoadDefault(char* fname) {
 	return;
 }
 
-AutoClass16* UnkFamily16A::CreateNewRecord(char* str, ChunkData* param_2, uint param_3, UnkFamily15A* param_4) {
+Chunk* UnkFamily16A::CreateNewRecord(char* str, ChunkData* param_2, uint param_3, UnkFamily15A* param_4) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	AutoClass16 * __thiscall UnkFamily16A::CreateNewRecord(UnkFamily16A *this,char *str,ChunkData *param_2,undefined4 param_3,UnkFamily15A *param_4){
@@ -406,7 +406,7 @@ AutoClass16* UnkFamily16A::CreateNewRecord(char* str, ChunkData* param_2, uint p
 	return null;
 }
 
-AutoClass16* UnkFamily16A::AddNewRecord(char* str, ChunkData* param_2) {
+Chunk* UnkFamily16A::AddNewRecord(char* str, ChunkData* param_2) {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
 	AutoClass16 * __thiscall UnkFamily16A::AddNewRecord(UnkFamily16A *this,char *str,ChunkData *param_2){

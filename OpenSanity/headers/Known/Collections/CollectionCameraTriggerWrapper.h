@@ -7,6 +7,6 @@ class CollectionCameraTriggerWrapper {
 		CollectionCameraTrigger * collectionPtr;
 
 		void CreateCollection(int cnt);
-		virtual void Add(CameraTrigger* element);
+		void Add(CameraTrigger* element);
 
 };

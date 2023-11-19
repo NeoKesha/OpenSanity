@@ -6,6 +6,7 @@ class AnimationBlob {
 	public:
 		uint size;
 		ushort parameter;
+		short unk;
 		int animationBuffer;
 
 		int CalculateAnimationLength();

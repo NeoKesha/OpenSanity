@@ -7,6 +7,6 @@ class CollectionCollisionSurfaceWrapper {
 		CollectionCollisionSurface * collectionPtr;
 
 		void CreateCollection(int cnt);
-		virtual void Add(CollisionSurface* element);
+		void Add(CollisionSurface* element);
 
 };
