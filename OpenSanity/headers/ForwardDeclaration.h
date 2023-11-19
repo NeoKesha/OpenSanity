@@ -1,8 +1,20 @@
 #pragma once
 
-class Renderer; 
+/* 
+	Status tracking legend :
+		STRUCTURE: <STATUS> - status of class structure accuracy
+			- No tags - undefined
+			- SIZE - structure is size complete, including correct virtuality
+			- SIMPLE - structure is simple type complete (void* are allowed)
+			- TYPE - structure is type complete with all "void*" changed to class pointers where required
+			- NAME - structure is name complete
+			- COMPLETE - structure of class is name complete and type complete
+*/
+
+
+class Renderer;
 class FileStream; 
-class TwinString; 
+class TwinString;					//STUCTURE: COMPLETE
 class GameContext; 
 class ScreenInfo; 
 class FontRenderer; 
