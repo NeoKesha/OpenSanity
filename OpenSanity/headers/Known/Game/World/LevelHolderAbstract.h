@@ -5,6 +5,9 @@
 class LevelHolderAbstract {
 	public:
 		WorldChunk * worldChunk;
+		UnkFamily18Abstract* ptr;
+		int unk1;
+		int unk2;
 		int someNum;
 
 		void Construct(uint param_1);

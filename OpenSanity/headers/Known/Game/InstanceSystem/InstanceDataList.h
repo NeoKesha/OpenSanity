@@ -8,6 +8,6 @@ class InstanceDataList {
 		InstanceNodeAbstract * array[24];
 
 		void Dispose();
-		virtual InstanceNodeAbstract* GetNode(ComponentId index);
+		InstanceNodeAbstract* GetNode(ComponentId index);
 
 };

@@ -8,14 +8,26 @@
 
 class InstanceContext : public InstanceContextBase {
 	public:
+		int unk1;
+		int unk2;
+		int unk3;
 		InstanceContextSmartPtr smartPtr;
+		int unk4;
+		int unk5;
+		int unk6;
 		Vector4 vec;
+		int unk7;
 		InstanceDataList nodes;
 		void * findMe;
 		InstanceContextSub * subPtr;
 		InstanceContext * prev;
 		InstanceContext * next;
+		int unk8;
+		int unk9;
+		int unk10;
 		int someIndex;
+		int unk11;
+		int unk12;
 
 		void FUN_000a81e0(float* param_2, uint param_3);
 		void FUN_00026f70(Vector4* vec);

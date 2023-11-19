@@ -193,6 +193,10 @@ const Renderer** RENDERER_PTR_ADDR = (const Renderer**)0x003E6BE8;
 const Clock** GLOBAL_CLOCK_PTR_ADDR = (const Clock**)0x003E6BEC;
 const InputController** INPUT_CONTROLLER_PTR_ADDR = (const InputController**)0x003E6BDC;
 const VideoPlayer** VIDEO_PLAYER_PTR_ADDR = (const VideoPlayer**)0x003E6BE0;
+const World** WORLD_PTR_ADDR = (const World**)0x003E6BF8;
+const SaveSystem** SAVE_SYSTEM_PTR_ADDR = (const SaveSystem**)0x003E6BE4;
+const FontRenderer** FONT_RENDERER_PTR_ADDR = (const FontRenderer**)0x003E6C00;
+const VideoController** VIDEO_CONTROLLER_PTR_ADDR = (const VideoController**)0x003E6BFC;
 
 byte reservation[STATIC_MEMORY_PAGE_SIZE];
 
@@ -300,6 +304,11 @@ int mainDebugger() {
     Clock* clock = (Clock*)*GLOBAL_CLOCK_PTR_ADDR;
     InputController* inputController = (InputController*)*INPUT_CONTROLLER_PTR_ADDR;
     VideoPlayer* videoPlayer = (VideoPlayer*)*VIDEO_PLAYER_PTR_ADDR;
+    World* world = (World*)*WORLD_PTR_ADDR;
+    SaveSystem* saveSystem = (SaveSystem*)*SAVE_SYSTEM_PTR_ADDR;
+    FontRenderer* fontRenderer = (FontRenderer*)*FONT_RENDERER_PTR_ADDR;
+    VideoController* videoController = (VideoController*)*VIDEO_CONTROLLER_PTR_ADDR;
+
     std::string cmd;
     currentPtr = context;
     currentSymbol = "GameContext";
@@ -360,6 +369,22 @@ int mainDebugger() {
                 else if (item.compare("VideoPlayer") == 0) {
                     currentPtr = videoPlayer;
                     currentSymbol = "VideoPlayer";
+                }
+                else if (item.compare("World") == 0) {
+                    currentPtr = world;
+                    currentSymbol = "World";
+                }
+                else if (item.compare("SaveSystem") == 0) {
+                    currentPtr = saveSystem;
+                    currentSymbol = "SaveSystem";
+                }
+                else if (item.compare("FontRenderer") == 0) {
+                    currentPtr = fontRenderer;
+                    currentSymbol = "FontRenderer";
+                }
+                else if (item.compare("VideoController") == 0) {
+                    currentPtr = videoController;
+                    currentSymbol = "VideoController";
                 }
                 else {
                     TwinsanitySymbol* symbol = database->symbols.find(currentSymbol)->second.get();

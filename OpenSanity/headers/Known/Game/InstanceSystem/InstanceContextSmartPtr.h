@@ -6,10 +6,10 @@ class InstanceContextSmartPtr {
 	public:
 		InstanceContextRefCounter * refCounter;
 
-		virtual void FreeCtx(InstanceContext* ctx);
+		void FreeCtx(InstanceContext* ctx);
 		InstanceContextSmartPtr* SetCtx(InstanceContext* ctx);
 		void CreateRef(InstanceContext* ctx, byte flag);
 		void FUN_00059e80(int* param_1);
-		virtual void Release();
+		void Release();
 
 };
