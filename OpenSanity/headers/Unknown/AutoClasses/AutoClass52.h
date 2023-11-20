@@ -8,16 +8,16 @@ class AutoClass52 {
 	public:
 		Vector4 vec1;
 		Vector4 vec2;
-		TwinString chunkName;
 		int field2_0x20;
+		TwinString chunkName;
 
 		AutoClass52(ChunkData* param_1);
 		AutoClass52(AutoClass52* other);
 		~AutoClass52();
 
 		AutoClass52* Copy(AutoClass52* other);
-		virtual void FUN_000f6ab0(InstanceContext* ctx, byte param_2);
+		void FUN_000f6ab0(InstanceContext* ctx, byte param_2);
 		void FUN_000f6b70(InstanceContext* ctx, ChunkData* chunkData, byte param_3);
-		virtual void FUN_000fb0b0(InstanceContext* ctx);
+		void FUN_000fb0b0(InstanceContext* ctx);
 
 };
