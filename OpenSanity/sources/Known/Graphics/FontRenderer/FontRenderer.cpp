@@ -5,6 +5,15 @@
 #include "headers/Known/Graphics/Renderer/Renderer.h"
 #include "headers/Unknown/AutoClasses/AutoClass58.h"
 #include "headers/Known/Graphics/Font/Font.h"
+#include "headers/Known/Graphics/VideoPlayer/VideoPlayer.h"
+#include "headers/Unknown/AutoClasses/AutoClass25/AutoClass25.h"
+#include "headers/Known/Game/InstanceSystem/InstanceContextRefCounter.h"
+#include "headers/Known/Game/InstanceSystem/InstanceContext.h"
+#include "headers/Known/Game/Chunks/ChunkData.h"
+#include "headers/Known/Game/InstanceSystem/InstanceTransform.h"
+#include "headers/Global.h"
+
+
 void FontRenderer::DrawAll() {
 	Logging::LogUnimplemented(__FUNCSIG__);
 	/*
@@ -75,111 +84,106 @@ void FontRenderer::DrawAll() {
 
 void FontRenderer::Render() {
 	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall FontRenderer::Render(FontRenderer *renderer){
-		InstanceTransform *transform;
-		ChunkData *this;
-		VideoPlayer *pVVar1;
-		InstanceNodeR *nodeR;
-		uint uVar2;
-		ChunkData *chunkData;
-		InstanceContext *ctx;
-		Matrix4 *matrix;
-		float aspect;
-		Matrix4 local_d0;
-		Matrix4 local_90;
-		Matrix4 local_50;
-		InstanceContextRefCounter *ctxPtr;
-		pVVar1 = VideoPlayer;
-		if ((VideoPlayer != (VideoPlayer *)0x0) && (((VideoPlayer->parent).flags & 0xf000) == 0x2000)) {
-		_D3DDevice_Clear@24(0,(undefined *)0x0,0xf2,(Color)0xff000000,1.0);
-		(*((pVVar1->parent).vtable)->Swap)();
-		DrawAll(renderer);
+
+	Global* GLOBAL = GLOBAL->Get();
+	InstanceTransform* transform;
+	ChunkData* skydome;
+	VideoPlayer* videoPlayer;
+	InstanceNodeR* nodeR;
+	uint clearFlags;
+	ChunkData* chunkData;
+	InstanceContext* ctx;
+	Matrix4* matrix;
+	float aspect;
+	Matrix4 local_90;
+	Matrix4 local_50;
+	InstanceContextRefCounter* ctxPtr;
+	videoPlayer = GLOBAL->VIDEO_PLAYER;
+	if ((videoPlayer != null) && ((videoPlayer->flags & 0xf000) == 0x2000)) {
+		GLOBAL->D3D_DEVICE->Clear(0, null, D3DCLEAR_TARGET | D3DCLEAR_STENCIL, 0xFF000000, 1.0, 0); // TODO: 0xF2 flags convert from XBOX to WIN32
+		videoPlayer->Swap();
+		DrawAll();
 		return;
+	}
+	if (field1_0x4 == null) {
+		clearFlags = D3DCLEAR_TARGET; //XBOX CLEAR FLAG 2
+		if ((flags >> 4 & 1) != 0) {
+			clearFlags |= D3DCLEAR_STENCIL; //XBOX CLEAR FLAG F2
 		}
-		if (renderer->field1_0x4 == (AutoClass25 *)0x0) {
-		uVar2 = 2;
-		if (((uint)renderer->flags >> 4 & 1) != 0) {
-		uVar2 = 0xf2;
+		if ((flags >> 5 & 1) != 0) {
+			clearFlags |= D3DCLEAR_ZBUFFER; //XBOX CLEAR FLAG 1
 		}
-		if (((uint)renderer->flags >> 5 & 1) != 0) {
-		uVar2 = uVar2 | 1;
-		}
-		_D3DDevice_Clear@24(0,(undefined *)0x0,uVar2,(Color)0xff000000,1.0);
-		DrawAll(renderer);
+		GLOBAL->D3D_DEVICE->Clear(0, null, clearFlags, 0xFF000000, 1.0, 0);
+		DrawAll();
 		return;
-		}
-		ctxPtr = renderer->field1_0x4->ctxPtr;
-		if (ctxPtr == (InstanceContextRefCounter *)0x0) {
-		ctx = (InstanceContext *)0x0;
-		chunkData = (ChunkData *)0x0;
-		}
-		else {
+	}
+	ctxPtr = field1_0x4->ctxPtr;
+	if (ctxPtr == (InstanceContextRefCounter*)0x0) {
+		ctx = (InstanceContext*)0x0;
+		chunkData = (ChunkData*)0x0;
+	}
+	else {
 		ctx = ctxPtr->ctx;
-		if (ctx == (InstanceContext *)0x0) {
-		chunkData = (ChunkData *)0x0;
+		if (ctx == (InstanceContext*)0x0) {
+			chunkData = (ChunkData*)0x0;
 		}
 		else {
-		chunkData = (ctx->parent).chunkData;
+			chunkData = ctx->chunkData;
 		}
-		}
-		if (chunkData == (ChunkData *)0x0) {
-		ClearViewport((bool)((byte)((uint)renderer->flags >> 4) & 1),(bool)((byte)((uint)renderer->flags >> 5) & 1));
-		DrawAll(renderer);
+	}
+	if (chunkData == (ChunkData*)0x0) {
+		renderer->ClearViewport((flags >> 4) & 1, (flags >> 5) & 1);
+		DrawAll();
 		return;
-		}
-		transform = (ctx->parent).transform;
-		InstanceTransform::FillMatrix(transform);
-		nodeR = (InstanceNodeR *)InstanceDataList::GetNode(&ctx->nodes,NodeR);
-		DAT_003ec544 = renderer->screenInfoExt;
-		this = (ChunkData *)chunkData->skydome;
-		matrix = &renderer->field1_0x4->matrix2;
-		DAT_003ec548 = renderer->field1_0x4;
-		Matrix4::Construct1(&local_d0);
-		_D3DDevice_SetTransform@8(0,matrix);
-		_D3DDevice_SetTransform@8(6,&local_d0);
-		_D3DDevice_GetTransform@8(1,&local_90);
-		Matrix4::Multiply4443(matrix,&local_90,&local_50);
-		_D3DDevice_SetTransform@8(7,&local_50);
-		FUN_001057c0(&ENV_CLASS_214.arraysCnt);
-		DAT_003ec518 = 0;
-		aspect = FLOAT_0038e420;
-		if (IS_WIDESCREEN == false) {
-		aspect = FLOAT_0038e41c;
-		}
-		FUN_00136860(nodeR->fov,nodeR->near,nodeR->far,aspect);
-		AutoClass25::FUN_001c6d10(renderer->field1_0x4,renderer->screenInfoExt);
-		(chunkData->field6_0x90).m11 = local_d0.m11;
-		(chunkData->field6_0x90).m12 = local_d0.m12;
-		(chunkData->field6_0x90).m13 = local_d0.m13;
-		(chunkData->field6_0x90).m14 = local_d0.m14;
-		(chunkData->field6_0x90).m21 = local_d0.m21;
-		(chunkData->field6_0x90).m22 = local_d0.m22;
-		(chunkData->field6_0x90).m23 = local_d0.m23;
-		(chunkData->field6_0x90).m24 = local_d0.m24;
-		(chunkData->field6_0x90).m31 = local_d0.m31;
-		(chunkData->field6_0x90).m32 = local_d0.m32;
-		(chunkData->field6_0x90).m33 = local_d0.m33;
-		(chunkData->field6_0x90).m34 = local_d0.m34;
-		(chunkData->field6_0x90).m41 = local_d0.m41;
-		(chunkData->field6_0x90).m42 = local_d0.m42;
-		(chunkData->field6_0x90).m43 = local_d0.m43;
-		(chunkData->field6_0x90).m44 = local_d0.m44;
-		if (this == (ChunkData *)0x0) {
-		ClearViewport((bool)((byte)((uint)renderer->flags >> 4) & 1),(bool)((byte)((uint)renderer->flags >> 5) & 1));
-		}
-		else {
-		ChunkData::FUN_00111d50(this,renderer->field1_0x4);
-		}
-		ChunkData::RenderWorld(chunkData,&transform->matrix,renderer->field1_0x4);
-		ChunkData::FUN_0013ba00(chunkData,matrix,&local_d0);
-		FUN_001057f0(&ENV_CLASS_214.arraysCnt);
-		FUN_0012c3d0((uint)(GameState == 3),(float)ENV_FLOAT_116_DT3 * TimePerTick1);
-		DrawAll(renderer);
-		return;
-		}
-		
-	*/
+	}
+	transform = ctx->transform;
+	InstanceTransform::FillMatrix(transform);
+	//nodeR = (InstanceNodeR*)InstanceDataList::GetNode(&ctx->nodes, NodeR);
+	GLOBAL->DAT_003ec544 = screenInfoExt;
+	skydome = (ChunkData*)chunkData->skydome;
+	matrix = &field1_0x4->matrix2;
+	GLOBAL->DAT_003ec548 = field1_0x4;
+	Matrix4 local_d0;
+	GLOBAL->D3D_DEVICE->SetTransform((D3DTRANSFORMSTATETYPE)0, (D3DMATRIX*)matrix);
+	GLOBAL->D3D_DEVICE->SetTransform((D3DTRANSFORMSTATETYPE)6, (D3DMATRIX*)&local_d0);
+	GLOBAL->D3D_DEVICE->GetTransform((D3DTRANSFORMSTATETYPE)1, (D3DMATRIX*)&local_90);
+	matrix->Multiply4443(&local_90, &local_50);
+	GLOBAL->D3D_DEVICE->GetTransform((D3DTRANSFORMSTATETYPE)7, (D3DMATRIX*)&local_50);
+	//FUN_001057c0(&ENV_CLASS_214.arraysCnt);
+	//GLOBAL->DAT_003ec518 = 0;
+	//aspect = GLOBAL->FLOAT_0038e420;
+	if (GLOBAL->IS_WIDESCREEN == false) {
+		//aspect = GLOBAL->FLOAT_0038e41c;
+	}
+	//FUN_00136860(nodeR->fov, nodeR->near, nodeR->far, aspect);
+	field1_0x4->FUN_001c6d10(screenInfoExt);
+	(chunkData->m3).m11 = local_d0.m11;
+	(chunkData->m3).m12 = local_d0.m12;
+	(chunkData->m3).m13 = local_d0.m13;
+	(chunkData->m3).m14 = local_d0.m14;
+	(chunkData->m3).m21 = local_d0.m21;
+	(chunkData->m3).m22 = local_d0.m22;
+	(chunkData->m3).m23 = local_d0.m23;
+	(chunkData->m3).m24 = local_d0.m24;
+	(chunkData->m3).m31 = local_d0.m31;
+	(chunkData->m3).m32 = local_d0.m32;
+	(chunkData->m3).m33 = local_d0.m33;
+	(chunkData->m3).m34 = local_d0.m34;
+	(chunkData->m3).m41 = local_d0.m41;
+	(chunkData->m3).m42 = local_d0.m42;
+	(chunkData->m3).m43 = local_d0.m43;
+	(chunkData->m3).m44 = local_d0.m44;
+	if (skydome == (ChunkData*)0x0) {
+		renderer->ClearViewport((flags >> 4) & 1, (flags >> 5) & 1);
+	}
+	else {
+		skydome->FUN_00111d50(field1_0x4);
+	}
+	chunkData->RenderWorld(&transform->matrix, field1_0x4);
+	chunkData->FUN_0013ba00(matrix, &local_d0);
+	//FUN_001057f0(&ENV_CLASS_214.arraysCnt);
+	//FUN_0012c3d0((GLOBAL->GAME_STATE == 3), (float)GLOBAL->ENV_FLOAT_116_DT3 * GLOBAL->TIME_PER_TICK_1);
+	DrawAll();
 	return;
 }
 

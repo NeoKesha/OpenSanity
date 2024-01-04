@@ -97,6 +97,7 @@ public:
 	int DAT_00402d24;
 	int DAT_00402d28;
 	int DAT_00402d2c;
+	AutoClass25* DAT_003ec548;
 	float FLOAT_0039f094;
 	float FLOAT_0039f098;
 	float FLOAT_0039f09c;
