@@ -100,18 +100,18 @@ void FontRenderer::Render() {
 	InstanceContextRefCounter* ctxPtr;
 	videoPlayer = GLOBAL->VIDEO_PLAYER;
 	if ((videoPlayer != null) && ((videoPlayer->flags & 0xf000) == 0x2000)) {
-		GLOBAL->D3D_DEVICE->Clear(0, null, D3DCLEAR_TARGET | D3DCLEAR_STENCIL, 0xFF000000, 1.0, 0); // TODO: 0xF2 flags convert from XBOX to WIN32
+		GLOBAL->D3D_DEVICE->Clear(0, null, D3DCLEAR_TARGET | D3DCLEAR_STENCIL, 0xFF000000, 1.0, 0);
 		videoPlayer->Swap();
 		DrawAll();
 		return;
 	}
 	if (field1_0x4 == null) {
-		clearFlags = D3DCLEAR_TARGET; //XBOX CLEAR FLAG 2
+		clearFlags = D3DCLEAR_TARGET;
 		if ((flags >> 4 & 1) != 0) {
-			clearFlags |= D3DCLEAR_STENCIL; //XBOX CLEAR FLAG F2
+			clearFlags |= D3DCLEAR_STENCIL;
 		}
 		if ((flags >> 5 & 1) != 0) {
-			clearFlags |= D3DCLEAR_ZBUFFER; //XBOX CLEAR FLAG 1
+			clearFlags |= D3DCLEAR_ZBUFFER;
 		}
 		GLOBAL->D3D_DEVICE->Clear(0, null, clearFlags, 0xFF000000, 1.0, 0);
 		DrawAll();
@@ -138,17 +138,17 @@ void FontRenderer::Render() {
 	}
 	transform = ctx->transform;
 	InstanceTransform::FillMatrix(transform);
-	//nodeR = (InstanceNodeR*)InstanceDataList::GetNode(&ctx->nodes, NodeR);
+	nodeR = (InstanceNodeR*)ctx->nodes.GetNode(ComponentId::ID_NODE_R);
 	GLOBAL->DAT_003ec544 = screenInfoExt;
 	skydome = (ChunkData*)chunkData->skydome;
 	matrix = &field1_0x4->matrix2;
 	GLOBAL->DAT_003ec548 = field1_0x4;
 	Matrix4 local_d0;
-	GLOBAL->D3D_DEVICE->SetTransform((D3DTRANSFORMSTATETYPE)0, (D3DMATRIX*)matrix);
-	GLOBAL->D3D_DEVICE->SetTransform((D3DTRANSFORMSTATETYPE)6, (D3DMATRIX*)&local_d0);
-	GLOBAL->D3D_DEVICE->GetTransform((D3DTRANSFORMSTATETYPE)1, (D3DMATRIX*)&local_90);
+	GLOBAL->D3D_DEVICE->SetTransform(D3DTRANSFORMSTATETYPE::D3DTS_VIEW, (D3DMATRIX*)matrix);
+	GLOBAL->D3D_DEVICE->SetTransform(D3DTS_WORLD, (D3DMATRIX*)&local_d0);
+	GLOBAL->D3D_DEVICE->GetTransform(D3DTRANSFORMSTATETYPE::D3DTS_PROJECTION, (D3DMATRIX*)&local_90);
 	matrix->Multiply4443(&local_90, &local_50);
-	GLOBAL->D3D_DEVICE->GetTransform((D3DTRANSFORMSTATETYPE)7, (D3DMATRIX*)&local_50);
+	GLOBAL->D3D_DEVICE->GetTransform(D3DTS_WORLDMATRIX(1), (D3DMATRIX*)&local_50);
 	//FUN_001057c0(&ENV_CLASS_214.arraysCnt);
 	//GLOBAL->DAT_003ec518 = 0;
 	//aspect = GLOBAL->FLOAT_0038e420;
