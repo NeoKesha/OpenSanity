@@ -2,19 +2,11 @@
 
 #include "headers/Known/Math/Vector2.h"
 #include "headers/Known/Graphics/FontRenderer/FontRenderer.h"
-#include "headers/Known/Iterators/TypeC/Iterator4/IteratorC4.h"
 #include "headers/Unknown/AutoClasses/AutoClass25/AutoClass25.h"
 #include "headers/Known/Game/InstanceSystem/InstanceContextRefCounter.h"
 #include "headers/Global.h"
 
 RendererAbstract::RendererAbstract() {
-	substruct.capacity = 0;
-	substruct.expansion = 10;
-	substruct.count = 0;
-	substruct.lastIndex = -1;
-	substruct.indexArray = (short*)0x0;
-	substruct.pointerArray = (FontRenderer**)0x0;
-
 	vec = Vector2();
 	return;
 }
@@ -26,7 +18,7 @@ RendererAbstract::~RendererAbstract() {
 
 
 void RendererAbstract::CleanUp() {
-	IteratorC4 iterator(&substruct);
+	TwinArrayIterator<FontRenderer> iterator(&renderArray);
 	iterator.Reset();
 	if (iterator.index != (iterator.collection)->count) {
 		do {
@@ -41,14 +33,14 @@ void RendererAbstract::CleanUp() {
 			iterator.Iterate();
 		} while (iterator.index != (iterator.collection)->count);
 	}
-	delete substruct.indexArray;
-	delete substruct.pointerArray;
+	delete renderArray.indexArray;
+	delete renderArray.pointerArray;
 	return;
 }
 
 
 void RendererAbstract::UnkMethod1() {
-	IteratorC4 iterator(&substruct);
+	TwinArrayIterator<FontRenderer> iterator(&renderArray);
 	//Stub2();
 	iterator.Reset();
 	while (iterator.index != (iterator.collection)->count) {
@@ -64,7 +56,7 @@ void RendererAbstract::UnkMethod1() {
 void RendererAbstract::UnkMethod2() {
 	Global* GLOBAL = Global::Get();
 
-	IteratorC4 iterator(&substruct);
+	TwinArrayIterator<FontRenderer> iterator(&renderArray);
 	iterator.Reset();
 	while (iterator.index != (iterator.collection)->count) {
 		FontRenderer* result = *iterator.Get();
@@ -93,7 +85,7 @@ void RendererAbstract::UnkMethod2() {
 }
 
 void RendererAbstract::Render() {
-	IteratorC4 iterator(&substruct);
+	TwinArrayIterator<FontRenderer> iterator(&renderArray);
 	iterator.Reset();
 	while (iterator.index != (iterator.collection)->count) {
 		FontRenderer* result = *iterator.Get();
@@ -105,9 +97,9 @@ void RendererAbstract::Render() {
 void RendererAbstract::UnkMethod5() {
 	FontRenderer* value = null;
 	//Stub2();
-	for (int i = 0; i < this->substruct.capacity; ++i) {
-		if (this->substruct.indexArray[i] == -1) {
-			value = this->substruct.pointerArray[i];
+	for (int i = 0; i < this->renderArray.capacity; ++i) {
+		if (this->renderArray.indexArray[i] == -1) {
+			value = this->renderArray.pointerArray[i];
 			break;
 		}
 	}
@@ -143,7 +135,7 @@ void RendererAbstract::SetXY(Vector2* val) {
 
 void RendererAbstract::FUN_00114940() {
 
-	IteratorC4 iterator(&substruct);
+	TwinArrayIterator<FontRenderer> iterator(&renderArray);
 	iterator.Reset();
 	while (iterator.index != (iterator.collection)->count) {
 		FontRenderer* result = *iterator.Get();

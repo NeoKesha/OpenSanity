@@ -1,12 +1,14 @@
 #pragma once
 
 #include "headers/OpenSanityGlobal.h"
-#include "headers/Known/Graphics/Renderer/RendererSubStruct.h"
+#include "headers/Templates/TwinArray.h"
+#include "headers/Templates/TwinArrayIterator.h"
+#include "headers/Known/Graphics/FontRenderer/FontRenderer.h"
 #include "headers/Known/Math/Vector2.h"
 
 class RendererAbstract {
 	public:
-		RendererSubStruct substruct;
+		TwinArray<FontRenderer> renderArray;
 		Vector2 vec;
 
 		RendererAbstract();

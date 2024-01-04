@@ -18,9 +18,7 @@ class TwinString;					//STUCTURE: COMPLETE
 class GameContext; 
 class ScreenInfo; 
 class FontRenderer; 
-class IteratorC4; 
 class FontCollection; 
-class RendererSubStruct; 
 class IteratorB1; 
 class SaveSystem; 
 class SaveSystemAbstract; 

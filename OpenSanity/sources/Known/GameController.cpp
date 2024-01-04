@@ -1248,7 +1248,7 @@ uint GameController::FUN_001c7570(FontRenderer* param_1, bool param_2) {
 		this->progressCounter = this->progressCounter & 0xfffffffb;
 		this->defaultRm = (UnkFamily16A *)0x0;
 		if ((param_2 != false) && (this->fontRenderer != (FontRenderer *)0x0)) {
-		(*(code *)(this->fontRenderer->renderer->parent).substruct.vtable)(*(undefined4 *)&this->field_0x4);
+		(*(code *)(this->fontRenderer->renderer->parent).renderArray.vtable)(*(undefined4 *)&this->field_0x4);
 		}
 		return this->fontRenderer;
 		}

@@ -176,7 +176,7 @@ void Renderer::SwapBuffer() {
 
 FontRenderer* Renderer::CreateFontRenderer(ScreenInfo* screen) {
 	FontRenderer* fontRednerer = new FontRenderer(this, screen);
-	substruct.Add(&fontRednerer); //TODO: or (FontRenderer**)&screen???
+	renderArray.Add(&fontRednerer); //TODO: or (FontRenderer**)&screen???
 	return fontRednerer;
 }
 
