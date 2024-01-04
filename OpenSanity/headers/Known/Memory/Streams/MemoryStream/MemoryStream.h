@@ -9,21 +9,26 @@ class MemoryStream {
 		byte * currentPtr;
 		size_t length;
 
+		MemoryStream(void* memptr, size_t length, byte flag, short param_4);
+		MemoryStream(uint param_1, byte param_2, ushort param_3);
+		MemoryStream(char* fname, char mode);
+		MemoryStream();
+		~MemoryStream();
+		virtual void Write(byte* data, uint length);
+		virtual void Read(int* outArray, uint length, uint var);
+
+		uint OpenFile(char* fname, char param_2);
+		uint FUN_0020d520(size_t param_1);
+
 		static void ReadInt2(MemoryStream* stream, uint param_2);
 		virtual void WriteInt(uint param_2);
-		uint FUN_0020d520(size_t param_1);
-		virtual MemoryStream* Contruct2(uint param_1, byte param_2, ushort param_3);
-		void Construct(void* memptr, size_t length, byte flag, short param_4);
-		void Dispose();
-		virtual void Write(byte* data, uint length);
-		uint OpenFile(char* fname, char param_2);
+		
+		
 		virtual void WriteStreamTo(uint len, MemoryStream* destination);
 		void WriteStreamTo_9(MemoryStream* destination);
-		MemoryStream* ConstructFile(char* fname, char mode);
 		virtual void FUN_0020fde0(char* fname);
-		virtual void Read(int* outArray, uint length, uint var);
+		
 		virtual bool EndOfStream();
-		void Dispose_14(byte param_1);
 		virtual void ReadUInt(uint* out);
 		virtual size_t GetPosition();
 		virtual void SeekBackwards(uint unused, int amount);

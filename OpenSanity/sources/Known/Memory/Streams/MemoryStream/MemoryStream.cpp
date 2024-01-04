@@ -53,77 +53,46 @@ uint MemoryStream::FUN_0020d520(size_t param_1) {
 	return 0;
 }
 
-MemoryStream* MemoryStream::Contruct2(uint param_1, byte param_2, ushort param_3) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	MemoryStream * __thiscall MemoryStream::Contruct2(MemoryStream *this,uint param_1,byte param_2,undefined2 param_3){
-		VirtualPool *this_00;
-		byte *pbVar1;
-		uint alignment;
-		uint amount;
-		this->startPtr = (byte *)0x0;
-		this->currentPtr = (byte *)0x0;
-		this->length = 0;
-		this->vtable = (MemoryStream_VTable *)&Stream_VT_Memory;
-		this->flags = 0;
-		this->flags = ((uint)param_2 << 0x11 ^ this->flags) & 0x20000 ^ this->flags | 0x10000;
-		*(undefined2 *)&this->flags = param_3;
-		alignment = this->flags & 0xffff;
-		amount = param_1;
-		this_00 = VirtualPool::GetPool();
-		pbVar1 = (byte *)VirtualPool::AllocateMemoryAligned(this_00,amount,alignment);
-		this->startPtr = pbVar1;
-		this->currentPtr = pbVar1;
-		this->length = -(uint)(pbVar1 != (byte *)0x0) & param_1;
-		this->flags = this->flags | 0x10000;
-		return this;
-		}
-		
-	*/
-	return null;
+MemoryStream::MemoryStream(uint param_1, byte param_2, ushort param_3) {
+	byte* pbVar1;
+	uint alignment;
+	uint amount;
+	this->startPtr = (byte*)0x0;
+	this->currentPtr = (byte*)0x0;
+	this->length = 0;
+	this->flags = 0;
+	this->flags = ((uint)param_2 << 0x11 ^ this->flags) & 0x20000 ^ this->flags | 0x10000;
+	*((ushort*)&this->flags) = param_3; 
+	alignment = this->flags & 0xffff;
+	amount = param_1;
+	pbVar1 = new byte[amount];//(byte*)VirtualPool::AllocateMemoryAligned(this_00, amount, alignment);
+	this->startPtr = pbVar1;
+	this->currentPtr = pbVar1;
+	this->length = (pbVar1 != null) ? amount : 0;
+	this->flags = this->flags | 0x10000;
 }
 
-void MemoryStream::Construct(void* memptr, size_t length, byte flag, short param_4) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	MemoryStream * __thiscall MemoryStream::Construct(MemoryStream *this,void *memptr,size_t length,byte flag,short param_4){
-		this->startPtr = (byte *)memptr;
-		this->currentPtr = (byte *)memptr;
-		this->length = length;
-		this->vtable = (MemoryStream_VTable *)&Stream_VT_Memory;
-		this->flags = 0;
-		this->flags = (flag & 1) << 0x10 | this->flags & 0xfffcffff;
-		*(short *)&this->flags = param_4;
-		return this;
-		}
-		
-	*/
-	return;
+MemoryStream::MemoryStream(void* memptr, size_t length, byte flag, short param_4) {
+	this->startPtr = (byte*)memptr;
+	this->currentPtr = (byte*)memptr;
+	this->length = length;
+	this->flags = 0;
+	this->flags = (flag & 1) << 0x10 | this->flags & 0xfffcffff;
+	*(ushort*)&this->flags = param_4;
 }
 
-void MemoryStream::Dispose() {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	void __fastcall MemoryStream::Dispose(MemoryStream *this){
-		byte bVar1;
-		VirtualPool *pool;
-		byte *pbVar2;
-		bVar1 = *(byte *)((int)&this->flags + 2);
-		this->vtable = (MemoryStream_VTable *)&Stream_VT_Memory;
-		if ((bVar1 & 1) != 0) {
-		pbVar2 = this->startPtr;
-		pool = VirtualPool::GetPool();
-		VirtualPool::FreeMemory(pool,pbVar2);
-		this->startPtr = (byte *)0x0;
-		this->currentPtr = (byte *)0x0;
+MemoryStream::~MemoryStream() {
+	byte bVar1;
+	VirtualPool* pool;
+	byte* pbVar2;
+	bVar1 = *(byte*)((int)&this->flags + 2);
+	if ((bVar1 & 1) != 0) {
+		delete this->startPtr;
+		this->startPtr = (byte*)0x0;
+		this->currentPtr = (byte*)0x0;
 		this->length = 0;
-		}
-		this->vtable = (MemoryStream_VTable *)&Stream_VT_Abstract;
-		return;
-		}
+	}
 		
-	*/
-	return;
 }
 
 void MemoryStream::Write(byte* data, uint length) {
@@ -294,23 +263,14 @@ void MemoryStream::WriteStreamTo_9(MemoryStream* destination) {
 	return;
 }
 
-MemoryStream* MemoryStream::ConstructFile(char* fname, char mode) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	MemoryStream * __thiscall MemoryStream::ConstructFile(MemoryStream *this,char *fname,char mode){
-		this->startPtr = (byte *)0x0;
-		this->currentPtr = (byte *)0x0;
-		this->length = 0;
-		this->vtable = (MemoryStream_VTable *)&Stream_VT_Memory;
-		this->flags = 0;
-		this->flags = 0x10000;
-		*(undefined2 *)&this->flags = 0x40;
-		OpenFile(this,fname,mode);
-		return this;
-		}
-		
-	*/
-	return null;
+MemoryStream::MemoryStream(char* fname, char mode) {
+	this->startPtr = (byte*)0x0;
+	this->currentPtr = (byte*)0x0;
+	this->length = 0;
+	this->flags = 0;
+	this->flags = 0x10000;
+	*(ushort*)&this->flags = 0x40;
+	OpenFile(fname, mode);
 }
 
 void MemoryStream::FUN_0020fde0(char* fname) {
@@ -441,33 +401,6 @@ bool MemoryStream::EndOfStream() {
 	return false;
 }
 
-void MemoryStream::Dispose_14(byte param_1) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	MemoryStream * __thiscall MemoryStream::Dispose(MemoryStream *this,byte param_1){
-		byte bVar1;
-		VirtualPool *pool;
-		byte *pbVar2;
-		bVar1 = *(byte *)((int)&this->flags + 2);
-		this->vtable = (MemoryStream_VTable *)&Stream_VT_Memory;
-		if ((bVar1 & 1) != 0) {
-		pbVar2 = this->startPtr;
-		pool = VirtualPool::GetPool();
-		VirtualPool::FreeMemory(pool,pbVar2);
-		this->startPtr = (byte *)0x0;
-		this->currentPtr = (byte *)0x0;
-		this->length = 0;
-		}
-		this->vtable = (MemoryStream_VTable *)&Stream_VT_Abstract;
-		if ((param_1 & 1) != 0) {
-		VirtualPool::FreeMemory(this);
-		}
-		return this;
-		}
-		
-	*/
-	return;
-}
 
 void MemoryStream::ReadUInt(uint* out) {
 	Logging::LogUnimplemented(__FUNCSIG__);
