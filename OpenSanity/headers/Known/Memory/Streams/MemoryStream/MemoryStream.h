@@ -17,7 +17,7 @@ class MemoryStream {
 		virtual void Write(byte* data, uint length);
 		virtual void Read(int* outArray, uint length, uint var);
 
-		uint OpenFile(char* fname, char param_2);
+		void OpenFile(char* fname, char param_2);
 		uint FUN_0020d520(size_t param_1);
 
 		static void ReadInt2(MemoryStream* stream, uint param_2);

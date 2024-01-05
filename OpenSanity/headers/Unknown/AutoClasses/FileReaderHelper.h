@@ -36,7 +36,7 @@ class FileReaderHelper {
 		virtual byte FUN_002057a0();
 		virtual void Read();
 		virtual bool OpenFile(char* fname);
-		virtual bool ReadFileToBuffer(int offset, uint size, byte* buffer, uint param_4, FileReaderHelper** out);
+		virtual bool ReadFileToBuffer(int offset, uint size, byte* buffer, uint param_4, void* unused);
 		static FileReaderHelper* Create(UnkRMRelated* src);
 		void InitBatch(char* packageName, bool read, GameReaderStorage* readerStorage);
 

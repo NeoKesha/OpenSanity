@@ -261,120 +261,114 @@ bool FileReaderHelper::OpenFile(char* fname) {
 	return false;
 }
 
-bool FileReaderHelper::ReadFileToBuffer(int offset, uint size, byte* buffer, uint param_4, FileReaderHelper** out) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	bool __thiscall FileReaderHelper::ReadFileToBuffer(FileReaderHelper *this,int offset,uint size,byte *buffer,undefined4 param_4,FileReaderHelper **out){
-		uint uVar1;
-		byte *pbVar2;
-		size_t sVar3;
-		uint uVar4;
-		int iVar5;
-		int iVar6;
-		int iVar7;
-		uint length;
-		int iVar8;
-		size_t sVar9;
-		bool result;
-		MemoryStream *_stream;
-		MemoryStream *stream;
-		iVar5 = this->field9_0x2c;
-		iVar8 = this->field10_0x30;
-		*out = (FileReaderHelper *)0x0;
-		length = this->field3_0xc;
-		uVar1 = iVar5 + offset;
-		iVar8 = iVar8 + iVar5;
-		result = false;
-		sVar3 = (*this->stream->vtable->GetPosition)(this->stream);
-		uVar4 = sVar3 + length;
-		if (uVar4 < uVar1) {
+bool FileReaderHelper::ReadFileToBuffer(int offset, uint size, byte* buffer, uint param_4, void* unused) {
+	uint uVar1;
+	byte* pbVar2;
+	size_t streamPosition;
+	uint uVar4;
+	int iVar5;
+	int iVar6;
+	int iVar7;
+	uint length;
+	int iVar8;
+	size_t sVar9;
+	bool result;
+	MemoryStream* _stream;
+	MemoryStream* stream;
+	iVar5 = this->field9_0x2c;
+	iVar8 = this->field10_0x30;
+	length = this->field3_0xc;
+	uVar1 = iVar5 + offset;
+	iVar8 = iVar8 + iVar5;
+	result = false;
+	streamPosition = this->stream->GetPosition();
+	uVar4 = streamPosition + length;
+	if (uVar4 < uVar1) {
 		stream = this->stream;
-		sVar3 = (*stream->vtable->GetPosition)(stream);
+		streamPosition = stream->GetPosition();
 		_stream = this->stream;
-		if ((int)(uVar1 - uVar4) < (int)(stream->length - sVar3)) {
-		(*_stream->vtable->SeekForward)(_stream,uVar1 - uVar4);
-		goto LAB_002063e5;
+		if ((int)(uVar1 - uVar4) < (int)(stream->length - streamPosition)) {
+			_stream->SeekForward(uVar1 - uVar4);
+			goto LAB_002063e5;
 		}
-		(*_stream->vtable->Rewind)(_stream);
-		}
-		else {
+		_stream->Rewind();
+	}
+	else {
 		if (uVar4 <= uVar1) goto LAB_002063e5;
 		stream = this->stream;
 		if (length <= uVar1) {
-		(*stream->vtable->SeekForward)(stream,uVar1 - uVar4);
-		goto LAB_002063e5;
+			stream->SeekForward(uVar1 - uVar4);
+			goto LAB_002063e5;
 		}
-		(*stream->vtable->Rewind)(stream);
-		}
-		this->flags = this->flags & 0xfffbffff;
-		LAB_002063e5:stream = this->stream;
-		sVar3 = (*stream->vtable->GetPosition)(stream);
-		length = stream->length - sVar3;
-		if ((this->flags & 0x40000U) == 0) {
-		(*this->stream->vtable->Rewind)(this->stream);
-		iVar5 = _XGetDiskSectorSizeA@4("d:\\");
+		stream->Rewind();
+	}
+	this->flags = this->flags & 0xfffbffff;
+LAB_002063e5:stream = this->stream;
+	streamPosition = stream->GetPosition();
+	length = stream->length - streamPosition;
+	FILE_STORAGE_INFO storageInfo;
+	GetFileInformationByHandleEx(fileHandle1, FILE_INFO_BY_HANDLE_CLASS::FileAlignmentInfo,&storageInfo,sizeof(storageInfo)); //TODO: or handle2?
+	if ((this->flags & 0x40000U) == 0) {
+		this->stream->Rewind();
+		iVar5 = storageInfo.ByteOffsetForSectorAlignment;
 		length = ~(iVar5 - 1U) & uVar1;
 		this->field3_0xc = length;
-		(*this->stream->vtable->SeekForward)(this->stream,uVar1 - length);
+		this->stream->SeekForward(uVar1 - length);
 		iVar5 = this->field3_0xc;
-		iVar6 = _XGetDiskSectorSizeA@4("d:\\");
-		iVar7 = _XGetDiskSectorSizeA@4("d:\\");
+		iVar6 = storageInfo.ByteOffsetForSectorAlignment;
+		iVar7 = storageInfo.ByteOffsetForSectorAlignment;
 		sVar9 = iVar7 + -1 + (iVar8 - iVar5) & ~(iVar6 - 1U);
-		sVar3 = (*this->stream->vtable->GetLength)(this->stream);
-		if (sVar3 <= sVar9) {
-		sVar9 = (*this->stream->vtable->GetLength)(this->stream);
+		streamPosition = this->stream->GetLength();
+		if (streamPosition <= sVar9) {
+			sVar9 = this->stream->GetLength();
 		}
 		pbVar2 = this->stream->startPtr;
 		this->flags = this->flags | 0x10000;
-		FUN_00204720((int)this,iVar5,sVar9,pbVar2);
+		//FUN_00204720(iVar5, sVar9, pbVar2); //member of this
 		if ((char)param_4 == '\0') {
-		this->length = size;
-		this->data = (int *)buffer;
+			this->length = size;
+			this->data = (int*)buffer;
 		}
 		else {
-		Read(this);
-		(*this->stream->vtable->Read)(this->stream,(int *)buffer,size,1);
+			Read();
+			this->stream->Read((int*)buffer, size, 1);
 		}
 		result = (char)param_4 != '\0';
 		this->flags = this->flags | 0x40000;
-		}
-		else if (length < size) {
-		iVar5 = _XGetDiskSectorSizeA@4("d:\\");
-		iVar6 = _XGetDiskSectorSizeA@4("d:\\");
+	}
+	else if (length < size) {
+		iVar5 = storageInfo.ByteOffsetForSectorAlignment;
+		iVar6 = storageInfo.ByteOffsetForSectorAlignment;
 		sVar9 = iVar6 + -1 + ((iVar8 - length) - uVar1) & ~(iVar5 - 1U);
-		(*this->stream->vtable->Read)(this->stream,(int *)buffer,length,1);
-		sVar3 = (*this->stream->vtable->GetLength)(this->stream);
-		if (sVar3 <= sVar9) {
-		sVar9 = (*this->stream->vtable->GetLength)(this->stream);
+		this->stream->Read((int*)buffer, length, 1);
+		streamPosition = this->stream->GetLength();
+		if (streamPosition <= sVar9) {
+			sVar9 = this->stream->GetLength();
 		}
-		(*this->stream->vtable->Rewind)(this->stream);
+		this->stream->Rewind();
 		this->field3_0xc = length + uVar1;
 		pbVar2 = this->stream->startPtr;
 		this->flags = this->flags | 0x10000;
-		FUN_00204720((int)this,length + uVar1,sVar9,pbVar2);
+		//FUN_00204720(length + uVar1, sVar9, pbVar2); //member of this
 		if ((char)param_4 == '\0') {
-		this->length = size - length;
-		this->data = (int *)(buffer + length);
+			this->length = size - length;
+			this->data = (int*)(buffer + length);
 		}
 		else {
-		Read(this);
-		(*this->stream->vtable->Read)(this->stream,(int *)(buffer + length),size - length,1);
+			Read();
+			this->stream->Read((int*)(buffer + length), size - length, 1);
+			result = true;
+		}
+	}
+	else {
+		this->stream->Read((int*)buffer, size, 1);
 		result = true;
-		}
-		}
-		else {
-		(*this->stream->vtable->Read)(this->stream,(int *)buffer,size,1);
-		result = true;
-		}
-		stream = this->stream;
-		if ((stream != (MemoryStream *)0x0) &&(sVar3 = (*stream->vtable->GetPosition)(stream), stream->length == sVar3)) {
+	}
+	stream = this->stream;
+	if ((stream != (MemoryStream*)0x0) && (streamPosition =stream->GetPosition(), stream->length == streamPosition)) {
 		this->flags = this->flags & 0xfffbffff;
-		}
-		return result;
-		}
-		
-	*/
-	return false;
+	}
+	return result;
 }
 
 FileReaderHelper* FileReaderHelper::Create(UnkRMRelated* src) {

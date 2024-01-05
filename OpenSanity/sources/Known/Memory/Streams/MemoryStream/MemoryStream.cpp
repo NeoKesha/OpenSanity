@@ -1,4 +1,8 @@
 #include "headers/Known/Memory/Streams/MemoryStream/MemoryStream.h"
+#include "headers/Unknown/GameReaderStorage.h"
+#include "headers/Unknown/AutoClasses/FileReaderHelper.h"
+
+#include "headers/Global.h"
 
 void MemoryStream::ReadInt2(MemoryStream* stream, uint param_2) {
 	Logging::LogUnimplemented(__FUNCSIG__);
@@ -29,14 +33,14 @@ uint MemoryStream::FUN_0020d520(size_t param_1) {
 	/*
 	int __thiscall MemoryStream::FUN_0020d520(MemoryStream *this,size_t param_1){
 		uint alignment;
-		VirtualPool *this_00;
+		VirtualPool *readerHelper;
 		byte *pbVar1;
 		uint3 uVar2;
 		size_t amount;
 		alignment = this->flags & 0xffff;
 		amount = param_1;
-		this_00 = VirtualPool::GetPool();
-		pbVar1 = (byte *)VirtualPool::AllocateMemoryAligned(this_00,amount,alignment);
+		readerHelper = VirtualPool::GetPool();
+		pbVar1 = (byte *)VirtualPool::AllocateMemoryAligned(readerHelper,amount,alignment);
 		this->startPtr = pbVar1;
 		this->currentPtr = pbVar1;
 		this->flags = this->flags | 0x10000;
@@ -65,7 +69,7 @@ MemoryStream::MemoryStream(uint param_1, byte param_2, ushort param_3) {
 	*((ushort*)&this->flags) = param_3; 
 	alignment = this->flags & 0xffff;
 	amount = param_1;
-	pbVar1 = new byte[amount];//(byte*)VirtualPool::AllocateMemoryAligned(this_00, amount, alignment);
+	pbVar1 = new byte[amount];//(byte*)VirtualPool::AllocateMemoryAligned(readerHelper, amount, alignment);
 	this->startPtr = pbVar1;
 	this->currentPtr = pbVar1;
 	this->length = (pbVar1 != null) ? amount : 0;
@@ -176,48 +180,40 @@ void MemoryStream::Write(byte* data, uint length) {
 	return;
 }
 
-uint MemoryStream::OpenFile(char* fname, char param_2) {
-	Logging::LogUnimplemented(__FUNCSIG__);
-	/*
-	undefined4 __thiscall MemoryStream::OpenFile(MemoryStream *this,char *fname,char param_2){
-		FileReaderHelper *this_00;
-		uint size;
-		bool bVar1;
-		uint3 extraout_var;
-		VirtualPool *this_01;
-		undefined4 uVar2;
-		size_t sVar3;
-		byte *pbVar4;
-		this_00 = GAME_READER_STORAGE[1]->reader;
-		bVar1 = FileReaderHelper::OpenFile(this_00,fname);
-		if (bVar1 != false) {
-		size = this_00->field10_0x30;
+void MemoryStream::OpenFile(char* fname, char param_2) {
+	Global* GLOBAL = Global::Get();
+
+	FileReaderHelper* readerHelper;
+	uint size;
+	bool bVar1;
+	VirtualPool* this_01;
+	size_t sVar3;
+	byte* pbVar4;
+	readerHelper = GLOBAL->GAME_READER_STORAGE[1]->reader;
+	bVar1 = readerHelper->OpenFile(fname);
+	if (bVar1 != false) {
+		size = readerHelper->field10_0x30;
 		sVar3 = size + 1;
 		if (param_2 == '\0') {
-		sVar3 = size;
+			sVar3 = size;
 		}
-		if ((*(byte *)((int)&this->flags + 2) & 1) != 0) {
-		pbVar4 = this->startPtr;
-		this_01 = VirtualPool::GetPool();
-		VirtualPool::FreeMemory(this_01,pbVar4);
-		this->startPtr = (byte *)0x0;
-		this->currentPtr = (byte *)0x0;
-		this->length = 0;
-		FUN_0020d520(this,sVar3);
+		if ((*(byte*)((int)&this->flags + 2) & 1) != 0) {
+			pbVar4 = this->startPtr;
+			this_01 = VirtualPool::GetPool();
+			VirtualPool::FreeMemory(this_01, pbVar4);
+			this->startPtr = (byte*)0x0;
+			this->currentPtr = (byte*)0x0;
+			this->length = 0;
+			FUN_0020d520(this, sVar3);
 		}
-		FileReaderHelper::ReadFileToBuffer(this_00,0,size,this->startPtr,1,(FileReaderHelper **)&fname);
-		FileReaderHelper::CloseFile(this_00);
+		readerHelper->ReadFileToBuffer(0, size, this->startPtr, 1, (FileReaderHelper**)&fname);
+		readerHelper->CloseFile();
 		if (param_2 != '\0') {
-		this->startPtr[size] = 0;
+			this->startPtr[size] = 0;
 		}
-		uVar2 = (*this->vtable->Rewind)(this);
-		return CONCAT31((int3)((uint)uVar2 >> 8),1);
-		}
-		return (uint)extraout_var << 8;
-		}
-		
-	*/
-	return 0;
+		Rewind();
+		return;
+	}
 }
 
 void MemoryStream::WriteStreamTo(uint len, MemoryStream* destination) {
@@ -789,7 +785,7 @@ int* MemoryStream::FUN_0020d740(int* param_1) {
 	/*
 	int * __thiscall MemoryStream::FUN_0020d740(MemoryStream *this,int *param_1){
 		MemoryStream_VTable *pMVar1;
-		VirtualPool *this_00;
+		VirtualPool *readerHelper;
 		int amount;
 		uint uVar2;
 		uint uVar3;
@@ -798,8 +794,8 @@ int* MemoryStream::FUN_0020d740(int* param_1) {
 		byte *pbVar6;
 		if ((((this->flags & 0x10000) != 0) && ((this->flags & 0x20000) != 0)) &&(this->length != param_1[4])) {
 		pbVar6 = this->startPtr;
-		this_00 = VirtualPool::GetPool();
-		VirtualPool::FreeMemory(this_00,pbVar6);
+		readerHelper = VirtualPool::GetPool();
+		VirtualPool::FreeMemory(readerHelper,pbVar6);
 		this->startPtr = (byte *)0x0;
 		this->currentPtr = (byte *)0x0;
 		this->length = 0;
