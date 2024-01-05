@@ -6,8 +6,6 @@
 
 constexpr auto null = (nullptr);
 
-const char* WORKING_DIR = "D:\\Documents\\TWIN\\";
-
 typedef unsigned int uint;
 typedef unsigned char byte;
 typedef unsigned short ushort;

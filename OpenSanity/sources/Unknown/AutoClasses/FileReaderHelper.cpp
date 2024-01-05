@@ -262,6 +262,7 @@ bool FileReaderHelper::OpenFile(char* fname) {
 }
 
 bool FileReaderHelper::ReadFileToBuffer(int offset, uint size, byte* buffer, uint param_4, void* unused) {
+	Logging::LogUnimplemented(__FUNCSIG__);
 	uint uVar1;
 	byte* pbVar2;
 	size_t streamPosition;

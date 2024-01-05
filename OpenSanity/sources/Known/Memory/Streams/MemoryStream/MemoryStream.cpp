@@ -181,6 +181,8 @@ void MemoryStream::Write(byte* data, uint length) {
 }
 
 void MemoryStream::OpenFile(char* fname, char param_2) {
+	Logging::LogUnimplemented(__FUNCSIG__);
+	
 	Global* GLOBAL = Global::Get();
 
 	FileReaderHelper* readerHelper;
@@ -199,12 +201,11 @@ void MemoryStream::OpenFile(char* fname, char param_2) {
 		}
 		if ((*(byte*)((int)&this->flags + 2) & 1) != 0) {
 			pbVar4 = this->startPtr;
-			this_01 = VirtualPool::GetPool();
-			VirtualPool::FreeMemory(this_01, pbVar4);
+			delete this->startPtr;
 			this->startPtr = (byte*)0x0;
 			this->currentPtr = (byte*)0x0;
 			this->length = 0;
-			FUN_0020d520(this, sVar3);
+			//FUN_0020d520(sVar3); this call
 		}
 		readerHelper->ReadFileToBuffer(0, size, this->startPtr, 1, (FileReaderHelper**)&fname);
 		readerHelper->CloseFile();
